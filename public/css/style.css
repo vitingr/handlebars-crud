@@ -1,0 +1,357 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Mukta:wght@300&family=Poppins&family=Roboto:wght@300;700&family=Varela+Round&display=swap');
+
+/* CONFIGURAÇÕES GERAIS */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ==== CONFIGURAÇÕES GERAIS ====== */
+
+.main {
+    min-height: 100vh;
+    background: #E4E9F7;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* ===== REUTILIZÁVEL ======= */
+
+.mensagem-sucesso {
+    z-index: 999;
+    width: 40%;
+    margin: auto;
+    display: grid;
+    padding: 10px;
+    border-radius: 15px;
+    background: rgb(142 229 142 / 23%);
+    color: rgb(20, 124, 20);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.mensagem-erro {
+    z-index: 999;
+    width: 40%;
+    margin: auto;
+    display: grid;
+    padding: 10px;
+    border-radius: 15px;
+    background: rgb(243 188 188 / 54%);
+    color: rgb(171 61 61);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.container-principal {
+    margin-top: 100px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    place-items: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ======= LOGIN / CADASTRO ======== */
+
+.container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: white;
+    overflow: hidden;
+}
+
+.container:before {
+    content: "";
+    position: absolute;
+    width: 2000px;
+    height: 2000px;
+    border-radius: 50%;
+    background: linear-gradient(-45deg, #4481eb, #04befe);
+    top: -10%;
+    right: 48%;
+    transform: translateY(-50%);
+    z-index: 6;
+    transition: 1.8s ease-in-out;
+}
+
+.forms-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.signin-signup {
+    margin-top: 600px;
+    position: absolute;
+    top: 50%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    display: grid;
+    grid-template-columns: 1fr;
+    z-index: 5;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 5rem;
+    overflow: hidden;
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+form.sign-in-form {
+    z-index: 2;
+}
+
+form.sign-up-form {
+    z-index: 1;
+}
+
+.title {
+    font-weight: 500;
+    max-width: 500px;
+    text-align: center;
+    font-size: 1.75rem;
+    color: #444;
+    margin-bottom: 25px;
+}
+
+.input-field {
+    max-width: 380px;
+    width: 100%;
+    height: 55px;
+    background-color: #f0f0f0;
+    margin: 10px 0;
+    border-radius: 55px;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    padding: 0 0.4rem;
+}
+
+.input-field ion-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 55px;
+    color: #acacac;
+    font-size: 1.1rem;
+}
+
+.input-field input {
+    background: none;
+    outline: none;
+    border: none;
+    line-height: 1;
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: #696969;
+}
+
+.input-field input::placeholder {
+    color: #aaa;
+    font-weight: 500;
+}
+
+.btn {
+    margin-top: 35px;
+    width: 150px;
+    height: 49px;
+    border: none;
+    outline: none;
+    border-radius: 49px;
+    cursor: pointer;
+    background: #5995fd;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 600;
+    transform: 0.5s;
+}
+
+.btn:hover {
+    background: #4d84e2;
+}
+
+.social-text {
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 50px;
+    color: #244a8b;
+    padding: 0.7rem 0;
+    font-size: 14.5px;
+    cursor: pointer;
+}
+
+.social-media {
+    display: flex;
+    justify-content: center;
+}
+
+.social-icon {
+    height: 50px;
+    width: 50px;
+    border: 1px solid #333;
+    margin: 0 0.45rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #333;
+    font-size: 1.1rem;
+    border-radius: 50%;
+    transform: 0.3s;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}
+
+.social-icon:hover {
+    color: #4481eb;
+    border-color: #4481eb;
+}
+
+.icon-inicio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-ion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.panels-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+    text-align: center;
+    z-index: 7;
+}
+
+.left-panel {
+    pointer-events: all;
+    padding: 3rem 17% 2rem 12%;
+}
+
+.right-panel {
+    pointer-events: none;
+    padding: 3rem 17% 2rem 17%;
+}
+
+.panel .content {
+    width: 500px;
+    margin-right: 225px;
+    color: white;
+}
+
+.panel h3 {
+    font-weight: 600;
+    line-height: 1;
+    font-size: 2.5rem;
+}
+
+.panel p {
+    font-size: 1.1rem;
+    padding: 0.7rem 0;
+}
+
+.btn.transparent {
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.5s;
+    margin: 0;
+    margin-top: 25px;
+    background: none;
+    border: 2px solid white;
+    width: 130px;
+    height: 41px;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.btn.transparent:hover {
+    color: #358eac;
+    background: white;
+}
+
+
+.image {
+    width: 100%;
+}
+
+.secret {
+    display: none;
+}
+
+.right-panel .content .right-panel .image {
+    transform: translateX(900px);
+}
+
+@media (max-width: 870px) {
+    .container {
+        min-height: 800px;
+        height: 140vh;
+    }
+
+    .container:before {
+        display: none;
+    }
+
+    .signin-signup {
+        margin-top: 0px;
+        width: 100%;
+        left: 50%;
+        top: 95%;
+        transform: translate(-50%, -100%);
+    }
+
+    .panels-container {
+        display: none;
+    }
+
+    .panel {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .image {
+        display: none;
+    }
+
+    .right-panel .content .right-panel .image {
+        transform: translateX(0px);
+    }
+
+    .content {
+        display: none;
+    }
+}
