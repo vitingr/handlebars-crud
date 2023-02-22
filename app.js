@@ -126,6 +126,22 @@ app.post("cadastrar", (req, res) => {
         erros.push({texto: "Nome Inválido"})
     }
 
+    if (req.body.nome.length > 20) {
+        erros.push({texto: "Nome muito Grande"})
+    }
+
+    if (req.body.sobrenome.length > 20) {
+        erros.push({texto: "Sobreome muito Grande"})
+    }
+
+    if (req.body.nome.length < 2) {
+        erros.push({texto: "Nome muito Curto"})
+    }
+
+    if (req.body.sobrenome.length < 2) {
+        erros.push({texto: "Sobrenome muito Curto"})
+    }
+
     if (!req.body.sobrenome || typeof req.body.sobrenome == undefined || req.body.sobrenome == null) {
         erros.push({texto: "Sobrenome Inválido"})
     }
@@ -134,8 +150,24 @@ app.post("cadastrar", (req, res) => {
         erros.push({texto: "Senha Inválida"})
     }
 
+    if (req.body.senha.length > 20) {
+        erros.push({texto: "Senha muito Grande"})
+    }
+
+    if (req.body.senha.length < 8) {
+        erros.push({texto: "Senha muito Curta"})
+    }
+
     if (!req.body.senhaConfirmar || typeof req.body.senhaConfirmar == undefined || req.body.senhaConfirmar == null) {
         erros.push({texto: "Senha Inválida"})
+    }
+    
+    if (req.body.senhaConfirmar.length > 20) {
+        erros.push({texto: "Senha muito Grande"})
+    }
+
+    if (req.body.senhaConfirmar.length < 8) {
+        erros.push({texto: "Senha muito Curta"})
     }
 
     if (req.body.senha != req.body.confirmarSenha) {
