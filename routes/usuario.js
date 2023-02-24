@@ -6,7 +6,7 @@ const mongoose = require("mongoose")
 
 router.get("/", (req, res) => {
 
-    res.send("Teste")
+    res.render("usuario/inicio")
 
 })
 

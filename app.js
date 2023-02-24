@@ -213,8 +213,8 @@ app.get('/404', (req, res) => {
 
 // Adicionar Rotas 
 
-app.use('/empresa', Logado, empresa)
-app.use('/usuario', Logado, usuario)
+app.use('/empresa', empresa)
+app.use('/usuario', usuario)
 
 // Public
 

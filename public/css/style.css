@@ -317,6 +317,17 @@ form.sign-up-form {
     transform: translateX(900px);
 }
 
+/* PÁGINA PRINCIPAL */
+
+.container_principal {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* RESPONSIVIDADES */ 
+
 @media (max-width: 870px) {
     .container {
         min-height: 800px;
