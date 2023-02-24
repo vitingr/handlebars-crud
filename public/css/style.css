@@ -324,6 +324,9 @@ form.sign-up-form {
     display: flex;
     align-items: center;
     justify-content: center;
+    background: red;
+    width: 500px;
+    height: 500px;
 }
 
 /* RESPONSIVIDADES */ 
