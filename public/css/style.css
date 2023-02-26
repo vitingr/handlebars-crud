@@ -10,19 +10,29 @@
     border: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    color: var(--font-color);
+}
+
+:root {
+    --bg-color: #f5f5f5;
+    --font-color: #404040;
+    --color1: #F2508B;
+    --color2: #b96378;
+    --color3: #F291B5;
+    --color4: #F2CEDB;
 }
 
 /* ==== CONFIGURAÇÕES GERAIS ====== */
 
 .main {
     min-height: 100vh;
-    background: #E4E9F7;
+    background: white;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 body {
-    background: #f9fafb;
+    background: white;
     min-height: 72vh;
 }
 
@@ -73,7 +83,7 @@ a {
     position: relative;
     width: 100%;
     min-height: 100vh;
-    background-color: white;
+    background-color: var(--bg-color);
     overflow: hidden;
 }
 
@@ -144,7 +154,7 @@ form.sign-up-form {
     max-width: 380px;
     width: 100%;
     height: 55px;
-    background-color: #f0f0f0;
+    background-color: #f0f0f3;
     margin: 10px 0;
     border-radius: 55px;
     display: grid;
@@ -195,14 +205,13 @@ form.sign-up-form {
 }
 
 .btn:hover {
-    background: #b96378;
+    background: var(--color2);
 }
 
 .social-text {
     text-align: center;
     margin-bottom: 10px;
     margin-top: 50px;
-    color: #404040;
     padding: 0.7rem 0;
     font-size: 14.5px;
     cursor: pointer;
@@ -231,8 +240,8 @@ form.sign-up-form {
 }
 
 .social-icon:hover {
-    color: #F291B5;
-    border-color: #F291B5;
+    color: var(--color3);
+    border-color: var(--color3);
 }
 
 .icon-inicio {
@@ -307,7 +316,7 @@ form.sign-up-form {
 }
 
 .btn.transparent:hover {
-    color: #b96378;
+    color: var(--color2);
     background: white;
 }
 
@@ -329,13 +338,14 @@ form.sign-up-form {
 /* NAVBAR CONFIG */
 
 .nav {
+    background: linear-gradient(-25deg, var(--color1), var(--color2), var(--color3));
+    animation: gradiente 7.5s ease-in-out alternate infinite;
     margin: auto;
-    width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    width: 100%;
     height: 100px;
-    background: white;
 }
 
 .nav-list {
@@ -350,7 +360,8 @@ form.sign-up-form {
     cursor: pointer;
     letter-spacing: 1px;
     margin-left: 30px;
-    color: #17171F;
+    /*color: #17171F;*/
+    color: white;
 }
 
 .link-nav::before,
@@ -360,7 +371,7 @@ form.sign-up-form {
     left: 0;
     width: 100%;
     height: 1px;
-    background: #17171F;
+    background: white;
     transform: scaleX(0);
     transition: transform .25s;
 }
@@ -380,34 +391,69 @@ form.sign-up-form {
     transform: scaleX(1);
 }
 
+.input_nav {
+    margin-left: 17.5%;
+    display: flex;
+    background: var(--bg-color);
+    border-radius: 10px;
+    padding: 6.5px;
+    width: 350px;
+    height: 40px;
+}
+
+.input_nav .icon_input_nav {
+    margin-left: 10px;
+    margin-right: 17.5px;
+    font-size: 22.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+
+
+.input_nav .search_input_nav input {
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    width: 275px;
+    background: none;
+    outline: none;
+}
+
+.input_nav .search_input_nav input:hover {
+    outline: none;
+    border: none;
+}
+
 /* PÁGINA PRINCIPAL */
 
 .container_principal {
     margin: auto;
-    margin-top: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgb(129, 129, 129);
-    width: 1250px;
-    height: 750px;
-    padding: 25px;
-    gap: 100px;
+    background: var(--bg-color);
+    width: 1450px;
+    min-height: 1250px;
+    padding: 50px;
+    padding-top: 50px;
+    margin-top: 50px;
+    gap: 50px;
+    border-radius: 15px;
+    box-shadow: 0 60px 35px rgba(0, 0, 0, 0.17);
 }
 
 .container_left {
     display: flex;
     flex-direction: column;
-    width: 600px;
-    height: 600px;
-    background: blue;
+    width: 850px;
+    height: 100%;
     gap: 50px;
 }
 
 .container_left_top {
-    width: 600px;
-    height: 300px;
-    background: cyan;
+    width: 850px;
+    height: 450px;
     display: flex;
     flex-direction: column;
 }
@@ -420,21 +466,110 @@ form.sign-up-form {
 }
 
 .main_info {
-    width: 300px;
-    height: 300px;
-    background: cyan;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 230px;
+    height: 685px;
+}
+
+.main_info .main_info_div {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    border: 1px solid #acacac30;
+    width: 230px;
+    height: 50px;
+    background: white;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.25s;
+}
+
+.main_info .main_info_div:hover {
+    background: #f0f0f0;
+}
+
+.main_info .main_info_div div {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main_info .main_info_div div ion-icon {
+    color: var(--color2);
+    margin-left: 0.25em;
+    font-size: 22.5px;
+}
+
+.main_info .main_info_div div p {
+    margin-left: 0.5em;
+    font-size: 16.5px;
 }
 
 .feed {
-    width: 300px;
-    height: 300px;
-    background: cyan;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    padding: 25px;
+    width: 850px;
+    height: 700px;
+    background: white;
+}
+
+.text_something {
+    display: flex;
+    align-items: center;
+    margin-top: 25px;
+    width: 500px;
+    height: 50px;
+}
+
+.photo_text_feed {
+    display: flex;
+    align-items: center;
+}
+
+.photo_text_feed img {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.text_feed {
+    margin-left: 20px;
+    width: 425px;
+    height: 45px;
+}
+
+.text_feed input {
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    border: 1px solid #acacac9a;
+    outline: none;
+}
+
+text_feed input:focus {
+    border: 1px solid #acacac9a;
+    outline: none;
 }
 
 .container_right {
-    width: 300px;
-    height: 600px;
-    background: blue;
+    border-radius: 15px;
+    width: 600px;
+    height: 675px;
+    background: white;
+}
+
+.main_profile {
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
 }
 
 /* ANIMAÇÕES */
@@ -450,6 +585,16 @@ form.sign-up-form {
 
     75% {
         translate: 6px 0;
+    }
+}
+
+@keyframes gradiente {
+    from {
+        background-position: 0 50%;
+    }
+
+    to {
+        background-position: 100% 50%;
     }
 }
 
