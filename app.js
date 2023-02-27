@@ -20,6 +20,9 @@ const usuario = require("./routes/usuario")
 
 // Declaração de Models
 
+require("./models/Usuario")
+const Usuario = mongoose.model("usuarios")
+
 // Método de Autenticação
 
 require("./config/auth")(passport)
@@ -118,64 +121,64 @@ app.get("/cadastrar", (req, res) => {
 
 })
 
-app.post("cadastrar", (req, res) => {
+app.post("/cadastrar", (req, res) => {
 
     var erros = []
 
     if (!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null) {
-        erros.push({texto: "Nome Inválido"})
+        erros.push({ texto: "Nome Inválido" })
     }
 
     if (req.body.nome.length > 20) {
-        erros.push({texto: "Nome muito Grande"})
+        erros.push({ texto: "Nome muito Grande" })
     }
 
     if (req.body.sobrenome.length > 20) {
-        erros.push({texto: "Sobreome muito Grande"})
+        erros.push({ texto: "Sobreome muito Grande" })
     }
 
     if (req.body.nome.length < 2) {
-        erros.push({texto: "Nome muito Curto"})
+        erros.push({ texto: "Nome muito Curto" })
     }
 
     if (req.body.sobrenome.length < 2) {
-        erros.push({texto: "Sobrenome muito Curto"})
+        erros.push({ texto: "Sobrenome muito Curto" })
     }
 
     if (!req.body.sobrenome || typeof req.body.sobrenome == undefined || req.body.sobrenome == null) {
-        erros.push({texto: "Sobrenome Inválido"})
+        erros.push({ texto: "Sobrenome Inválido" })
     }
 
     if (!req.body.senha || typeof req.body.senha == undefined || req.body.senha == null) {
-        erros.push({texto: "Senha Inválida"})
+        erros.push({ texto: "Senha Inválida" })
     }
 
     if (req.body.senha.length > 20) {
-        erros.push({texto: "Senha muito Grande"})
+        erros.push({ texto: "Senha muito Grande" })
     }
 
     if (req.body.senha.length < 8) {
-        erros.push({texto: "Senha muito Curta"})
+        erros.push({ texto: "Senha muito Curta" })
     }
 
     if (!req.body.senhaConfirmar || typeof req.body.senhaConfirmar == undefined || req.body.senhaConfirmar == null) {
-        erros.push({texto: "Senha Inválida"})
+        erros.push({ texto: "Senha Inválida" })
     }
-    
+
     if (req.body.senhaConfirmar.length > 20) {
-        erros.push({texto: "Senha muito Grande"})
+        erros.push({ texto: "Senha muito Grande" })
     }
 
     if (req.body.senhaConfirmar.length < 8) {
-        erros.push({texto: "Senha muito Curta"})
+        erros.push({ texto: "Senha muito Curta" })
     }
 
-    if (req.body.senha != req.body.confirmarSenha) {
+    if (req.body.senha != req.body.senhaConfirmar) {
         erros.push({ texto: "As Senhas são Diferentes! Tente Novamente..." })
     }
 
     if (!req.body.email || typeof req.body.email == undefined || req.body.email == null) {
-        erros.push({texto: "Email Inválido"})
+        erros.push({ texto: "Email Inválido" })
     }
 
     if (req.body.email.includes("@")) {
@@ -196,6 +199,72 @@ app.post("cadastrar", (req, res) => {
         erros.push({ texto: "Email Inválido" })
     }
 
+    if (erros.length > 0) {
+        
+        console.log(erros)
+        res.render("naoLogado/cadastro", { erros: erros })
+
+    } else {
+
+        Usuario.findOne({email: req.body.email}).lean().then((usuario) => {
+
+            if (usuario) {
+
+                req.flash('error_msg', 'ERRO! Já existe uma conta com esse email cadastrada em nosso Sistema...')
+                res.redirect("/registro")
+
+            } else {
+
+                const nomeCompleto = req.body.nome + " " + req.body.sobrenome
+
+                const novoUsuario = new Usuario({
+
+                    nome: req.body.nome,
+                    sobrenome: req.body.sobrenome,
+                    nomeCompleto: nomeCompleto,
+                    email: req.body.email,
+                    senha: req.body.senha,
+                    seguidores: 0,
+
+                })
+
+                bcrypt.genSalt(10, (erro, salt) => {
+                    bcrypt.hash(novoUsuario.senha, salt, (erro, hash) => {
+
+                        if (erro) {
+                            console.log(`ERRO! Não foi possível salvar a senha com hash do usuário! ${erro}`)
+                            redirect.redirect("/login")
+                        }
+
+                        novoUsuario.senha = hash
+
+                        novoUsuario.save().then(() => {
+
+                            req.flash('success_msg', 'Bem-Vndo, Conta Criada com Sucesso!')
+                            res.redirect("/login")
+
+                        }).catch((erro) => {
+
+                            console.log(erro)
+                            req.flash('error_msg', 'ERRO! Não foi possível criar a conta!')
+                            res.redirect("/login")
+
+                        })
+
+                    })
+
+                })
+
+            }
+
+        }).catch((erro) => {
+
+            console.log(`ERRO! Houve um Erro Interno ao Cadastrar o Usuário: ${erro}`)
+            res.redirect('/cadastrar')
+
+        })
+
+    }
 
 })
 

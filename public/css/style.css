@@ -76,6 +76,12 @@ a {
     text-decoration: none;
 }
 
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* ======= LOGIN / CADASTRO ======== */
 
 .container_login,
@@ -338,7 +344,7 @@ form.sign-up-form {
 /* NAVBAR CONFIG */
 
 .nav {
-    background: linear-gradient(-25deg, var(--color1), var(--color2), var(--color3));
+    background: linear-gradient(-25deg, var(--color1), var(--color2), var(--color3), var(--color4));
     animation: gradiente 7.5s ease-in-out alternate infinite;
     margin: auto;
     display: flex;
@@ -408,7 +414,7 @@ form.sign-up-form {
     display: flex;
     align-items: center;
     justify-content: center;
-} 
+}
 
 .input_nav .search_input_nav input {
     margin-top: 4px;
@@ -429,7 +435,6 @@ form.sign-up-form {
 .container_principal {
     margin: auto;
     display: flex;
-    align-items: center;
     justify-content: center;
     background: var(--bg-color);
     width: 1450px;
@@ -446,13 +451,13 @@ form.sign-up-form {
 .container_left {
     display: flex;
     flex-direction: column;
-    width: 850px;
+    width: 875px;
     height: 100%;
     gap: 50px;
 }
 
 .container_left_top {
-    width: 850px;
+    width: 875px;
     height: 450px;
     display: flex;
     flex-direction: column;
@@ -466,21 +471,21 @@ form.sign-up-form {
 }
 
 .main_info {
+    background: white;
+    padding: 20px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
-    width: 230px;
+    width: 350px;
     height: 685px;
 }
 
 .main_info .main_info_div {
+    border-bottom: 1px solid #3333331a;
     cursor: pointer;
     display: flex;
     align-items: center;
-    border-radius: 15px;
-    margin-bottom: 25px;
-    border: 1px solid #acacac30;
-    width: 230px;
+    width: 210px;
     height: 50px;
     background: white;
     transition-timing-function: ease-in-out;
@@ -534,14 +539,14 @@ form.sign-up-form {
 
 .photo_text_feed img {
     cursor: pointer;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
 }
 
 .text_feed {
     margin-left: 20px;
-    width: 425px;
+    width: 450px;
     height: 45px;
 }
 
@@ -575,7 +580,7 @@ text_feed input:focus {
     border-radius: 15px;
     padding: 25px;
     background: white;
-    width: 450px;
+    width: 425px;
     min-height: 100px;
     margin-bottom: 50px;
 }
@@ -584,16 +589,16 @@ text_feed input:focus {
     border-radius: 15px;
     padding: 25px;
     background: white;
-    width: 450px;
+    width: 425px;
     min-height: 100px;
     margin-bottom: 50px;
 }
 
-.index_pages {
+.index_friends {
     border-radius: 15px;
     padding: 25px;
     background: white;
-    width: 450px;
+    width: 425px;
     min-height: 100px;
     margin-bottom: 50px;
 }
@@ -617,7 +622,6 @@ text_feed input:focus {
     padding: 20px;
     display: flex;
     align-items: center;
-    margin-bottom: 0.5em;
     transition-timing-function: ease-in-out;
     transition-duration: 0.3s;
 }
@@ -654,6 +658,186 @@ text_feed input:focus {
 
 .desc_vaga_emprego {
     font-size: 15px;
+}
+
+.ver_mais_index {
+    margin-top: 1em;
+    cursor: pointer;
+    padding: 1em;
+    font-size: 16.5px;
+    text-align: center;
+    color: #444;
+    font-weight: normal;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+.ver_mais_index:hover {
+    color: var(--color1);
+}
+
+.friends_option_index {
+    margin-left: -20px;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+.friends_option_index:hover {
+    background: var(--bg-color);
+}
+
+.photo_friends_index {
+    display: flex;
+    align-items: center;
+    width: 85px;
+    height: 50px;
+    border-left: 1px solid #333;
+    padding: 0em 1em 0em 1em;
+}
+
+.photo_friends_index img {
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+}
+
+.text_friends_index {
+    width: 325px;
+    display: flex;
+    flex-direction: column;
+}
+
+.name_friends_index {
+    font-weight: bold;
+}
+
+.desc_friends_index {
+    font-size: 14.5px;
+}
+
+.add_friends_index ion-icon {
+    cursor: pointer;
+    border-radius: 50%;
+    margin-left: 25px;
+    background: var(--color3);
+    color: white;
+    font-size: 25px;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+.add_friends_index ion-icon:hover {
+    background: var(--color1);
+}
+
+.cta {
+    cursor: pointer;
+    position: relative;
+    margin: 0;
+    margin-top: 35px;
+    padding: 12px 12px;
+    transition: all 0.2s ease;
+    border: none;
+    background: none;
+}
+
+.cta:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    border-radius: 50px;
+    background: var(--color4);
+    width: 40px;
+    height: 40px;
+    transition: all 0.3s ease;
+}
+
+.cta span {
+    position: relative;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: #c12a61;
+}
+
+.cta svg {
+    position: relative;
+    top: 0;
+    margin-left: 10px;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: #c12a61;
+    stroke-width: 2;
+    transform: translateX(-5px);
+    transition: all 0.3s ease;
+}
+
+.cta:hover:before {
+    width: 100%;
+    background: var(--color4);
+}
+
+.cta:hover svg {
+    transform: translateX(0);
+}
+
+.cta:active {
+    transform: scale(0.95);
+}
+
+.trend_item {
+    display: flex;
+    align-items: center;
+    padding-bottom: 22.5px;
+    border-bottom: 0.75px solid #33333317;
+    margin-bottom: 1em;
+}
+
+.trend_item_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+}
+
+.trend_item_icon ion-icon {
+    font-size: 28.5px;
+    font-weight: bold;
+}
+
+.trend_item_text {
+    margin-left: 10px;
+    font-size: 17.5px;
+    display: flex;
+    align-items: center;
+    width: 275px;
+}
+
+.more_trend_item {
+    cursor: pointer;
+    font-size: 13.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color3);
+    padding: 2.5px;
+    color: white;
+    width: 100px;
+    border-radius: 15px;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+.more_trend_item:hover {
+    background: var(--color2);
 }
 
 /* ANIMAÇÕES */

@@ -7,7 +7,11 @@ const Usuario = new Schema({
         type: String,
         required: true
     },
-    nomeAdicional: {
+    sobrenome: {
+        type: String,
+        required: true
+    },
+    nomeCompleto: {
         type: String
     },
     email: {
@@ -20,15 +24,24 @@ const Usuario = new Schema({
     },
     pais: {
         type: String,
-        required: true
+    },
+    estado: {
+        type: String,
     },
     cidade: {
         type: String,
-        required: true
+    },
+    escola: {
+        type: String
+    },
+    faculdade: {
+        type: String
+    },
+    foto: {
+        type: String
     },
     area: {
-        type: String,
-        required: true
+        type: String
     },
     seguidores: {
         type: Number
