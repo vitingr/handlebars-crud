@@ -410,7 +410,6 @@ form.sign-up-form {
     justify-content: center;
 } 
 
-
 .input_nav .search_input_nav input {
     margin-top: 4px;
     display: flex;
@@ -438,6 +437,7 @@ form.sign-up-form {
     padding: 50px;
     padding-top: 50px;
     margin-top: 50px;
+    margin-bottom: 10em;
     gap: 50px;
     border-radius: 15px;
     box-shadow: 0 60px 35px rgba(0, 0, 0, 0.17);
@@ -559,17 +559,101 @@ text_feed input:focus {
     outline: none;
 }
 
-.container_right {
-    border-radius: 15px;
-    width: 600px;
-    height: 675px;
-    background: white;
-}
-
 .main_profile {
     border-radius: 20px;
     width: 100%;
     height: 100%;
+}
+
+.container_right {
+    border-radius: 15px;
+    width: 600px;
+    min-height: 1200px;
+}
+
+.index_events {
+    border-radius: 15px;
+    padding: 25px;
+    background: white;
+    width: 450px;
+    min-height: 100px;
+    margin-bottom: 50px;
+}
+
+.index_companies {
+    border-radius: 15px;
+    padding: 25px;
+    background: white;
+    width: 450px;
+    min-height: 100px;
+    margin-bottom: 50px;
+}
+
+.index_pages {
+    border-radius: 15px;
+    padding: 25px;
+    background: white;
+    width: 450px;
+    min-height: 100px;
+    margin-bottom: 50px;
+}
+
+.title_index_events {
+    color: var(--font-color);
+    display: flex;
+    align-items: center;
+    font-size: 19.5px;
+    margin-bottom: 2em;
+}
+
+.title_index_events ion-icon {
+    margin-right: 10px;
+}
+
+.vaga_emprego {
+    margin-left: -20px;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5em;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+.vaga_emprego:hover {
+    background: var(--bg-color);
+}
+
+.photo_vaga_emprego {
+    border-left: 1px solid #333;
+    padding: 0em 1em 0em 1em;
+}
+
+.photo_vaga_emprego {
+    display: flex;
+    align-items: center;
+    width: 85px;
+    height: 50px;
+}
+
+.photo_vaga_emprego img {
+    max-width: 50px;
+    max-height: 50px;
+}
+
+.text_vaga_emprego {
+    display: flex;
+    flex-direction: column;
+}
+
+.name_vaga_emprego {
+    font-weight: bold;
+}
+
+.desc_vaga_emprego {
+    font-size: 15px;
 }
 
 /* ANIMAÇÕES */
