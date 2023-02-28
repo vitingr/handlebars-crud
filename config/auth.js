@@ -20,19 +20,15 @@ module.exports = (passport) => {
                 Usuario.findOne({ email: email }).lean().then((usuario) => {
 
                     if (!usuario) {
-
                         console.log("ERRO! Essa conta não Existe!")
                         return done(null, false, { message: "Essa Conta não Existe!" }) // null = error | false = user
-
                     }
 
                     bcrypt.compare(senha, usuario.senha, (erro, sucesso) => { // Verificador de Hash para verificar se a senha hasheada equivale a senha digitada.
 
                         if (erro) {
-
                             console.log(`${erro}`)
                             throw erro
-
                         }
 
                         if (sucesso) {

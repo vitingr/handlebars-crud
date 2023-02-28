@@ -6,41 +6,42 @@
 
     <div class="forms-container">
         <div class="signin-signup">
-            <form action="" class="sign-in-form">
+            <form action="/login/done" method="POST" class="sign-in-form">
                 <h2 class="title">Entrar</h2>
 
                 <div class="input-field">
                     <div class="icon-ion">
                         <ion-icon name="mail-outline"></ion-icon>
                     </div>
-                    <input type="email" id="email" minlength="10" maxlength="50" autocomplete="off" pattern="[a-z]*" placeholder="Email">
+                    <input type="email" id="email" name="email" minlength="10" maxlength="50" autocomplete="off" placeholder="Email" required>
                 </div>
 
                 <div class="input-field">
                     <div class="icon-ion">
                         <ion-icon name="lock-closed-outline"></ion-icon>
                     </div>
-                    <input type="password" id="password" placeholder="Senha">
+                    <input type="password" id="senha" name="senha" placeholder="Senha" required>
                 </div>
 
                 <input type="submit" value="Login" class="btn solid">
 
-                <p class="social-text">Or Sign in with social platforms</p>
-                <div class="social-media">
-                    <a href="#" class="social-icon facebook">
-                        <ion-icon name="logo-facebook"></ion-icon>
-                    </a>
-                    <a href="#" class="social-icon twitter">
-                        <ion-icon name="logo-twitter"></ion-icon>
-                    </a>
-                    <a href="#" class="social-icon github">
-                        <ion-icon name="logo-github"></ion-icon>
-                    </a>
-                    <a href="#" class="social-icon linkedin">
-                        <ion-icon name="logo-linkedin"></ion-icon>
-                    </a>
-                </div>
             </form>
+
+            <p class="social-text">Or Sign in with social platforms</p>
+            <div class="social-media">
+                <a href="#" class="social-icon facebook">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                </a>
+                <a href="#" class="social-icon twitter">
+                    <ion-icon name="logo-twitter"></ion-icon>
+                </a>
+                <a href="#" class="social-icon github">
+                    <ion-icon name="logo-github"></ion-icon>
+                </a>
+                <a href="#" class="social-icon linkedin">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -54,7 +55,8 @@
                     Novo por Aqui?
                 </h3>
                 <p>
-                    Não perca tempo! Se junte a $nome, tenha acesso a uma vasta rede de networking, conecte-se, converse e tenha acesso a oportunidades de trabalho voltadas exclusivamente para o genêro feminino.
+                    Não perca tempo! Se junte a $nome, tenha acesso a uma vasta rede de networking, conecte-se, converse
+                    e tenha acesso a oportunidades de trabalho voltadas exclusivamente para o genêro feminino.
                 </p>
                 <a href="/">
                     <button class="btn transparent" id="signup-up-btn">Cadastrar</button>

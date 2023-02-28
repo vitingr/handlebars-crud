@@ -436,12 +436,12 @@ form.sign-up-form {
     margin: auto;
     display: flex;
     justify-content: center;
-    background: var(--bg-color);
+    background: #f5f5f5c7;
     width: 1450px;
-    min-height: 1250px;
+    height: 100%;
     padding: 50px;
     padding-top: 50px;
-    margin-top: 50px;
+    margin-top: 5em;
     margin-bottom: 10em;
     gap: 50px;
     border-radius: 15px;
@@ -451,13 +451,13 @@ form.sign-up-form {
 .container_left {
     display: flex;
     flex-direction: column;
-    width: 875px;
+    width: 900px;
     height: 100%;
     gap: 50px;
 }
 
 .container_left_top {
-    width: 875px;
+    width: 900px;
     height: 450px;
     display: flex;
     flex-direction: column;
@@ -580,7 +580,7 @@ text_feed input:focus {
     border-radius: 15px;
     padding: 25px;
     background: white;
-    width: 425px;
+    width: 400px;
     min-height: 100px;
     margin-bottom: 50px;
 }
@@ -589,7 +589,7 @@ text_feed input:focus {
     border-radius: 15px;
     padding: 25px;
     background: white;
-    width: 425px;
+    width: 400px;
     min-height: 100px;
     margin-bottom: 50px;
 }
@@ -598,7 +598,7 @@ text_feed input:focus {
     border-radius: 15px;
     padding: 25px;
     background: white;
-    width: 425px;
+    width: 400px;
     min-height: 100px;
     margin-bottom: 50px;
 }
@@ -815,7 +815,7 @@ text_feed input:focus {
 
 .trend_item_text {
     margin-left: 10px;
-    font-size: 17.5px;
+    font-size: 16px;
     display: flex;
     align-items: center;
     width: 275px;
