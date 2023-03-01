@@ -20,6 +20,7 @@
     --color2: #b96378;
     --color3: #F291B5;
     --color4: #F2CEDB;
+    --color5: #b96b7f;
 }
 
 /* ==== CONFIGURAÇÕES GERAIS ====== */
@@ -80,6 +81,10 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+ 
+.pink_font {
+    color: var(--color1);
 }
 
 /* ======= LOGIN / CADASTRO ======== */
@@ -517,19 +522,62 @@ form.sign-up-form {
 .feed {
     display: flex;
     flex-direction: column;
+    align-items: center;
     border-radius: 15px;
     padding: 25px;
-    width: 850px;
+    width: 575px;
     height: 700px;
     background: white;
 }
 
 .text_something {
     display: flex;
+    flex-direction: column;
     align-items: center;
     margin-top: 25px;
     width: 500px;
-    height: 50px;
+    height: 100px;
+}
+
+.text_something_top {
+    display: flex;
+    align-items: center;
+}
+
+.text_something_bottom {
+    margin-top: 15px;
+    display: flex;
+    width: 500px;
+    margin-left: 125px;
+}
+
+.text_something_bottom ion-icon {
+    cursor: pointer;
+    color: #444444ab;
+    font-size: 22px;
+    margin-right: 10px;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+.text_something_bottom ion-icon:hover {
+    color: var(--font-color);
+}
+
+.text_something_bottom input {
+    cursor: pointer;
+    margin-left: 250px;
+    padding: 2.5px;
+    background: var(--color5);
+    color: white;
+    border-radius: 10px;
+    width: 75px;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+.text_something_bottom input:hover {
+    background: var(--color2);
 }
 
 .photo_text_feed {
@@ -585,9 +633,7 @@ text_feed input:focus {
 }
 
 .desc_main_profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin-bottom: 1em;
     text-align: left;
     margin-left: 15px;
 }
@@ -602,7 +648,7 @@ text_feed input:focus {
     margin: 10px 0px 10px 0px;
     color: white;
     font-weight: normal;
-    font-size: 20px;
+    font-size: 18px;
     text-shadow: var(--font-color) 0.1em 0.1em 0.2em
 }
 

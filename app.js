@@ -94,7 +94,7 @@ function validarEmail(email) {
 
 app.get("/", (req, res) => {
 
-    res.render("naoLogado/cadastro")
+    res.render("naoLogado/login")
 
 })
 
