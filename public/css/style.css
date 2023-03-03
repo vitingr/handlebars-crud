@@ -471,7 +471,6 @@ form.sign-up-form {
 .container_left_bottom {
     gap: 50px;
     display: flex;
-    align-items: center;
     justify-content: center;
 }
 
@@ -526,7 +525,7 @@ form.sign-up-form {
     border-radius: 15px;
     padding: 25px;
     width: 575px;
-    height: 700px;
+    min-height: 700px;
     background: white;
 }
 
@@ -610,6 +609,74 @@ form.sign-up-form {
 text_feed input:focus {
     border: 1px solid #acacac9a;
     outline: none;
+}
+
+.feed_publications {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    width: 100%;
+    min-height: 400px;
+}
+
+.publication {
+    margin-top: 3em;
+    border-radius: 15px;
+    border: 1px solid #33333323;
+    padding: 15px;
+    width: 100%;
+    background: white;
+}
+
+.info_publication {
+    display: flex;
+    width: 100%;
+}
+
+.info_publication img {
+    border-radius: 50%;
+    max-width: 35px;
+    max-height: 35px;
+}
+
+.info_publication h2 {
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+.content_publication {
+    text-align: justify;
+    margin-top: 1.25em;
+    width: 100%;
+}
+
+.actions_publications {
+    font-size: 20px;
+    margin-top: 15px;
+}
+
+.actions_publications ion-icon {
+    cursor: pointer;
+    color: #444444b0;
+    margin-right: 10px;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+.actions_publications ion-icon:hover {
+    color: var(--font-color);
+}
+
+.date_publication {
+    margin-left: 15px;
+    font-size: 15px;
+    font-weight: normal;
+    color: #444444b0;
 }
 
 .main_profile {
@@ -1003,5 +1070,25 @@ text_feed input:focus {
 
     .content {
         display: none;
+    }
+    .container_left_bottom {
+        flex-wrap: wrap;
+    }
+
+    .container_principal {
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .container_left_top {
+        width: 100%;
+    }
+
+    .feed {
+        width: 100%;
+    }
+
+    .text_something {
+        width: 300px;
     }
 }
