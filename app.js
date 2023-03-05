@@ -15,13 +15,24 @@ const bcrypt = require("bcryptjs")
 
 // Declaração de Rotas
 
+const router = express.Router()
+
 const empresa = require("./routes/empresa")
 const usuario = require("./routes/usuario")
 
 // Declaração de Models
 
+require("./models/Postagem")
+require("./models/Empresa")
 require("./models/Usuario")
+require("./models/Vaga")
+
+// Import Models
+
+const Postagem = mongoose.model("postagens")
+const Empresa = mongoose.model("empresas")
 const Usuario = mongoose.model("usuarios")
+const Vaga = mongoose.model("vagas")
 
 // Método de Autenticação
 
@@ -30,7 +41,6 @@ require("./config/auth")(passport)
 // Helpers
 
 const { Logado } = require("./helpers/estaLogado")
-
 const { infoUsuario } = require("./helpers/infoUsuario")
 
 // Configurações de Conexão com o Banco de Dados
@@ -98,9 +108,16 @@ function validarEmail(email) {
 
 app.get("/", Logado ,(req, res) => {
 
+    // Informações Usuario
     const usuarioLogado = infoUsuario(req.user)
+    console.log(usuarioLogado.id)
 
-    res.render("usuario/inicio", { usuario: usuarioLogado })
+    // Encontrar Postagens
+    Postagem.find().lean().sort({data: 'desc'}).then((postagens) => {
+
+        res.render("usuario/inicio", { usuario: usuarioLogado, postagens: postagens })
+
+    })
 
 })
 

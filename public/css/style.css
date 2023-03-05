@@ -48,7 +48,7 @@ body {
     border-radius: 15px;
     background: rgb(142 229 142 / 23%);
     color: rgb(20, 124, 20);
-    text-align: center;
+    text-align: center; 
     margin-bottom: 25px;
 }
 
@@ -655,7 +655,6 @@ text_feed input:focus {
     font-weight: normal;
     display: flex;
     align-items: center;
-    justify-content: center;
     font-size: 17px;
     margin-left: 15px;
     font-weight: bold;
@@ -667,9 +666,27 @@ text_feed input:focus {
     width: 100%;
 }
 
+.bottom_publication {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
 .actions_publications {
+    display: flex;
     font-size: 20px;
     margin-top: 15px;
+}
+
+.qtd_likes_publication {
+    width: 100%;
+}
+
+.qtd_likes_publication p {
+    text-align: right;
+    margin-right: 5px;
+    color: #444444b0;
+    font-size: 15px;
 }
 
 .actions_publications ion-icon {

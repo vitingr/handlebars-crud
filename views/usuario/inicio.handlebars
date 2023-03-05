@@ -10,7 +10,7 @@
                 <div class="left_profile">
                     <div class="photo_main_profile">
                         <img
-                            src="https://conteudo.imguol.com.br/c/esporte/98/2022/09/01/neymar-comemora-gol-marcado-pelo-psg-contra-o-lille-no-campeonato-frances-1662065638690_v2_450x450.jpg">
+                            src="https://avatars.akamai.steamstatic.com/c29c1079c7712664fdc13651a0af8197e7d07f4e_full.jpg">
                     </div>
 
                     <div class="desc_main_profile">
@@ -87,7 +87,7 @@
                             <ion-icon name="image-outline"></ion-icon>
                             <ion-icon name="location-outline"></ion-icon>
                             <ion-icon name="happy-outline"></ion-icon>
-                            <input type="button" name="publicar" id="publicar" value="Publicar">
+                            <input type="submit" name="publicar" id="publicar" value="Publicar">
                         </div>
                     </div>
             </form>
@@ -95,6 +95,43 @@
             <div class="feed_publications">
 
                 <!-- PUBLICAÇÕES -->
+
+                {{#each postagens}}
+
+                <div class="publication">
+                    <div class="info_publication">
+                        <img src="https://avatars.akamai.steamstatic.com/c29c1079c7712664fdc13651a0af8197e7d07f4e_full.jpg">
+                        <div>
+                            <h2>{{nomeDono}}</h2>
+                            <p class="date_publication">{{data}}</p>
+                        </div>
+                    </div>
+                    <div class="content_publication">
+                        <div class="text_publication">
+                            {{conteudo}}
+                        </div>
+                        <div class="image_publication">
+
+                        </div>
+                    </div>
+                    <div class="bottom_publication">
+                        <div class="actions_publications">
+                            <ion-icon name="heart-outline"></ion-icon>
+                            <ion-icon name="chatbubbles-outline"></ion-icon>
+                            <ion-icon name="share-social-outline"></ion-icon>
+                            <ion-icon name="send-outline"></ion-icon>
+                        </div>
+                        <div class="qtd_likes_publication">
+                            <p>{{curtidas}} curtidas</p>
+                        </div>
+                    </div>
+                </div>
+
+                {{else}}
+
+                <p>Nenhuma Postagem</p>
+
+                {{/each}}
 
                 <div class="publication">
                     <div class="info_publication">
@@ -106,7 +143,9 @@
                     </div>
                     <div class="content_publication">
                         <div class="text_publication">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati vitae a ab vel ea tenetur, iste facilis quia, laboriosam asperiores ut! Perspiciatis nostrum dicta deleniti inventore eligendi corporis ea esse?
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati vitae a ab vel ea
+                            tenetur, iste facilis quia, laboriosam asperiores ut! Perspiciatis nostrum dicta deleniti
+                            inventore eligendi corporis ea esse?
                         </div>
                         <div class="image_publication">
 
@@ -130,7 +169,11 @@
                     </div>
                     <div class="content_publication">
                         <div class="text_publication">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati vitae a ab vel ea tenetur, iste facilis quia, laboriosam asperiores ut! Perspiciatis nostrum dicta deleniti inventore eligendi corporis ea esse? Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti excepturi aspernatur tempore vero, ea veniam illo blanditiis consectetur saepe enim, provident nulla perferendis nam distinctio expedita, ratione odio aliquid odit.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati vitae a ab vel ea
+                            tenetur, iste facilis quia, laboriosam asperiores ut! Perspiciatis nostrum dicta deleniti
+                            inventore eligendi corporis ea esse? Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Corrupti excepturi aspernatur tempore vero, ea veniam illo blanditiis consectetur
+                            saepe enim, provident nulla perferendis nam distinctio expedita, ratione odio aliquid odit.
                         </div>
                         <div class="image_publication">
 
