@@ -10,7 +10,8 @@ module.exports = {
 
         }
 
-        res.render("naoLogado/login", { error_msg: "Você precisa estar logado para Acessar!" })
+        req.flash('error_msg', 'ERRO! Você precisa estar logado para acessar essa área!')
+        res.redirect("/login")
 
     }
 

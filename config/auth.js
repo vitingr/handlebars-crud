@@ -52,6 +52,7 @@ module.exports = (passport) => {
 
     passport.serializeUser((usuario, done) => {
 
+        console.log("serialize")
         done(null, usuario._id)
 
     }) // Envia os dados para o req.user, que é uma função do passport que pega os dados do user atual da sessão.
@@ -60,6 +61,7 @@ module.exports = (passport) => {
 
         Usuario.findOne({ _id: id }, (erro, usuario) => {
 
+            console.log("deserialize")
             done(erro, usuario)
 
         })

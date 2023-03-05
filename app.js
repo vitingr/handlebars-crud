@@ -27,7 +27,11 @@ const Usuario = mongoose.model("usuarios")
 
 require("./config/auth")(passport)
 
+// Helpers
+
 const { Logado } = require("./helpers/estaLogado")
+
+const { infoUsuario } = require("./helpers/infoUsuario")
 
 // Configurações de Conexão com o Banco de Dados
 
@@ -92,9 +96,11 @@ function validarEmail(email) {
 
 // Rotas de Acesso
 
-app.get("/", (req, res) => {
+app.get("/", Logado ,(req, res) => {
 
-    res.render("naoLogado/login")
+    const usuarioLogado = infoUsuario(req.user)
+
+    res.render("usuario/inicio", { usuario: usuarioLogado })
 
 })
 
@@ -105,7 +111,7 @@ app.get("/login", (req, res) => {
 })
 
 app.post("/login/done", passport.authenticate("local", {
-    successRedirect: '/usuario',
+    successRedirect: '/',
     failureRedirect: '/login',
     failureFlash: 'true',
     session: true
@@ -282,8 +288,8 @@ app.get('/404', (req, res) => {
 
 // Adicionar Rotas 
 
-app.use('/empresa', empresa)
-app.use('/usuario', usuario)
+app.use('/empresa', Logado, empresa)
+app.use('/usuario', Logado, usuario)
 
 // Public
 

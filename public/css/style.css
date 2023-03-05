@@ -53,9 +53,11 @@ body {
 }
 
 .mensagem-erro {
+    position: relative;
     z-index: 999;
     width: 40%;
     margin: auto;
+    margin-top: 20px;
     display: grid;
     padding: 10px;
     border-radius: 15px;
@@ -253,6 +255,16 @@ form.sign-up-form {
 .social-icon:hover {
     color: var(--color3);
     border-color: var(--color3);
+}
+
+.social-icon ion-icon {
+    transform: 0.3s;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}
+
+.social-icon ion-icon:hover {
+    color: var(--color3);
 }
 
 .icon-inicio {
