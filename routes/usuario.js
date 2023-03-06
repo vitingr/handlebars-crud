@@ -17,6 +17,8 @@ const Vaga = mongoose.model("vagas")
 
 const { infoUsuario } = require("../helpers/infoUsuario")
 
+// Funções
+
 // Páginas
 
 router.post("/publicar", (req, res) => {
@@ -32,7 +34,8 @@ router.post("/publicar", (req, res) => {
 
     } else {
 
-        Usuario.findOne({_id: usuarioLogado.id}).then((usuario) => {
+        Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
+
 
             const novaPostagem = {
                 dono: usuarioLogado.id,
@@ -41,19 +44,19 @@ router.post("/publicar", (req, res) => {
                 curtidas: 0,
                 compartilhamentos: 0
             }
-    
+
             new Postagem(novaPostagem).save().then(() => {
-    
+
                 console.log("Postagem Criada com Sucesso!")
                 req.flash('success_msg', 'Mensagem Publicada com Sucesso!')
                 res.redirect("/")
-    
+
             }).catch((erro) => {
-    
+
                 console.log(`ERRO: ${erro}`)
                 req.flash('error_msg', 'ERRO! Houve um problema na criação da postagem...')
                 res.redirect("/")
-    
+
             })
 
         }).catch((erro) => {
@@ -64,6 +67,14 @@ router.post("/publicar", (req, res) => {
         })
 
     }
+
+})
+
+router.get("/editarPerfil", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    res.render("usuario/perfil", { usuario: usuarioLogado })
 
 })
 

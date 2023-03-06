@@ -48,7 +48,7 @@ body {
     border-radius: 15px;
     background: rgb(142 229 142 / 23%);
     color: rgb(20, 124, 20);
-    text-align: center; 
+    text-align: center;
     margin-bottom: 25px;
 }
 
@@ -84,7 +84,7 @@ a {
     align-items: center;
     justify-content: center;
 }
- 
+
 .pink_font {
     color: var(--color1);
 }
@@ -454,7 +454,7 @@ form.sign-up-form {
     display: flex;
     justify-content: center;
     background: #f5f5f5c7;
-    width: 1450px;
+    max-width: 1450px;
     height: 100%;
     padding: 50px;
     padding-top: 50px;
@@ -703,12 +703,13 @@ text_feed input:focus {
 
 .date_publication {
     margin-left: 15px;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: normal;
     color: #444444b0;
 }
 
 .main_profile {
+    display: flex;
     border-radius: 20px;
     width: 100%;
     height: 100%;
@@ -752,6 +753,68 @@ text_feed input:focus {
     color: white;
     font-size: 15px;
     text-shadow: var(--font-color) 0.1em 0.1em 0.2em
+}
+
+.right_profile {
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.edit_profile_button_index {
+    width: 175px;
+    cursor: pointer;
+    background: linear-gradient(-60deg, #F29F05, #F2B705, #F2CB05);
+    color: white;
+    font-family: inherit;
+    padding: 0.3em;
+    padding-left: 1.2em;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 1.2em;
+    border: none;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    box-shadow: inset 0 0 1.6em -0.6em #F29F05;
+    overflow: hidden;
+    position: relative;
+    height: 2.8em;
+    padding-right: 3.3em;
+}
+
+.edit_profile_button_index .icon {
+    background: white;
+    margin-left: 1em;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.2em;
+    width: 2.2em;
+    border-radius: 0.7em;
+    box-shadow: 0.1em 0.1em 0.6em 0.2em #F29F05;
+    right: 0.3em;
+    transition: all 0.3s;
+}
+
+.edit_profile_button_index:hover .icon {
+    width: calc(100% - 0.6em);
+}
+
+.edit_profile_button_index .icon svg {
+    width: 1.1em;
+    transition: transform 0.3s;
+    color: #F29F05;
+}
+
+.edit_profile_button_index:hover .icon svg {
+    transform: translateX(0.1em);
+}
+
+.edit_profile_button_index:active .icon {
+    transform: scale(0.95);
 }
 
 .container_right {
@@ -1100,6 +1163,7 @@ text_feed input:focus {
     .content {
         display: none;
     }
+
     .container_left_bottom {
         flex-wrap: wrap;
     }
