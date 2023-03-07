@@ -79,7 +79,16 @@ router.get("/editarPerfil", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    res.render("usuario/perfil", { usuario: usuarioLogado })
+    Postagem.find({dono: usuarioLogado.id}).lean().then((postagens) => {
+
+        res.render("usuario/perfil", { usuario: usuarioLogado, postagens: postagens })
+
+    }).catch((erro) => {
+
+        req.flash('error_msg', 'ERRO! Não foi possível encontrar seu perfil...')
+        res.redirect("/")
+
+    })
 
 })
 

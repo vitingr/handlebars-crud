@@ -16,6 +16,7 @@
 :root {
     --bg-color: #f5f5f5;
     --font-color: #404040;
+    --font-color-low-emphasis: #444444b2;
     --color1: #F2508B;
     --color2: #b96378;
     --color3: #F291B5;
@@ -550,7 +551,8 @@ form.sign-up-form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 25px;
+    margin-top: 2em;
+    margin-bottom: 3em;
     width: 500px;
     height: 100px;
 }
@@ -637,7 +639,7 @@ text_feed input:focus {
 }
 
 .publication {
-    margin-top: 3em;
+    margin-bottom: 3em;
     border-radius: 15px;
     border: 1px solid #33333323;
     padding: 15px;
@@ -1096,7 +1098,6 @@ text_feed input:focus {
 .profile_background {
     height: 200px;
     padding: 50px;
-    background: blue;
     border-radius: 10px;
 }
 
@@ -1108,7 +1109,118 @@ text_feed input:focus {
 }
 
 .profile_info {
-    margin-top: 75px;
+    margin-top: 55px;
+    display: flex;
+    width: 100%;
+}
+
+.profile_info_left {
+    padding: 25px;
+}
+
+.profile_info_left h2 {
+    font-size: 17px;
+    font-weight: lighter;
+}
+
+.profile_info_left p {
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--font-color-low-emphasis);
+}
+
+.profile_info_left p span {
+    cursor: pointer;
+    color: var(--color2);
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+.profile_info_left p span:hover {
+    color: var(--color1);
+}
+
+.profile_info_right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.profile_info_right form button {
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 16.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    background: none;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+.profile_info_right form button:hover {
+    background: var(--bg-color);
+}
+
+.profile_info_right form button ion-icon {
+    font-size: 20px;
+}
+
+.profile_info_right h1 {
+    font-size: 17.5px;
+}
+
+.profile_info_right_div {
+    margin-top: 25px;
+    display: flex;
+}
+
+.profile_info_right_div img {
+    max-width: 35px;
+    max-height: 35px;
+}
+
+.profile_info_right_div p {
+    margin-left: 10px;
+}
+
+.title_profile_edit {
+    font-size: 21.5px;
+    padding: 25px;
+}
+
+.title_profile_edit .subtitle_profile_edit {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+    gap: 5px;
+    font-size: 14px;
+    color: var(--font-color-low-emphasis);
+}
+
+.followers_profile_edit {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+    gap: 5px;
+    font-size: 14px;
+    color: var(--color2);
+}
+
+.edit_profile_message {
+    margin-left: 25px;
+}
+
+.edit_profile_message h2 {
+    font-size: 15px;
+}
+
+.edit_profile_message p {
+    color: var(--font-color-low-emphasis);
+    font-size: 14px;
 }
 
 /* ======== ANIMAÇÕES ======== */
