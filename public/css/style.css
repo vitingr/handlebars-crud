@@ -363,9 +363,60 @@ form.sign-up-form {
     transform: translateX(900px);
 }
 
+/* ==== CONTINUAÇÃO CADASTRO ==== */
+
+#cadastro {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+}
+
+.title_cadastro {
+    text-align: center;
+}
 
 
-/* NAVBAR CONFIG */
+.subtitle_cadastro {
+    font-weight: normal;
+    color: var(--font-color-low-emphasis);
+    width: 500px;
+    margin-top: -17.5px;
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.span_cadastro {
+    color: var(--color1);
+}
+
+.input_cadastro {
+    margin-bottom: 25px;
+    outline: none;
+    border-radius: 7.5px;
+    padding: 10px;
+    width: 425px;
+    border: 1px solid #44444428;
+}
+
+.submit_cadastro {
+    cursor: pointer;
+    margin-top: 50px;
+    padding: 10px;
+    border-radius: 15px;
+    width: 300px;
+    background: var(--color2);
+    color: white;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+.submit_cadastro:hover {
+    background: var(--color5);
+}
+
+/* ======= NAVBAR CONFIG ======= */
 
 .nav {
     background: linear-gradient(-25deg, var(--color1), var(--color2), var(--color3), var(--color4));

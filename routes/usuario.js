@@ -26,6 +26,41 @@ function validarEmail(email) {
 
 // Páginas
 
+router.get("/endereco", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+    res.render("cadastro/cidade", { usuario: usuarioLogado })
+
+})
+
+router.get("/cargo", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+    res.render("cadastro/cargo", { usuario: usuarioLogado })
+
+})
+
+router.get("/emprego", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+    res.render("casdastro/emprego", { usuario: usuarioLogado })
+
+})
+
+router.get("/tipoEmprego", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+    res.render("cadastro/tipoEmprego", { usuario: usuarioLogado })
+
+})
+
+router.get("/finalizacao", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+    res.render("cadastro/finalizacao", { usuario: usuarioLogado })
+
+})
+
 router.post("/publicar", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
@@ -79,7 +114,7 @@ router.get("/editarPerfil", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    Postagem.find({dono: usuarioLogado.id}).lean().then((postagens) => {
+    Postagem.find({ dono: usuarioLogado.id }).lean().then((postagens) => {
 
         res.render("usuario/perfil", { usuario: usuarioLogado, postagens: postagens })
 
