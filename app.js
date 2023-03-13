@@ -113,7 +113,7 @@ app.get("/", Logado ,(req, res) => {
     console.log(usuarioLogado.id)
 
     // Encontrar Postagens
-    Postagem.find().lean().sort({data: 'asc'}).then((postagens) => {
+    Postagem.find().lean().sort({data: 'desc'}).then((postagens) => {
 
         res.render("usuario/inicio", { usuario: usuarioLogado, postagens: postagens })
 

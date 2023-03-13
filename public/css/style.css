@@ -401,8 +401,8 @@ form.sign-up-form {
 }
 
 .submit_cadastro {
+    margin-top: 1em;
     cursor: pointer;
-    margin-top: 50px;
     padding: 10px;
     border-radius: 15px;
     width: 300px;

@@ -114,7 +114,7 @@ router.get("/editarPerfil", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    Postagem.find({ dono: usuarioLogado.id }).lean().then((postagens) => {
+    Postagem.find({ dono: usuarioLogado.id }).lean().sort({data: 'desc'}).then((postagens) => {
 
         res.render("usuario/perfil", { usuario: usuarioLogado, postagens: postagens })
 

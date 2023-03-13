@@ -26,14 +26,9 @@ const Usuario = new Schema({
         type: String,
         required: true
     },
-    pais: {
-        type: String,
-    },
-    estado: {
-        type: String,
-    },
-    cidade: {
-        type: String,
+    endreco: {
+        type: Schema.Types.ObjectId,
+        ref: "enderecos"
     },
     escola: {
         type: String

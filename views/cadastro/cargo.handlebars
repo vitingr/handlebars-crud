@@ -1,1 +1,46 @@
-<h1>Tipo de emprego</h1>
+<div class="container_principal" id="cadastro">
+    <h1 class="title_cadastro">Tipo de Emprego </h1>
+    <h2 class="subtitle_cadastro">
+        Personalize seu perfil para conectar com profissionais quem tem os mesmos interesses que você.
+    </h2>
+
+    <form action="/usuario/novoCargo" method="POST">
+
+        <!-- ULTIMO CARGO ATUADO -->
+
+        <label for="cargo_recente" class="label_cadastro">Cargo mais Recente <span class="span_cadastro"></span></label>
+
+        <input type="text" name="cargo_recente" id="cargo_recente" class="input_cadastro" autocomplete="off" minlength="3" maxlength="20" required>
+
+        <!-- TIPO DE CONTRATO DE EMPREGO -->
+
+        <label for="tipo_emprego" class="label_cadastro">Tipo de Emprego <span class="span_cadastro"></span></label>
+
+        <input type="text" name="tipo_emprego" id="tipo_emprego" class="input_cadastro" autocomplete="off" minlength="3" maxlength="60" required>
+
+        <!-- EMPRESA MAIS RECENTE -->
+
+        <label for="empresa_recente" class="label_cadastro">Empresa mais Recente <span class="span_cadastro"></span></label>
+
+        <input type="text" name="empresa_recente" id="empresa_recente" class="input_cadastro" autocomplete="off" minlength="3" maxlength="60" required>
+
+        <button type="submit" class="submit_cadastro">
+            Confirmar 
+        </button>
+
+    </form>
+
+    <form action="/usuario/novoCargo/Estudante">
+    
+        <button type="submit" class="submit_cadastro">
+            Sou Estudante 
+        </button>
+    
+    </form>
+
+
+
+</div>
+<!-- CARGO MAIS RECENTE (Cargo mais recente, tipo de emprego, empresa mais recente )-->
+
+<!-- SOU ESTUDANTE INPUT -->

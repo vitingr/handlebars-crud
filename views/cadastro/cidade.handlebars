@@ -1,7 +1,7 @@
 <div class="container_principal" id="cadastro">
     <h1 class="title_cadastro">Olá {{usuario.nome}}!</h1>
     <h2 class="subtitle_cadastro">
-        Crie seu perfil para conectar com profissionais quem tem os mesmos interesses que você.
+        Personalize seu perfil para conectar com profissionais quem tem os mesmos interesses que você.
     </h2>
 
     <form action="/usuario/novoEndereco" method="POST">
@@ -13,7 +13,10 @@
 
         <!-- INFORME A  CIDADE E DISTRITO -->
 
-        <label for="cidade" class="label_cadastro">Cidade / Distrito <span class="span_cadastro">*</span></label>
+        <label for="estado" class="label_cadastro">Estado / Distrito <span class="span_cadastro">*</span></label>
+        <input type="text" name="estado" id="estado" class="input_cadastro" autocomplete="off" minlength="3" maxlength="60" required>
+
+         <label for="cidade" class="label_cadastro">Cidade <span class="span_cadastro">*</span></label>
         <input type="text" name="cidade" id="cidade" class="input_cadastro" autocomplete="off" minlength="3" maxlength="60" required>
 
         <button type="submit" class="submit_cadastro">
