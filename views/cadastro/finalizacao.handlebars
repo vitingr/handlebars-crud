@@ -1,1 +1,36 @@
-<h1>Informe os recrutadores sobre seu interesse!</h1>
+<div class="container_principal" id="cadastro">
+    <h1 class="title_cadastro">Informe os Recrutadores sobre o seu Interesse! </h1>
+    <h2 class="subtitle_cadastro">
+        Personalize seu perfil para conectar com profissionais quem tem os mesmos interesses que você.
+    </h2>
+
+    <form action="/usuario/novoCargo" method="POST">
+
+        <div class="inputs_container">
+
+            <!-- CARGO-->
+
+            <label for="cargo" class="label_cadastro">Cargo Desejado <span class="span_cadastro"></span></label>
+            <input type="text" name="cargo" id="cargo" class="input_cadastro" autocomplete="off" minlength="3" maxlength="60" required>
+
+            <!-- LOCALIDADE -->
+
+            <label for="tipo" class="label_cadastro">Tipo da Vaga <span class="span_cadastro"></span></label>
+            <select name="tipo" id="tipo" class="input_cadastro" required>
+                <option value=""></option>
+                <option value="presencial">Presencial</option>
+                <option value="hibrido">Híbrido</option>
+                <option value="remoto">Remoto</option>
+            </select>
+
+            <button type="submit" class="submit_cadastro">
+                Confirmar
+            </button>
+        </div>
+
+    </form>
+
+
+    <a href="/usuario/finalizacao">Proximo Provisório</a>
+
+</div>

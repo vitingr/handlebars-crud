@@ -43,7 +43,7 @@ router.get("/cargo", (req, res) => {
 router.get("/emprego", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
-    res.render("casdastro/emprego", { usuario: usuarioLogado })
+    res.render("cadastro/emprego", { usuario: usuarioLogado })
 
 })
 
@@ -113,6 +113,10 @@ router.post("/publicar", (req, res) => {
 router.get("/editarPerfil", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
+
+    if (!usuarioLogado.endereco ||usuarioLogado.endereco == null || usuarioLogado.endereco == undefined || usuarioLogado.endereco == "") {
+
+    }
 
     Postagem.find({ dono: usuarioLogado.id }).lean().sort({data: 'desc'}).then((postagens) => {
 

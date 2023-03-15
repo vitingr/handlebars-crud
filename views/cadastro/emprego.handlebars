@@ -1,5 +1,46 @@
-<h1>
-    Procurando emprego?
-</h1>
+<div class="container_principal" id="cadastro">
+    <h1 class="title_cadastro">Procurando Emprego? </h1>
+    <h2 class="subtitle_cadastro">
+        Personalize seu perfil para conectar com profissionais quem tem os mesmos interesses que você.
+    </h2>
+
+    <form action="/usuario/novoCargo" method="POST">
+
+        <div class="inputs_container">
+
+            <!-- QUERO UM EMPREGO -->
+
+            <div class="radio_options">
+                <input type="radio" name="emprego" id="emprego" value="sim" class="radio">Sim, estou procurando um novo
+                emprego.
+            </div>
+
+            <!-- TALVEZ, DEPENDE DA OPORTUNIDADE -->
+
+            <div class="radio_options">
+                <input type="radio" name="emprego" id="emprego" value="talvez">Não, mas se a oportunidade certa
+                aparecer, talvez.
+            </div>
+
+            <!-- NÃO QUERO EMPREGO -->
+
+            <div class="radio_options">
+                <input type="radio" name="emprego" id="emprego" value="nao">Não possuo interesse.
+            </div>
+
+            <button type="submit" class="submit_cadastro">
+                Confirmar
+            </button>
+        </div>
+
+    </form>
+
+
+    <a href="/usuario/tipoEmprego">Proximo Provisório</a>
+
+</div>
+<!-- CARGO MAIS RECENTE (Cargo mais recente, tipo de emprego, empresa mais recente )-->
+
+<!-- SOU ESTUDANTE INPUT -->
 
 <!-- ESTA BUSCANDO EMPREGO (Sim, estou || Não, mas se aparecer se pá || Não tenho interesse)-->

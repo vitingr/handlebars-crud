@@ -30,6 +30,18 @@ const Usuario = new Schema({
         type: Schema.Types.ObjectId,
         ref: "enderecos"
     },
+    ultimo_cargo: {
+        type: String
+    },
+    ultimo_empresa: {
+        type: String
+    },
+    ultimo_contrato: {
+        type: String
+    },
+    area: {
+        type: String
+    },
     escola: {
         type: String
     },
@@ -37,9 +49,6 @@ const Usuario = new Schema({
         type: String
     },
     foto: {
-        type: String
-    },
-    area: {
         type: String
     },
     seguidores: {

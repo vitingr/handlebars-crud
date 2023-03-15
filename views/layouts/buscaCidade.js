@@ -1,46 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="shortcut icon" href="/img/favicon (3).ico" type="image/x-icon">
-    <title>Projeto TCC</title>
-</head>
-
-<body>
-    <div>
-        {{>_nav}}
-        <main>
-            {{{body}}}
-        </main>
-    </div>
-</body>
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script src="https://unpkg.com/scrollreveal"></script>
-<script>
-    ScrollReveal({
-        reset: false,
-        distance: '60px',
-        duration: 2500,
-        delay: 400
-    })
-
-    ScrollReveal().reveal('.main_profile', { delay: 450, origin: 'top', interval: 100 });
-    ScrollReveal().reveal('.main_info', { delay: 525, origin: 'top', interval: 100 });
-    ScrollReveal().reveal('.feed', { delay: 575, origin: 'top', interval: 100 });
-    ScrollReveal().reveal('.index_events', { delay: 625, origin: 'top', interval: 100 });
-    ScrollReveal().reveal('.index_companies', { delay: 675, origin: 'top', interval: 100 });
-    ScrollReveal().reveal('.index_pages', { delay: 725, origin: 'top', interval: 100 });
-    ScrollReveal().reveal('.index_friends', { delay: 750, origin: 'top', interval: 100 });
-
-    ScrollReveal().reveal('#profile_edit', { delay: 625, origin: 'left', interval: 100 });
-</script>
-<script>
-    var json_cidades = {
+var json_cidades = {
     "estados": [
         {
             "sigla": "AC",
@@ -5804,6 +5762,8 @@
 
 function buscaCidades(e) {
 
+    console.log("OI")
+
     document.querySelector("#cidade").innerHTML = '';
     var cidade_select = document.querySelector("#cidade");
 
@@ -5830,6 +5790,3 @@ function buscaCidades(e) {
         document.querySelector("#cidade").innerHTML = '';
     }
 }
-</script>
-
-</html>

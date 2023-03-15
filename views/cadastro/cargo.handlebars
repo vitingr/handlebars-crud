@@ -6,39 +6,54 @@
 
     <form action="/usuario/novoCargo" method="POST">
 
-        <!-- ULTIMO CARGO ATUADO -->
+        <div class="inputs_container">
 
-        <label for="cargo_recente" class="label_cadastro">Cargo mais Recente <span class="span_cadastro"></span></label>
+            <!-- ULTIMO CARGO ATUADO -->
 
-        <input type="text" name="cargo_recente" id="cargo_recente" class="input_cadastro" autocomplete="off" minlength="3" maxlength="20" required>
+            <label for="cargo_recente" class="label_cadastro">Cargo mais Recente <span class="span_cadastro"></span></label>
+            <input type="text" name="cargo_recente" id="cargo_recente" class="input_cadastro" autocomplete="off" minlength="3" maxlength="20" required>
 
-        <!-- TIPO DE CONTRATO DE EMPREGO -->
+            <!-- TIPO DE CONTRATO DE EMPREGO -->
 
-        <label for="tipo_emprego" class="label_cadastro">Tipo de Emprego <span class="span_cadastro"></span></label>
+            <label for="tipo_emprego" class="label_cadastro">Tipo de Emprego <span
+                    class="span_cadastro">*</span></label>
 
-        <input type="text" name="tipo_emprego" id="tipo_emprego" class="input_cadastro" autocomplete="off" minlength="3" maxlength="60" required>
+            <select name="tipo_emprego" id="tipo_emprego" class="input_cadastro" required>
+                <option value=""></option>
+                <option value="determinado">Tempo determinado</option>
+                <option value="indeterminado">Tempo Indeterminado</option>
+                <option value="eventual">Eventual</option>
+                <option value="estagio">Estágio</option>
+                <option value="experiencia">Experiência</option>
+                <option value="intermitente">Intermitente</option>
+                <option value="home_office">Home Office</option>
+                <option value="jovem_aprendiz">Jovem Aprendiz</option>
+                <option value="parcial">Parcial</option>
+                <option value="autonomo">Autônomo</option>
+            </select>
 
-        <!-- EMPRESA MAIS RECENTE -->
 
-        <label for="empresa_recente" class="label_cadastro">Empresa mais Recente <span class="span_cadastro"></span></label>
+            <!-- EMPRESA MAIS RECENTE -->
 
-        <input type="text" name="empresa_recente" id="empresa_recente" class="input_cadastro" autocomplete="off" minlength="3" maxlength="60" required>
+            <label for="empresa_recente" class="label_cadastro">Empresa mais Recente <span class="span_cadastro"></span></label>
+            <input type="text" name="empresa_recente" id="empresa_recente" class="input_cadastro" autocomplete="off" minlength="3" maxlength="60" required>
 
-        <button type="submit" class="submit_cadastro">
-            Confirmar 
-        </button>
+            <!-- SOU ESTUDANTE -->
+
+            <div class="flex">
+                <input type="checkbox" name="estudante" id="estudante" value="Sou Estudante" class="checkbox">
+                <label for="estudante" class="label_cadastro">Sou Estudante <span class="span_cadastro"></span></label>
+            </div>
+
+            <button type="submit" class="submit_cadastro">
+                Confirmar
+            </button>
+        </div> 
 
     </form>
 
-    <form action="/usuario/novoCargo/Estudante">
-    
-        <button type="submit" class="submit_cadastro">
-            Sou Estudante 
-        </button>
-    
-    </form>
 
-
+    <a href="/usuario/emprego">Proximo Provisório</a>
 
 </div>
 <!-- CARGO MAIS RECENTE (Cargo mais recente, tipo de emprego, empresa mais recente )-->
