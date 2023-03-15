@@ -5,6 +5,7 @@ require("../models/Postagem")
 require("../models/Empresa")
 require("../models/Usuario")
 require("../models/Vaga")
+require("../models/Endereco")
 
 // Import Models
 
@@ -12,6 +13,7 @@ const Postagem = mongoose.model("postagens")
 const Empresa = mongoose.model("empresas")
 const Usuario = mongoose.model("usuarios")
 const Vaga = mongoose.model("vagas")
+const Endereco = mongoose.model("enderecos")
 
 // Helpers
 
@@ -40,10 +42,84 @@ router.get("/cargo", (req, res) => {
 
 })
 
+router.post("/novoEndereco", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+    const novoEndereco = {
+        dono: usuarioLogado._id,
+        pais: req.body.pais,
+        estado: req.body.estado,
+        cidade: req.body.cidade
+    }
+
+    new Endereco(novoEndereco).save().then(() => {
+
+        req.redirect("/emprego")
+
+    }).catch((erro) => {
+
+        req.flash('error_msg', 'ERRO! Não foi possível salvar o Endereço')
+        res.redirect("/")
+
+    })
+
+})
+
 router.get("/emprego", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
     res.render("cadastro/emprego", { usuario: usuarioLogado })
+
+})
+
+router.post("/novoEmprego", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    Usuario.findOne({_id: usuarioLogado._id}).then((usuario) => {
+
+        if (!req.body.estudante || req.body.estudante == null || req.body.estudante == undefined) {
+
+            usuario.ultimo_cargo = "Estudante"
+            usuario.ultimo_contrato = "Estudante"
+            usuarioLogado.ultima_empresa = "Estudante"
+
+            usuario.save().then(() => {
+
+                res.redirect("/tipoEmprego")
+
+            }).catch((erro) => {
+
+                req.flash('error_msg', 'ERRO! Houve um erro ao salvar suas informações...')
+                res.redirect("/")
+
+            })
+
+        } else {
+
+            usuario.ultimo_cargo = req.body.cargo_recente
+            usuario.ultimo_contrato = req.body.tipo_emprego
+            usuarioLogado.ultima_empresa = req.body.empresa_recente
+
+            usuario.save().then(() => {
+
+                res.redirect("/tipoEmprego")
+
+            }).catch((erro) => {
+
+                req.flash('error_msg', 'ERRO! Houve um erro ao salvar suas informações...')
+                res.redirect("/")
+
+            })
+
+        }
+
+    }).catch((erro) => {
+
+        req.flash('error_msg', 'ERRO! Não foi possível encontrar sua conta..')
+        res.redirect("/")
+
+    })
 
 })
 
@@ -114,11 +190,11 @@ router.get("/editarPerfil", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    if (!usuarioLogado.endereco ||usuarioLogado.endereco == null || usuarioLogado.endereco == undefined || usuarioLogado.endereco == "") {
+    if (!usuarioLogado.endereco || usuarioLogado.endereco == null || usuarioLogado.endereco == undefined || usuarioLogado.endereco == "") {
 
     }
 
-    Postagem.find({ dono: usuarioLogado.id }).lean().sort({data: 'desc'}).then((postagens) => {
+    Postagem.find({ dono: usuarioLogado.id }).lean().sort({ data: 'desc' }).then((postagens) => {
 
         res.render("usuario/perfil", { usuario: usuarioLogado, postagens: postagens })
 

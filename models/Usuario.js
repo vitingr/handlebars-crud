@@ -33,7 +33,7 @@ const Usuario = new Schema({
     ultimo_cargo: {
         type: String
     },
-    ultimo_empresa: {
+    ultima_empresa: {
         type: String
     },
     ultimo_contrato: {
@@ -53,6 +53,10 @@ const Usuario = new Schema({
     },
     seguidores: {
         type: Number
+    },
+    novoUsuario: {
+        type: Number,
+        default: 0
     }
 
 })

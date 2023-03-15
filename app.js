@@ -106,18 +106,27 @@ function validarEmail(email) {
 
 // Rotas de Acesso
 
-app.get("/", Logado ,(req, res) => {
+app.get("/", Logado, (req, res) => {
 
     // Informações Usuario
+
     const usuarioLogado = infoUsuario(req.user)
     console.log(usuarioLogado.id)
 
-    // Encontrar Postagens
-    Postagem.find().lean().sort({data: 'desc'}).then((postagens) => {
+    if (usuarioLogado) {
 
-        res.render("usuario/inicio", { usuario: usuarioLogado, postagens: postagens })
+        res.redirect("/usuario/endereco")
 
-    })
+    } else {
+
+        // Encontrar Postagens
+        Postagem.find().lean().sort({ data: 'desc' }).then((postagens) => {
+
+            res.render("usuario/inicio", { usuario: usuarioLogado, postagens: postagens })
+
+        })
+
+    }
 
 })
 
@@ -306,7 +315,7 @@ app.get('/404', (req, res) => {
 // Adicionar Rotas 
 
 app.use('/empresa', Logado, empresa)
-app.use('/usuario', Logado, usuario)
+app.use('/usuario', usuario)
 
 // Public
 

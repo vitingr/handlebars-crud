@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
-const Usuario = new Schema({
+const Endereco = new Schema({
 
     dono: {
         type: Schema.Types.ObjectId,
@@ -21,4 +21,4 @@ const Usuario = new Schema({
     },
 })
 
-mongoose.model("usuarios", Usuario)
+mongoose.model("enderecos", Endereco)
