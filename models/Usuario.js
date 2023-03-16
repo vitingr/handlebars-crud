@@ -26,7 +26,7 @@ const Usuario = new Schema({
         type: String,
         required: true
     },
-    endreco: {
+    endereco: {
         type: Schema.Types.ObjectId,
         ref: "enderecos"
     },
@@ -40,6 +40,12 @@ const Usuario = new Schema({
         type: String
     },
     area: {
+        type: String
+    },
+    preferencia_emprego: {
+        type: String
+    },
+    procurando_emprego: {
         type: String
     },
     escola: {

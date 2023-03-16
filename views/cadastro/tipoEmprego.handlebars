@@ -4,18 +4,18 @@
         Personalize seu perfil para conectar com profissionais quem tem os mesmos interesses que você.
     </h2>
 
-    <form action="/usuario/novoCargo" method="POST">
+    <form action="/usuario/novoTipoEmprego" method="POST">
 
         <div class="inputs_container">
 
             <!-- CARGO-->
 
-            <label for="cargo" class="label_cadastro">Cargo Desejado <span class="span_cadastro"></span></label>
+            <label for="cargo" class="label_cadastro">Sua Área <span class="span_cadastro"></span></label>
             <input type="text" name="cargo" id="cargo" class="input_cadastro" autocomplete="off" minlength="3" maxlength="60" required>
 
             <!-- LOCALIDADE -->
 
-            <label for="tipo" class="label_cadastro">Tipo da Vaga <span class="span_cadastro"></span></label>
+            <label for="tipo" class="label_cadastro">Preferência de Emprego <span class="span_cadastro"></span></label>
             <select name="tipo" id="tipo" class="input_cadastro" required>
                 <option value=""></option>
                 <option value="presencial">Presencial</option>

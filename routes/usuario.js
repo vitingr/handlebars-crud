@@ -35,13 +35,6 @@ router.get("/endereco", (req, res) => {
 
 })
 
-router.get("/cargo", (req, res) => {
-
-    const usuarioLogado = infoUsuario(req.user)
-    res.render("cadastro/cargo", { usuario: usuarioLogado })
-
-})
-
 router.post("/novoEndereco", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
@@ -52,11 +45,27 @@ router.post("/novoEndereco", (req, res) => {
         cidade: req.body.cidade
     }
 
-    new Endereco(novoEndereco).save().then(() => {
+    new Endereco(novoEndereco).save().then((endereco) => {
 
-        req.redirect("/emprego")
+        Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
+
+            usuario.endereco = endereco._id
+
+            usuario.save().then(() => {
+
+                res.redirect("/usuario/emprego")
+
+            })
+
+        }).catch((erro) => {
+
+            req.flash('error_msg', 'ERRO! Não foi possível relacionar o endereço com sua Conta!')
+            res.redirect("/")
+
+        })
 
     }).catch((erro) => {
+
 
         req.flash('error_msg', 'ERRO! Não foi possível salvar o Endereço')
         res.redirect("/")
@@ -68,7 +77,7 @@ router.post("/novoEndereco", (req, res) => {
 router.get("/emprego", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
-    res.render("cadastro/emprego", { usuario: usuarioLogado })
+    res.render("cadastro/cargo", { usuario: usuarioLogado })
 
 })
 
@@ -76,17 +85,17 @@ router.post("/novoEmprego", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    Usuario.findOne({_id: usuarioLogado._id}).then((usuario) => {
+    Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
 
         if (!req.body.estudante || req.body.estudante == null || req.body.estudante == undefined) {
 
-            usuario.ultimo_cargo = "Estudante"
-            usuario.ultimo_contrato = "Estudante"
-            usuarioLogado.ultima_empresa = "Estudante"
+            usuario.ultimo_cargo = req.body.cargo_recente
+            usuario.ultimo_contrato = req.body.tipo_emprego
+            usuario.ultima_empresa = req.body.empresa_recente
 
             usuario.save().then(() => {
 
-                res.redirect("/tipoEmprego")
+                res.redirect("/usuario/tipoEmprego")
 
             }).catch((erro) => {
 
@@ -97,13 +106,13 @@ router.post("/novoEmprego", (req, res) => {
 
         } else {
 
-            usuario.ultimo_cargo = req.body.cargo_recente
-            usuario.ultimo_contrato = req.body.tipo_emprego
-            usuarioLogado.ultima_empresa = req.body.empresa_recente
+            usuario.ultimo_cargo = "Estudante"
+            usuario.ultimo_contrato = "Estudante"
+            usuario.ultima_empresa = "Estudante"
 
             usuario.save().then(() => {
 
-                res.redirect("/tipoEmprego")
+                res.redirect("/usuario/tipoEmprego")
 
             }).catch((erro) => {
 
@@ -127,6 +136,70 @@ router.get("/tipoEmprego", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
     res.render("cadastro/tipoEmprego", { usuario: usuarioLogado })
+
+})
+
+router.post("/novoTipoEmprego", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
+
+        usuario.area = req.body.cargo
+        usuario.preferencia_emprego = req.body.tipo
+
+        usuario.save().then(() => {
+
+            res.redirect("/usuario/vagas")
+
+        }).catch((erro) => {
+
+            req.flash('error_msg', 'ERRO! Houve um erro ao salvar suas informações...')
+            res.redirect("/")
+
+        })
+
+    }).catch((erro) => {
+
+        req.flash('error_msg', 'ERRO! Não foi possível encontrar sua conta..')
+        res.redirect("/")
+
+    })
+
+})
+
+router.get("/vagas", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+    res.render("cadastro/emprego", { usuario: usuarioLogado })
+
+})
+
+router.post("/novasVagas", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
+
+        usuario.procurando_emprego = req.body.emprego
+
+        usuario.save().then(() => {
+
+            res.redirect("/usuario/editarPerfil")
+
+        }).catch((erro) => {
+
+            req.flash('error_msg', 'ERRO! Houve um erro ao salvar suas informações...')
+            res.redirect("/")
+
+        })
+
+    }).catch((erro) => {
+
+        req.flash('error_msg', 'ERRO! Não foi possível encontrar sua conta..')
+        res.redirect("/")
+
+    })
 
 })
 
