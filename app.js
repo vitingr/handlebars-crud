@@ -113,20 +113,40 @@ app.get("/", Logado, (req, res) => {
     const usuarioLogado = infoUsuario(req.user)
     console.log(usuarioLogado.id)
 
-    if (usuarioLogado) {
+    if (!usuarioLogado.endereco || usuarioLogado.endereco == null || usuarioLogado.endereco == undefined || usuarioLogado.endereco == "") {
 
         res.redirect("/usuario/endereco")
 
     } else {
 
-        // Encontrar Postagens
-        Postagem.find().lean().sort({ data: 'desc' }).then((postagens) => {
+        if (!usuarioLogado.ultimo_cargo || usuarioLogado.ultimo_cargo == null || usuarioLogado.ultimo_cargo == undefined || usuarioLogado.ultimo_cargo == "" || !usuarioLogado.ultima_empresa || usuarioLogado.ultima_empresa == null || usuarioLogado.ultima_empresa == undefined || usuarioLogado.ultima_empresa == "" || !usuarioLogado.ultimo_contrato || usuarioLogado.ultimo_contrato == null || usuarioLogado.ultimo_contrato == undefined || usuarioLogado.ultimo_contrato == "") {
 
-            res.render("usuario/inicio", { usuario: usuarioLogado, postagens: postagens })
+            res.redirect("/usuario/emprego")
 
-        })
+        } else {
+
+            if (!usuarioLogado.area || usuarioLogado.area == null || usuarioLogado.area == undefined || usuarioLogado.area == "" || !usuarioLogado.preferencia_emprego || usuarioLogado.preferencia_emprego == null || usuarioLogado.preferencia_emprego == undefined || usuarioLogado.preferencia_emprego == "") {
+
+                res.redirect("/usuario/tipoEmprego")
+
+            } else {
+
+                if (!usuarioLogado.procurando_emprego || usuarioLogado.procurando_emprego == null || usuarioLogado.procurando_emprego == undefined || usuarioLogado.procurando_emprego == "")
+
+                    res.redirect("/usuario/vagas")
+
+            }
+
+        }
 
     }
+
+    // Encontrar Postagens
+    Postagem.find().lean().sort({ data: 'desc' }).then((postagens) => {
+
+        res.render("usuario/inicio", { usuario: usuarioLogado, postagens: postagens })
+
+    })
 
 })
 

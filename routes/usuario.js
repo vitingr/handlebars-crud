@@ -30,8 +30,17 @@ function validarEmail(email) {
 
 router.get("/endereco", (req, res) => {
 
-    const usuarioLogado = infoUsuario(req.user)
-    res.render("cadastro/cidade", { usuario: usuarioLogado })
+    if (!usuarioLogado.endereco || usuarioLogado.endereco == null || usuarioLogado.endereco == undefined || usuarioLogado.endereco == "") {
+
+        const usuarioLogado = infoUsuario(req.user)
+        res.render("cadastro/cidade", { usuario: usuarioLogado })
+
+    } else {
+
+        res.redirect("usuario/emprego")
+
+    }
+
 
 })
 
@@ -76,8 +85,16 @@ router.post("/novoEndereco", (req, res) => {
 
 router.get("/emprego", (req, res) => {
 
-    const usuarioLogado = infoUsuario(req.user)
-    res.render("cadastro/cargo", { usuario: usuarioLogado })
+    if (!usuarioLogado.ultimo_cargo || usuarioLogado.ultimo_cargo == null || usuarioLogado.ultimo_cargo == undefined || usuarioLogado.ultimo_cargo == "" || !usuarioLogado.ultima_empresa || usuarioLogado.ultima_empresa == null || usuarioLogado.ultima_empresa == undefined || usuarioLogado.ultima_empresa == "" || !usuarioLogado.ultimo_contrato || usuarioLogado.ultimo_contrato == null || usuarioLogado.ultimo_contrato == undefined || usuarioLogado.ultimo_contrato == "") {
+
+        const usuarioLogado = infoUsuario(req.user)
+        res.render("cadastro/cargo", { usuario: usuarioLogado })
+
+    } else {
+
+        res.redirect("/usuario/tipoEmprego")
+
+    }
 
 })
 
@@ -134,8 +151,16 @@ router.post("/novoEmprego", (req, res) => {
 
 router.get("/tipoEmprego", (req, res) => {
 
-    const usuarioLogado = infoUsuario(req.user)
-    res.render("cadastro/tipoEmprego", { usuario: usuarioLogado })
+    if (!usuarioLogado.area || usuarioLogado.area == null || usuarioLogado.area == undefined || usuarioLogado.area == "" || !usuarioLogado.preferencia_emprego || usuarioLogado.preferencia_emprego == null || usuarioLogado.preferencia_emprego == undefined || usuarioLogado.preferencia_emprego == "") {
+
+        const usuarioLogado = infoUsuario(req.user)
+        res.render("cadastro/tipoEmprego", { usuario: usuarioLogado })
+
+    } else {
+
+        res.redirect("/usuario/vagas")
+
+    }
 
 })
 
@@ -170,8 +195,16 @@ router.post("/novoTipoEmprego", (req, res) => {
 
 router.get("/vagas", (req, res) => {
 
-    const usuarioLogado = infoUsuario(req.user)
-    res.render("cadastro/emprego", { usuario: usuarioLogado })
+    if (!usuarioLogado.procurando_emprego || usuarioLogado.procurando_emprego == null || usuarioLogado.procurando_emprego == undefined || usuarioLogado.procurando_emprego == "") {
+
+        const usuarioLogado = infoUsuario(req.user)
+        res.render("cadastro/emprego", { usuario: usuarioLogado })
+
+    } else {
+
+        res.redirect("/usuario/editarPerfil")
+
+    }
 
 })
 
@@ -262,21 +295,71 @@ router.post("/publicar", (req, res) => {
 router.get("/editarPerfil", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
+    let perfil_completo = "sim"
 
     if (!usuarioLogado.endereco || usuarioLogado.endereco == null || usuarioLogado.endereco == undefined || usuarioLogado.endereco == "") {
 
+        perfil_completo = "não"
+
+    } else {
+
+        if (!usuarioLogado.ultimo_cargo || usuarioLogado.ultimo_cargo == null || usuarioLogado.ultimo_cargo == undefined || usuarioLogado.ultimo_cargo == "" || !usuarioLogado.ultima_empresa || usuarioLogado.ultima_empresa == null || usuarioLogado.ultima_empresa == undefined || usuarioLogado.ultima_empresa == "" || !usuarioLogado.ultimo_contrato || usuarioLogado.ultimo_contrato == null || usuarioLogado.ultimo_contrato == undefined || usuarioLogado.ultimo_contrato == "") {
+
+            perfil_completo = "não"
+
+        } else {
+
+            if (!usuarioLogado.area || usuarioLogado.area == null || usuarioLogado.area == undefined || usuarioLogado.area == "" || !usuarioLogado.preferencia_emprego || usuarioLogado.preferencia_emprego == null || usuarioLogado.preferencia_emprego == undefined || usuarioLogado.preferencia_emprego == "") {
+
+                perfil_completo = "não"
+
+            } else {
+
+                if (!usuarioLogado.procurando_emprego || usuarioLogado.procurando_emprego == null || usuarioLogado.procurando_emprego == undefined || usuarioLogado.procurando_emprego == "")
+
+                    perfil_completo = "não"
+
+            }
+
+        }
+
     }
 
-    Postagem.find({ dono: usuarioLogado.id }).lean().sort({ data: 'desc' }).then((postagens) => {
+    if (perfil_completo == "não") {
 
-        res.render("usuario/perfil", { usuario: usuarioLogado, postagens: postagens })
+        Postagem.find({ dono: usuarioLogado.id }).lean().sort({ data: 'desc' }).then((postagens) => {
 
-    }).catch((erro) => {
+            res.render("usuario/perfil", { usuario: usuarioLogado, postagens: postagens, perfil_completo: perfil_completo })
 
-        req.flash('error_msg', 'ERRO! Não foi possível encontrar seu perfil...')
-        res.redirect("/")
+        }).catch((erro) => {
 
-    })
+            req.flash('error_msg', 'ERRO! Não foi possível encontrar seu perfil...')
+            res.redirect("/")
+
+        })
+
+    } else {
+
+        if (perfil_completo == "sim") {
+
+            Postagem.find({ dono: usuarioLogado.id }).lean().sort({ data: 'desc' }).then((postagens) => {
+
+                res.render("usuario/perfil", { usuario: usuarioLogado, postagens: postagens })
+
+            }).catch((erro) => {
+
+                req.flash('error_msg', 'ERRO! Não foi possível encontrar seu perfil...')
+                res.redirect("/")
+
+            })
+
+        } else {
+
+            req.flash('error_msg', 'Não foi possível analisar seu Perfil.')
+            res.redirect("/")
+
+        }
+    }
 
 })
 

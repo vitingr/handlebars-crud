@@ -9,13 +9,16 @@ module.exports = {
             nomeCompleto: usuario.nomeCompleto,
             email: usuario.email,
             senha: usuario.senha,
-            pais: usuario.pais,
-            estado: usuario.estado,
-            cidade: usuario.cidade,
+            endereco: usuario.endereco,
+            ultimo_cargo: usuario.ultimo_cargo,
+            ultima_empresa: usuario.ultima_empresa,
+            ultimo_contrato: usuario.ultimo_contrato,
+            preferencia_emprego: usuario.preferencia_emprego,
+            procurando_emprego: usuario.procurando_emprego,
+            area: usuario.area,
             escola: usuario.escola,
             faculdade: usuario.faculdade,
             foto: usuario.foto,
-            area: usuario.area,
             seguidores: usuario.seguidores 
         }
 

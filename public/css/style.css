@@ -41,6 +41,7 @@ body {
 /* ===== REUTILIZÁVEL ======= */
 
 .mensagem-sucesso {
+    position: relative;
     z-index: 999;
     width: 40%;
     margin: auto;
@@ -675,6 +676,7 @@ form.sign-up-form {
 }
 
 .text_something_bottom ion-icon:hover {
+    transform: scale(1.1);
     color: var(--font-color);
 }
 
@@ -1202,6 +1204,13 @@ text_feed input:focus {
     max-width: 175px;
     border-radius: 50%;
     margin-top: 30px;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+.profile_background img:hover {
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 .profile_info {
@@ -1315,8 +1324,31 @@ text_feed input:focus {
 }
 
 .edit_profile_message p {
+    width: 100%;
     color: var(--font-color-low-emphasis);
     font-size: 14px;
+}
+
+.edit_profile_message div {
+    display: flex;
+    align-items: center;
+}
+
+.edit_profile_message button {
+    cursor: pointer;
+    border-radius: 5px;
+    width: 150px;
+    padding: 7.5px;
+    background: none;
+    border: 1px solid #33333379;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+.edit_profile_message button:hover {
+    border: 1px solid white;
+    background: var(--color2);
+    color: white;
 }
 
 /* ======== ANIMAÇÕES ======== */

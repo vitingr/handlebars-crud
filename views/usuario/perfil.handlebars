@@ -31,11 +31,49 @@
         </div>
 
         <!-- INFORMAÇÕES EMPREGOS -->
+
+        {{#if perfil_completo}}
+
         <div class="profile_jobs">
             <h1 class="title_profile_edit">
                 Complemente sua conta!
             </h1>
         </div>
+
+        <div class="edit_profile_message">
+            <h2>
+                Há Informações Faltando...
+            </h2>
+            <p>
+                edite e personalize o perfil para atrair mais pessoas!
+            </p>
+        </div>
+
+        {{else}}
+
+        <div class="profile_jobs">
+            <h1 class="title_profile_edit">
+                Complemente sua conta!
+            </h1>
+        </div>
+
+        <div class="edit_profile_message">
+            <h2>
+                Há Informações Faltando...
+            </h2>
+            <div>
+            <p>
+                edite e personalize o perfil para atrair mais pessoas!
+            </p>
+            <button>
+                Finalizar Perfil
+            </button>
+            </div>
+
+        </div>
+
+
+        {{/if}}
 
         <!-- INFORMAÇÕES ANALYTICS -->
         <div class="profile_analytics">
@@ -128,6 +166,21 @@
                 Experiência Profissional
             </h1>
         </div>
+
+        {{#each experiencias}}
+
+        {{else}}
+
+        <div class="edit_profile_message">
+            <h2>
+                Sem Dados...
+            </h2>
+            <p>
+                Nenhuma informação sobre experiência disponível!
+            </p>
+        </div>
+
+        {{/each}}
 
     </div>
 
