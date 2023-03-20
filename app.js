@@ -332,7 +332,19 @@ app.post("/cadastrar", (req, res) => {
 
 app.get("/logout", (req, res) => {
 
-    res.send("Em breve")
+    req.logout((erro) => {
+
+        if (erro) {
+
+            req.flash('error_msg', 'ERRO! Não foi possível deslogar')
+            res.redirect("/")
+
+        }
+
+        req.flash('success_msg', 'SUCESSO! Você foi desconectado...')
+        res.redirect("/login")
+
+    })
 
 })
 

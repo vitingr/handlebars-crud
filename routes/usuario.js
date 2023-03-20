@@ -30,6 +30,8 @@ function validarEmail(email) {
 
 router.get("/endereco", (req, res) => {
 
+    const usuarioLogado = infoUsuario(req.user)
+
     if (!usuarioLogado.endereco || usuarioLogado.endereco == null || usuarioLogado.endereco == undefined || usuarioLogado.endereco == "") {
 
         const usuarioLogado = infoUsuario(req.user)
@@ -84,6 +86,8 @@ router.post("/novoEndereco", (req, res) => {
 })
 
 router.get("/emprego", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
 
     if (!usuarioLogado.ultimo_cargo || usuarioLogado.ultimo_cargo == null || usuarioLogado.ultimo_cargo == undefined || usuarioLogado.ultimo_cargo == "" || !usuarioLogado.ultima_empresa || usuarioLogado.ultima_empresa == null || usuarioLogado.ultima_empresa == undefined || usuarioLogado.ultima_empresa == "" || !usuarioLogado.ultimo_contrato || usuarioLogado.ultimo_contrato == null || usuarioLogado.ultimo_contrato == undefined || usuarioLogado.ultimo_contrato == "") {
 
@@ -151,6 +155,8 @@ router.post("/novoEmprego", (req, res) => {
 
 router.get("/tipoEmprego", (req, res) => {
 
+    const usuarioLogado = infoUsuario(req.user)
+
     if (!usuarioLogado.area || usuarioLogado.area == null || usuarioLogado.area == undefined || usuarioLogado.area == "" || !usuarioLogado.preferencia_emprego || usuarioLogado.preferencia_emprego == null || usuarioLogado.preferencia_emprego == undefined || usuarioLogado.preferencia_emprego == "") {
 
         const usuarioLogado = infoUsuario(req.user)
@@ -194,6 +200,8 @@ router.post("/novoTipoEmprego", (req, res) => {
 })
 
 router.get("/vagas", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
 
     if (!usuarioLogado.procurando_emprego || usuarioLogado.procurando_emprego == null || usuarioLogado.procurando_emprego == undefined || usuarioLogado.procurando_emprego == "") {
 
