@@ -102,6 +102,25 @@ a {
     border-radius: 15px;
 }
 
+#menu-icon ion-icon {
+    display: none;
+    color: white;
+    font-size: 35px;
+    z-index: 10001;
+    cursor: pointer;
+}
+
+.bx-x {
+    display: block;
+}
+
+.open {
+    z-index: 999;
+    display: block !important;
+    top: 0px !important;
+    right: 0px !important;
+}
+
 /* ======= LOGIN / CADASTRO ======== */
 
 .container_login,
@@ -423,7 +442,7 @@ form.sign-up-form {
     margin-right: 10px;
 }
 
-.checkbox:checked{
+.checkbox:checked {
     background-color: var(--color2);
 }
 
@@ -1351,6 +1370,8 @@ text_feed input:focus {
     color: white;
 }
 
+
+
 /* ======== ANIMAÇÕES ======== */
 
 @keyframes shake {
@@ -1386,7 +1407,7 @@ text_feed input:focus {
 
     .container_login {
         min-height: 800px;
-        height: 140vh;
+        height: 100vh;
     }
 
     .container_cadastro {
@@ -1428,6 +1449,10 @@ text_feed input:focus {
         display: none;
     }
 
+    .container_left {
+        width: 100%;
+    }
+
     .container_left_bottom {
         flex-wrap: wrap;
     }
@@ -1447,5 +1472,74 @@ text_feed input:focus {
 
     .text_something {
         width: 300px;
+    }
+}
+
+@media (max-width: 750px) {
+
+    .container_principal {
+        padding: 25px;
+    }
+
+    .input_nav {
+        margin-left: 7.5%;
+        width: 250px;
+    }
+
+    .nav-list {
+        display: none;
+        background: white;
+        position: absolute;
+        top: 100%;
+        right: -100%;
+        width: 300px;
+        height: 130vh;
+        padding: 120px 30px;
+        transition-timing-function: ease-in-out;
+        transition-duration: 0.4s;
+    }
+
+    #menu-icon ion-icon {
+        display: block;
+    }
+
+    .nav-list li a {
+        color: var(--font-color);
+    }
+
+    .left_profile {
+        align-items: center;
+    }
+
+    .main_profile {
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .main_info {
+        width: 100%;
+    }
+
+    .main_info .main_info_div {
+        width: 100%;
+    }
+
+    .feed,
+    .index_companies,
+    .index_events,
+    .index_friends {
+        width: 350px;
+    }
+
+    .text_feed {
+        width: 100%;
+    }
+
+    .text_something_bottom input {
+        margin-left: 0px;
+    }
+
+    .text_something_bottom {
+        width: 100%;
     }
 }

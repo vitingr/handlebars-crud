@@ -276,7 +276,6 @@ app.post("/cadastrar", (req, res) => {
                     nomeCompleto: nomeCompleto,
                     email: req.body.email,
                     senha: req.body.senha,
-                    endereco: "",
                     ultimo_cargo: "",
                     ultima_empresa: "",
                     ultimo_contrato: "",
