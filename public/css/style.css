@@ -111,7 +111,12 @@ a {
 }
 
 .bx-x {
+    z-index: 9999;
     display: block;
+}
+
+.bx-x ion-icon {
+    color: var(--font-color) !important;
 }
 
 .open {
@@ -128,7 +133,6 @@ a {
     position: relative;
     width: 100%;
     min-height: 100vh;
-    background-color: var(--bg-color);
     overflow: hidden;
 }
 
@@ -151,8 +155,6 @@ a {
     position: relative;
     width: 100%;
     height: 100%;
-    top: 0;
-    left: 0;
 }
 
 .signin-signup {
@@ -597,7 +599,6 @@ form.sign-up-form {
 
 .container_left_top {
     width: 900px;
-    height: 450px;
     display: flex;
     flex-direction: column;
 }
@@ -615,7 +616,6 @@ form.sign-up-form {
     display: flex;
     flex-direction: column;
     width: 350px;
-    height: 685px;
 }
 
 .main_info .main_info_div {
@@ -841,6 +841,7 @@ text_feed input:focus {
 
 .left_profile {
     display: flex;
+    flex-wrap: wrap;
     align-items: end;
     width: 100%;
     height: 100%;
@@ -1210,6 +1211,32 @@ text_feed input:focus {
     background: var(--color2);
 }
 
+/* -=-=-=- FOOTER -=-=-=- */
+
+.custom-shape-divider-bottom-1679778702 {
+    width: 100%;
+    overflow: hidden;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1679778702 svg {
+    position: relative;
+    display: block;
+    width: calc(119% + 1.3px);
+    height: 152px;
+}
+
+.custom-shape-divider-bottom-1679778702 .shape-fill {
+    fill: var(--color3);
+}
+
+.footer {
+    min-height: 200px;
+    width: 100%;
+    background: var(--color3);
+    margin-top: -1px;
+}
+
 /* ====== EDIT PROFILE ======= */
 
 .profile_background {
@@ -1487,6 +1514,7 @@ text_feed input:focus {
     }
 
     .nav-list {
+        z-index: 9999;
         display: none;
         background: white;
         position: absolute;
@@ -1494,9 +1522,20 @@ text_feed input:focus {
         right: -100%;
         width: 300px;
         height: 130vh;
-        padding: 120px 30px;
+        padding: 120px 20px;
         transition-timing-function: ease-in-out;
         transition-duration: 0.4s;
+    }
+
+    .open li {
+        padding: 15px;
+        border-bottom: 1px solid #44444448;
+        transition-timing-function: ease-in-out;
+        transition-duration: 0.4s;
+    }
+
+    .open li:hover {
+        transform: scale(1.1);
     }
 
     #menu-icon ion-icon {
@@ -1541,5 +1580,12 @@ text_feed input:focus {
 
     .text_something_bottom {
         width: 100%;
+    }
+
+}
+
+@media (max-width: 500px) {
+    .forms-container {
+        margin-top: 125px;
     }
 }
