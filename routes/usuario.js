@@ -6,6 +6,7 @@ require("../models/Empresa")
 require("../models/Usuario")
 require("../models/Vaga")
 require("../models/Endereco")
+require("../models/Notificacao")
 
 // Import Models
 
@@ -14,6 +15,7 @@ const Empresa = mongoose.model("empresas")
 const Usuario = mongoose.model("usuarios")
 const Vaga = mongoose.model("vagas")
 const Endereco = mongoose.model("enderecos")
+const Notificacao = mongoose.model("notificacoes")
 
 // Helpers
 
@@ -337,7 +339,7 @@ router.get("/editarPerfil", (req, res) => {
 
         Postagem.find({ dono: usuarioLogado.id }).lean().sort({ data: 'desc' }).then((postagens) => {
 
-            res.render("usuario/perfil", { usuario: usuarioLogado, postagens: postagens, perfil_completo: perfil_completo })
+            res.render("usuario/perfil", { usuario: usuarioLogado, postagens: postagens })
 
         }).catch((erro) => {
 
@@ -352,7 +354,7 @@ router.get("/editarPerfil", (req, res) => {
 
             Postagem.find({ dono: usuarioLogado.id }).lean().sort({ data: 'desc' }).then((postagens) => {
 
-                res.render("usuario/perfil", { usuario: usuarioLogado, postagens: postagens })
+                res.render("usuario/perfil", { usuario: usuarioLogado, postagens: postagens, perfil_completo: perfil_completo })
 
             }).catch((erro) => {
 
@@ -368,6 +370,23 @@ router.get("/editarPerfil", (req, res) => {
 
         }
     }
+
+})
+
+router.get("/notificacoes", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    Notificacao.find().lean().then((notificacoes) => {
+
+        res.render("usuario/notificacoes", {usuario: usuarioLogado, notificacoes: notificacoes})
+
+    }).catch((erro) => {
+
+        req.flash('error_msg', 'ERRO! Não foi possível carregar as Notificações!')
+        res.redirect("/")
+
+    })
 
 })
 

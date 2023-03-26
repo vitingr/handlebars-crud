@@ -1,4 +1,4 @@
-<div class="container_principal">
+<div class="container_principal" id="editarPerfil">
     <div class="container_left" id="profile_edit">
 
         <!-- INFORMAÇÕES PERFIL SUPERIOR -->
@@ -25,6 +25,7 @@
                         <img
                             src="https://pbs.twimg.com/profile_images/1219235687/soh_o_P_logo_transparente_novo_400x400.png">
                         <p>ETEC - Escola Técnica Estadual de São Paulo</p>
+
                     </div>
                 </div>
             </div>
@@ -34,41 +35,19 @@
 
         {{#if perfil_completo}}
 
-        <div class="profile_jobs">
-            <h1 class="title_profile_edit">
-                Complemente sua conta!
-            </h1>
-        </div>
-
-        <div class="edit_profile_message">
-            <h2>
-                Há Informações Faltando...
-            </h2>
-            <p>
-                edite e personalize o perfil para atrair mais pessoas!
-            </p>
-        </div>
-
         {{else}}
 
-        <div class="profile_jobs">
-            <h1 class="title_profile_edit">
-                Complemente sua conta!
-            </h1>
-        </div>
-
-        <div class="edit_profile_message">
+        <div class="edit_profile_message" id="edit_center">
             <h2>
                 Há Informações Faltando...
+                Complemente sua Conta!
             </h2>
-            <div>
             <p>
                 edite e personalize o perfil para atrair mais pessoas!
             </p>
             <button>
                 Finalizar Perfil
             </button>
-            </div>
 
         </div>
 

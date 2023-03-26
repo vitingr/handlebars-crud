@@ -11,6 +11,9 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     color: var(--font-color);
+    list-style: none;
+    text-decoration: none;
+    scroll-behavior: smooth;
 }
 
 :root {
@@ -75,10 +78,6 @@ body {
     align-items: center;
     justify-content: center;
     place-items: center;
-}
-
-a {
-    text-decoration: none;
 }
 
 .center {
@@ -174,10 +173,6 @@ form {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 0 5rem;
-    overflow: hidden;
-    grid-column: 1 / 2;
-    grid-row: 1 / 2;
 }
 
 form.sign-in-form {
@@ -235,8 +230,6 @@ form.sign-up-form {
 }
 
 .btn {
-    transition-timing-function: ease-in-out;
-    transition-duration: 0.3s;
     margin-top: 35px;
     width: 150px;
     height: 49px;
@@ -249,6 +242,8 @@ form.sign-up-form {
     text-transform: uppercase;
     font-weight: 600;
     transform: 0.5s;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
 }
 
 .btn:hover {
@@ -277,13 +272,12 @@ form.sign-up-form {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-decoration: none;
     color: #333;
     font-size: 1.1rem;
     border-radius: 50%;
     transform: 0.3s;
-    transition-duration: 0.3s;
     transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
 }
 
 .social-icon:hover {
@@ -292,9 +286,9 @@ form.sign-up-form {
 }
 
 .social-icon ion-icon {
-    transform: 0.3s;
-    transition-duration: 0.3s;
     transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+    transform: 0.3s;
 }
 
 .social-icon ion-icon:hover {
@@ -360,7 +354,6 @@ form.sign-up-form {
 }
 
 .btn.transparent {
-    transition-timing-function: ease-in-out;
     transition-duration: 0.5s;
     margin: 0;
     margin-top: 25px;
@@ -370,13 +363,14 @@ form.sign-up-form {
     height: 41px;
     font-weight: 600;
     font-size: 0.8rem;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
 }
 
 .btn.transparent:hover {
     color: var(--color2);
     background: white;
 }
-
 
 .image {
     width: 100%;
@@ -504,11 +498,9 @@ form.sign-up-form {
 .link-nav {
     position: relative;
     display: inline-block;
-    text-decoration: none;
     cursor: pointer;
     letter-spacing: 1px;
     margin-left: 30px;
-    /*color: #17171F;*/
     color: white;
 }
 
@@ -565,6 +557,8 @@ form.sign-up-form {
     width: 275px;
     background: none;
     outline: none;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
 }
 
 .input_nav .search_input_nav input:hover {
@@ -581,12 +575,11 @@ form.sign-up-form {
     max-width: 1450px;
     height: 100%;
     padding: 50px;
-    padding-top: 50px;
     margin-top: 5em;
+    padding-top: 50px;
     margin-bottom: 10em;
     gap: 50px;
     border-radius: 15px;
-    /*box-shadow: 0 60px 35px rgba(0, 0, 0, 0.17); */
 }
 
 .container_left {
@@ -627,7 +620,7 @@ form.sign-up-form {
     height: 50px;
     background: white;
     transition-timing-function: ease-in-out;
-    transition-duration: 0.25s;
+    transition-duration: 0.3s;
 }
 
 .main_info .main_info_div:hover {
@@ -1205,7 +1198,7 @@ text_feed input:focus {
     border-radius: 15px;
     transition-timing-function: ease-in-out;
     transition-duration: 0.3s;
-}
+    }
 
 .more_trend_item:hover {
     background: var(--color2);
@@ -1361,6 +1354,25 @@ text_feed input:focus {
     color: var(--color2);
 }
 
+.profile_activity .publication {
+    margin-left: 20px;
+}
+
+#edit_center {
+    border-radius: 10px;
+    border: 1px solid #33333323;
+    padding: 50px 25px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#edit_center p {
+    text-align: center;
+    margin: 12.5px;
+}
+
 .edit_profile_message {
     margin-left: 25px;
 }
@@ -1396,8 +1408,6 @@ text_feed input:focus {
     background: var(--color2);
     color: white;
 }
-
-
 
 /* ======== ANIMAÇÕES ======== */
 
@@ -1505,7 +1515,7 @@ text_feed input:focus {
 @media (max-width: 750px) {
 
     .container_principal {
-        padding: 25px;
+        padding: 5px;
     }
 
     .input_nav {
@@ -1523,14 +1533,12 @@ text_feed input:focus {
         width: 300px;
         height: 130vh;
         padding: 120px 20px;
-        transition-timing-function: ease-in-out;
-        transition-duration: 0.4s;
+        transition: ease-in-out 0.3s;
     }
 
     .open li {
         padding: 15px;
         border-bottom: 1px solid #44444448;
-        transition-timing-function: ease-in-out;
         transition-duration: 0.4s;
     }
 
@@ -1553,10 +1561,6 @@ text_feed input:focus {
     .main_profile {
         align-items: center;
         flex-direction: column;
-    }
-
-    .main_info {
-        width: 100%;
     }
 
     .main_info .main_info_div {
@@ -1587,5 +1591,9 @@ text_feed input:focus {
 @media (max-width: 500px) {
     .forms-container {
         margin-top: 125px;
+    }
+
+    #profile_edit {
+        padding: 0px;
     }
 }

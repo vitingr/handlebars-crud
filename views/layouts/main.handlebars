@@ -36,8 +36,8 @@
     ScrollReveal().reveal('.index_companies', { delay: 675, origin: 'top', interval: 100 });
     ScrollReveal().reveal('.index_pages', { delay: 725, origin: 'top', interval: 100 });
     ScrollReveal().reveal('.index_friends', { delay: 750, origin: 'top', interval: 100 });
-
     ScrollReveal().reveal('#profile_edit', { delay: 625, origin: 'left', interval: 100 });
+
 </script>
 <script>
     var json_cidades = {
@@ -5835,10 +5835,9 @@
     let menu = document.querySelector("#menu-icon")
     let navmenu = document.querySelector(".nav-list")
 
-    menu.onclick = () => {
+    menu.onclick = function() {
         menu.classList.toggle("bx-x")
         navmenu.classList.toggle("open")
     }
 </script>
-
 </html>
