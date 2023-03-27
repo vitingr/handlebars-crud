@@ -1,0 +1,35 @@
+<div class="container_principal" id="cadastro">
+    <h1 class="title_cadastro">Olá {{usuario.nome}} </h1>
+    <h2 class="subtitle_cadastro">
+        Faça as Alterações que você deseja em seu Perfil para que assim, fique tudo do seu jeitinho!
+    </h2>
+
+    <form action="/usuario/editInfo" method="POST">
+
+        <div class="inputs_container">
+
+            <!-- HEADLINE -->
+
+            <label for="formacao" class="label_cadastro">Nova Formação</label>
+            <input type="text" name="formacao" id="formacao" placeholder="Um Pequeno Resumo Sobre Você" class="input_cadastro" autocomplete="off" minlength="2" maxlength="100">
+
+            <label for="tipo_formacao" class="label_cadastro">Tipo dd Formação</label>
+            <select name="tipo_formacao" id="tipo_formacao" class="input_cadastro">
+                <option value=""></option>
+                <option value="Ensino Fundamental">Ensino Fundamental</option>
+                <option value="Ensino Médio">Ensino Médio</option>
+                <option value="Ensino Superior">Ensino Superior</option>
+                <option value="Curso Técnico">Curso Técnico</option>
+            </select>
+
+            <button type="submit" class="submit_cadastro">
+                Confirmar Alterações
+            </button>
+        </div> 
+
+    </form>
+
+
+    <a href="/">Fechar Edição</a>
+
+</div>
