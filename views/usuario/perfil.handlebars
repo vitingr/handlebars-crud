@@ -1,287 +1,287 @@
 <div class="container_principal" id="editarPerfil">
-    <div class="container_left" id="profile_edit">
+    <div class="profile_edit">
 
         <!-- INFORMAÇÕES PERFIL SUPERIOR -->
 
-        <div class="profile_top">
+        <div class="profile">
             <div class="profile_background"
                 style="background: url(https://img.freepik.com/free-vector/gradient-spheres-background_52683-76367.jpg); background-size: cover; background-repeat: no-repeat">
                 <img src="https://avatars.akamai.steamstatic.com/c29c1079c7712664fdc13651a0af8197e7d07f4e_full.jpg">
             </div>
             <div class="profile_info">
-                <div class="profile_info_left">
-                    <h1>{{usuario.nomeCompleto}}</h1>
+                <div class="profile_info_text">
+                    <div class="profile_info_config">
+                        <h1>{{usuario.nomeCompleto}}</h1>
+                        <a href="/usuario/infoPerfil">
+                            <button type="submit" class="link_edit_profile">
+                                <p>Editar Perfil</p>
+                            </button>
+                        </a>
+                    </div>
                     <h2>Analise e Desenvolvimento de Sistemas - Escola Técnica Estdual de São Paulo</h2>
-                    <p>Santa Bárbara d'Oeste, São Paulo, Brazil ● <span>Contact Info</span></p>
-                </div>
-                <div class="profile_info_right">
-                    <form action="">
-                        <button type="submit">
-                            <p>Editar</p>
-                            <ion-icon name="pencil-outline"></ion-icon>
-                        </button>
-                    </form>
-                    <div class="profile_info_right_div">
-                        <img
-                            src="https://pbs.twimg.com/profile_images/1219235687/soh_o_P_logo_transparente_novo_400x400.png">
-                        <p>ETEC - Escola Técnica Estadual de São Paulo</p>
+                    <h2>ETEC - Escola Técnica Estadual de São Paulo</h2>
+                    {{#if endereco}}
+                    <p>{{endereco.cidade}}, {{endereco.estado}}, {{endereco.pais}} ● <span>Contact Info</span></p>
+                    {{else}}
+                    <p>Adicione um Endereço. ● <span>Contact Info</span></p>
+                    {{/if}}
 
-                    </div>
                 </div>
+
             </div>
-        </div>
 
-        <!-- INFORMAÇÕES EMPREGOS -->
+            <!-- INFORMAÇÕES EMPREGOS -->
 
-        {{#if perfil_completo}}
-
-        {{else}}
-
-        <div class="edit_profile_message" id="edit_center">
-            <h2>
-                Há Informações Faltando...
-                Complemente sua Conta!
-            </h2>
-            <p>
-                edite e personalize o perfil para atrair mais pessoas!
-            </p>
-            <button>
-                Finalizar Perfil
-            </button>
-
-        </div>
-
-        {{/if}}
-
-        <!-- INFORMAÇÕES ANALYTICS -->
-        <div class="profile_analytics">
-            <h1 class="title_profile_edit">
-                Analytics
-                <span class="subtitle_profile_edit">
-                    <ion-icon name="eye-outline"></ion-icon>
-                    Somente você pode ver
-                </span>
-            </h1>
-
-
-            <div class="edit_profile_message">
-                <h2>
-                    Não há dados...
-                </h2>
-                <p>
-                    movimente sua conta para acessar o analytics!
-                </p>
-            </div>
-        </div>
-        <!-- INFORMAÇÕES RECURSOS -->
-        <div class="profile_resources">
-            <h1 class="title_profile_edit">
-                Recursos
-                <span class="subtitle_profile_edit">
-                    <ion-icon name="eye-outline"></ion-icon>
-                    Somente você pode ver
-                </span>
-            </h1>
-        </div>
-
-        <!-- INFORMAÇÕES ATIVIDADE -->
-        <div class="profile_activity">
-            <h1 class="title_profile_edit">
-                Atividade
-                <span class="followers_profile_edit">
-                    {{usuario.seguidores}} seguidores
-                </span>
-            </h1>
-
-            {{#each postagens}}
-
-            <div class="publication">
-                <div class="info_publication">
-                    <img src="https://avatars.akamai.steamstatic.com/c29c1079c7712664fdc13651a0af8197e7d07f4e_full.jpg">
-                    <div>
-                        <h2>{{nomeDono}}</h2>
-                        <p class="date_publication">{{data}}</p>
-                    </div>
-                </div>
-                <div class="content_publication">
-                    <div class="text_publication">
-                        {{conteudo}}
-                    </div>
-                    <div class="image_publication">
-
-                    </div>
-                </div>
-                <div class="bottom_publication">
-                    <div class="actions_publications">
-                        <ion-icon name="heart-outline"></ion-icon>
-                        <ion-icon name="chatbubbles-outline"></ion-icon>
-                        <ion-icon name="share-social-outline"></ion-icon>
-                        <ion-icon name="send-outline"></ion-icon>
-                    </div>
-                    <div class="qtd_likes_publication">
-                        <p>{{curtidas}} curtidas</p>
-                    </div>
-                </div>
-            </div>
+            {{#if perfil_completo}}
 
             {{else}}
 
-            <div class="edit_profile_message">
+            <div class="edit_profile_message" id="edit_center">
                 <h2>
-                    Você não postou nada recentemente...
+                    Há Informações Faltando...
+                    Complemente sua Conta!
                 </h2>
                 <p>
-                    Suas publicações recentes irão aparecer aqui!
+                    edite e personalize o perfil para atrair mais pessoas!
                 </p>
+                <button>
+                    Finalizar Perfil
+                </button>
+
             </div>
 
-            {{/each}}
+            {{/if}}
+
+            <!-- INFORMAÇÕES ANALYTICS -->
+            <div class="profile_analytics">
+                <h1 class="title_profile_edit">
+                    Analytics
+                    <span class="subtitle_profile_edit">
+                        <ion-icon name="eye-outline"></ion-icon>
+                        Somente você pode ver
+                    </span>
+                </h1>
+
+
+                <div class="edit_profile_message">
+                    <h2>
+                        Não há dados...
+                    </h2>
+                    <p>
+                        movimente sua conta para acessar o analytics!
+                    </p>
+                </div>
+            </div>
+            <!-- INFORMAÇÕES RECURSOS -->
+            <div class="profile_resources">
+                <h1 class="title_profile_edit">
+                    Recursos
+                    <span class="subtitle_profile_edit">
+                        <ion-icon name="eye-outline"></ion-icon>
+                        Somente você pode ver
+                    </span>
+                </h1>
+            </div>
+
+            <!-- INFORMAÇÕES ATIVIDADE -->
+            <div class="profile_activity">
+                <h1 class="title_profile_edit">
+                    Atividade
+                    <span class="followers_profile_edit">
+                        {{usuario.seguidores}} seguidores
+                    </span>
+                </h1>
+
+                {{#each postagens}}
+
+                <div class="publication">
+                    <div class="info_publication">
+                        <img
+                            src="https://avatars.akamai.steamstatic.com/c29c1079c7712664fdc13651a0af8197e7d07f4e_full.jpg">
+                        <div>
+                            <h2>{{nomeDono}}</h2>
+                            <p class="date_publication">{{data}}</p>
+                        </div>
+                    </div>
+                    <div class="content_publication">
+                        <div class="text_publication">
+                            {{conteudo}}
+                        </div>
+                        <div class="image_publication">
+
+                        </div>
+                    </div>
+                    <div class="bottom_publication">
+                        <div class="actions_publications">
+                            <ion-icon name="heart-outline"></ion-icon>
+                            <ion-icon name="chatbubbles-outline"></ion-icon>
+                            <ion-icon name="share-social-outline"></ion-icon>
+                            <ion-icon name="send-outline"></ion-icon>
+                        </div>
+                        <div class="qtd_likes_publication">
+                            <p>{{curtidas}} curtidas</p>
+                        </div>
+                    </div>
+                </div>
+
+                {{else}}
+
+                <div class="edit_profile_message">
+                    <h2>
+                        Você não postou nada recentemente...
+                    </h2>
+                    <p>
+                        Suas publicações recentes irão aparecer aqui!
+                    </p>
+                </div>
+
+                {{/each}}
+            </div>
+
+            <!-- INFORMAÇÕES PESSOAIS (ESCOLA, FACULDADE, EMPREGOS) -->
+            <div class="profile_exprience">
+                <h1 class="title_profile_edit">
+                    Experiência Profissional
+                </h1>
+
+                {{#each experiencias}}
+
+                {{else}}
+
+                <div class="edit_profile_message">
+                    <h2>
+                        Sem Dados...
+                    </h2>
+                    <p>
+                        Nenhuma informação sobre experiência disponível!
+                    </p>
+                </div>
+
+                {{/each}}
+            </div>
+
         </div>
 
-        <!-- INFORMAÇÕES PESSOAIS (ESCOLA, FACULDADE, EMPREGOS) -->
-        <div class="profile_exprience">
-            <h1 class="title_profile_edit">
-                Experiência Profissional
-            </h1>
+        <!-- ADICIONAR AMIGOS -->
+
+        <div class="container_right">
+            <div class="index_friends">
+                <h1 class="title_index_events">
+                    <ion-icon name="git-network-outline"></ion-icon>
+                    Talvez você conheça
+                </h1>
+
+                <div class="friends_option_index">
+                    <div class="photo_friends_index">
+                        <img
+                            src="https://i.pinimg.com/736x/40/d0/3d/40d03d04ff61fccaf012a5fba3612e61--fluffy-animals-baby-animals.jpg">
+                    </div>
+
+                    <div class="text_friends_index">
+                        <p class="name_friends_index">
+                            Sebastiana Felisberta
+                        </p>
+                        <p class="desc_friends_index">
+                            Profissional de Recursos Humanos.
+                        </p>
+                        <p class="desc_friends_index">
+                            Estuda em USP São Paulo.
+                        </p>
+                    </div>
+                    <div class="add_friends_index">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="friends_option_index">
+                    <div class="photo_friends_index">
+                        <img
+                            src="https://thumbs.dreamstime.com/b/cachorro-franc%C3%AAs-engra%C3%A7ado-usando-um-carnaval-ou-vaqueiro-de-halloween-com-fantasia-corpo-inteiro-bra%C3%A7os-e-cal%C3%A7as-falsos-c%C3%A3o-176071462.jpg">
+                    </div>
+
+                    <div class="text_friends_index">
+                        <p class="name_friends_index">
+                            Maria Joana
+                        </p>
+                        <p class="desc_friends_index">
+                            Desempregada.
+                        </p>
+                        <p class="desc_friends_index">
+                            Estudou em E.E Jorge Covre.
+                        </p>
+                    </div>
+                    <div class="add_friends_index">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="friends_option_index">
+                    <div class="photo_friends_index">
+                        <img src="https://a.thumbs.redditmedia.com/ZEDQ7Di2TjK2Oia7QY97Bl5PRuuAEsYUcRRMGkTObs8.jpg">
+                    </div>
+
+                    <div class="text_friends_index">
+                        <p class="name_friends_index">
+                            Eugenia Cosimo
+                        </p>
+                        <p class="desc_friends_index">
+                            Profissional de Produção.
+                        </p>
+                        <p class="desc_friends_index">
+                            Estudou em ETEC José Dagnoni.
+                        </p>
+                    </div>
+                    <div class="add_friends_index">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="friends_option_index">
+                    <div class="photo_friends_index">
+                        <img src="https://m.media-amazon.com/images/I/51yYfu2H1eL._AC_SX569_.jpg">
+                    </div>
+
+                    <div class="text_friends_index">
+                        <p class="name_friends_index">
+                            Marineusa dos Santos
+                        </p>
+                        <p class="desc_friends_index">
+                            Cursando ADS.
+                        </p>
+                        <p class="desc_friends_index">
+                            Estuda em UNICAMP Campinas.
+                        </p>
+                    </div>
+                    <div class="add_friends_index">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="friends_option_index">
+                    <div class="photo_friends_index">
+                        <img src="https://i.pinimg.com/originals/0e/02/f6/0e02f656b1464a8ef1064b172e85a1c2.jpg">
+                    </div>
+
+                    <div class="text_friends_index">
+                        <p class="name_friends_index">
+                            Julia Pereira
+                        </p>
+                        <p class="desc_friends_index">
+                            Desempregada.
+                        </p>
+                        <p class="desc_friends_index">
+                            Estudou em E.E Alfredo Santos.
+                        </p>
+                    </div>
+                    <div class="add_friends_index">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <h2 class="ver_mais_index">
+                    Ver mais
+                </h2>
+
+            </div>
         </div>
-
-        {{#each experiencias}}
-
-        {{else}}
-
-        <div class="edit_profile_message">
-            <h2>
-                Sem Dados...
-            </h2>
-            <p>
-                Nenhuma informação sobre experiência disponível!
-            </p>
-        </div>
-
-        {{/each}}
-
     </div>
-
-    <!-- ADICIONAR AMIGOS -->
-
-    <div class="container_right">
-        <div class="index_friends">
-            <h1 class="title_index_events">
-                <ion-icon name="git-network-outline"></ion-icon>
-                Talvez você conheça
-            </h1>
-
-            <div class="friends_option_index">
-                <div class="photo_friends_index">
-                    <img
-                        src="https://i.pinimg.com/736x/40/d0/3d/40d03d04ff61fccaf012a5fba3612e61--fluffy-animals-baby-animals.jpg">
-                </div>
-
-                <div class="text_friends_index">
-                    <p class="name_friends_index">
-                        Sebastiana Felisberta
-                    </p>
-                    <p class="desc_friends_index">
-                        Profissional de Recursos Humanos.
-                    </p>
-                    <p class="desc_friends_index">
-                        Estuda em USP São Paulo.
-                    </p>
-                </div>
-                <div class="add_friends_index">
-                    <ion-icon name="add-circle-outline"></ion-icon>
-                </div>
-            </div>
-
-            <div class="friends_option_index">
-                <div class="photo_friends_index">
-                    <img
-                        src="https://thumbs.dreamstime.com/b/cachorro-franc%C3%AAs-engra%C3%A7ado-usando-um-carnaval-ou-vaqueiro-de-halloween-com-fantasia-corpo-inteiro-bra%C3%A7os-e-cal%C3%A7as-falsos-c%C3%A3o-176071462.jpg">
-                </div>
-
-                <div class="text_friends_index">
-                    <p class="name_friends_index">
-                        Maria Joana
-                    </p>
-                    <p class="desc_friends_index">
-                        Desempregada.
-                    </p>
-                    <p class="desc_friends_index">
-                        Estudou em E.E Jorge Covre.
-                    </p>
-                </div>
-                <div class="add_friends_index">
-                    <ion-icon name="add-circle-outline"></ion-icon>
-                </div>
-            </div>
-
-            <div class="friends_option_index">
-                <div class="photo_friends_index">
-                    <img src="https://a.thumbs.redditmedia.com/ZEDQ7Di2TjK2Oia7QY97Bl5PRuuAEsYUcRRMGkTObs8.jpg">
-                </div>
-
-                <div class="text_friends_index">
-                    <p class="name_friends_index">
-                        Eugenia Cosimo
-                    </p>
-                    <p class="desc_friends_index">
-                        Profissional de Produção.
-                    </p>
-                    <p class="desc_friends_index">
-                        Estudou em ETEC José Dagnoni.
-                    </p>
-                </div>
-                <div class="add_friends_index">
-                    <ion-icon name="add-circle-outline"></ion-icon>
-                </div>
-            </div>
-
-            <div class="friends_option_index">
-                <div class="photo_friends_index">
-                    <img src="https://m.media-amazon.com/images/I/51yYfu2H1eL._AC_SX569_.jpg">
-                </div>
-
-                <div class="text_friends_index">
-                    <p class="name_friends_index">
-                        Marineusa dos Santos
-                    </p>
-                    <p class="desc_friends_index">
-                        Cursando ADS.
-                    </p>
-                    <p class="desc_friends_index">
-                        Estuda em UNICAMP Campinas.
-                    </p>
-                </div>
-                <div class="add_friends_index">
-                    <ion-icon name="add-circle-outline"></ion-icon>
-                </div>
-            </div>
-
-            <div class="friends_option_index">
-                <div class="photo_friends_index">
-                    <img src="https://i.pinimg.com/originals/0e/02/f6/0e02f656b1464a8ef1064b172e85a1c2.jpg">
-                </div>
-
-                <div class="text_friends_index">
-                    <p class="name_friends_index">
-                        Julia Pereira
-                    </p>
-                    <p class="desc_friends_index">
-                        Desempregada.
-                    </p>
-                    <p class="desc_friends_index">
-                        Estudou em E.E Alfredo Santos.
-                    </p>
-                </div>
-                <div class="add_friends_index">
-                    <ion-icon name="add-circle-outline"></ion-icon>
-                </div>
-            </div>
-
-            <h2 class="ver_mais_index">
-                Ver mais
-            </h2>
-
-        </div>
-    </div>
-</div>

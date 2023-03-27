@@ -7,6 +7,7 @@ require("../models/Usuario")
 require("../models/Vaga")
 require("../models/Endereco")
 require("../models/Notificacao")
+require("../models/Formacao")
 
 // Import Models
 
@@ -16,6 +17,7 @@ const Usuario = mongoose.model("usuarios")
 const Vaga = mongoose.model("vagas")
 const Endereco = mongoose.model("enderecos")
 const Notificacao = mongoose.model("notificacoes")
+const Formacao = mongoose.model("formacoes")
 
 // Helpers
 
@@ -339,7 +341,20 @@ router.get("/editarPerfil", (req, res) => {
 
         Postagem.find({ dono: usuarioLogado.id }).lean().sort({ data: 'desc' }).then((postagens) => {
 
-            res.render("usuario/perfil", { usuario: usuarioLogado, postagens: postagens })
+            if (!usuarioLogado.endereco || usuarioLogado.endereco == null || usuarioLogado.endereco == undefined || usuarioLogado.endereco == "") {
+
+                Endereco.findOne({_id: usuarioLogado.endereco}).lean().then((endereco) => {
+
+                    res.render("usuario/perfil", { usuario: usuarioLogado, postagens: postagens, endereco: endereco })
+    
+                }).catch((erro) => {
+    
+                    req.flash('error_msg', 'ERRO! Não foi possível encontrar seu endereço...')
+                    res.redirect("/")
+    
+                })
+        
+            }
 
         }).catch((erro) => {
 
@@ -354,7 +369,16 @@ router.get("/editarPerfil", (req, res) => {
 
             Postagem.find({ dono: usuarioLogado.id }).lean().sort({ data: 'desc' }).then((postagens) => {
 
-                res.render("usuario/perfil", { usuario: usuarioLogado, postagens: postagens, perfil_completo: perfil_completo })
+                Endereco.findOne({_id: usuarioLogado.endereco}).lean().then((endereco) => {
+
+                    res.render("usuario/perfil", { usuario: usuarioLogado, postagens: postagens, perfil_completo: perfil_completo, endereco: endereco })
+
+                }).catch((erro) => {
+
+                    req.flash('error_msg', 'ERRO! Não foi possível encontrar seu endereço...')
+                    res.redirect("/")
+    
+                })
 
             }).catch((erro) => {
 
@@ -385,6 +409,69 @@ router.get("/notificacoes", (req, res) => {
 
         req.flash('error_msg', 'ERRO! Não foi possível carregar as Notificações!')
         res.redirect("/")
+
+    })
+
+})
+
+router.get("/infoPerfil", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    Formacao.findOne({dono: usuarioLogado.id}).lean().then((formacao) => {
+
+        Usuario.findOne({_id: usuarioLogado.id}).lean().then((usuario) => {
+
+            Endereco.findOne({dono: usuarioLogado.id}).lean().then((endereco) => {
+
+                res.render("usuario/infoPerfil", {usuario: usuarioLogado, formacao: formacao, endereco: endereco})
+
+
+            }).catch((erro) => {
+
+            req.flash('error_msg', 'ERRO! Não foi possível localizar seu endereço')
+            res.redirect("/usuario/editarPerfil")
+    
+        })
+
+        }).catch((erro) => {
+
+            req.flash('error_msg', 'ERRO! Não foi possível localizar seu perfil')
+            res.redirect("/usuario/editarPerfil")
+    
+        })
+
+    }).catch((erro) => {
+
+        req.flash('error_msg', 'ERRO! Não foi possível localizar suas formações')
+        res.redirect("/usuario/editarPerfil")
+
+    })
+
+})
+
+
+router.get("/novaFormacao", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    Usuario.findOne({_id: usuarioLogado.id}).lean().then((usuario) => {
+
+        Formacao.findOne({dono: usuarioLogado.id}).lean().then((formacao) => {
+
+            res.render("usuario/novaFormacao", {usuario: usuarioLogado, formacao: formacao})
+
+        }).catch((erro) => {
+
+            req.flash('error_msg', 'ERRO! Não foi possível localizar suas formações.')
+            res.redirect("/usuario/editarPerfil")
+    
+        })
+
+    }).catch((erro) => {
+
+        req.flash('error_msg', 'ERRO! Não foi possível localizar sua conta!')
+        res.redirect("/usuario/editarPerfil")
 
     })
 

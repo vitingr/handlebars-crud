@@ -1,0 +1,65 @@
+<div class="container_principal" id="cadastro">
+    <h1 class="title_cadastro">Olá {{usuario.nome}} </h1>
+    <h2 class="subtitle_cadastro">
+        Faça as Alterações que você deseja em seu Perfil para que assim, fique tudo do seu jeitinho!
+    </h2>
+
+    <form action="/usuario/editInfo" method="POST">
+
+        <div class="inputs_container">
+
+            <!-- HEADLINE -->
+
+            <label for="headline" class="label_cadastro">Resumo</label>
+            <input type="text" value="{{usuario.resumo}}" name="headline" id="headline" placeholder="Um Pequeno Resumo Sobre Você" class="input_cadastro" autocomplete="off" minlength="2" maxlength="100">
+
+            <!-- CARGO ATUAL -->
+
+            <label for="formacao" class="label_cadastro">Cargo Atual: </label>
+            <input type="text" value="{{usuario.formacao}}" name="formacao" id="formacao" class="input_cadastro" autocomplete="off" minlength="2" maxlength="100" placeholder="Seu cargo atual na sua Empresa">
+
+            <!-- FORMACAO -->
+
+            <label for="formacao" class="label_cadastro">Formação: </label>
+            <select name="formacao" id="formacao" class="input_cadastro">
+                {{#each formacao}}
+                    <option value="{{formacao._id}}">{{formacao.nome}} - {{formacao.tipo}}</option>
+                {{else}}
+                    
+                {{/each}}
+            </select>
+
+            <a href="/usuario/novaFormacao" class="adicionar_formacao">
+                <div>
+                    <ion-icon name="add-outline"></ion-icon>
+                    Adicionar Formação
+                </div>
+            </a>
+
+            <!-- TELEFONE -->
+
+            <label for="telefone" class="label_cadastro">Número de Telefone</label>
+            <input type="number" value="{{usuario.telefone}}" name="telefone" id="telefone" autocomplete="off" minlength="8" maxlength="9" class="input_cadastro">
+
+            <label for="tipo-telefone" class="label_cadastro">Tipo de Telefone</label>
+            <select name="tipo-telefone" id="tipo-telefone" class="input_cadastro">
+                <option value=""></option>
+                <option value="Celular">Celular</option>
+                <option value="Casa">Casa</option>
+                <option value="Trabalho">Trabalho</option>
+            </select>
+
+            <label for="website">Site Pessoal</label>
+            <input type="text" value="{{usuario.website}}" name="website" id="wesbiste" class="input_cadastro" minlength="3" maxlength="100" placeholder="Exemplo seu Portfólio Online">
+
+            <button type="submit" class="submit_cadastro">
+                Confirmar Alterações
+            </button>
+        </div> 
+
+    </form>
+
+
+    <a href="/">Fechar Edição</a>
+
+</div>

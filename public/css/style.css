@@ -95,9 +95,13 @@ body {
     display: flex;
 }
 
-#profile_edit {
+.profile_edit {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    gap: 50px;
     padding: 50px;
-    background: white;
     border-radius: 15px;
 }
 
@@ -125,10 +129,25 @@ body {
     right: 0px !important;
 }
 
+.container_unico {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    min-height: 100%;
+    min-width: 100%;
+    border-radius: 10px;
+    background: white;
+}
+
 /* ======= LOGIN / CADASTRO ======== */
 
 .container_login,
 .container_cadastro {
+    background: var(--bg-color);
+    margin-top: -100px;
     position: relative;
     width: 100%;
     min-height: 100vh;
@@ -190,6 +209,19 @@ form.sign-up-form {
     font-size: 1.75rem;
     color: #444;
     margin-bottom: 25px;
+}
+
+.subtitle {
+    text-align: center;
+    width: 300px;
+    margin-top: -20px;
+    margin-bottom: 25px;
+}
+
+.subtitle a {
+    color: var(--color1);
+    text-underline-offset: 3px;
+    text-decoration: underline;
 }
 
 .input-field {
@@ -419,8 +451,33 @@ form.sign-up-form {
     align-items: center;
 }
 
+.label_cadastro {
+    font-size: 16px;
+    margin-bottom: 2.5px;
+}
+
+.adicionar_formacao div {
+    margin-top: -10px;
+    margin-bottom: 50px;
+    color: var(--color1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: ease-in-out .3s;
+}
+
+.adicionar_formacao div:hover {
+    text-underline-offset: 3px;
+    text-decoration: underline;
+}
+
+.adicionar_formacao div ion-icon {
+    font-size: 20px;
+    color: var(--color1);
+}
+
 .input_cadastro {
-    font-size: 17px;
+    font-size: 16.5px;
     margin-bottom: 25px;
     outline: none;
     border-radius: 7.5px;
@@ -575,7 +632,6 @@ form.sign-up-form {
     max-width: 1450px;
     height: 100%;
     padding: 50px;
-    margin-top: 5em;
     padding-top: 50px;
     margin-bottom: 10em;
     gap: 50px;
@@ -1204,6 +1260,25 @@ text_feed input:focus {
     background: var(--color2);
 }
 
+.link_edit_profile {
+    background: white;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.link_edit_profile p {
+    padding: 3.5px;
+    border-radius: 10px;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+    color: var(--color1) !important;
+}
+
+.link_edit_profile p:hover {
+    color: white !important;
+    background: var(--color3);
+}
+
 /* -=-=-=- FOOTER -=-=-=- */
 
 .custom-shape-divider-bottom-1679778702 {
@@ -1254,81 +1329,66 @@ text_feed input:focus {
 
 .profile_info {
     margin-top: 55px;
-    display: flex;
     width: 100%;
 }
 
-.profile_info_left {
+.profile_info_text {
     padding: 25px;
 }
 
-.profile_info_left h2 {
+.profile_info_text h2 {
+    margin-top: 7.5px;
+    max-width: 700px;
     font-size: 17px;
     font-weight: lighter;
 }
 
-.profile_info_left p {
-    margin-top: 10px;
+.profile_info_text p {
+    margin-top: 7 .5px;
     font-size: 15px;
     color: var(--font-color-low-emphasis);
 }
 
-.profile_info_left p span {
+.profile_info_text p span {
     cursor: pointer;
     color: var(--color2);
     transition-timing-function: ease-in-out;
     transition-duration: 0.3s;
 }
 
-.profile_info_left p span:hover {
+.profile_info_text p span:hover {
     color: var(--color1);
+}
+
+.profile_analytics,
+.profile_activity, 
+.profile_experience, 
+.profile_resources {
+    padding-bottom: 25px;
+    border-bottom: 1px solid #44444434;
+}
+
+.profile {
+    padding: 25px;
+    background: white;
+    margin-bottom: 4em;
 }
 
 .profile_info_right {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding-top: 10px;
+    padding: 25px;
 }
 
-.profile_info_right form button {
-    border-radius: 10px;
-    padding: 5px;
-    font-size: 16.5px;
+.profile_info_config {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    cursor: pointer;
-    background: none;
-    transition-timing-function: ease-in-out;
-    transition-duration: 0.3s;
+    gap: 25px;
+    margin-bottom: 25px;
 }
 
-.profile_info_right form button:hover {
-    background: var(--bg-color);
-}
-
-.profile_info_right form button ion-icon {
-    font-size: 20px;
-}
-
-.profile_info_right h1 {
-    font-size: 17.5px;
-}
-
-.profile_info_right_div {
-    margin-top: 25px;
+.profile_info_div {
     display: flex;
-}
-
-.profile_info_right_div img {
-    max-width: 35px;
-    max-height: 35px;
-}
-
-.profile_info_right_div p {
-    margin-left: 10px;
 }
 
 .title_profile_edit {
@@ -1352,10 +1412,6 @@ text_feed input:focus {
     gap: 5px;
     font-size: 14px;
     color: var(--color2);
-}
-
-.profile_activity .publication {
-    margin-left: 20px;
 }
 
 #edit_center {
@@ -1437,11 +1493,24 @@ text_feed input:focus {
 
 /* RESPONSIVIDADES */
 
-@media (max-width: 870px) {
-    .title {
-        font-size: 1.45em;
+@media (max-width: 1800px) {
+    .panel {
+        align-items: normal;
+    }
+}
+
+@media (max-width: 1400px) {
+    .left-panel {
+        padding: 3rem 17% 2rem 5%;
     }
 
+    .container_login:before,
+    .container_cadastro:before {
+        top: 0;
+    }
+}
+
+@media (max-width: 1925px) {
     .container_login {
         min-height: 800px;
         height: 100vh;
@@ -1484,6 +1553,12 @@ text_feed input:focus {
 
     .content {
         display: none;
+    }
+}
+
+@media (max-width: 870px) {
+    .title {
+        font-size: 1.45em;
     }
 
     .container_left {
@@ -1593,7 +1668,7 @@ text_feed input:focus {
         margin-top: 125px;
     }
 
-    #profile_edit {
+    .profile_edit {
         padding: 0px;
     }
 }
