@@ -285,7 +285,10 @@ app.post("/cadastrar", (req, res) => {
                     escola: "",
                     faculdade: "",
                     foto: "",
-                    seguidores: 0
+                    seguidores: 0,
+                    resumo: "",
+                    cargo_atual: "",
+                    website: ""
 
                 })
 

@@ -6,7 +6,7 @@
         <div class="profile">
             <div class="profile_background"
                 style="background: url(https://img.freepik.com/free-vector/gradient-spheres-background_52683-76367.jpg); background-size: cover; background-repeat: no-repeat">
-                <img src="https://avatars.akamai.steamstatic.com/c29c1079c7712664fdc13651a0af8197e7d07f4e_full.jpg">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png">
             </div>
             <div class="profile_info">
                 <div class="profile_info_text">
@@ -18,12 +18,18 @@
                             </button>
                         </a>
                     </div>
-                    <h2>Analise e Desenvolvimento de Sistemas - Escola Técnica Estdual de São Paulo</h2>
-                    <h2>ETEC - Escola Técnica Estadual de São Paulo</h2>
-                    {{#if endereco}}
-                    <p>{{endereco.cidade}}, {{endereco.estado}}, {{endereco.pais}} ● <span>Contact Info</span></p>
+                    {{#if formacao}}
+                        <h2>{{formacao.area}} - {{formacao.nome}}</h2>
+                        <h2>{{formacao.tipo}} - {{formacao.nome}}</h2>
                     {{else}}
-                    <p>Adicione um Endereço. ● <span>Contact Info</span></p>
+                        <h2>{{formacao.nome}}</h2>
+                        <h2>Adicione uma Formação.</h2>
+                    {{/if}}
+
+                    {{#if endereco}}
+                        <p>{{endereco.cidade}}, {{endereco.estado}}, {{endereco.pais}} ● <span>Contact Info</span></p>
+                    {{else}}
+                        <p>Adicione um Endereço. ● <span>Contact Info</span></p>
                     {{/if}}
 
                 </div>
@@ -44,9 +50,9 @@
                 <p>
                     edite e personalize o perfil para atrair mais pessoas!
                 </p>
-                <button>
+                <a href="/usuario/endereco">
                     Finalizar Perfil
-                </button>
+                </a>
 
             </div>
 

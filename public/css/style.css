@@ -1344,7 +1344,7 @@ text_feed input:focus {
 }
 
 .profile_info_text p {
-    margin-top: 7 .5px;
+    margin-top: 7.5px;
     font-size: 15px;
     color: var(--font-color-low-emphasis);
 }
@@ -1369,6 +1369,7 @@ text_feed input:focus {
 }
 
 .profile {
+    width: 700px;
     padding: 25px;
     background: white;
     margin-bottom: 4em;

@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const mongoose = require("mongoose")
+const { Form } = require("react-router-dom")
 require("../models/Postagem")
 require("../models/Empresa")
 require("../models/Usuario")
@@ -43,7 +44,7 @@ router.get("/endereco", (req, res) => {
 
     } else {
 
-        res.redirect("usuario/emprego")
+        res.redirect("/usuario/emprego")
 
     }
 
@@ -343,22 +344,31 @@ router.get("/editarPerfil", (req, res) => {
 
             if (!usuarioLogado.endereco || usuarioLogado.endereco == null || usuarioLogado.endereco == undefined || usuarioLogado.endereco == "") {
 
-                Endereco.findOne({_id: usuarioLogado.endereco}).lean().then((endereco) => {
+                Endereco.findOne({ _id: usuarioLogado.endereco }).lean().then((endereco) => {
 
-                    res.render("usuario/perfil", { usuario: usuarioLogado, postagens: postagens, endereco: endereco })
-    
+                    Formacao.find({ _id: usuarioLogado.formacao }).lean().then((formacao) => {
+
+                        res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, endereco: endereco })
+
+                    }).catch((erro) => {
+
+                        req.flash('error_msg', 'ERRO! Não foi possível encontrar suas formações.')
+                        res.redirect("/")
+
+                    })
+
                 }).catch((erro) => {
-    
-                    req.flash('error_msg', 'ERRO! Não foi possível encontrar seu endereço...')
+
+                    req.flash('error_msg', 'ERRO! Não foi possível encontrar seu endereço.')
                     res.redirect("/")
-    
+
                 })
-        
+
             }
 
         }).catch((erro) => {
 
-            req.flash('error_msg', 'ERRO! Não foi possível encontrar seu perfil...')
+            req.flash('error_msg', 'ERRO! Não foi possível encontrar seu perfil.')
             res.redirect("/")
 
         })
@@ -369,15 +379,24 @@ router.get("/editarPerfil", (req, res) => {
 
             Postagem.find({ dono: usuarioLogado.id }).lean().sort({ data: 'desc' }).then((postagens) => {
 
-                Endereco.findOne({_id: usuarioLogado.endereco}).lean().then((endereco) => {
+                Endereco.findOne({ _id: usuarioLogado.endereco }).lean().then((endereco) => {
 
-                    res.render("usuario/perfil", { usuario: usuarioLogado, postagens: postagens, perfil_completo: perfil_completo, endereco: endereco })
+                    Formacao.find({ _id: usuarioLogado.formacao }).lean().then((formacao) => {
+
+                        res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, endereco: endereco, perfil_completo: perfil_completo })
+
+                    }).catch((erro) => {
+
+                        req.flash('error_msg', 'ERRO! Não foi possível encontrar suas formações.')
+                        res.redirect("/")
+
+                    })
 
                 }).catch((erro) => {
 
                     req.flash('error_msg', 'ERRO! Não foi possível encontrar seu endereço...')
                     res.redirect("/")
-    
+
                 })
 
             }).catch((erro) => {
@@ -403,7 +422,7 @@ router.get("/notificacoes", (req, res) => {
 
     Notificacao.find().lean().then((notificacoes) => {
 
-        res.render("usuario/notificacoes", {usuario: usuarioLogado, notificacoes: notificacoes})
+        res.render("usuario/notificacoes", { usuario: usuarioLogado, notificacoes: notificacoes })
 
     }).catch((erro) => {
 
@@ -418,27 +437,27 @@ router.get("/infoPerfil", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    Formacao.findOne({dono: usuarioLogado.id}).lean().then((formacao) => {
+    Formacao.find({ dono: usuarioLogado.id }).lean().then((formacao) => {
 
-        Usuario.findOne({_id: usuarioLogado.id}).lean().then((usuario) => {
+        Usuario.findOne({ _id: usuarioLogado.id }).lean().then((usuario) => {
 
-            Endereco.findOne({dono: usuarioLogado.id}).lean().then((endereco) => {
+            Endereco.findOne({ dono: usuarioLogado.id }).lean().then((endereco) => {
 
-                res.render("usuario/infoPerfil", {usuario: usuarioLogado, formacao: formacao, endereco: endereco})
+                res.render("usuario/infoPerfil", { usuario: usuarioLogado, formacao: formacao, endereco: endereco })
 
 
             }).catch((erro) => {
 
-            req.flash('error_msg', 'ERRO! Não foi possível localizar seu endereço')
-            res.redirect("/usuario/editarPerfil")
-    
-        })
+                req.flash('error_msg', 'ERRO! Não foi possível localizar seu endereço')
+                res.redirect("/usuario/editarPerfil")
+
+            })
 
         }).catch((erro) => {
 
             req.flash('error_msg', 'ERRO! Não foi possível localizar seu perfil')
             res.redirect("/usuario/editarPerfil")
-    
+
         })
 
     }).catch((erro) => {
@@ -450,16 +469,36 @@ router.get("/infoPerfil", (req, res) => {
 
 })
 
-
-router.get("/novaFormacao", (req, res) => {
+router.post("/editInfo", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    Usuario.findOne({_id: usuarioLogado.id}).lean().then((usuario) => {
+    Usuario.findOne({ _id: usuarioLogado.id }).lean().then((usuario) => {
 
-        Formacao.findOne({dono: usuarioLogado.id}).lean().then((formacao) => {
+        console.log("USUARIO")
 
-            res.render("usuario/novaFormacao", {usuario: usuarioLogado, formacao: formacao})
+        Formacao.findOne({_id: req.body.formacao}).lean().then((formacao) => {
+
+            console.log("FORMACAO")
+
+            usuario.resumo = req.body.headline
+            usuario.cargo_atual = req.body.cargo_atual
+            usuario.formacao = formacao._id
+            usuario.website = req.body.website
+    
+            usuario.save().then(() => {
+
+                console.log("SALVO")
+    
+                req.flash('success_msg', 'Perfil Atualizado com Sucesso!')
+                res.redirect("/usuario/editarPerfil")
+    
+            }).catch((erro) => {
+    
+                req.flash('error_msg', 'ERRO! Não foi possível salvar suas alterações.')
+                res.redirect("/")
+    
+            })
 
         }).catch((erro) => {
 
@@ -470,7 +509,68 @@ router.get("/novaFormacao", (req, res) => {
 
     }).catch((erro) => {
 
+        req.flash('error_msg', 'ERRO! Não foi possível localizar seu perfil')
+        res.redirect("/usuario/editarPerfil")
+
+    })
+
+})
+
+
+router.get("/novaFormacao", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    Usuario.findOne({ _id: usuarioLogado.id }).lean().then((usuario) => {
+
+        Formacao.find({ dono: usuarioLogado.id }).lean().then((formacao) => {
+
+            res.render("usuario/novaFormacao", { usuario: usuarioLogado, formacao: formacao })
+
+        }).catch((erro) => {
+
+            req.flash('error_msg', 'ERRO! Não foi possível localizar suas formações.')
+            res.redirect("/usuario/editarPerfil")
+
+        })
+
+    }).catch((erro) => {
+
         req.flash('error_msg', 'ERRO! Não foi possível localizar sua conta!')
+        res.redirect("/usuario/editarPerfil")
+
+    })
+
+})
+
+router.post("/addFormacao", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    Usuario.findOne({ _id: usuarioLogado.id }).lean().then((usuario) => {
+
+        const novaFormacao = {
+            dono: usuarioLogado.id,
+            nome: req.body.formacao,
+            tipo: req.body.tipo_formacao,
+            area: req.body.area_formacao,
+        }
+
+        new Formacao(novaFormacao).save().then(() => {
+
+            req.flash('success_msg', 'Formação Adicionada com Sucesso!')
+            res.redirect("/usuario/infoPerfil")
+
+        }).catch((erro) => {
+
+            req.flash('error_msg', 'ERRO! Não foi possível adicionar a formação.')
+            res.redirect("/usuario/editarPerfil")
+
+        })
+
+    }).catch((erro) => {
+
+        req.flash('error_msg', 'ERRO! Não foi possível localizar sua conta.')
         res.redirect("/usuario/editarPerfil")
 
     })

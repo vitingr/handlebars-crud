@@ -1,20 +1,23 @@
 <div class="container_principal" id="cadastro">
-    <h1 class="title_cadastro">Olá {{usuario.nome}} </h1>
+    <h1 class="title_cadastro">Adicionar Formação</h1>
     <h2 class="subtitle_cadastro">
-        Faça as Alterações que você deseja em seu Perfil para que assim, fique tudo do seu jeitinho!
+        Adicione a suas formações em seu perfil para atrair a atenção de recrutadores!
     </h2>
 
-    <form action="/usuario/editInfo" method="POST">
+    <form action="/usuario/addFormacao" method="POST">
 
         <div class="inputs_container">
 
-            <!-- HEADLINE -->
+            <!-- INFORMAÇÕES FORMACAO -->
 
             <label for="formacao" class="label_cadastro">Nova Formação</label>
-            <input type="text" name="formacao" id="formacao" placeholder="Um Pequeno Resumo Sobre Você" class="input_cadastro" autocomplete="off" minlength="2" maxlength="100">
+            <input type="text" name="formacao" id="formacao" placeholder="Nome da Unidade de Ensino" class="input_cadastro" autocomplete="off" minlength="2" maxlength="100" required>
 
-            <label for="tipo_formacao" class="label_cadastro">Tipo dd Formação</label>
-            <select name="tipo_formacao" id="tipo_formacao" class="input_cadastro">
+            <label for="area_formacao" class="label_cadastro">Curso</label>
+            <input type="text" name="area_formacao" id="area_formacao" placeholder="Matéria do Curso (Ensino Superior/Tecnico)" class="input_cadastro" autocomplete="off" minlength="2" maxlength="100">
+
+            <label for="tipo_formacao" class="label_cadastro">Tipo de Formação</label>
+            <select name="tipo_formacao" id="tipo_formacao" class="input_cadastro" required>
                 <option value=""></option>
                 <option value="Ensino Fundamental">Ensino Fundamental</option>
                 <option value="Ensino Médio">Ensino Médio</option>

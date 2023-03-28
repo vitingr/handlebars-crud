@@ -15,17 +15,17 @@
 
             <!-- CARGO ATUAL -->
 
-            <label for="formacao" class="label_cadastro">Cargo Atual: </label>
-            <input type="text" value="{{usuario.formacao}}" name="formacao" id="formacao" class="input_cadastro" autocomplete="off" minlength="2" maxlength="100" placeholder="Seu cargo atual na sua Empresa">
+            <label for="cargo_atual" class="label_cadastro">Cargo Atual: </label>
+            <input type="text" value="{{usuario.formacao}}" name="cargo_atual" id="cargo_atual" class="input_cadastro" autocomplete="off" minlength="2" maxlength="100" placeholder="Seu cargo atual na sua Empresa">
 
             <!-- FORMACAO -->
 
             <label for="formacao" class="label_cadastro">Formação: </label>
             <select name="formacao" id="formacao" class="input_cadastro">
                 {{#each formacao}}
-                    <option value="{{formacao._id}}">{{formacao.nome}} - {{formacao.tipo}}</option>
+                    <option value="{{_id}}">{{nome}} - {{tipo}}</option>
                 {{else}}
-                    
+                    <option value=""></option>
                 {{/each}}
             </select>
 
@@ -58,7 +58,6 @@
         </div> 
 
     </form>
-
 
     <a href="/">Fechar Edição</a>
 

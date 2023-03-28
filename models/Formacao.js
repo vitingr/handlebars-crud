@@ -15,6 +15,9 @@ const Formacao = new Schema({
     tipo: {
         type: String,
         required: true
+    },
+    area: {
+        type: String
     }
 
 })

@@ -19,7 +19,11 @@ module.exports = {
             escola: usuario.escola,
             faculdade: usuario.faculdade,
             foto: usuario.foto,
-            seguidores: usuario.seguidores 
+            seguidores: usuario.seguidores,
+            resumo: usuario.resumo,
+            cargo_atual: usuario.cargo_atual,
+            website: usuario.webiste,
+            formacao: usuario.formacao
         }
 
         return usuarioLogado

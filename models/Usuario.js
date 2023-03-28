@@ -60,6 +60,19 @@ const Usuario = new Schema({
     seguidores: {
         type: Number
     },
+    resumo: {
+        type: String
+    },
+    cargo_atual: {
+        type: String,
+    },
+    webiste: {
+        type: String
+    },
+    formacao: {
+        type: Schema.Types.ObjectId,
+        ref: "formacoes"
+    },
     novoUsuario: {
         type: Number,
         default: 0
