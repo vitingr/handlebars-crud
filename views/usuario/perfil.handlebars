@@ -18,12 +18,23 @@
                             </button>
                         </a>
                     </div>
+                    {{#if usuario.resumo}} 
+                        <h2>{{usuario.resumo}}</h2>
+                    {{else}}
+                        <h2>Adicione um Resumo ao Seu Perfil,.</h2>
+                    {{/if}}
+                    
                     {{#if formacao}}
                         <h2>{{formacao.area}} - {{formacao.nome}}</h2>
                         <h2>{{formacao.tipo}} - {{formacao.nome}}</h2>
                     {{else}}
-                        <h2>{{formacao.nome}}</h2>
                         <h2>Adicione uma Formação.</h2>
+                    {{/if}}
+
+                    {{#if usuario.website}}
+                        <p>{{usuario.website}}</p>
+                    {{else}}
+                        <p>Adicione um portfólio</p>
                     {{/if}}
 
                     {{#if endereco}}

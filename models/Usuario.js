@@ -66,7 +66,7 @@ const Usuario = new Schema({
     cargo_atual: {
         type: String,
     },
-    webiste: {
+    website: {
         type: String
     },
     formacao: {

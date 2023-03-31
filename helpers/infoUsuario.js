@@ -22,7 +22,7 @@ module.exports = {
             seguidores: usuario.seguidores,
             resumo: usuario.resumo,
             cargo_atual: usuario.cargo_atual,
-            website: usuario.webiste,
+            website: usuario.website,
             formacao: usuario.formacao
         }
 

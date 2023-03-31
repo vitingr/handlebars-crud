@@ -339,14 +339,14 @@ router.get("/editarPerfil", (req, res) => {
     }
 
     if (perfil_completo == "não") {
-
+        
         Postagem.find({ dono: usuarioLogado.id }).lean().sort({ data: 'desc' }).then((postagens) => {
 
             if (!usuarioLogado.endereco || usuarioLogado.endereco == null || usuarioLogado.endereco == undefined || usuarioLogado.endereco == "") {
 
                 Endereco.findOne({ _id: usuarioLogado.endereco }).lean().then((endereco) => {
 
-                    Formacao.find({ _id: usuarioLogado.formacao }).lean().then((formacao) => {
+                    Formacao.findOne({ _id: usuarioLogado.formacao }).lean().then((formacao) => {
 
                         res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, endereco: endereco })
 
@@ -381,7 +381,7 @@ router.get("/editarPerfil", (req, res) => {
 
                 Endereco.findOne({ _id: usuarioLogado.endereco }).lean().then((endereco) => {
 
-                    Formacao.find({ _id: usuarioLogado.formacao }).lean().then((formacao) => {
+                    Formacao.findOne({ _id: usuarioLogado.formacao }).lean().then((formacao) => {
 
                         res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, endereco: endereco, perfil_completo: perfil_completo })
 
@@ -473,12 +473,14 @@ router.post("/editInfo", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    Usuario.findOne({ _id: usuarioLogado.id }).lean().then((usuario) => {
+    Formacao.findOne({_id: req.body.formacao}).lean().then((formacao) => {
 
+        console.log(formacao)
         console.log("USUARIO")
 
-        Formacao.findOne({_id: req.body.formacao}).lean().then((formacao) => {
+        Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
 
+            console.log(usuario)
             console.log("FORMACAO")
 
             usuario.resumo = req.body.headline
@@ -495,6 +497,7 @@ router.post("/editInfo", (req, res) => {
     
             }).catch((erro) => {
     
+                console.log(erro)
                 req.flash('error_msg', 'ERRO! Não foi possível salvar suas alterações.')
                 res.redirect("/")
     
@@ -502,14 +505,14 @@ router.post("/editInfo", (req, res) => {
 
         }).catch((erro) => {
 
-            req.flash('error_msg', 'ERRO! Não foi possível localizar suas formações.')
+            req.flash('error_msg', 'ERRO! Não foi possível localizar seu perfil.')
             res.redirect("/usuario/editarPerfil")
     
         })
 
     }).catch((erro) => {
 
-        req.flash('error_msg', 'ERRO! Não foi possível localizar seu perfil')
+        req.flash('error_msg', 'ERRO! Não foi possível localizar suas informações')
         res.redirect("/usuario/editarPerfil")
 
     })

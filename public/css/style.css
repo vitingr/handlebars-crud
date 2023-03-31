@@ -97,6 +97,7 @@ body {
 
 .profile_edit {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     width: 100%;
     height: 100%;
@@ -369,8 +370,6 @@ form.sign-up-form {
 }
 
 .panel .content {
-    width: 500px;
-    margin-right: 225px;
     color: white;
 }
 
@@ -665,6 +664,7 @@ form.sign-up-form {
     display: flex;
     flex-direction: column;
     width: 350px;
+    max-height: 275px;
 }
 
 .main_info .main_info_div {
@@ -1254,7 +1254,7 @@ text_feed input:focus {
     border-radius: 15px;
     transition-timing-function: ease-in-out;
     transition-duration: 0.3s;
-    }
+}
 
 .more_trend_item:hover {
     background: var(--color2);
@@ -1337,7 +1337,6 @@ text_feed input:focus {
 }
 
 .profile_info_text h2 {
-    margin-top: 7.5px;
     max-width: 700px;
     font-size: 17px;
     font-weight: lighter;
@@ -1361,8 +1360,8 @@ text_feed input:focus {
 }
 
 .profile_analytics,
-.profile_activity, 
-.profile_experience, 
+.profile_activity,
+.profile_experience,
 .profile_resources {
     padding-bottom: 25px;
     border-bottom: 1px solid #44444434;
@@ -1492,101 +1491,151 @@ text_feed input:focus {
     }
 }
 
+@media (max-width: 170px) {
+    .left-panel .content {
+        width: 500px;
+        margin-right: 225px;
+    }
+}
+
 /* RESPONSIVIDADES */
 
-@media (max-width: 1800px) {
-    .panel {
-        align-items: normal;
-    }
-}
+@media (max-width: 870px) {
 
-@media (max-width: 1400px) {
-    .left-panel {
-        padding: 3rem 17% 2rem 5%;
-    }
-
-    .container_login:before,
-    .container_cadastro:before {
-        top: 0;
-    }
-}
-
-@media (max-width: 1925px) {
-    .container_login {
+    .container_login,
+    .container_cadastro {
         min-height: 800px;
         height: 100vh;
     }
 
-    .container_cadastro {
-        min-height: 800px;
-        height: 270vh;
-    }
-
-    .container_login:before,
-    .container_cadastro:before {
-        display: none;
-    }
-
     .signin-signup {
-        margin-top: 0px;
+        margin-top: -175px;
         width: 100%;
-        left: 50%;
+        top: 95%;
         transform: translate(-50%, -100%);
+        transition: 1s 0.8s ease-in-out;
+    }
+
+    .signin-signup,
+    form.sign-up-mode .signin-signup {
+        left: 50%;
     }
 
     .panels-container {
-        display: none;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 2fr 1fr;
     }
 
     .panel {
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
+        padding: 2.5rem 8%;
+        grid-column: 1 / 2;
+    }
+
+    .right-panel {
+        grid-row: 3 / 4;
+    }
+
+    .left-panel {
+        grid-row: 1 / 2;
     }
 
     .image {
-        display: none;
+        width: 200px;
+        transition: transform 0.9s ease-in-out;
+        transition-delay: 0.6s;
     }
 
-    .right-panel .content .right-panel .image {
-        transform: translateX(0px);
+    .panel .content {
+        transition: transform 0.9s ease-in-out;
+        transition-delay: 0.8s;
     }
 
-    .content {
-        display: none;
+    .panel h3 {
+        font-size: 1.2rem;
     }
-}
 
-@media (max-width: 870px) {
+    .panel p {
+        font-size: 0.9rem;
+        padding: 0.5rem 0;
+    }
+
+    .btn.transparent {
+        width: 110px;
+        height: 35px;
+        font-size: 0.7rem;
+    }
+
+    .container_login:before,
+    .container_cadastro:before {
+        width: 1500px;
+        height: 1500px;
+        transform: translateX(-50%);
+        left: 30%;
+        bottom: 68%;
+        right: initial;
+        top: initial;
+        transition: 2s ease-in-out;
+    }
+
+    form.sign-up-mode:before {
+        transform: translate(-50%, 100%);
+        bottom: 32%;
+        right: initial;
+    }
+
+    form.sign-up-mode .left-panel .image,
+    form.sign-up-mode .left-panel .content {
+        transform: translateY(-300px);
+    }
+
+    form.sign-up-mode .right-panel .image,
+    form.sign-up-mode .right-panel .content {
+        transform: translateY(0px);
+    }
+
+    .right-panel .image,
+    .right-panel .content {
+        transform: translateY(300px);
+    }
+
+    form.sign-up-mode .signin-signup {
+        top: 5%;
+        transform: translate(-50%, 0);
+    }
+
     .title {
         font-size: 1.45em;
     }
-
+    
     .container_left {
         width: 100%;
     }
-
+    
     .container_left_bottom {
         flex-wrap: wrap;
     }
-
+    
     .container_principal {
         flex-wrap: wrap;
         width: 100%;
     }
-
+    
     .container_left_top {
         width: 100%;
     }
-
+    
     .feed {
         width: 100%;
     }
-
+    
     .text_something {
         width: 300px;
     }
 }
+
 
 @media (max-width: 750px) {
 
@@ -1665,8 +1714,42 @@ text_feed input:focus {
 }
 
 @media (max-width: 500px) {
+    .title {
+        padding: 10px;
+        font-size: 20px;
+    }
+    
+    .input-field {
+        max-width: 325px;
+        height: 40px;
+    }
+
+    .input-field input {
+        font-size: 13px;
+    }
+
+    .left-panel {
+        width: 425px;
+    }
+    
+    .panel {
+        padding: 1.25rem 8%;
+    }
+
+    .content h3 {
+        font-size: 1em;
+    }
+
+    .content p {
+        font-size: 0.7em;
+    }
+
     .forms-container {
-        margin-top: 125px;
+        margin-top: 175px;
+    }
+
+    #cadastro-forms-container {
+        margin-top: 325px;
     }
 
     .profile_edit {

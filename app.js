@@ -144,7 +144,14 @@ app.get("/", Logado, (req, res) => {
     // Encontrar Postagens
     Postagem.find().lean().sort({ data: 'desc' }).then((postagens) => {
 
+
+
         res.render("usuario/inicio", { usuario: usuarioLogado, postagens: postagens })
+
+    }).catch((erro) => {   
+
+        req.flash('error_msg', 'ERRO! Não foi possível encontrar as postagens...')
+        res.redirect("/")
 
     })
 
