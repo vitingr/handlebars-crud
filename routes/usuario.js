@@ -339,7 +339,7 @@ router.get("/editarPerfil", (req, res) => {
     }
 
     if (perfil_completo == "não") {
-        
+
         Postagem.find({ dono: usuarioLogado.id }).lean().sort({ data: 'desc' }).then((postagens) => {
 
             if (!usuarioLogado.endereco || usuarioLogado.endereco == null || usuarioLogado.endereco == undefined || usuarioLogado.endereco == "") {
@@ -473,7 +473,7 @@ router.post("/editInfo", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    Formacao.findOne({_id: req.body.formacao}).lean().then((formacao) => {
+    Formacao.findOne({ _id: req.body.formacao }).lean().then((formacao) => {
 
         console.log(formacao)
         console.log("USUARIO")
@@ -487,27 +487,27 @@ router.post("/editInfo", (req, res) => {
             usuario.cargo_atual = req.body.cargo_atual
             usuario.formacao = formacao._id
             usuario.website = req.body.website
-    
+
             usuario.save().then(() => {
 
                 console.log("SALVO")
-    
+
                 req.flash('success_msg', 'Perfil Atualizado com Sucesso!')
                 res.redirect("/usuario/editarPerfil")
-    
+
             }).catch((erro) => {
-    
+
                 console.log(erro)
                 req.flash('error_msg', 'ERRO! Não foi possível salvar suas alterações.')
                 res.redirect("/")
-    
+
             })
 
         }).catch((erro) => {
 
             req.flash('error_msg', 'ERRO! Não foi possível localizar seu perfil.')
             res.redirect("/usuario/editarPerfil")
-    
+
         })
 
     }).catch((erro) => {
@@ -575,6 +575,172 @@ router.post("/addFormacao", (req, res) => {
 
         req.flash('error_msg', 'ERRO! Não foi possível localizar sua conta.')
         res.redirect("/usuario/editarPerfil")
+
+    })
+
+})
+
+router.get("/amigos", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    Usuario.find({ _id: { $ne: usuarioLogado.id } }).lean().then((usuarios) => {
+
+        res.render("usuario/amigos", { usuario: usuarioLogado, usuarios: usuarios })
+
+    }).catch((erro) => {
+        console.log(erro)
+        req.flash('error_msg', 'ERRO! Não foi possível encontrar pessoas!')
+        res.redirect("/")
+
+    })
+
+})
+
+router.post("/amigos/addAmigo", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    Usuario.findOne({ _id: req.body.id }).then((usuario) => {
+
+        var amigos_pendentes = usuario.amigos_pendentes
+        var amigos = usuario.amigos
+
+        if (amigos_pendentes.includes(usuarioLogado.id) || amigos.includes(usuarioLogado.id)) {
+
+            req.flash('error_msg', 'ERRO! Não é possível adicionar o mesmo amigo duas vezes...')
+            res.redirect("/usuario/amigos")
+
+        } else {
+
+            usuario.amigos_pendentes = usuario.amigos_pendentes + `${usuarioLogado.id} `
+            usuario.save().then(() => {
+
+                console.log(`CONVITE ENVIADO PARA ${usuario.id}`)
+                req.flash('success_msg', 'SUCESSO! O convite de Amizade foi enviado...')
+                res.redirect("/usuario/amigos")
+
+            })
+
+        }
+
+    }).catch((erro) => {
+
+        req.flash('error_msg', 'ERRO! Não foi possível encontrar a conta desse usuário.')
+        res.redirect("/usuario/amigos")
+
+    })
+
+})
+
+router.post("/amigos/deletar", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+})
+
+router.post("/amigos/aceitar", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
+
+        usuario.amigos += `${req.body.id}`
+        usuario.seguidores += 1
+
+        var amigos = []
+
+        var amigosSeparados = usuario.amigos_pendentes.split(" ")
+        amigosSeparados.array.forEach(amigo => {
+
+            if (amigo == 0 || amigo == null || amigo == undefined || amigo == "") {
+                console.log("Amigo Invalido")
+            } else {
+                amigos.push(amigo)
+            }
+
+        })
+
+        var amigoAtual = req.body.id
+        var indice = amigos.indexOf(amigoAtual)
+
+        amigos.splice(indice, 1)
+
+        usuario.amigos_pendentes = amigos.join(" ")
+        usuario.save()
+
+        Usuario.findOne({ _id: req.body.id }).then((amigo) => {
+
+            amigo.amigos += `${usuarioLogado.id}`
+            amigo.seguidores += 1 
+            amigo.save().then(() => {
+
+                req.flash('success_msg', 'SUCESSO! Convite Aceito.')
+                res.redirect("/usuario/amigos")
+
+            }).catch((erro) => {
+
+                req.flash('error_msg', 'ERRO! Não foi possível aceitar o convite...')
+                res.redirect("/usuario/amigos")
+
+            })
+
+        }).catch((erro) => {
+
+            req.flash('error_msg', 'ERRO! Não foi possível sincronizar o convite...')
+            res.redirect("/usuario/amigos")
+
+        })
+
+    }).catch((erro) => {
+
+        req.flash('error_msg', 'ERRO! Não foi possível encontrar esse convite em sua conta...')
+        res.redirect("/usuario/amigos")
+
+    })
+
+})
+
+router.post("/amigos/rejeitar", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    Usuario.findOne({_id: usuarioLogado.id}).then((usuario) => {
+
+        var amigos = []
+        var amigosSeparados = usuario.amigos_pendentes.split(" ")
+        amigosSeparados.forEach(amigo => {
+
+            if (amigo == 0 || amigo == null || amigo == undefined || amigo == "") {
+                console.log("Amigo Invalido")
+            } else {
+                amigos.push(amigo)
+            }
+
+        })
+
+        var amigoAtual = req.body._id 
+        var indice = amigos.indexOf(amigoAtual)
+
+        amigos.splice(indice, 1)
+
+        usuario.amigos_pendentes = amigos.join(" ")
+        usuario.save().then(() => {
+
+            req.flash('success_msg', 'SUCESSO! Convite rejeitado')
+            res.redirect("/usuario/amigos")
+
+        }).catch((erro) => {
+
+            req.flash('error_msg', 'ERRO! Não foi possível rejeitar o convite...')
+            res.redirect("/usuario/amigos")
+
+        })
+
+    }).catch((erro) => {
+
+        req.flash('error_msg', 'ERRO! Não foi possível encontrar o convite...')
+        res.redirect("/usuario/amigos")
 
     })
 

@@ -51,7 +51,10 @@ const Usuario = new Schema({
     escola: {
         type: String
     },
-    faculdade: {
+    amigos: {
+        type: String
+    },
+    amigos_pendentes: {
         type: String
     },
     foto: {

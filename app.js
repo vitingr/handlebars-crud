@@ -12,6 +12,7 @@ const passport = require("passport")
 const flash = require("connect-flash")
 const path = require("path")
 const bcrypt = require("bcryptjs")
+const db = require("./config/db")
 
 // Declaração de Rotas
 
@@ -87,7 +88,7 @@ app.set('view engine', 'handlebars')
 
 mongoose.set("strictQuery", false);
 mongoose.Promise = global.Promise
-mongoose.connect("mongodb://localhost:27017/TCC").then(() => {
+mongoose.connect(db.mongoURI).then(() => {
 
     console.log("SUCESSO! Login com o MongoDB Realizado com Sucesso!")
 
@@ -290,7 +291,8 @@ app.post("/cadastrar", (req, res) => {
                     preferencia_emprego: "",
                     procurando_emprego: "",
                     escola: "",
-                    faculdade: "",
+                    amigos: "",
+                    amigos_pendentes: "",
                     foto: "",
                     seguidores: 0,
                     resumo: "",
@@ -381,7 +383,7 @@ app.use((req, res, next) => {
 
 // Inicialização
 
-const PORT = 3030
+const PORT = process.env.PORT || 3030
 
 app.listen(PORT, () => {
     console.log(`SUCESSO! Servidor Funcionando na Porta ${PORT}`)
