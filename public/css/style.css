@@ -476,6 +476,7 @@ form.sign-up-form {
 }
 
 .input_cadastro {
+    background: white;
     font-size: 16.5px;
     margin-bottom: 25px;
     outline: none;
@@ -1702,7 +1703,7 @@ text_feed input:focus {
 
     .container_principal {
         margin-top: 5em;
-        padding: 5px;
+        padding: 10px;
     }
 
     .input_nav {
@@ -1823,5 +1824,24 @@ text_feed input:focus {
 
     .profile_edit {
         padding: 0px;
+    }
+
+    #cadastro {
+        flex-wrap: nowrap;
+    }
+
+    .title_cadastro {
+        font-size: 26.5px;
+    }
+
+    .subtitle_cadastro {
+        width: 100%;
+        font-size: 15px;
+    }
+
+    .input_cadastro {
+        padding: 7.5px;
+        font-size: 13px;
+        width: 300px;
     }
 }
