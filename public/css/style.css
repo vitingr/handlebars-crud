@@ -134,7 +134,6 @@ body {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    align-items: center;
     justify-content: center;
     padding: 50px;
     min-height: 100%;
@@ -628,6 +627,7 @@ form.sign-up-form {
 .container_principal {
     margin: auto;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     max-width: 1450px;
     height: 100%;
@@ -1349,7 +1349,7 @@ text_feed input:focus {
     color: var(--font-color-low-emphasis);
 }
 
-.profile_info_text p span {
+.span_link {
     cursor: pointer;
     color: var(--color2);
     transition-timing-function: ease-in-out;
@@ -1526,6 +1526,52 @@ text_feed input:focus {
 
 .opcao_amigo_bottom button:hover {
     background: var(--color5);
+}
+
+/* -=-=-=- VAGAS -=-=-=- */
+
+#vaga h1 {
+    margin-top: 1.5em;
+    text-align: center;
+    font-size: 27.5px;
+}
+
+#vaga h2 {
+    text-align: center;
+    font-size: 20px;
+    font-weight: normal;
+    margin-bottom: 2.5em;
+}
+
+#vaga .info_vaga_top {
+    font-size: 18px;
+    margin-bottom: 1.75em;
+}
+
+#vaga .info_vaga_top div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#vaga .info_vaga_top div ion-icon {
+    font-size: 20px;
+    cursor: pointer;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+#vaga .info_vaga_top div ion-icon:hover {
+    color: var(--color2);
+}
+
+#vaga .info_vaga_bottom h1 {
+    margin: 10px;
+}
+
+#vaga .info_vaga_bottom p {
+    text-align: justify;
+    margin-bottom: 1em;
 }
 
 /* -=-=-=- ANIMAÇÕES -=-=-=- */
@@ -1784,6 +1830,23 @@ text_feed input:focus {
 }
 
 @media (max-width: 500px) {
+
+    * {
+        font-size: 14px;
+    }
+
+    .container_unico {
+        padding: 25px;
+    }
+
+    #vaga h1 {
+        font-size: 25px;
+    }
+
+    #vaga h2 {
+        font-size: 16.5px;
+    }
+
     .title {
         padding: 10px;
         font-size: 20px;

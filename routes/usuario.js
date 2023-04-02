@@ -746,4 +746,12 @@ router.post("/amigos/rejeitar", (req, res) => {
 
 })
 
+router.get("/vaga", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    res.render("usuario/vaga")
+
+})
+
 module.exports = router
