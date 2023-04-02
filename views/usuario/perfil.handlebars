@@ -19,22 +19,23 @@
                         </a>
                     </div>
                     {{#if usuario.resumo}} 
-                        <h2>{{usuario.resumo}}</h2>
+                        <h2><ion-icon name="newspaper-outline"></ion-icon> {{usuario.resumo}}</h2>
                     {{else}}
-                        <h2>Adicione um Resumo ao Seu Perfil,.</h2>
+                        <h2><ion-icon name="newspaper-outline"></ion-icon> Adicione um Resumo ao Seu Perfil.</h2>
                     {{/if}}
                     
                     {{#if formacao}}
-                        <h2>{{formacao.area}} - {{formacao.nome}}</h2>
-                        <h2>{{formacao.tipo}} - {{formacao.nome}}</h2>
+                        <h2><ion-icon name="school-outline"></ion-icon> {{formacao.area}} - {{formacao.nome}}</h2>
                     {{else}}
-                        <h2>Adicione uma Formação.</h2>
+                        <h2><ion-icon name="school-outline"></ion-icon> Adicione uma Formação.</h2>
                     {{/if}}
+                    
+                    <h2><ion-icon name="mail-outline"></ion-icon> {{usuario.email}}</h2>
 
                     {{#if usuario.website}}
-                        <p>{{usuario.website}}</p>
+                        <p id="margin_top">{{usuario.website}}</p>
                     {{else}}
-                        <p>Adicione um portfólio</p>
+                        <p id="margin_top">Adicione um portfólio</p>
                     {{/if}}
 
                     {{#if endereco}}

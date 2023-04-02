@@ -473,20 +473,79 @@ router.post("/editInfo", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    Formacao.findOne({ _id: req.body.formacao }).lean().then((formacao) => {
+    if (req.body.formacao) {
+        Formacao.findOne({ _id: req.body.formacao }).lean().then((formacao) => {
 
-        console.log(formacao)
-        console.log("USUARIO")
+            console.log(formacao)
+            console.log("USUARIO")
 
+            Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
+
+                console.log(usuario)
+                console.log("FORMACAO")
+
+                if (req.body.headline) {
+                    usuario.resumo = req.body.headline
+                }
+
+                if (req.body.cargo_atual) {
+                    usuario.cargo_atual = req.body.cargo_atual
+                }
+
+                if (formacao._id) {
+                    usuario.formacao = formacao._id
+                }
+
+                if (req.body.website) {
+                    usuario.website = req.body.website
+                }
+
+                usuario.save().then(() => {
+
+                    console.log("SALVO")
+
+                    req.flash('success_msg', 'Perfil Atualizado com Sucesso!')
+                    res.redirect("/usuario/editarPerfil")
+
+                }).catch((erro) => {
+
+                    console.log(erro)
+                    req.flash('error_msg', 'ERRO! Não foi possível salvar suas alterações.')
+                    res.redirect("/")
+
+                })
+
+            }).catch((erro) => {
+
+                req.flash('error_msg', 'ERRO! Não foi possível localizar seu perfil.')
+                res.redirect("/usuario/editarPerfil")
+
+            })
+
+        }).catch((erro) => {
+
+            req.flash('error_msg', 'ERRO! Não foi possível localizar suas informações')
+            res.redirect("/usuario/editarPerfil")
+
+        })
+    } else {
+        
         Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
 
             console.log(usuario)
             console.log("FORMACAO")
 
-            usuario.resumo = req.body.headline
-            usuario.cargo_atual = req.body.cargo_atual
-            usuario.formacao = formacao._id
-            usuario.website = req.body.website
+            if (req.body.headline) {
+                usuario.resumo = req.body.headline
+            }
+
+            if (req.body.cargo_atual) {
+                usuario.cargo_atual = req.body.cargo_atual
+            }
+
+            if (req.body.website) {
+                usuario.website = req.body.website
+            }
 
             usuario.save().then(() => {
 
@@ -509,13 +568,7 @@ router.post("/editInfo", (req, res) => {
             res.redirect("/usuario/editarPerfil")
 
         })
-
-    }).catch((erro) => {
-
-        req.flash('error_msg', 'ERRO! Não foi possível localizar suas informações')
-        res.redirect("/usuario/editarPerfil")
-
-    })
+    }
 
 })
 
@@ -672,7 +725,7 @@ router.post("/amigos/aceitar", (req, res) => {
         Usuario.findOne({ _id: req.body.id }).then((amigo) => {
 
             amigo.amigos += `${usuarioLogado.id}`
-            amigo.seguidores += 1 
+            amigo.seguidores += 1
             amigo.save().then(() => {
 
                 req.flash('success_msg', 'SUCESSO! Convite Aceito.')
@@ -705,7 +758,7 @@ router.post("/amigos/rejeitar", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    Usuario.findOne({_id: usuarioLogado.id}).then((usuario) => {
+    Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
 
         var amigos = []
         var amigosSeparados = usuario.amigos_pendentes.split(" ")
@@ -719,7 +772,7 @@ router.post("/amigos/rejeitar", (req, res) => {
 
         })
 
-        var amigoAtual = req.body._id 
+        var amigoAtual = req.body._id
         var indice = amigos.indexOf(amigoAtual)
 
         amigos.splice(indice, 1)

@@ -5,6 +5,8 @@
     <div class="forms-container" id="cadastro-forms-container">
         <div class="signin-signup">
 
+            {{>_msg}}
+
             <form action="/cadastrar" method="POST" class="sign-up-form">
                 <h2 class="title">Faça Parte dessa Comunidade Feminina Profissional</h2>
 
@@ -12,35 +14,40 @@
                     <div class="icon-ion">
                         <ion-icon name="person-outline"></ion-icon>
                     </div>
-                    <input type="text" name="nome" id="nome" placeholder="Nome" minlength="2" maxlength="20" autocomplete="off"  required>
+                    <input type="text" name="nome" id="nome" placeholder="Nome" minlength="2" maxlength="20"
+                        autocomplete="off" required>
                 </div>
 
                 <div class="input-field">
                     <div class="icon-ion">
                         <ion-icon name="person-outline"></ion-icon>
                     </div>
-                    <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome" minlength="2" maxlength="25" autocomplete="off" required>
+                    <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome" minlength="2"
+                        maxlength="25" autocomplete="off" required>
                 </div>
 
                 <div class="input-field">
                     <div class="icon-ion">
                         <ion-icon name="mail-outline"></ion-icon>
                     </div>
-                    <input type="email" name="email" id="email" placeholder="Email" minlength="10" maxlength="50" autocomplete="off" required>
+                    <input type="email" name="email" id="email" placeholder="Email" minlength="10" maxlength="50"
+                        autocomplete="off" required>
                 </div>
 
                 <div class="input-field">
                     <div class="icon-ion">
                         <ion-icon name="lock-closed-outline"></ion-icon>
                     </div>
-                    <input type="password" name="senha" id="senha" placeholder="Senha" maxlength="20" minlength="8" required>
+                    <input type="password" name="senha" id="senha" placeholder="Senha" maxlength="20" minlength="8"
+                        required>
                 </div>
 
                 <div class="input-field">
                     <div class="icon-ion">
                         <ion-icon name="lock-closed-outline"></ion-icon>
                     </div>
-                    <input type="password" name="senhaConfirmar" id="senhaConfirmar" placeholder="Confirmar a Senha" maxlength="20" minlength="8" required>
+                    <input type="password" name="senhaConfirmar" id="senhaConfirmar" placeholder="Confirmar a Senha"
+                        maxlength="20" minlength="8" required>
                 </div>
 
                 <input type="submit" value="Cadastrar" class="btn solid">
@@ -74,8 +81,7 @@
                     Já é um dos nós?
                 </h3>
                 <p>
-                    Caso você já tenha realizado um cadastro anteriormente e faça parte da plaforma {sem nome ainda
-                    ksks} clique aqui para efetuar a sua sessão de login novamente e conectar-se!
+                    Caso você já tenha realizado um cadastro anteriormente e faça parte da nossa plaforma. clique aqui para efetuar a sua sessão de login novamente e conectar-se!
                 </p>
                 <a href="/login">
                     <button class="btn transparent" id="signup-up-btn">Login</button>

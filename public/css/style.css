@@ -48,7 +48,6 @@ body {
     z-index: 999;
     width: 40%;
     margin: auto;
-    display: grid;
     padding: 10px;
     border-radius: 15px;
     background: rgb(142 229 142 / 23%);
@@ -63,7 +62,6 @@ body {
     width: 40%;
     margin: auto;
     margin-top: 20px;
-    display: grid;
     padding: 10px;
     border-radius: 15px;
     background: rgb(243 188 188 / 54%);
@@ -140,6 +138,10 @@ body {
     min-width: 100%;
     border-radius: 10px;
     background: white;
+}
+
+#margin_top {
+    margin-top: 1em;
 }
 
 /* ======= LOGIN / CADASTRO ======== */
@@ -1338,13 +1340,17 @@ text_feed input:focus {
 }
 
 .profile_info_text h2 {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
     max-width: 700px;
     font-size: 17px;
     font-weight: lighter;
 }
 
 .profile_info_text p {
-    margin-top: 7.5px;
+    margin-left: 5px;
     font-size: 15px;
     color: var(--font-color-low-emphasis);
 }
@@ -1549,6 +1555,7 @@ text_feed input:focus {
 }
 
 #vaga .info_vaga_top div {
+    padding: 5px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -1741,7 +1748,11 @@ text_feed input:focus {
     }
     
     .text_something {
-        width: 300px;
+        width: 100%;
+    }
+
+    .text_something_top {
+        width: 100%;
     }
 }
 
@@ -1789,7 +1800,8 @@ text_feed input:focus {
     }
 
     .left_profile {
-        align-items: center;
+        justify-content: center;
+        gap: 25px;
     }
 
     .main_profile {
@@ -1851,6 +1863,30 @@ text_feed input:focus {
         padding: 10px;
         font-size: 20px;
     }
+
+    .right_profile {
+        padding: 25px;
+    }
+
+    .photo_main_profile img {
+        max-width: 115px;
+        max-height: 115px;
+    }
+
+    .desc_main_profile {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .desc_main_profile h1 {
+        font-size: 21.5px;
+    }
+
+    .desc_main_profile p {
+        font-size: 15px;
+    }
     
     .input-field {
         max-width: 325px;
@@ -1907,4 +1943,5 @@ text_feed input:focus {
         font-size: 13px;
         width: 300px;
     }
+
 }
