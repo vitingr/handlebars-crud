@@ -686,6 +686,42 @@ router.post("/amigos/addAmigo", (req, res) => {
 
 })
 
+router.get("/amigosPendentes", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    var amigosPendentes = []
+
+    var convites = usuarioLogado.amigos_pendentes.split(" ")
+    convites.forEach(convite => {
+        if (convite == 0 || convite == null || convite == undefined || convite == "") {
+            console.log("Amigo Invalido")
+        } else {
+            amigosPendentes.push(convite)
+        }
+    })
+
+    Usuario.find({"_id": {$in: amigosPendentes}}).lean().then((amigos_pendentes) => {
+
+        res.render("usuario/amigosPendentes", {usuario: usuarioLogado, convites: amigos_pendentes})
+
+    }).catch((erro) => {
+
+        req.flash('error_msg', 'ERRO! Não foi possível encontrar os convites de Amizade...')
+        res.redirect('/')
+
+    })
+
+})
+
+router.get("/convitesEnviados", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    res.render("usuario/convitesEnviados")
+
+})
+
 router.post("/amigos/deletar", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)

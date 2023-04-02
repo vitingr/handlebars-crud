@@ -1479,12 +1479,12 @@ text_feed input:focus {
 }
 
 #amigos .container_amigos {
-    margin-top: 5em;
     display: flex;
     flex-wrap: wrap;
 }
 
 #amigos .acoes_amigos {
+    margin-top: 5em;
     padding: 0px 50px 0px 25px;
     border-right: 1px solid #33333336;
 }
@@ -1511,6 +1511,7 @@ text_feed input:focus {
 }
 
 #amigos .opcoes_amigos {
+    margin-top: 5em;
     padding-left: 50px;
     display: flex;
     justify-content: center;
@@ -1986,6 +1987,14 @@ text_feed input:focus {
         padding: 7.5px;
         font-size: 13px;
         width: 300px;
+    }
+
+    #amigos .container_amigos {
+        justify-content: center;
+    }
+
+    #amigos .opcoes_amigos {
+        padding-left: 0px;
     }
 
 }

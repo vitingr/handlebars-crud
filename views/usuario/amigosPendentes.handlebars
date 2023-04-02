@@ -1,0 +1,70 @@
+<div class="container_principal" id="amigos">
+
+    <div class="container_unico">
+
+        <h1>Amigos Pendentes</h1>
+        <div class="container_amigos">
+
+            <div class="acoes_amigos">
+                <div>
+                    <ion-icon name="rocket-outline"></ion-icon> Encontrar Amigos
+                </div>
+                <div>
+                    <ion-icon name="person-add-outline"></ion-icon> Amigos Pendentes
+                </div>
+                <div>
+                    <ion-icon name="mail-outline"></ion-icon> Convites Enviados
+                </div>
+                <div>
+                    <ion-icon name="people-outline"></ion-icon> Meus Amigos
+                </div>
+            </div>
+
+            <div class="amigos_pendentes">
+
+                {{#each amigos_pendentes}}
+
+                <div class="opcao_amigo">
+                    <div class="opcao_amigo_top"
+                        style="background: url(https://img.freepik.com/free-vector/gradient-spheres-background_52683-76367.jpg)">
+
+                    </div>
+                    <div class="opcao_amigo_bottom">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png">
+                        <h2>
+                            {{nomeCompleto}}
+                        </h2>
+                        <p class="opcao_amigo_resumo">
+                            {{resumo}}
+                        </p>
+                        <p class="opcao_amigo_formacao">
+                            ETEC. Prof. Dr. José Dagnoni
+                        </p>
+
+                        <input type="hidden" name="id" id="id" value="{{_id}}">
+
+                        <form action="/usuario/amigos/aceitar">
+                            <button type="submit">
+                                Aceitar Convite
+                            </button>
+                        </form>
+
+                        <form action="/usuario/amigos/rejeitar">
+                            <button type="submit">
+                                Rejeitar Convite
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                {{else}}
+
+                <p>Nenhum Convite de Amigo Pendente</p>
+
+                {{/each}}
+
+            </div>
+        </div>
+
+    </div>
+</div>
