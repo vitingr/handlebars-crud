@@ -1474,52 +1474,92 @@ text_feed input:focus {
 
 /* -=-=-=- AMIGOS -=-=-=- */
 
-.opcoes_amigos {
-    margin-top: 4em;
+#amigos .container_unico h1 {
+    text-align: center;
+}
+
+#amigos .container_amigos {
+    margin-top: 5em;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#amigos .acoes_amigos {
+    padding: 0px 50px 0px 25px;
+    border-right: 1px solid #33333336;
+}
+
+#amigos .acoes_amigos div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #33333336;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.25s;
+}
+
+#amigos .acoes_amigos div ion-icon {
+    color: var(--color2);
+}
+
+#amigos .acoes_amigos div:hover {
+    color: var(--color1);
+    border-bottom: 1px solid var(--color1);
+}
+
+#amigos .opcoes_amigos {
+    padding-left: 50px;
     display: flex;
     justify-content: center;
     gap: 50px;
 }
 
-.opcao_amigo {
+#amigos .opcao_amigo {
     min-width: 215px;
     min-height: 275px;
     border-radius: 10px;
     border: 1px solid #33333333;
 }
 
-.opcao_amigo_top {
+#amigos .opcao_amigo_top {
     background-size: cover;
     background-repeat: no-repeat;
     height: 65px;
 }
 
-.opcao_amigo_bottom {
+#amigos .opcao_amigo_bottom {
     padding: 15px;
 }
 
-.opcao_amigo_bottom img {
+#amigos .opcao_amigo_bottom img {
     max-width: 100px;
     max-height: 100px;
     margin-top: -65px;
     margin-bottom: 10px;
 }
 
-.opcao_amigo_bottom h2 {
+#amigos .opcao_amigo_bottom h2 {
     font-size: 18.5px;
 }
 
-.opcao_amigo_resumo {
+#amigos .opcao_amigo_resumo {
+    min-height: 25px;
     font-size: 15px;
+    text-align: justify;
 }
 
-.opcao_amigo_formacao {
+#amigos .opcao_amigo_formacao {
     color: var(--font-color-low-emphasis);
     margin-top: 1.2em;
     font-size: 15px;
+    min-height: 25px;
+    text-align: center;
 }
 
-.opcao_amigo_bottom button {
+#amigos .opcao_amigo_bottom button {
     margin-top: 5px;
     cursor: pointer;
     padding: 7.5px;
@@ -1530,7 +1570,7 @@ text_feed input:focus {
     transition-duration: 0.3s;
 }
 
-.opcao_amigo_bottom button:hover {
+#amigos .opcao_amigo_bottom button:hover {
     background: var(--color5);
 }
 
@@ -1899,6 +1939,10 @@ text_feed input:focus {
 
     .left-panel {
         width: 425px;
+    }
+
+    .text_something_bottom {
+        margin-left: 0px;
     }
     
     .panel {
