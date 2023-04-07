@@ -4,11 +4,11 @@
 
         {{>_msg}}
 
-        <h1>Explorar novas Amizades</h1>
+        <h1>Minhas Amizades</h1>
         <div class="container_amigos">
 
             <div class="acoes_amigos">
-                <a href="#">
+                <a href="/usuario/encontrarAmigos">
                     <div>
                         <ion-icon name="rocket-outline"></ion-icon> Encontrar Amigos
                     </div>
@@ -23,7 +23,7 @@
                         <ion-icon name="mail-outline"></ion-icon> Convites Enviados
                     </div>
                 </a>
-                <a href="/usuario/amigos">
+                <a href="#">
                     <div>
                         <ion-icon name="people-outline"></ion-icon> Meus Amigos
                     </div>
@@ -31,7 +31,7 @@
             </div>
 
             <div class="opcoes_amigos">
-                {{#each usuarios}}
+                {{#each amigos}}
                 <div class="opcao_amigo">
                     <div class="opcao_amigo_top"
                         style="background: url(https://img.freepik.com/free-vector/gradient-spheres-background_52683-76367.jpg)">
@@ -53,7 +53,7 @@
                             <input type="hidden" name="id" id="id" value="{{_id}}">
 
                             <button type="submit" class="adicionar_amigo">
-                                Adicionar
+                                Remover
                             </button>
                         </form>
                     </div>
@@ -61,7 +61,7 @@
 
                 {{else}}
 
-                <p>Nenhuma Pessoa Encontrada</p>
+                <p>Nenhuma Amizade por Enquanto...</p>
 
                 {{/each}}
 

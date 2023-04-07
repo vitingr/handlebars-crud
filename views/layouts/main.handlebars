@@ -12,7 +12,7 @@
 
 <body>
     <div>
-        {{>_nav}}  
+        {{>_nav}}
         <main>
             {{{body}}}
         </main>
@@ -5835,9 +5835,24 @@
     let menu = document.querySelector("#menu-icon")
     let navmenu = document.querySelector(".nav-list")
 
-    menu.onclick = function() {
+    menu.onclick = function () {
         menu.classList.toggle("bx-x")
         navmenu.classList.toggle("open")
     }
 </script>
+<script>
+    const numeroTelefone = (numero) => {
+    let input = numero.target
+    input.value = mascaraTelefone(input.value)
+    }
+
+    const mascaraTelefone = (value) => {
+    if (!value) return ""
+    value = value.replace(/\D/g,'')
+    value = value.replace(/(\d{2})(\d)/,"($1) $2")
+    value = value.replace(/(\d)(\d{4})$/,"$1-$2")
+    return value
+    }
+</script>
+
 </html>

@@ -2,11 +2,13 @@
 
     <div class="container_unico">
 
+        {{>_msg}}
+
         <h1>Amigos Pendentes</h1>
         <div class="container_amigos">
 
             <div class="acoes_amigos">
-                <a href="/usuario/amigos">
+                <a href="/usuario/encontrarAmigos">
                     <div>
                         <ion-icon name="rocket-outline"></ion-icon> Encontrar Amigos
                     </div>
@@ -21,7 +23,7 @@
                         <ion-icon name="mail-outline"></ion-icon> Convites Enviados
                     </div>
                 </a>
-                <a href="#">
+                <a href="/usuario/amigos">
                     <div>
                         <ion-icon name="people-outline"></ion-icon> Meus Amigos
                     </div>
@@ -49,15 +51,16 @@
                             ETEC. Prof. Dr. José Dagnoni
                         </p>
 
-                        <input type="hidden" name="id" id="id" value="{{_id}}">
-
                         <div class="acoes_amigo_pendentes">
-                            <form action="/usuario/amigos/aceitar">
+                            <form action="/usuario/amigos/aceitar" method="POST">
+                                <input type="hidden" name="id" id="id" value="{{_id}}">
                                 <button type="submit" class="aceitar_convite">
                                     Aceitar Convite
                                 </button>
                             </form>
-                            <form action="/usuario/amigos/rejeitar">
+
+                            <form action="/usuario/amigos/rejeitar" method="POST">
+                                <input type="hidden" name="id" id="id" value="{{_id}}">
                                 <button type="submit" class="rejeitar_convite">
                                     Rejeitar Convite
                                 </button>

@@ -282,13 +282,11 @@ router.post("/publicar", (req, res) => {
 
             new Postagem(novaPostagem).save().then(() => {
 
-                console.log("Postagem Criada com Sucesso!")
                 req.flash('success_msg', 'Mensagem Publicada com Sucesso!')
                 res.redirect("/")
 
             }).catch((erro) => {
 
-                console.log(`ERRO: ${erro}`)
                 req.flash('error_msg', 'ERRO! Houve um problema na criação da postagem...')
                 res.redirect("/")
 
@@ -476,13 +474,7 @@ router.post("/editInfo", (req, res) => {
     if (req.body.formacao) {
         Formacao.findOne({ _id: req.body.formacao }).lean().then((formacao) => {
 
-            console.log(formacao)
-            console.log("USUARIO")
-
             Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
-
-                console.log(usuario)
-                console.log("FORMACAO")
 
                 if (req.body.headline) {
                     usuario.resumo = req.body.headline
@@ -502,14 +494,11 @@ router.post("/editInfo", (req, res) => {
 
                 usuario.save().then(() => {
 
-                    console.log("SALVO")
-
                     req.flash('success_msg', 'Perfil Atualizado com Sucesso!')
                     res.redirect("/usuario/editarPerfil")
 
                 }).catch((erro) => {
 
-                    console.log(erro)
                     req.flash('error_msg', 'ERRO! Não foi possível salvar suas alterações.')
                     res.redirect("/")
 
@@ -532,9 +521,6 @@ router.post("/editInfo", (req, res) => {
         
         Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
 
-            console.log(usuario)
-            console.log("FORMACAO")
-
             if (req.body.headline) {
                 usuario.resumo = req.body.headline
             }
@@ -549,14 +535,11 @@ router.post("/editInfo", (req, res) => {
 
             usuario.save().then(() => {
 
-                console.log("SALVO")
-
                 req.flash('success_msg', 'Perfil Atualizado com Sucesso!')
                 res.redirect("/usuario/editarPerfil")
 
             }).catch((erro) => {
 
-                console.log(erro)
                 req.flash('error_msg', 'ERRO! Não foi possível salvar suas alterações.')
                 res.redirect("/")
 
@@ -633,16 +616,26 @@ router.post("/addFormacao", (req, res) => {
 
 })
 
-router.get("/amigos", (req, res) => {
+router.get("/encontrarAmigos", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
+    var amigos_separados = usuarioLogado.amigos.split(" ")
 
-    Usuario.find({ _id: { $ne: usuarioLogado.id } }).lean().then((usuarios) => {
+    var amigos = []
+
+    amigos_separados.forEach(amigo => {
+        if (amigo == 0 || amigo == null || amigo == undefined || amigo == "") {
+            console.log("Amigo Invalido")
+        } else {
+            amigos.push(amigo)
+        }
+    })
+
+    Usuario.find({ "_id": { $nin: [usuarioLogado.id, amigos] }}).lean().then((usuarios) => {
 
         res.render("usuario/amigos", { usuario: usuarioLogado, usuarios: usuarios })
 
     }).catch((erro) => {
-        console.log(erro)
         req.flash('error_msg', 'ERRO! Não foi possível encontrar pessoas!')
         res.redirect("/")
 
@@ -669,7 +662,6 @@ router.post("/amigos/addAmigo", (req, res) => {
             usuario.amigos_pendentes = usuario.amigos_pendentes + `${usuarioLogado.id} `
             usuario.save().then(() => {
 
-                console.log(`CONVITE ENVIADO PARA ${usuario.id}`)
                 req.flash('success_msg', 'SUCESSO! O convite de Amizade foi enviado...')
                 res.redirect("/usuario/amigos")
 
@@ -701,12 +693,7 @@ router.get("/amigosPendentes", (req, res) => {
         }
     })
 
-    console.log(`AMIGOS PENDENTES: ${usuarioLogado.amigos_pendentes}`)
-    console.log(amigosPendentes)
-
     Usuario.find({"_id": {$in: amigosPendentes}}).lean().then((amigos_pendentes) => {
-
-        console.log(amigos_pendentes)
 
         res.render("usuario/amigosPendentes", {usuario: usuarioLogado, convites: amigos_pendentes})
 
@@ -714,6 +701,33 @@ router.get("/amigosPendentes", (req, res) => {
 
         req.flash('error_msg', 'ERRO! Não foi possível encontrar os convites de Amizade...')
         res.redirect('/')
+
+    })
+
+})
+
+router.get("/amigos", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+    var amigos = []
+
+    var amigos_atuais = usuarioLogado.amigos.split(" ")
+    amigos_atuais.forEach(amigo => {
+        if (amigo == 0 || amigo == null || amigo == undefined || amigo == "") {
+            console.log("Amigo Invalido")
+        } else {
+            amigos.push(amigo)
+        }
+    })
+
+    Usuario.find({_id: amigos}).lean().then((amigos) => {
+
+        res.render("usuario/meusAmigos", {usuario: usuarioLogado, amigos: amigos})
+
+    }).catch((erro) => {
+
+        req.flash('error_msg', 'ERRO! Não foi possível encontrar seus amigos')
+        res.redirect("/")
 
     })
 
@@ -745,7 +759,7 @@ router.post("/amigos/aceitar", (req, res) => {
         var amigos = []
 
         var amigosSeparados = usuario.amigos_pendentes.split(" ")
-        amigosSeparados.array.forEach(amigo => {
+        amigosSeparados.forEach(amigo => {
 
             if (amigo == 0 || amigo == null || amigo == undefined || amigo == "") {
                 console.log("Amigo Invalido")

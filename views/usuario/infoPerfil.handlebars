@@ -39,7 +39,7 @@
             <!-- TELEFONE -->
 
             <label for="telefone" class="label_cadastro">Número de Telefone</label>
-            <input type="number" value="{{usuario.telefone}}" name="telefone" id="telefone" autocomplete="off" minlength="8" maxlength="9" class="input_cadastro">
+            <input type="tel" value="{{usuario.telefone}}" name="telefone" id="telefone" autocomplete="off" maxlength="15" onkeyup="numeroTelefone(event)" class="input_cadastro">
 
             <label for="tipo-telefone" class="label_cadastro">Tipo de Telefone</label>
             <select name="tipo-telefone" id="tipo-telefone" class="input_cadastro">
