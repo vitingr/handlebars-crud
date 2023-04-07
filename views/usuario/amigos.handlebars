@@ -2,11 +2,13 @@
 
     <div class="container_unico">
 
+        {{>_msg}}
+
         <h1>Explorar novas Amizades</h1>
         <div class="container_amigos">
 
             <div class="acoes_amigos">
-                <a href="#">
+                <a href="/usuario/amigos">
                     <div>
                         <ion-icon name="rocket-outline"></ion-icon> Encontrar Amigos
                     </div>
@@ -46,7 +48,7 @@
 
                             <input type="hidden" name="id" id="id" value="{{_id}}">
 
-                            <button type="submit">
+                            <button type="submit" class="adicionar_amigo">
                                 Adicionar
                             </button>
                         </form>

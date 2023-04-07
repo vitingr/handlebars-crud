@@ -701,7 +701,12 @@ router.get("/amigosPendentes", (req, res) => {
         }
     })
 
+    console.log(`AMIGOS PENDENTES: ${usuarioLogado.amigos_pendentes}`)
+    console.log(amigosPendentes)
+
     Usuario.find({"_id": {$in: amigosPendentes}}).lean().then((amigos_pendentes) => {
+
+        console.log(amigos_pendentes)
 
         res.render("usuario/amigosPendentes", {usuario: usuarioLogado, convites: amigos_pendentes})
 

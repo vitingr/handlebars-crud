@@ -6,23 +6,31 @@
         <div class="container_amigos">
 
             <div class="acoes_amigos">
-                <div>
-                    <ion-icon name="rocket-outline"></ion-icon> Encontrar Amigos
-                </div>
-                <div>
-                    <ion-icon name="person-add-outline"></ion-icon> Amigos Pendentes
-                </div>
-                <div>
-                    <ion-icon name="mail-outline"></ion-icon> Convites Enviados
-                </div>
-                <div>
-                    <ion-icon name="people-outline"></ion-icon> Meus Amigos
-                </div>
+                <a href="/usuario/amigos">
+                    <div>
+                        <ion-icon name="rocket-outline"></ion-icon> Encontrar Amigos
+                    </div>
+                </a>
+                <a href="/usuario/amigosPendentes">
+                    <div>
+                        <ion-icon name="person-add-outline"></ion-icon> Amigos Pendentes
+                    </div>
+                </a>
+                <a href="#">
+                    <div>
+                        <ion-icon name="mail-outline"></ion-icon> Convites Enviados
+                    </div>
+                </a>
+                <a href="#">
+                    <div>
+                        <ion-icon name="people-outline"></ion-icon> Meus Amigos
+                    </div>
+                </a>
             </div>
 
             <div class="amigos_pendentes">
 
-                {{#each amigos_pendentes}}
+                {{#each convites}}
 
                 <div class="opcao_amigo">
                     <div class="opcao_amigo_top"
@@ -43,23 +51,24 @@
 
                         <input type="hidden" name="id" id="id" value="{{_id}}">
 
-                        <form action="/usuario/amigos/aceitar">
-                            <button type="submit">
-                                Aceitar Convite
-                            </button>
-                        </form>
-
-                        <form action="/usuario/amigos/rejeitar">
-                            <button type="submit">
-                                Rejeitar Convite
-                            </button>
-                        </form>
+                        <div class="acoes_amigo_pendentes">
+                            <form action="/usuario/amigos/aceitar">
+                                <button type="submit" class="aceitar_convite">
+                                    Aceitar Convite
+                                </button>
+                            </form>
+                            <form action="/usuario/amigos/rejeitar">
+                                <button type="submit" class="rejeitar_convite">
+                                    Rejeitar Convite
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
 
                 {{else}}
 
-                <p>Nenhum Convite de Amigo Pendente</p>
+                <p class="nenhum_amigo">Nenhum Convite de Amigo Pendente</p>
 
                 {{/each}}
 
