@@ -144,6 +144,10 @@ body {
     margin-top: 1em;
 }
 
+#transparente {
+    background: transparent !important;
+}
+
 /* ======= LOGIN / CADASTRO ======== */
 
 .container_login,
@@ -1665,6 +1669,69 @@ text_feed input:focus {
     margin-bottom: 3em;
 }
 
+/* -=-=-=- BUSCAR VAGAS -=-=-=- */
+
+#vagas .container_vagas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 35px;
+}
+
+#vagas .opcao_vaga {
+    border: 1px solid #3333332c;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    width: 600px;
+    height: 140px;
+    gap: 20px;
+    border-radius: 5px;
+}
+
+#vagas .foto_empresa_vaga img {
+    max-width: 100px;
+    max-height: 100px;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+#vagas .foto_empresa_vaga img:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+#vagas .info_vaga .nome_vaga {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+#vagas .info_vaga .desc_vaga {
+    font-size: 14.5px;
+    color: var(--font-color-low-emphasis);
+}
+
+#vagas .aplicar_vaga button {
+    cursor: pointer;
+    background: var(--color2);
+    color: white;
+    padding: 10px;
+    margin-left: 100px;
+    border-radius: 10px;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+#vagas .aplicar_vaga button:hover {
+    background: var(--color5);
+}
+
+#vagas .titulo_explorar_vagas {
+    text-align: center;
+    margin-bottom: 3.25em;
+}
+
 /* -=-=-=- ANIMAÇÕES -=-=-=- */
 
 @keyframes shake {
@@ -2038,6 +2105,39 @@ text_feed input:focus {
 
     #amigos .opcoes_amigos {
         padding-left: 0px;
+    }
+
+    #transparente {
+        padding: 0px !important;
+    }
+
+    .container_vagas {
+        gap: 10px !important;
+    }
+
+    #vagas .opcao_vaga {
+        width: 100%;
+        padding: 10px;
+        height: 165px;
+    }
+
+    #vagas .foto_empresa_vaga img {
+        max-width: 65px;
+        max-height: 65px;
+    }
+
+    #vagas .info_vaga .nome_vaga {
+        font-size: 16px;
+    }
+
+    #vagas .info_vaga .desc_vaga {
+        font-size: 13px;
+    }
+
+    #vagas .aplicar_vaga button {
+        width: 75px;
+        font-size: 10px;
+        margin-left: 25px;
     }
 
 }
