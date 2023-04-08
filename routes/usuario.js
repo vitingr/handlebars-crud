@@ -488,6 +488,10 @@ router.post("/editInfo", (req, res) => {
                     usuario.formacao = formacao._id
                 }
 
+                if (req.body.telefone) {
+                    usuario.telefone = req.body.telefone 
+                }
+
                 if (req.body.website) {
                     usuario.website = req.body.website
                 }
@@ -527,6 +531,10 @@ router.post("/editInfo", (req, res) => {
 
             if (req.body.cargo_atual) {
                 usuario.cargo_atual = req.body.cargo_atual
+            }
+
+            if (req.body.telefone) {
+                usuario.telefone = req.body.telefone 
             }
 
             if (req.body.website) {
@@ -851,6 +859,14 @@ router.post("/amigos/rejeitar", (req, res) => {
         res.redirect("/usuario/amigos")
 
     })
+
+})
+
+router.get("/buscarVagas", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    res.render("usuario/vagasEmprego")
 
 })
 

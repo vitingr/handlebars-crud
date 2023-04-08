@@ -32,6 +32,12 @@
                     
                     <h2><ion-icon name="mail-outline"></ion-icon> {{usuario.email}}</h2>
 
+                    {{#if usuario.telefone}}
+                        <h2><ion-icon name="call-outline"></ion-icon> {{usuario.telefone}}</h2>
+                    {{else}}
+                        <h2><ion-icon name="call-outline"></ion-icon> Adicione um Telefone.</h2>
+                    {{/if}}
+
                     {{#if usuario.website}}
                         <p id="margin_top">{{usuario.website}}</p>
                     {{else}}

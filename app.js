@@ -297,6 +297,7 @@ app.post("/cadastrar", (req, res) => {
                     seguidores: 0,
                     resumo: "",
                     cargo_atual: "",
+                    telefone: "",
                     website: ""
 
                 })
