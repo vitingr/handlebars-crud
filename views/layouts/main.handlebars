@@ -21,6 +21,26 @@
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script src="https://unpkg.com/scrollreveal"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+<script>
+
+    const graficoPerfil = document.getElementById("graficoPerfil")
+    console.log(`GRAFICO ${graficoPerfil}`)
+
+    let grafico = new Chart(graficoPerfil, {
+        type: 'doughnut',
+        data: {
+            labels: ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"],
+            datasets: [
+                {
+                    label: "Atividade",
+                    data: [65, 69, 35, 81, 166, 155]
+                }
+            ]
+        }
+    })
+
+</script>
 <script>
     ScrollReveal({
         reset: false,
@@ -5843,16 +5863,16 @@
 </script>
 <script>
     const numeroTelefone = (numero) => {
-    let input = numero.target
-    input.value = mascaraTelefone(input.value)
+        let input = numero.target
+        input.value = mascaraTelefone(input.value)
     }
 
     const mascaraTelefone = (value) => {
-    if (!value) return ""
-    value = value.replace(/\D/g,'')
-    value = value.replace(/(\d{2})(\d)/,"($1) $2")
-    value = value.replace(/(\d)(\d{4})$/,"$1-$2")
-    return value
+        if (!value) return ""
+        value = value.replace(/\D/g, '')
+        value = value.replace(/(\d{2})(\d)/, "($1) $2")
+        value = value.replace(/(\d)(\d{4})$/, "$1-$2")
+        return value
     }
 </script>
 

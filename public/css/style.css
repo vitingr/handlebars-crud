@@ -1379,6 +1379,16 @@ text_feed input:focus {
     border-bottom: 1px solid #44444434;
 }
 
+.profile_analytics {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile_analytics h1 {
+    text-align: center;
+}
+
 .profile {
     width: 700px;
     padding: 25px;

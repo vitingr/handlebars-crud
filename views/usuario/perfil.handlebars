@@ -18,36 +18,37 @@
                             </button>
                         </a>
                     </div>
-                    {{#if usuario.resumo}} 
-                        <h2><ion-icon name="newspaper-outline"></ion-icon> {{usuario.resumo}}</h2>
+                    {{#if usuario.resumo}}
+                    <h2><ion-icon name="newspaper-outline"></ion-icon> {{usuario.resumo}}</h2>
                     {{else}}
-                        <h2><ion-icon name="newspaper-outline"></ion-icon> Adicione um Resumo ao Seu Perfil.</h2>
+                    <h2><ion-icon name="newspaper-outline"></ion-icon> Adicione um Resumo ao Seu Perfil.</h2>
                     {{/if}}
-                    
+
                     {{#if formacao}}
-                        <h2><ion-icon name="school-outline"></ion-icon> {{formacao.area}} - {{formacao.nome}}</h2>
+                    <h2><ion-icon name="school-outline"></ion-icon> {{formacao.area}} - {{formacao.nome}}</h2>
                     {{else}}
-                        <h2><ion-icon name="school-outline"></ion-icon> Adicione uma Formação.</h2>
+                    <h2><ion-icon name="school-outline"></ion-icon> Adicione uma Formação.</h2>
                     {{/if}}
-                    
+
                     <h2><ion-icon name="mail-outline"></ion-icon> {{usuario.email}}</h2>
 
                     {{#if usuario.telefone}}
-                        <h2><ion-icon name="call-outline"></ion-icon> {{usuario.telefone}}</h2>
+                    <h2><ion-icon name="call-outline"></ion-icon> {{usuario.telefone}}</h2>
                     {{else}}
-                        <h2><ion-icon name="call-outline"></ion-icon> Adicione um Telefone.</h2>
+                    <h2><ion-icon name="call-outline"></ion-icon> Adicione um Telefone.</h2>
                     {{/if}}
 
                     {{#if usuario.website}}
-                        <p id="margin_top">{{usuario.website}}</p>
+                    <p id="margin_top">{{usuario.website}}</p>
                     {{else}}
-                        <p id="margin_top">Adicione um portfólio</p>
+                    <p id="margin_top">Adicione um portfólio</p>
                     {{/if}}
 
                     {{#if endereco}}
-                        <p>{{endereco.cidade}}, {{endereco.estado}}, {{endereco.pais}} ● <span class="span_link">Contact Info</span></p>
+                    <p>{{endereco.cidade}}, {{endereco.estado}}, {{endereco.pais}} ● <span class="span_link">Contact
+                            Info</span></p>
                     {{else}}
-                        <p>Adicione um Endereço. ● <span class="span_link">Contact Info</span></p>
+                    <p>Adicione um Endereço. ● <span class="span_link">Contact Info</span></p>
                     {{/if}}
 
                 </div>
@@ -78,6 +79,7 @@
 
             <!-- INFORMAÇÕES ANALYTICS -->
             <div class="profile_analytics">
+
                 <h1 class="title_profile_edit">
                     Analytics
                     <span class="subtitle_profile_edit">
@@ -88,12 +90,7 @@
 
 
                 <div class="edit_profile_message">
-                    <h2>
-                        Não há dados...
-                    </h2>
-                    <p>
-                        movimente sua conta para acessar o analytics!
-                    </p>
+                    <canvas id="graficoPerfil" height="400" width="400"></canvas>
                 </div>
             </div>
             <!-- INFORMAÇÕES RECURSOS -->
@@ -120,8 +117,7 @@
 
                 <div class="publication">
                     <div class="info_publication">
-                        <img
-                            src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png">
                         <div>
                             <h2>{{nomeDono}}</h2>
                             <p class="date_publication">{{data}}</p>
