@@ -21,7 +21,8 @@
     --font-color: #404040;
     --font-color-low-emphasis: #444444b2;
     --color1: #F2508B;
-    --color2: #b96378;
+    /*--color2: #b96378;*/
+    --color2: #bb5a72;
     --color3: #F291B5;
     --color4: #F2CEDB;
     --color5: #b96b7f;
@@ -1638,7 +1639,7 @@ text_feed input:focus {
 }
 
 #vaga .info_vaga_top {
-    font-size: 18px;
+    font-size: 16.5px;
     margin-bottom: 1.75em;
 }
 
@@ -1680,6 +1681,7 @@ text_feed input:focus {
 }
 
 #vagas .opcao_vaga {
+    background: white;
     border: 1px solid #3333332c;
     padding: 30px;
     display: flex;
