@@ -734,6 +734,7 @@ router.get("/amigos", (req, res) => {
 
     }).catch((erro) => {
 
+        console.log(erro)
         req.flash('error_msg', 'ERRO! Não foi possível encontrar seus amigos')
         res.redirect("/")
 
