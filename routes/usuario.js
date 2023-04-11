@@ -762,7 +762,7 @@ router.post("/amigos/aceitar", (req, res) => {
 
     Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
 
-        usuario.amigos += `${req.body.id}`
+        usuario.amigos += `${req.body.id} `
         usuario.seguidores += 1
 
         var amigos = []

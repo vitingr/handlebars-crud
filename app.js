@@ -143,7 +143,7 @@ app.get("/", Logado, (req, res) => {
     }
 
     // Encontrar Postagens
-    Postagem.find().lean().sort({ data: 'desc' }).then((postagens) => {
+    Postagem.find().lean().sort({ data: 'asc' }).then((postagens) => {
 
 
 
