@@ -867,7 +867,7 @@ router.get("/buscarVagas", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    res.render("usuario/vagasEmprego")
+    res.render("usuario/vagasEmprego", {usuario: usuarioLogado})
 
 })
 
@@ -875,7 +875,15 @@ router.get("/vaga", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    res.render("usuario/vaga")
+    res.render("usuario/vaga", {usuario: usuarioLogado})
+
+})
+
+router.get("/criarPagina", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    res.render("usuario/criarPagina", {usuario: usuarioLogado})
 
 })
 

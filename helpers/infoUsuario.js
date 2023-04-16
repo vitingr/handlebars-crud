@@ -4,6 +4,7 @@ module.exports = {
 
         const usuarioLogado = {
             id: usuario._id,
+            tipoConta: usuario.tipoConta,
             nome: usuario.nome,
             sobrenome: usuario.sobrenome,
             nomeCompleto: usuario.nomeCompleto,

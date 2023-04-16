@@ -279,6 +279,7 @@ app.post("/cadastrar", (req, res) => {
 
                 const novoUsuario = new Usuario({
 
+                    tipo_conta: "usuario",
                     nome: req.body.nome,
                     sobrenome: req.body.sobrenome,
                     nomeCompleto: nomeCompleto,

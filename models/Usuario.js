@@ -7,6 +7,11 @@ const Usuario = new Schema({
         type: Number,
         default: 1
     },
+    tipoConta: {
+        type: String,
+        default: "usuario",
+        required: true
+    },
     nome: {
         type: String,
         required: true
