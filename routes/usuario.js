@@ -887,4 +887,12 @@ router.get("/criarPagina", (req, res) => {
 
 })
 
+router.get("/criarEmpresa", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    res.render("empresa/criarEmpresa", {usuario: usuarioLogado})
+
+})
+
 module.exports = router
