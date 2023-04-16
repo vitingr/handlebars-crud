@@ -90,6 +90,7 @@ body {
 }
 
 .flex {
+    max-width: 425px;
     align-items: center;
     display: flex;
 }
@@ -1799,6 +1800,11 @@ text_feed input:focus {
 
 #criarPagina p {
     text-align: center;
+}
+
+#permissao {
+    text-align: justify;
+    font-size: 13px !important;
 }
 
 /* -=-=-=- ANIMAÇÕES -=-=-=- */

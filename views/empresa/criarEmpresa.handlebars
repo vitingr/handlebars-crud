@@ -10,17 +10,17 @@
 
             <!-- NOME -->
 
-            <label for="nome" class="label_cadastro">Nome <span class="pink_font">*</span></label>
-            <input type="text" name="nome" id="nome" placeholder="Um Pequeno Resumo Sobre Você" class="input_cadastro" autocomplete="off" minlength="2" maxlength="100" aria-placeholder="Nome da sua empresa" required>
+            <label for="nome" class="label_cadastro">Nome: <span class="pink_font">*</span></label>
+            <input type="text" name="nome" id="nome" placeholder="Um Pequeno Resumo Sobre Você" class="input_cadastro" autocomplete="off" minlength="2" maxlength="30" aria-placeholder="Nome da sua empresa" required>
 
             <!-- WEBSITE -->
 
             <label for="website" class="label_cadastro">Website: <span class="pink_font">*</span></label>
-            <input type="text" name="website" id="website" class="input_cadastro" autocomplete="off" minlength="2" maxlength="100" placeholder="O site da sua empresa" required>
+            <input type="text" name="website" id="website" class="input_cadastro" autocomplete="off" minlength="2" maxlength="100" placeholder="O site da sua empresa">
 
             <!-- INDUSTRIA -->
 
-            <label for="industria" class="label_cadastro">Industria <span class="pink_font">*</span></label>
+            <label for="industria" class="label_cadastro">Industria: <span class="pink_font">*</span></label>
             <input type="text" name="industria" id="industria" placeholder="ex: Farmacêutica" class="input_cadastro" autocomplete="off" minlength="2" maxlength="60" required>
 
             <!-- TAMANHO DA EMPRESA -->
@@ -41,8 +41,8 @@
 
             <!-- TIPO DA ORGANIZAÇÃO -->
 
-            <label for="formacao" class="label_cadastro">Formação: <span class="pink_font">*</span></label>
-            <select name="formacao" id="formacao" class="input_cadastro" required>
+            <label for="tipo_empresa" class="label_cadastro">Tipo da Empresa: <span class="pink_font">*</span></label>
+            <select name="tipo_empresa" id="tipo_empresa" class="input_cadastro" required>
                 <option value=""></option>
                 <option value="Empresa Pública">Empresa Pública</option>
                 <option value="Empresa Privada">Empresa Privada</option>
@@ -53,8 +53,14 @@
                 <option value="Autonomo">Autonomo</option>
             </select>
 
-            <label for="descricao" class="label_cadastro">Descrição <span class="pink_font">*</span></label>
-            <input type="text" name="descricao" id="descricao" placeholder="uma Descrição da sua empresa" class="input_cadastro" autocomplete="off" minlength="2" maxlength="60" required>
+            <label for="descricao" class="label_cadastro">Descrição: <span class="pink_font">*</span></label>
+            <input type="text" name="descricao" id="descricao" placeholder="uma Descrição da sua empresa" class="input_cadastro" autocomplete="off" minlength="2" maxlength="200" required>
+
+            <div class="flex">
+                <input type="checkbox" name="permissao" id="permissao" value="Assinado" class="checkbox">
+                <label for="permissao" class="label_cadastro" id="permissao">Confirmo que sou um representante autorizado desta organização e tenho o direito de agir em seu nome na criação e gestão desta página. A organização e eu concordamos com os termos adicionais das Páginas.
+                <span class="span_cadastro"></span></label>
+            </div>
 
             <button type="submit" class="submit_cadastro">
                 Criar Empresa

@@ -489,7 +489,7 @@ router.post("/editInfo", (req, res) => {
                 }
 
                 if (req.body.telefone) {
-                    usuario.telefone = req.body.telefone 
+                    usuario.telefone = req.body.telefone
                 }
 
                 if (req.body.website) {
@@ -522,7 +522,7 @@ router.post("/editInfo", (req, res) => {
 
         })
     } else {
-        
+
         Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
 
             if (req.body.headline) {
@@ -534,7 +534,7 @@ router.post("/editInfo", (req, res) => {
             }
 
             if (req.body.telefone) {
-                usuario.telefone = req.body.telefone 
+                usuario.telefone = req.body.telefone
             }
 
             if (req.body.website) {
@@ -639,7 +639,7 @@ router.get("/encontrarAmigos", (req, res) => {
         }
     })
 
-    Usuario.find({ "_id": { $nin: [usuarioLogado.id, amigos] }}).lean().then((usuarios) => {
+    Usuario.find({ "_id": { $nin: [usuarioLogado.id, amigos] } }).lean().then((usuarios) => {
 
         res.render("usuario/amigos", { usuario: usuarioLogado, usuarios: usuarios })
 
@@ -701,9 +701,9 @@ router.get("/amigosPendentes", (req, res) => {
         }
     })
 
-    Usuario.find({"_id": {$in: amigosPendentes}}).lean().then((amigos_pendentes) => {
+    Usuario.find({ "_id": { $in: amigosPendentes } }).lean().then((amigos_pendentes) => {
 
-        res.render("usuario/amigosPendentes", {usuario: usuarioLogado, convites: amigos_pendentes})
+        res.render("usuario/amigosPendentes", { usuario: usuarioLogado, convites: amigos_pendentes })
 
     }).catch((erro) => {
 
@@ -728,9 +728,9 @@ router.get("/amigos", (req, res) => {
         }
     })
 
-    Usuario.find({_id: amigos}).lean().then((amigos) => {
+    Usuario.find({ _id: amigos }).lean().then((amigos) => {
 
-        res.render("usuario/meusAmigos", {usuario: usuarioLogado, amigos: amigos})
+        res.render("usuario/meusAmigos", { usuario: usuarioLogado, amigos: amigos })
 
     }).catch((erro) => {
 
@@ -867,7 +867,7 @@ router.get("/buscarVagas", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    res.render("usuario/vagasEmprego", {usuario: usuarioLogado})
+    res.render("usuario/vagasEmprego", { usuario: usuarioLogado })
 
 })
 
@@ -875,7 +875,7 @@ router.get("/vaga", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    res.render("usuario/vaga", {usuario: usuarioLogado})
+    res.render("usuario/vaga", { usuario: usuarioLogado })
 
 })
 
@@ -883,7 +883,7 @@ router.get("/criarPagina", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    res.render("usuario/criarPagina", {usuario: usuarioLogado})
+    res.render("usuario/criarPagina", { usuario: usuarioLogado })
 
 })
 
@@ -891,7 +891,68 @@ router.get("/criarEmpresa", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    res.render("empresa/criarEmpresa", {usuario: usuarioLogado})
+    res.render("empresa/criarEmpresa", { usuario: usuarioLogado })
+
+})
+
+router.post("/novaEmpresa", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+    const checkbox = req.body.permissao
+
+    var erros = []
+
+    if (checkbox === 'yes') {
+
+        if (!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null) {
+            erros.push({ texto: "Adicione um Nome" })
+        }
+
+        if (req.body.nome.length > 2) {
+            erros.push({ texto: "Nome muito Grande" })
+        }
+
+        if (req.body.sobrenome.length > 30) {
+            erros.push({ texto: "Sobreome muito Grande" })
+        }
+
+        if (!req.body.industria || typeof req.body.industria == undefined || req.body.industria == null) {
+            erros.push({ texto: "Adicione o ramo da sua Empresa" })
+        }
+
+        if (!req.body.tamanho_empresa || typeof req.body.tamanho_empresa == undefined || req.body.tamanho_empresa == null) {
+            erros.push({ texto: "Adicione o tamanho da sua Empresa" })
+        }
+
+        if (!req.body.tipo_empresa || typeof req.body.tipo_empresa == undefined || req.body.tipo_empresa == null) {
+            erros.push({ texto: "Adicione o tipo da sua Empresa" })
+        }
+
+        if (!req.body.descricao || typeof req.body.descricao == undefined || req.body.descricao == null) {
+            erros.push({ texto: "Adicione uma descrição da sua Empresa" })
+        }
+
+        if (erros.length > 0) {
+
+            console.log(erros)
+            res.render("usuario/criarPagina", { erros: erros })
+
+        } else {
+
+            res.redirect("/")
+
+        }
+
+    } else {
+
+        erros.push("Para criar sua Empresa, marque o Checkbox de Permissão.")
+        res.render("usuario/criarPagina", { erros: erros })
+
+    }
+
+
+
+
 
 })
 
