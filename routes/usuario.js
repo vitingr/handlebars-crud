@@ -899,21 +899,22 @@ router.post("/novaEmpresa", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
     const checkbox = req.body.permissao
+    console.log(`checkbox => ${checkbox}`)
 
     var erros = []
 
-    if (checkbox === 'yes') {
+    if (checkbox == 'Assinado') {
 
         if (!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null) {
             erros.push({ texto: "Adicione um Nome" })
         }
 
-        if (req.body.nome.length > 2) {
-            erros.push({ texto: "Nome muito Grande" })
+        if (req.body.nome.length < 2) {
+            erros.push({ texto: "Nome muito Pequeno" })
         }
 
-        if (req.body.sobrenome.length > 30) {
-            erros.push({ texto: "Sobreome muito Grande" })
+        if (req.body.nome.length > 30) {
+            erros.push({ texto: "Nome muito Grande" })
         }
 
         if (!req.body.industria || typeof req.body.industria == undefined || req.body.industria == null) {
@@ -939,7 +940,89 @@ router.post("/novaEmpresa", (req, res) => {
 
         } else {
 
-            res.redirect("/")
+            Empresa.findOne({ nome: req.body.nome }).lean().then((empresa) => {
+
+                if (empresa) {
+                    req.flash('error_msg', 'ERRO! Já existe uma empresa com esse nome cadastrada em nosso Sistema...')
+                    res.redirect("/criarPagina")
+                } else {
+
+                    if (req.body.website) {
+
+                        const novaEmpresa = new Empresa({
+
+                            dono: usuarioLogado.id,
+                            nome: req.body.nome,
+                            website: req.body.website,
+                            qtdFuncionarios: req.body.tamanho_empresa,
+                            industria: req.body.industria,
+                            tipo: req.body.tipo_empresa,
+                            descricao: req.body.descricao
+
+                        })
+
+                        novaEmpresa.save().then(() => {
+
+                            req.flash('success_msg', 'SUCESSO! A sua página empresarial foi criada.')
+                            res.redirect("/")
+
+                        }).catch((erro) => {
+
+                            req.flash('error_msg', 'ERRO! Não foi possível criar a página.')
+                            res.redirect("/criarPagina")
+
+                        })
+
+                    } else {
+
+                        const novaEmpresa = new Empresa({
+
+                            dono: usuarioLogado.id,
+                            nome: req.body.nome,
+                            website: "",
+                            qtdFuncionarios: req.body.tamanho_empresa,
+                            industria: req.body.industria,
+                            tipo: req.body.tipo_empresa,
+                            descricao: req.body.descricao
+
+                        })
+
+                        novaEmpresa.save().then(() => {
+
+                            Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
+
+                                usuario.tipoConta = "empresarial"
+                                usuario.save().then(() => {
+
+                                    req.flash('success_msg', 'SUCESSO! A sua página empresarial foi criada.')
+                                    res.redirect("/")
+
+                                }).catch((erro) => {
+
+                                    req.flash('error_msg', 'ERRO! Não foi possível salvar as alterações.')
+                                    res.redirect("/criarPagina")
+
+                                })
+
+                            }).catch((erro) => {
+
+                                req.flash('error_msg', 'ERRO! Não foi possível identificar sua conta.')
+                                res.redirect("/criarPagina")
+
+                            })
+
+                        }).catch((erro) => {
+
+                            req.flash('error_msg', 'ERRO! Não foi possível criar a página.')
+                            res.redirect("/criarPagina")
+
+                        })
+
+                    }
+
+                }
+
+            })
 
         }
 

@@ -2,12 +2,21 @@
 
     <div class="container_unico">
 
-        {{erros}}
+        {{#if erros}}
+            <div class="mensagem-erro">
+                <p>
+                    {{erros}}
+                </p>
+            </div>
+        {{else}}
+
+        {{/if}}
+
         {{>_msg}}
 
         <h1>Crie uma Página</h1>
         <h5>Conecte-se com clientes, empregados e a comunidade em geral. Para iniciar escolha um tipo de página.</h5>
-        
+
         <div class="opcoes_pagina">
 
             <a href="/usuario/criarEmpresa">

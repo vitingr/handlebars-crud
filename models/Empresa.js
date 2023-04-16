@@ -8,32 +8,30 @@ const Empresa = new Schema({
         ref: "usuarios",
         required: true
     },
-    endereco: {
+    nome: {
         type: String,
         required: true
     },
-    nomeEmpresa: {
-        type: String,
-        required: true
-    },
-    nomeFantasia: {
-        type: String,
-        requidred: true
-    },
-    cnpj: {
-        type: String,
-        required: true
+    website: {
+        type: String
     },
     qtdFuncionarios: {
-        type: Number
-    },
-    ramo: {
         type: String,
         required: true
+    },
+    industria: {
+        type: String,
+        required: true
+    },
+    tipo: {
+        type: String,
+        required: true
+    },
+    descricao: {
+        type: String
     },
     logo: {
-        type: String,
-        required: true
+        type: String
     }
 
 })
