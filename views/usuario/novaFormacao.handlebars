@@ -10,11 +10,20 @@
 
             <!-- INFORMAÇÕES FORMACAO -->
 
-            <label for="formacao" class="label_cadastro">Nova Formação</label>
-            <input type="text" name="formacao" id="formacao" placeholder="Nome da Unidade de Ensino" class="input_cadastro" autocomplete="off" minlength="2" maxlength="100" required>
+            <label for="formacao" class="label_cadastro">Unidade de Ensino</label>
+            <select name="formacao" id="formacao" class="input_cadastro" required>
+                <option value=""></option>
+                {{#each Instituicoes}}
+                    <option value="{{_id}}">{{nome}}</option>
+                {{else}}
+
+                {{/each}}
+            </select>
 
             <label for="area_formacao" class="label_cadastro">Curso</label>
-            <input type="text" name="area_formacao" id="area_formacao" placeholder="Matéria do Curso (Ensino Superior/Tecnico)" class="input_cadastro" autocomplete="off" minlength="2" maxlength="100">
+            <input type="text" name="area_formacao" id="area_formacao"
+                placeholder="Tipo de Ensino, ex: Ensino Médio,Tecnico" class="input_cadastro" autocomplete="off"
+                minlength="2" maxlength="100">
 
             <label for="tipo_formacao" class="label_cadastro">Tipo de Formação</label>
             <select name="tipo_formacao" id="tipo_formacao" class="input_cadastro" required>
@@ -28,7 +37,7 @@
             <button type="submit" class="submit_cadastro">
                 Confirmar Alterações
             </button>
-        </div> 
+        </div>
 
     </form>
 

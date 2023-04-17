@@ -4,6 +4,7 @@ const mongoose = require("mongoose")
 const { Form } = require("react-router-dom")
 require("../models/Postagem")
 require("../models/Empresa")
+require("../models/Instituicao")
 require("../models/Usuario")
 require("../models/Vaga")
 require("../models/Endereco")
@@ -14,6 +15,7 @@ require("../models/Formacao")
 
 const Postagem = mongoose.model("postagens")
 const Empresa = mongoose.model("empresas")
+const Instituicao = mongoose.model("instituicoes")
 const Usuario = mongoose.model("usuarios")
 const Vaga = mongoose.model("vagas")
 const Endereco = mongoose.model("enderecos")
@@ -572,7 +574,16 @@ router.get("/novaFormacao", (req, res) => {
 
         Formacao.find({ dono: usuarioLogado.id }).lean().then((formacao) => {
 
-            res.render("usuario/novaFormacao", { usuario: usuarioLogado, formacao: formacao })
+            Instituicao.find().lean().then((Instituicoes) => {
+
+                res.render("usuario/novaFormacao", { usuario: usuarioLogado, formacao: formacao, Instituicoes: Instituicoes })
+
+            }).catch((erro) => {
+
+                req.flash('error_msg', 'ERRO! Não foi possível as instituições de ensino.')
+                res.redirect("/usuario/editarPerfil")
+
+            })
 
         }).catch((erro) => {
 
@@ -963,8 +974,27 @@ router.post("/novaEmpresa", (req, res) => {
 
                         novaEmpresa.save().then(() => {
 
-                            req.flash('success_msg', 'SUCESSO! A sua página empresarial foi criada.')
-                            res.redirect("/")
+                            Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
+
+                                usuario.tipoConta = "empresarial"
+                                usuario.save().then(() => {
+
+                                    req.flash('success_msg', 'SUCESSO! A sua página empresarial foi criada.')
+                                    res.redirect("/criarPagina")
+
+                                }).catch((erro) => {
+
+                                    req.flash('error_msg', 'ERRO! Não foi possível salvar as alterações.')
+                                    res.redirect("/criarPagina")
+
+                                })
+
+                            }).catch((erro) => {
+
+                                req.flash('error_msg', 'ERRO! Não foi possível identificar sua conta.')
+                                res.redirect("/criarPagina")
+
+                            })
 
                         }).catch((erro) => {
 
@@ -995,7 +1025,7 @@ router.post("/novaEmpresa", (req, res) => {
                                 usuario.save().then(() => {
 
                                     req.flash('success_msg', 'SUCESSO! A sua página empresarial foi criada.')
-                                    res.redirect("/")
+                                    res.redirect("/criarPagina")
 
                                 }).catch((erro) => {
 
@@ -1033,9 +1063,166 @@ router.post("/novaEmpresa", (req, res) => {
 
     }
 
+})
 
+router.get("/criarInstituicao", (req, res) => {
 
+    const usuarioLogado = infoUsuario(req.user)
 
+    res.render("empresa/criarInstituicao", { usuario: usuarioLogado })
+
+})
+
+router.post("/novaInstituicao", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+    const checkbox = req.body.permissao
+    console.log(`checkbox => ${checkbox}`)
+
+    var erros = []
+
+    if (checkbox == 'Assinado') {
+
+        if (!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null) {
+            erros.push({ texto: "Adicione um Nome" })
+        }
+
+        if (req.body.nome.length < 2) {
+            erros.push({ texto: "Nome muito Pequeno" })
+        }
+
+        if (req.body.nome.length > 30) {
+            erros.push({ texto: "Nome muito Grande" })
+        }
+
+        if (!req.body.industria || typeof req.body.industria == undefined || req.body.industria == null) {
+            erros.push({ texto: "Adicione o ramo da sua Empresa" })
+        }
+
+        if (!req.body.tamanho_instituicao || typeof req.body.tamanho_instituicao == undefined || req.body.tamanho_instituicao == null) {
+            erros.push({ texto: "Adicione o tamanho da sua Empresa" })
+        }
+
+        if (!req.body.descricao || typeof req.body.descricao == undefined || req.body.descricao == null) {
+            erros.push({ texto: "Adicione uma descrição da sua Empresa" })
+        }
+
+        if (erros.length > 0) {
+
+            console.log(erros)
+            res.render("usuario/criarPagina", { erros: erros })
+
+        } else {
+
+            Instituicao.findOne({ nome: req.body.nome }).lean().then((instituicao) => {
+
+                if (instituicao) {
+                    req.flash('error_msg', 'ERRO! Já existe uma instituição com esse nome cadastrada em nosso Sistema...')
+                    res.redirect("/usuario/criarPagina")
+                } else {
+
+                    if (req.body.website) {
+
+                        const novaInstituicao = new Instituicao({
+
+                            dono: usuarioLogado.id,
+                            nome: req.body.nome,
+                            website: req.body.website,
+                            qtdFuncionarios: req.body.tamanho_instituicao,
+                            industria: req.body.industria,
+                            descricao: req.body.descricao
+
+                        })
+
+                        novaInstituicao.save().then(() => {
+
+                            Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
+
+                                usuario.tipoConta = "institucional"
+                                usuario.save().then(() => {
+
+                                    req.flash('success_msg', 'SUCESSO! A sua página institucional foi criada.')
+                                    res.redirect("/usuario/criarPagina")
+
+                                }).catch((erro) => {
+
+                                    req.flash('error_msg', 'ERRO! Não foi possível salvar as alterações.')
+                                    res.redirect("/usuario/criarPagina")
+
+                                })
+
+                            }).catch((erro) => {
+
+                                req.flash('error_msg', 'ERRO! Não foi possível identificar sua conta.')
+                                res.redirect("/usuario/criarPagina")
+
+                            })
+
+                        }).catch((erro) => {
+
+                            req.flash('error_msg', 'ERRO! Não foi possível criar a página.')
+                            res.redirect("/usuario/criarPagina")
+
+                        })
+
+                    } else {
+
+                        const novaInstituicao = new Instituicao({
+
+                            dono: usuarioLogado.id,
+                            nome: req.body.nome,
+                            website: "",
+                            qtdFuncionarios: req.body.tamanho_instituicao,
+                            industria: req.body.industria,
+                            descricao: req.body.descricao
+
+                        })
+
+                        novaInstituicao.save().then(() => {
+
+                            Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
+
+                                usuario.tipoConta = "institucional"
+                                usuario.save().then(() => {
+
+                                    req.flash('success_msg', 'SUCESSO! A sua página institucional foi criada.')
+                                    res.redirect("/usuario/criarPagina")
+
+                                }).catch((erro) => {
+
+                                    req.flash('error_msg', 'ERRO! Não foi possível salvar as alterações.')
+                                    res.redirect("/usuario/criarPagina")
+
+                                })
+
+                            }).catch((erro) => {
+
+                                req.flash('error_msg', 'ERRO! Não foi possível identificar sua conta.')
+                                res.redirect("/usuario/criarPagina")
+
+                            })
+
+                        }).catch((erro) => {
+
+                            req.flash('error_msg', 'ERRO! Não foi possível criar a página.')
+                            res.redirect("/usuario/criarPagina")
+
+                        })
+
+                    }
+
+                }
+
+            })
+
+        }
+
+    } else {
+
+        erros.push("Para criar sua Empresa, marque o Checkbox de Permissão.")
+        res.render("usuario/criarPagina", { erros: erros })
+
+    }
 
 })
 

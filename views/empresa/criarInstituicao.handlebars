@@ -1,10 +1,10 @@
-<div class="container_principal" id="empresa">
-    <h1 class="title_cadastro">Adicionar Empresa </h1>
+<div class="container_principal" id="cadastro">
+    <h1 class="title_cadastro">Adicionar Instituição </h1>
     <h2 class="subtitle_cadastro">
-        Para começarmos, adicione algumas informações básicas da sua empresa.
+        Para começarmos, adicione algumas informações básicas da sua instituição.
     </h2>
 
-    <form action="/usuario/novaEmpresa" method="POST">
+    <form action="/usuario/novaInstituicao" method="POST">
 
         <div class="inputs_container">
 
@@ -21,12 +21,12 @@
             <!-- INDUSTRIA -->
 
             <label for="industria" class="label_cadastro">Industria: <span class="pink_font">*</span></label>
-            <input type="text" name="industria" id="industria" placeholder="ex: Farmacêutica" class="input_cadastro" autocomplete="off" minlength="2" maxlength="60" required>
+            <input type="text" name="industria" id="industria" placeholder="ex: Cursos Tecnicos" class="input_cadastro" autocomplete="off" minlength="2" maxlength="60" required>
 
             <!-- TAMANHO DA EMPRESA -->
 
-            <label for="tamanho_empresa" class="label_cadastro">Tamanho da Empresa: <span class="pink_font">*</span></label>
-            <select name="tamanho_empresa" id="tamanho_empresa" class="input_cadastro" required>
+            <label for="tamanho_instituicao" class="label_cadastro">Tamanho da Instuição: <span class="pink_font">*</span></label>
+            <select name="tamanho_instituicao" id="tamanho_instituicao" class="input_cadastro" required>
                 <option value=""></option>
                 <option value="0 - 1 Colaboradores">0 - 1 Colaboradores</option>
                 <option value="2 - 10 Colaboradores">2 - 10 Colaboradores</option>
@@ -37,20 +37,6 @@
                 <option value="1.001 - 5.000 Colaboradores">1.001 - 5.000 Colaboradores</option>
                 <option value="5.001 - 10.000 Colaboradores">5.001 - 10.000 Colaboradores</option>
                 <option value="+ 10.000 Colaboradores">+ 10.000 Colaboradores</option>
-            </select>
-
-            <!-- TIPO DA ORGANIZAÇÃO -->
-
-            <label for="tipo_empresa" class="label_cadastro">Tipo da Empresa: <span class="pink_font">*</span></label>
-            <select name="tipo_empresa" id="tipo_empresa" class="input_cadastro" required>
-                <option value=""></option>
-                <option value="Empresa Pública">Empresa Pública</option>
-                <option value="Empresa Privada">Empresa Privada</option>
-                <option value="Empresa Governamental">Empresa Governamental</option>
-                <option value="Sem Fins Lucrativos">Sem Fins Lucrativos</option>
-                <option value="Empresa Pessoal">Empresa Pessoal</option>
-                <option value="Parceria">Parceria</option>
-                <option value="Autonomo">Autonomo</option>
             </select>
 
             <label for="descricao" class="label_cadastro">Descrição: <span class="pink_font">*</span></label>
