@@ -1,0 +1,63 @@
+<div class="container_principal" id="amigos">
+
+    <div class="container_unico">
+
+        {{>_msg}}
+
+        <h1>Siga Páginas para aumentar seu Network!</h1>
+        <h2>Ainda não funciona aqui kk</h2>
+        <div class="container_amigos">
+
+            <div class="acoes_amigos">
+                <a href="#">
+                    <div>
+                        <ion-icon name="rocket-outline"></ion-icon> Encontrar Páginas
+                    </div>
+                </a>
+                <a href="#">
+                    <div>
+                        <ion-icon name="people-outline"></ion-icon> Páginas que Sigo
+                    </div>
+                </a>
+            </div>
+
+            <div class="opcoes_amigos">
+
+                {{#each paginas}}
+
+                <div class="opcao_amigo">
+                    <div class="opcao_amigo_top"
+                        style="background: url(https://img.freepik.com/free-vector/gradient-spheres-background_52683-76367.jpg)">
+
+                    </div>
+                    <div class="opcao_amigo_bottom">
+                        <form action="/usuario/amigos/addAmigo" method="POST">
+                            <img src="https://static.licdn.com/sc/h/8j7g1qg4ygqnysr4hplvebpx7">
+                            <h2>
+                                {{nome}}
+                            </h2>
+                            <p class="opcao_amigo_formacao">
+                                0 Seguidores
+                            </p>
+
+                            <input type="hidden" name="id" id="id" value="{{_id}}">
+
+                            <button type="submit" class="adicionar_amigo">
+                                Seguir
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                {{else}}
+
+                <p>Nenhuma Página Encontrada</p>
+
+                {{/each}}
+
+
+            </div>
+        </div>
+
+    </div>
+</div>

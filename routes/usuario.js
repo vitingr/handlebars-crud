@@ -1249,6 +1249,12 @@ router.get("/networking", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
+    Empresa.find().lean().then((paginas) => {
+
+        res.render("usuario/paginas", {usuario: usuarioLogado, paginas: paginas})
+
+    })
+
 })
 
 module.exports = router

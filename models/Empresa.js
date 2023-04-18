@@ -32,6 +32,9 @@ const Empresa = new Schema({
     },
     logo: {
         type: String
+    },
+    seguidores: {
+        type: Number
     }
 
 })
