@@ -674,13 +674,14 @@ form.sign-up-form {
 }
 
 .main_info {
+    border: 1px solid #e7e7e7;
     background: white;
     padding: 20px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
-    width: 350px;
-    max-height: 275px;
+    width: 325px;
+    max-height: 400px;
 }
 
 .main_info .main_info_div {
@@ -688,7 +689,7 @@ form.sign-up-form {
     cursor: pointer;
     display: flex;
     align-items: center;
-    width: 210px;
+    width: 100%;
     height: 50px;
     background: white;
     transition-timing-function: ease-in-out;
@@ -706,24 +707,48 @@ form.sign-up-form {
     justify-content: center;
 }
 
+.main_info h3 {
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 1em;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.main_info_button {
+    cursor: pointer;
+    color: var(--font-color-low-emphasis);
+    font-size: 14.5px;
+    padding: 25px;
+    background: none;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+.main_info_button:hover {
+    color: var(--font-color);
+}
+
 .main_info .main_info_div div ion-icon {
-    color: var(--color2);
+    color: var(--font-color);
     margin-left: 0.25em;
     font-size: 22.5px;
 }
 
 .main_info .main_info_div div p {
-    margin-left: 0.5em;
-    font-size: 16.5px;
+    color: var(--font-color-low-emphasis);
+    margin-left: -0.5em;
+    font-size: 14.5px;
 }
 
 .feed {
+    border: 1px solid #e7e7e7;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 15px;
     padding: 25px;
-    width: 575px;
+    width: 595px;
     min-height: 700px;
     background: white;
 }
@@ -1013,6 +1038,7 @@ text_feed input:focus {
 }
 
 .index_events {
+    border: 1px solid #e7e7e7;
     border-radius: 15px;
     padding: 25px;
     background: white;
@@ -1022,6 +1048,7 @@ text_feed input:focus {
 }
 
 .index_companies {
+    border: 1px solid #e7e7e7;
     border-radius: 15px;
     padding: 25px;
     background: white;
@@ -1031,6 +1058,7 @@ text_feed input:focus {
 }
 
 .index_friends {
+    border: 1px solid #e7e7e7;
     border-radius: 15px;
     padding: 25px;
     background: white;
@@ -1544,7 +1572,7 @@ text_feed input:focus {
 
 #amigos .opcao_amigo {
     padding: 7.5px;
-    min-width: 235px;
+    width: 235px;
     min-height: 275px;
     border-radius: 10px;
     border: 1px solid #33333333;
@@ -1591,7 +1619,7 @@ text_feed input:focus {
 }
 
 #amigos .opcao_amigo_bottom .adicionar_amigo {
-    margin-top: 5px;
+    margin-top: 15px;
     cursor: pointer;
     padding: 7.5px;
     border-radius: 7.5px;
@@ -1638,6 +1666,77 @@ text_feed input:focus {
     background: white;
     transition-timing-function: ease-in-out;
     transition-duration: 0.3s;
+}
+
+/* -=-=-=- NOTIFICAÇÕES -=-=-=- */
+
+#notificacoes h1 {
+    font-size: 22.5px;
+    text-align: center;
+    padding: 25px;
+}
+
+#notificacoes .notificacao {
+    cursor: pointer;
+    border: 1px solid #e7e7e7;
+    border-radius: 10px;
+    display: flex;
+    padding: 15px;
+    width: 100%;
+    min-height: 100px;
+    margin-bottom: 50px;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.15s;
+}
+
+#notificacoes .notificacao:hover {
+    background: #f3f3f3;
+}
+
+#notificacoes .notificacao .notificacao_foto  {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+#notificacoes .notificacao .notificacao_foto img {
+    width: 75px;
+    height: 75px;
+}
+
+#notificacoes .notificacao .notificacao_texto {
+    margin-left: 1em;
+}
+
+#notificacoes .notificacao .notificacao_texto h2 {
+    font-size: 18px;
+}
+
+#notificacoes .notificacao .notificacao_texto p {
+    font-size: 15px;
+    color: var(--font-color-low-emphasis);
+}
+
+#notificacoes .notificacao .notificacao_actions {
+    justify-content: flex-end;
+    width: 100%;
+    display: flex;
+}
+
+#notificacoes .notificacao .notificacao_actions button {
+    cursor: pointer;
+    background: none;
+    padding: 25px;
+}
+
+#notificacoes .notificacao .notificacao_actions button ion-icon {
+    font-size: 25px;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.2s;
+}
+
+#notificacoes .notificacao .notificacao_actions button ion-icon:hover {
+    color: var(--color2);
 }
 
 /* -=-=-=- VAGAS -=-=-=- */
@@ -2238,6 +2337,42 @@ text_feed input:focus {
 
     #criarPagina h5 {
         font-size: 14px;
+    }
+
+    #notificacoes .container_unico {
+        padding: 10px !important;
+    }
+
+    #notificacoes .notificacao {
+        padding: 5px;
+        height: 100px;
+        overflow: hidden;
+    }
+
+    #notificacoes .notificacao .notificacao_foto img {
+        width: 50px;
+        height: 50px;
+    }
+
+    #notificacoes .notificacao .notificacao_texto h2 {
+        font-size: 14px;
+    }
+
+    #notificacoes .notificacao .notificacao_texto p {
+        font-size: 12px;
+    }
+
+    #notificacoes .notificacao .notificacao_actions {
+        width: auto;
+    }
+
+    #notificacoes .notificacao .notificacao_actions button{
+        padding: 15px;
+        width: auto;
+    }
+
+    #notificacoes .notificacao .notificacao_actions button ion-icon {
+        font-size: 20px;
     }
 }
 

@@ -15,9 +15,12 @@ const Notificacao = new Schema({
         type: String,
         required: true
     },
-    cor: {
+    foto: {
         type: String,
-        required: true
+        default: "https://static.licdn.com/sc/h/f11v1qjrri2wv7j3p61nisjwy"
+    },
+    cor: {
+        type: String
     },
     link: {
         type: String

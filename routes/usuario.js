@@ -420,7 +420,7 @@ router.get("/notificacoes", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    Notificacao.find().lean().then((notificacoes) => {
+    Notificacao.find({dono: usuarioLogado.id}).lean().then((notificacoes) => {
 
         res.render("usuario/notificacoes", { usuario: usuarioLogado, notificacoes: notificacoes })
 
@@ -674,15 +674,34 @@ router.post("/amigos/addAmigo", (req, res) => {
         if (amigos_pendentes.includes(usuarioLogado.id) || amigos.includes(usuarioLogado.id)) {
 
             req.flash('error_msg', 'ERRO! Não é possível adicionar o mesmo amigo duas vezes...')
-            res.redirect("/usuario/amigos")
+            res.redirect("/usuario/encontrarAmigos")
 
         } else {
 
             usuario.amigos_pendentes = usuario.amigos_pendentes + `${usuarioLogado.id} `
             usuario.save().then(() => {
 
-                req.flash('success_msg', 'SUCESSO! O convite de Amizade foi enviado...')
-                res.redirect("/usuario/amigos")
+                const novaNotificacao = new Notificacao({
+
+                    dono: usuario._id,
+                    texto: `${usuario.nome} Enviou um Convite de Amizade para Você! Para aceitar ou rejeitar esse convite, clique nesse container de notificação.`,
+                    tipo: 'Convite de Amizade',
+                    foto: 'https://cdn-icons-png.flaticon.com/512/3135/3135789.png',
+                    link: '/usuario/amigosPendentes'
+
+                })
+
+                novaNotificacao.save().then(() => {
+
+                    req.flash('success_msg', 'SUCESSO! O convite de Amizade foi enviado...')
+                    res.redirect("/usuario/encontrarAmigos")
+
+                }).catch((erro) => {
+
+                    req.flash('error_msg', 'ERRO! Não foi possível enviar o Convite.')
+                    res.redirect("/usuario/amigos")
+
+                })
 
             })
 
@@ -804,26 +823,26 @@ router.post("/amigos/aceitar", (req, res) => {
             amigo.save().then(() => {
 
                 req.flash('success_msg', 'SUCESSO! Convite Aceito.')
-                res.redirect("/usuario/amigos")
+                res.redirect("/usuario/amigosPendentes")
 
             }).catch((erro) => {
 
                 req.flash('error_msg', 'ERRO! Não foi possível aceitar o convite...')
-                res.redirect("/usuario/amigos")
+                res.redirect("/usuario/amigosPendentes")
 
             })
 
         }).catch((erro) => {
 
             req.flash('error_msg', 'ERRO! Não foi possível sincronizar o convite...')
-            res.redirect("/usuario/amigos")
+            res.redirect("/usuario/amigosPendentes")
 
         })
 
     }).catch((erro) => {
 
         req.flash('error_msg', 'ERRO! Não foi possível encontrar esse convite em sua conta...')
-        res.redirect("/usuario/amigos")
+        res.redirect("/usuario/amigosPendentes")
 
     })
 
@@ -955,7 +974,7 @@ router.post("/novaEmpresa", (req, res) => {
 
                 if (empresa) {
                     req.flash('error_msg', 'ERRO! Já existe uma empresa com esse nome cadastrada em nosso Sistema...')
-                    res.redirect("/criarPagina")
+                    res.redirect("/usuario/criarPagina")
                 } else {
 
                     if (req.body.website) {
@@ -980,26 +999,26 @@ router.post("/novaEmpresa", (req, res) => {
                                 usuario.save().then(() => {
 
                                     req.flash('success_msg', 'SUCESSO! A sua página empresarial foi criada.')
-                                    res.redirect("/criarPagina")
+                                    res.redirect("/usuario/criarPagina")
 
                                 }).catch((erro) => {
 
                                     req.flash('error_msg', 'ERRO! Não foi possível salvar as alterações.')
-                                    res.redirect("/criarPagina")
+                                    res.redirect("/usuario/criarPagina")
 
                                 })
 
                             }).catch((erro) => {
 
                                 req.flash('error_msg', 'ERRO! Não foi possível identificar sua conta.')
-                                res.redirect("/criarPagina")
+                                res.redirect("/usuario/criarPagina")
 
                             })
 
                         }).catch((erro) => {
 
                             req.flash('error_msg', 'ERRO! Não foi possível criar a página.')
-                            res.redirect("/criarPagina")
+                            res.redirect("/usuario/criarPagina")
 
                         })
 
@@ -1025,26 +1044,26 @@ router.post("/novaEmpresa", (req, res) => {
                                 usuario.save().then(() => {
 
                                     req.flash('success_msg', 'SUCESSO! A sua página empresarial foi criada.')
-                                    res.redirect("/criarPagina")
+                                    res.redirect("/usuario/criarPagina")
 
                                 }).catch((erro) => {
 
                                     req.flash('error_msg', 'ERRO! Não foi possível salvar as alterações.')
-                                    res.redirect("/criarPagina")
+                                    res.redirect("/usuario/criarPagina")
 
                                 })
 
                             }).catch((erro) => {
 
                                 req.flash('error_msg', 'ERRO! Não foi possível identificar sua conta.')
-                                res.redirect("/criarPagina")
+                                res.redirect("/usuario/criarPagina")
 
                             })
 
                         }).catch((erro) => {
 
                             req.flash('error_msg', 'ERRO! Não foi possível criar a página.')
-                            res.redirect("/criarPagina")
+                            res.redirect("/usuario/criarPagina")
 
                         })
 
@@ -1223,6 +1242,12 @@ router.post("/novaInstituicao", (req, res) => {
         res.render("usuario/criarPagina", { erros: erros })
 
     }
+
+})
+
+router.get("/networking", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
 
 })
 
