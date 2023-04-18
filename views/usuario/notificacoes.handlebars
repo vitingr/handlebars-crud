@@ -6,24 +6,26 @@
 
         {{#each notificacoes}}
 
-        <div class="notificacao">
-            <div class="notificacao_foto">
-                <img src="{{foto}}" alt="Logo Notificação">
+        <a href="{{link}}">
+            <div class="notificacao">
+                <div class="notificacao_foto">
+                    <img src="{{foto}}" alt="Logo Notificação">
+                </div>
+                <div class="notificacao_texto">
+                    <h2 class="tipo_notificacao">
+                        {{tipo}}
+                    </h2>
+                    <p>
+                        {{texto}}
+                    </p>
+                </div>
+                <div class="notificacao_actions">
+                    <button>
+                        <ion-icon name="trash-outline"></ion-icon>
+                    </button>
+                </div>
             </div>
-            <div class="notificacao_texto">
-                <h2 class="tipo_notificacao">
-                    {{tipo}}
-                </h2>
-                <p>
-                    {{texto}}
-                </p>
-            </div>
-            <div class="notificacao_actions">
-                <button>
-                    <ion-icon name="trash-outline"></ion-icon>
-                </button>
-            </div>
-        </div>
+        </a>
 
         {{else}}
 
