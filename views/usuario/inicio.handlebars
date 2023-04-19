@@ -360,6 +360,8 @@
 
     <!-- ADICIONAR AMIGOS  -->
 
+    {{#if usuarios}}
+
     <div class="index_friends">
         <h1 class="title_index_events">
             <ion-icon name="git-network-outline"></ion-icon>
@@ -370,8 +372,7 @@
 
         <div class="friends_option_index">
             <div class="photo_friends_index">
-                <img
-                    src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png">
             </div>
 
             <div class="text_friends_index">
@@ -380,9 +381,9 @@
                 </p>
                 <p class="desc_friends_index">
                     {{#if cargo_atual}}
-                        {{cargo_atual}}
+                    {{cargo_atual}}
                     {{else}}
-                        Profissional Qualificado
+                    Profissional Qualificado
                     {{/if}}
                 </p>
                 <p class="desc_friends_index">
@@ -398,6 +399,27 @@
 
         {{/each}}
 
+        <div class="center">
+            <a href="/usuario/amigos">
+                <button class="cta">
+                    <span>Ver mais</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                        <path d="M1,5 L11,5"></path>
+                        <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                </button>
+            </a>
+        </div>
+
+    </div>
+
+    {{else}}
+
+    <div class="index_friends">
+        <h1 class="title_index_events">
+            <ion-icon name="git-network-outline"></ion-icon>
+            Conecte-se
+        </h1>
 
         <div class="friends_option_index">
             <div class="photo_friends_index">
@@ -519,9 +541,7 @@
         </div>
 
     </div>
-
-</div>
-</div>
+    {{/if}}
 
 </div>
 
