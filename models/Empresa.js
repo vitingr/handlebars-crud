@@ -34,7 +34,8 @@ const Empresa = new Schema({
         type: String
     },
     seguidores: {
-        type: Number
+        type: Number,
+        default: 0
     }
 
 })

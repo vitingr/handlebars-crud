@@ -1245,16 +1245,67 @@ router.post("/novaInstituicao", (req, res) => {
 
 })
 
-router.get("/networking", (req, res) => {
+router.get("/encontrarPaginas", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    Empresa.find().lean().then((paginas) => {
+    if (usuarioLogado.paginas) {
+
+        console.log(`tem paginas`)
+        console.log(`paginas ${paginas}`)
+
+        const empresas = usuarioLogado.paginas
+        const empresas_seguidas = empresas.split(" ")
+
+        Empresa.find({ "dono": {$ne: usuarioLogado.id }, "_id": {$nin: [empresas_seguidas]}}).lean().then((empresas) => {
+
+            Instituicao.find({ "dono": {$ne: usuarioLogado.id }, "_id": {$nin: [empresas_seguidas]}}).lean().then((instituicoes) => {
+
+                let paginas = empresas.concat(instituicoes)
+
+                res.render("usuario/encontrarPaginas", {usuario: usuarioLogado, empresas: empresas, instituicoes: instituicoes})
+
+            })
+    
+        })
+         
+    } else {
+
+        Empresa.find({ "dono": {$ne: usuarioLogado.id }}).lean().then((empresas) => {
+
+            console.log(`nao tem paginas`)
+            console.log(`paginas ${empresas}`)
+            console.log(empresas)
+
+            Instituicao.find({ "dono": {$ne: usuarioLogado.id }}).lean().then((instituicoes) => {
+
+                let paginas = empresas.concat(instituicoes)
+                console.log(paginas)
+
+                res.render("usuario/encontrarPaginas", {usuario: usuarioLogado, empresas: empresas, instituicoes: instituicoes })
+
+            })
+    
+        })
+        
+    }
+
+})
+
+router.get("/paginas", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    const empresas = usuarioLogado.paginas
+    const empresas_seguidas = empresas.split(" ")
+
+    Empresa.find({ "_id": empresas_seguidas}).lean().then((paginas) => {
 
         res.render("usuario/paginas", {usuario: usuarioLogado, paginas: paginas})
 
     })
 
 })
+
 
 module.exports = router

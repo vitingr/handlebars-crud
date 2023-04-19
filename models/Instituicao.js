@@ -30,7 +30,8 @@ const Instituicao = new Schema({
         type: String
     },
     seguidores: {
-        type: Number
+        type: Number,
+        default: 0
     }
 
 })

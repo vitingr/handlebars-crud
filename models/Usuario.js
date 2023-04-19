@@ -62,6 +62,9 @@ const Usuario = new Schema({
     amigos_pendentes: {
         type: String
     },
+    paginas: {
+        type: String
+    },
     foto: {
         type: String
     },

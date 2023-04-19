@@ -22,6 +22,7 @@ module.exports = {
             amigos_pendentes: usuario.amigos_pendentes,
             foto: usuario.foto,
             seguidores: usuario.seguidores,
+            paginas: usuario.paginas,
             resumo: usuario.resumo,
             cargo_atual: usuario.cargo_atual,
             telefone: usuario.telefone,

@@ -325,6 +325,7 @@ app.post("/cadastrar", (req, res) => {
                     amigos_pendentes: "",
                     foto: "",
                     seguidores: 0,
+                    paginas: "",
                     resumo: "",
                     cargo_atual: "",
                     telefone: "",
