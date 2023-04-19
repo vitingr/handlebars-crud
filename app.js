@@ -145,9 +145,38 @@ app.get("/", Logado, (req, res) => {
     // Encontrar Postagens
     Postagem.find().lean().sort({ data: 'asc' }).then((postagens) => {
 
+        Usuario.find({_id: {$ne: usuarioLogado.id}}).lean().then((usuarios) => {
+            
+            if (usuarios.length > 5) {
+                let users = []
 
+                for (contador = 0; contador < 5; contador++) {
+                    let user = Math.floor(Math.random() * usuarios.length)
+    
+                    if (!users.includes(usuarios[user])) {
+                        users.push(usuarios[user]);
+                      } else {
+                        i--;
+                      }
+                }
+                
+                console.log(users)
+    
+                res.render("usuario/inicio", { usuario: usuarioLogado, postagens: postagens, usuarios: users })
 
-        res.render("usuario/inicio", { usuario: usuarioLogado, postagens: postagens })
+            } else {
+
+                console.log("Não tem pessoal")
+                res.render("usuario/inicio", { usuario: usuarioLogado, postagens: postagens })
+
+            }
+
+        }).catch((erro) => {   
+
+            req.flash('error_msg', 'ERRO! Não foi possível encontrar outras contas...')
+            res.redirect("/")
+    
+        })
 
     }).catch((erro) => {   
 
