@@ -2,6 +2,11 @@ const express = require("express")
 const router = express.Router()
 const mongoose = require("mongoose")
 const { Form } = require("react-router-dom")
+const multer = require("multer")
+const upload = require("../config/multer")
+const fs = require("fs")
+
+// Require Models 
 require("../models/Postagem")
 require("../models/Empresa")
 require("../models/Instituicao")
@@ -12,7 +17,6 @@ require("../models/Notificacao")
 require("../models/Formacao")
 
 // Import Models
-
 const Postagem = mongoose.model("postagens")
 const Empresa = mongoose.model("empresas")
 const Instituicao = mongoose.model("instituicoes")
@@ -25,6 +29,7 @@ const Formacao = mongoose.model("formacoes")
 // Helpers
 
 const { infoUsuario } = require("../helpers/infoUsuario")
+const { NOTIMP } = require("dns")
 
 // Funções
 
@@ -420,7 +425,7 @@ router.get("/notificacoes", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    Notificacao.find({dono: usuarioLogado.id}).lean().then((notificacoes) => {
+    Notificacao.find({ dono: usuarioLogado.id }).lean().then((notificacoes) => {
 
         res.render("usuario/notificacoes", { usuario: usuarioLogado, notificacoes: notificacoes })
 
@@ -469,34 +474,108 @@ router.get("/infoPerfil", (req, res) => {
 
 })
 
-router.post("/editInfo", (req, res) => {
+router.post("/editInfo", upload.single('file'), (req, res) => {
+
+    const { nome, sobrenome, telefone, tipo_telefone, website, headline, cargo_atual, formacaoUsuario, area, ultima_empresa } = req.body
+
+    console.log(req.file)
 
     const usuarioLogado = infoUsuario(req.user)
 
-    if (req.body.formacao) {
-        Formacao.findOne({ _id: req.body.formacao }).lean().then((formacao) => {
+    // COM FOTO
+    if (req.file === null || req.file === undefined || req.file === "") {
+
+        if (formacaoUsuario) {
+
+            Formacao.findOne({ _id: formacaoUsuario }).lean().then((formacao) => {
+
+                Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
+
+                    if (nome) {
+                        usuario.nome = nome
+                    }
+
+                    if (sobrenome) {
+                        usuario.sobrenome = sobrenome
+                    }
+
+                    if (headline) {
+                        usuario.resumo = headline
+                    }
+
+                    if (cargo_atual) {
+                        usuario.cargo_atual = cargo_atual
+                    }
+
+                    if (_id) {
+                        usuario.formacao = formacao._id
+                    }
+
+                    if (telefone) {
+                        usuario.telefone = telefone
+                    }
+
+                    if (website) {
+                        usuario.website = website
+                    }
+
+                    usuario.nomeCompleto = `${nome} ${sobrenome}`
+
+                    usuario.save().then(() => {
+
+                        req.flash('success_msg', 'Perfil Atualizado com Sucesso!')
+                        res.redirect("/usuario/editarPerfil")
+
+                    }).catch((erro) => {
+
+                        req.flash('error_msg', 'ERRO! Não foi possível salvar suas alterações.')
+                        res.redirect("/")
+
+                    })
+
+                }).catch((erro) => {
+
+                    req.flash('error_msg', 'ERRO! Não foi possível localizar seu perfil.')
+                    res.redirect("/usuario/editarPerfil")
+
+                })
+
+            }).catch((erro) => {
+
+                req.flash('error_msg', 'ERRO! Não foi possível localizar suas informações')
+                res.redirect("/usuario/editarPerfil")
+
+            })
+
+        } else {
 
             Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
 
-                if (req.body.headline) {
-                    usuario.resumo = req.body.headline
+                if (nome) {
+                    usuario.nome = nome
                 }
 
-                if (req.body.cargo_atual) {
-                    usuario.cargo_atual = req.body.cargo_atual
+                if (sobrenome) {
+                    usuario.sobrenome = sobrenome
                 }
 
-                if (formacao._id) {
-                    usuario.formacao = formacao._id
+                if (headline) {
+                    usuario.resumo = headline
                 }
 
-                if (req.body.telefone) {
-                    usuario.telefone = req.body.telefone
+                if (cargo_atual) {
+                    usuario.cargo_atual = cargo_atual
                 }
 
-                if (req.body.website) {
-                    usuario.website = req.body.website
+                if (telefone) {
+                    usuario.telefone = telefone
                 }
+
+                if (website) {
+                    usuario.website = website
+                }
+
+                usuario.nomeCompleto = `${nome} ${sobrenome}`
 
                 usuario.save().then(() => {
 
@@ -510,6 +589,7 @@ router.post("/editInfo", (req, res) => {
 
                 })
 
+
             }).catch((erro) => {
 
                 req.flash('error_msg', 'ERRO! Não foi possível localizar seu perfil.')
@@ -517,50 +597,134 @@ router.post("/editInfo", (req, res) => {
 
             })
 
-        }).catch((erro) => {
+        }
+    }
 
-            req.flash('error_msg', 'ERRO! Não foi possível localizar suas informações')
-            res.redirect("/usuario/editarPerfil")
+    // SEM FOTO
+    else {
 
-        })
-    } else {
+        if (formacaoUsuario) {
 
-        Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
+            Formacao.findOne({ _id: formacaoUsuario }).lean().then((formacao) => {
 
-            if (req.body.headline) {
-                usuario.resumo = req.body.headline
-            }
+                Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
 
-            if (req.body.cargo_atual) {
-                usuario.cargo_atual = req.body.cargo_atual
-            }
+                    if (nome) {
+                        usuario.nome = nome
+                    }
 
-            if (req.body.telefone) {
-                usuario.telefone = req.body.telefone
-            }
+                    if (sobrenome) {
+                        usuario.sobrenome = sobrenome
+                    }
 
-            if (req.body.website) {
-                usuario.website = req.body.website
-            }
+                    if (headline) {
+                        usuario.resumo = headline
+                    }
 
-            usuario.save().then(() => {
+                    if (cargo_atual) {
+                        usuario.cargo_atual = cargo_atual
+                    }
 
-                req.flash('success_msg', 'Perfil Atualizado com Sucesso!')
-                res.redirect("/usuario/editarPerfil")
+                    if (_id) {
+                        usuario.formacao = formacao._id
+                    }
+
+                    if (telefone) {
+                        usuario.telefone = telefone
+                    }
+
+                    if (website) {
+                        usuario.website = website
+                    }
+
+                    usuario.nomeCompleto = `${nome} ${sobrenome}`
+
+                    const foto = req.file.path
+                    const newFoto = foto.replace('public', '')
+                    usuario.foto = newFoto
+
+                    usuario.save().then(() => {
+
+                        req.flash('success_msg', 'Perfil Atualizado com Sucesso!')
+                        res.redirect("/usuario/editarPerfil")
+
+                    }).catch((erro) => {
+
+                        req.flash('error_msg', 'ERRO! Não foi possível salvar suas alterações.')
+                        res.redirect("/")
+
+                    })
+
+                }).catch((erro) => {
+
+                    req.flash('error_msg', 'ERRO! Não foi possível localizar seu perfil.')
+                    res.redirect("/usuario/editarPerfil")
+
+                })
 
             }).catch((erro) => {
 
-                req.flash('error_msg', 'ERRO! Não foi possível salvar suas alterações.')
-                res.redirect("/")
+                req.flash('error_msg', 'ERRO! Não foi possível localizar suas informações')
+                res.redirect("/usuario/editarPerfil")
 
             })
 
-        }).catch((erro) => {
+        } else {
 
-            req.flash('error_msg', 'ERRO! Não foi possível localizar seu perfil.')
-            res.redirect("/usuario/editarPerfil")
+            Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
 
-        })
+                if (nome) {
+                    usuario.nome = nome
+                }
+
+                if (sobrenome) {
+                    usuario.sobrenome = sobrenome
+                }
+
+                if (headline) {
+                    usuario.resumo = headline
+                }
+
+                if (cargo_atual) {
+                    usuario.cargo_atual = cargo_atual
+                }
+
+                if (telefone) {
+                    usuario.telefone = telefone
+                }
+
+                if (website) {
+                    usuario.website = website
+                }
+
+                usuario.nomeCompleto = `${nome} ${sobrenome}`
+
+                const foto = req.file.path
+                const newFoto = foto.replace('public', '')
+                usuario.foto = newFoto
+
+                usuario.save().then(() => {
+
+                    req.flash('success_msg', 'Perfil Atualizado com Sucesso!')
+                    res.redirect("/usuario/editarPerfil")
+
+                }).catch((erro) => {
+
+                    req.flash('error_msg', 'ERRO! Não foi possível salvar suas alterações.')
+                    res.redirect("/")
+
+                })
+
+
+            }).catch((erro) => {
+
+                req.flash('error_msg', 'ERRO! Não foi possível localizar seu perfil.')
+                res.redirect("/usuario/editarPerfil")
+
+            })
+
+        }
+
     }
 
 })
@@ -655,6 +819,7 @@ router.get("/encontrarAmigos", (req, res) => {
         res.render("usuario/amigos", { usuario: usuarioLogado, usuarios: usuarios })
 
     }).catch((erro) => {
+
         req.flash('error_msg', 'ERRO! Não foi possível encontrar pessoas!')
         res.redirect("/")
 
@@ -686,7 +851,7 @@ router.post("/amigos/addAmigo", (req, res) => {
                     dono: usuario._id,
                     texto: `${usuario.nome} Enviou um Convite de Amizade para Você! Para aceitar ou rejeitar esse convite, clique nesse container de notificação.`,
                     tipo: 'Convite de Amizade',
-                    foto: 'https://cdn-icons-png.flaticon.com/512/3135/3135789.png',
+                    file: 'https://cdn-icons-png.flaticon.com/512/3135/3135789.png',
                     link: '/usuario/amigosPendentes'
 
                 })
@@ -764,7 +929,6 @@ router.get("/amigos", (req, res) => {
 
     }).catch((erro) => {
 
-        console.log(erro)
         req.flash('error_msg', 'ERRO! Não foi possível encontrar seus amigos')
         res.redirect("/")
 
@@ -929,7 +1093,6 @@ router.post("/novaEmpresa", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
     const checkbox = req.body.permissao
-    console.log(`checkbox => ${checkbox}`)
 
     var erros = []
 
@@ -965,7 +1128,6 @@ router.post("/novaEmpresa", (req, res) => {
 
         if (erros.length > 0) {
 
-            console.log(erros)
             res.render("usuario/criarPagina", { erros: erros })
 
         } else {
@@ -1096,7 +1258,6 @@ router.post("/novaInstituicao", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
     const checkbox = req.body.permissao
-    console.log(`checkbox => ${checkbox}`)
 
     var erros = []
 
@@ -1128,7 +1289,6 @@ router.post("/novaInstituicao", (req, res) => {
 
         if (erros.length > 0) {
 
-            console.log(erros)
             res.render("usuario/criarPagina", { erros: erros })
 
         } else {
@@ -1251,44 +1411,140 @@ router.get("/encontrarPaginas", (req, res) => {
 
     if (usuarioLogado.paginas) {
 
-        console.log(`tem paginas`)
-        console.log(`paginas ${paginas}`)
-
         const empresas = usuarioLogado.paginas
         const empresas_seguidas = empresas.split(" ")
 
-        Empresa.find({ "dono": {$ne: usuarioLogado.id }, "_id": {$nin: [empresas_seguidas]}}).lean().then((empresas) => {
+        Empresa.find({ "dono": { $ne: usuarioLogado.id }, "_id": { $nin: [empresas_seguidas] } }).lean().then((empresas) => {
 
-            Instituicao.find({ "dono": {$ne: usuarioLogado.id }, "_id": {$nin: [empresas_seguidas]}}).lean().then((instituicoes) => {
+            Instituicao.find({ "dono": { $ne: usuarioLogado.id }, "_id": { $nin: [empresas_seguidas] } }).lean().then((instituicoes) => {
 
-                let paginas = empresas.concat(instituicoes)
+                res.render("usuario/encontrarPaginas", { usuario: usuarioLogado, empresas: empresas, instituicoes: instituicoes })
 
-                res.render("usuario/encontrarPaginas", {usuario: usuarioLogado, empresas: empresas, instituicoes: instituicoes})
+            }).catch((erro) => {
+
+                req.flash('error_msg', 'ERRO! Não foi possível encontrar instituições')
+                res.redirect('/')
 
             })
-    
+
+        }).catch((erro) => {
+
+            req.flash('error_msg', 'ERRO! Não foi possível encontrar empresas')
+            res.redirect('/')
+
         })
-         
+
     } else {
 
-        Empresa.find({ "dono": {$ne: usuarioLogado.id }}).lean().then((empresas) => {
+        Empresa.find({ "dono": { $ne: usuarioLogado.id } }).lean().then((empresas) => {
 
-            console.log(`nao tem paginas`)
-            console.log(`paginas ${empresas}`)
-            console.log(empresas)
+            Instituicao.find({ "dono": { $ne: usuarioLogado.id } }).lean().then((instituicoes) => {
 
-            Instituicao.find({ "dono": {$ne: usuarioLogado.id }}).lean().then((instituicoes) => {
+                res.render("usuario/encontrarPaginas", { usuario: usuarioLogado, empresas: empresas, instituicoes: instituicoes })
 
-                let paginas = empresas.concat(instituicoes)
-                console.log(paginas)
+            }).catch((erro) => {
 
-                res.render("usuario/encontrarPaginas", {usuario: usuarioLogado, empresas: empresas, instituicoes: instituicoes })
+                req.flash('error_msg', 'ERRO! Não foi possível encontrar instituições')
+                res.redirect('/')
 
             })
-    
+
+        }).catch((erro) => {
+
+            req.flash('error_msg', 'ERRO! Não foi possível encontrar empresas')
+            res.redirect('/')
+
         })
-        
+
     }
+
+})
+
+router.post("/encontrarPaginas/seguirPagina", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
+
+        if (req.body.tipo === 'empresa') {
+
+            Empresa.findOne({ _id: req.body.id }).then((pagina) => {
+
+                pagina.seguidores += 1
+                usuario.paginas += `${req.body.id} `
+
+                pagina.save().then(() => {
+
+                    usuario.save().then(() => {
+
+                        req.flash('success_msg', 'Você começou a seguir a página!')
+                        res.redirect("/usuario/encontrarPaginas")
+
+                    }).catch((erro) => {
+
+                        req.flash('error_msg', 'ERRO! Não foi possível seguir a página')
+                        res.redirect('/usuario/encontrarPaginas')
+
+                    })
+
+                }).catch((erro) => {
+
+                    req.flash('error_msg', 'ERRO! Não foi possível seguir a página')
+                    res.redirect('/usuario/encontrarPaginas')
+
+                })
+
+            }).catch((erro) => {
+
+                req.flash('error_msg', 'ERRO! Não foi possível encontrar a empresa')
+                res.redirect('/usuario/encontrarPaginas')
+
+            })
+
+        }
+
+        if (req.body.tipo === 'instituicao') {
+
+            Instituicao.findOne({ _id: req.body.id }).then((pagina) => {
+
+                pagina.seguidores += 1
+                usuario.paginas += `${req.body.id} `
+
+                pagina.save().then(() => {
+
+                    usuario.save().then(() => {
+
+                        req.flash('success_msg', 'Você começou a seguir a página!')
+                        res.redirect("/usuario/encontrarPaginas")
+
+                    }).catch((erro) => {
+
+                        req.flash('error_msg', 'ERRO! Não foi possível seguir a página')
+                        res.redirect('/usuario/encontrarPaginas')
+
+                    })
+
+                }).catch((erro) => {
+
+                    req.flash('error_msg', 'ERRO! Não foi possível seguir a página')
+                    res.redirect('/usuario/encontrarPaginas')
+
+                })
+
+            }).catch((erro) => {
+
+                req.flash('error_msg', 'ERRO! Não foi possível encontrar a instituição')
+                res.redirect('/usuario/encontrarPaginas')
+
+            })
+        }
+
+    }).catch((erro) => {
+
+        req.flash('error_msg', 'ERRO! Não foi possível sincronizar sua conta!')
+        res.redirect("/usuario/encontrarPaginas")
+
+    })
 
 })
 
@@ -1299,13 +1555,12 @@ router.get("/paginas", (req, res) => {
     const empresas = usuarioLogado.paginas
     const empresas_seguidas = empresas.split(" ")
 
-    Empresa.find({ "_id": empresas_seguidas}).lean().then((paginas) => {
+    Empresa.find({ "_id": empresas_seguidas }).lean().then((paginas) => {
 
-        res.render("usuario/paginas", {usuario: usuarioLogado, paginas: paginas})
+        res.render("usuario/paginas", { usuario: usuarioLogado, paginas: paginas })
 
     })
 
 })
-
 
 module.exports = router

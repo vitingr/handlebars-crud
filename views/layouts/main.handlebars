@@ -5875,5 +5875,24 @@
         return value
     }
 </script>
+<script>
+    let info_basica = document.querySelector("#info_basica")
+    let info_profissional = document.querySelector("#info_profissional")
+
+    let form_basico = document.querySelector("#form_basico")
+    let form_profissional = document.querySelector("#form_profissional")
+
+    info_basica.onclick = function () {
+        console.log(`A`)
+        form_basico.style.display = 'block'
+        form_profissional.style.display = 'none'
+    }
+
+    info_profissional.onclick = function () {
+        console.log(`B`)
+        form_basico.style.display = 'none'
+        form_profissional.style.display = 'block'
+    }
+</script>
 
 </html>

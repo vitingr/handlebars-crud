@@ -323,7 +323,7 @@ app.post("/cadastrar", (req, res) => {
                     escola: "",
                     amigos: "",
                     amigos_pendentes: "",
-                    foto: "",
+                    foto: "https://cdn-icons-png.flaticon.com/512/3135/3135789.png",
                     seguidores: 0,
                     paginas: "",
                     resumo: "",

@@ -1524,6 +1524,56 @@ text_feed input:focus {
     color: white;
 }
 
+#form_basico {
+    display: block;
+}
+
+#form_profissional {
+    display: none;
+}
+
+.opcoes_perfil {
+    margin-bottom: 3em;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.opcao_perfil {
+    cursor: pointer;
+}
+
+.opcao_perfil h3 {
+    padding: 3.5px;
+    text-align: center;
+    font-weight: normal;
+    font-size: 15px;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+    border-bottom: 1px solid var(--font-color);
+}
+
+.opcao_perfil h3:hover {
+    color: var(--color1);
+    border-bottom: 1px solid var(--color1);
+}
+
+.perfil_foto_trocar {
+    padding: 25px 0 25px 0;
+    display: flex;
+    gap: 25px;
+}
+
+.foto_trocar_left img {
+    width: 75px;
+    height: 75px;
+}
+
+.foto_trocar_right {
+    display: flex;
+    flex-direction: column;
+}
+
 /* -=-=-=- AMIGOS -=-=-=- */
 
 #amigos .container_unico h1 {
@@ -1929,7 +1979,7 @@ text_feed input:focus {
 .opcao_pagina {
     padding: 7.5px;
     width: 235px;
-    height: 265px;
+    height: 285px;
     border-radius: 10px;
     border: 1px solid #33333333;
 }
@@ -1956,12 +2006,14 @@ text_feed input:focus {
 }
 
 .opcao_pagina_bottom h2 {
-    font-size: 18.5px;
+    text-align: center;
+    height: 50px;
+    font-size: 15px;
 }
 
 .opcao_pagina_resumo {
-    min-height: 25px;
-    font-size: 15px;
+    height: 20px;
+    font-size: 13px;
     text-align: justify;
 }
 
