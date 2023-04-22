@@ -46,7 +46,6 @@ router.get("/endereco", (req, res) => {
 
     if (!usuarioLogado.endereco || usuarioLogado.endereco == null || usuarioLogado.endereco == undefined || usuarioLogado.endereco == "") {
 
-        const usuarioLogado = infoUsuario(req.user)
         res.render("cadastro/cidade", { usuario: usuarioLogado })
 
     } else {
@@ -849,7 +848,7 @@ router.post("/amigos/addAmigo", (req, res) => {
                 const novaNotificacao = new Notificacao({
 
                     dono: usuario._id,
-                    texto: `${usuario.nome} Enviou um Convite de Amizade para Você! Para aceitar ou rejeitar esse convite, clique nesse container de notificação.`,
+                    texto: `${usuarioLogado.nome} Enviou um Convite de Amizade para Você! Para aceitar ou rejeitar esse convite, clique nesse container de notificação.`,
                     tipo: 'Convite de Amizade',
                     file: 'https://cdn-icons-png.flaticon.com/512/3135/3135789.png',
                     link: '/usuario/amigosPendentes'

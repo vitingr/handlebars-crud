@@ -940,8 +940,8 @@ text_feed input:focus {
 }
 
 .left_profile img {
-    max-width: 150px;
-    max-height: 150px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
 }
 
@@ -1359,8 +1359,8 @@ text_feed input:focus {
 }
 
 .profile_background img {
-    min-height: 175px;
-    max-width: 175px;
+    height: 175px;
+    width: 175px;
     border-radius: 50%;
     margin-top: 30px;
     transition-timing-function: ease-in-out;
@@ -1616,6 +1616,7 @@ text_feed input:focus {
 
 #amigos .opcoes_amigos,
 #amigos .amigos_pendentes {
+    max-width: 900px;
     margin-top: 5em;
     padding-left: 50px;
     display: flex;
@@ -1648,13 +1649,15 @@ text_feed input:focus {
 }
 
 #amigos .opcao_amigo_bottom img {
-    max-width: 100px;
-    max-height: 100px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
     margin-top: -65px;
     margin-bottom: 10px;
 }
 
 #amigos .opcao_amigo_bottom h2 {
+    text-align: center;
     font-size: 18.5px;
 }
 
