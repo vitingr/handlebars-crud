@@ -128,10 +128,20 @@
                     Licenças e Certificações
                 </h1>
 
+
                 {{#each certificacoes}}
 
-                <img src="{{foto}}" alt="Foto">
-                <p>{{nome}} -- {{instituicao}}</p>
+                <div class="certificacao">
+                    <img src="{{foto}}" alt="Logo">
+                    <div class="certificacao_text">
+                        <h2>
+                            {{nome}}
+                        </h2>
+                        <p>
+                            {{unidade}}
+                        </p>
+                    </div>
+                </div>
 
                 {{else}}
 

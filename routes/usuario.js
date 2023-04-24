@@ -355,6 +355,8 @@ router.get("/editarPerfil", (req, res) => {
                         Usuario.find({ "_id": { $ne: usuarioLogado.id } }).lean().then((usuarios) => {
 
                             Certificado.find({dono: usuarioLogado.id}).lean().then((certificacoes) => {
+
+                                console.log("TEM CERTIFICADO A")
                               
                                 if (usuarios.length >= 5) {
 
@@ -420,7 +422,42 @@ router.get("/editarPerfil", (req, res) => {
 
                     Formacao.findOne({ _id: usuarioLogado.formacao }).lean().then((formacao) => {
 
-                        res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, endereco: endereco, perfil_completo: perfil_completo })
+                        Usuario.find({ "_id": { $ne: usuarioLogado.id } }).lean().then((usuarios) => {
+
+                            Certificado.find({dono: usuarioLogado.id}).lean().then((certificacoes) => {
+
+                                console.log("TEM CERTIFICADO B")
+                              
+                                if (usuarios.length >= 5) {
+
+                                    let users = []
+    
+                                    for (contador = 0; contador < 5; contador++) {
+                                        let user = Math.floor(Math.random() * usuarios.length)
+    
+                                        if (!users.includes(usuarios[user])) {
+                                            users.push(usuarios[user]);
+                                        } else {
+                                            contador--;
+                                        }
+                                    }
+    
+                                    res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, usuarios: users, perfil_completo: perfil_completo })
+    
+                                } else {
+    
+                                    res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, perfil_completo: perfil_completo })
+    
+                                }
+
+                            })
+
+                        }).catch((erro) => {
+
+                            req.flash('error_msg', 'ERRO! Não foi possível encontrar outras contas...')
+                            res.redirect("/")
+
+                        })
 
                     }).catch((erro) => {
 
@@ -863,7 +900,7 @@ router.post("/addCertificacao", (req, res) => {
 
     Usuario.findOne({ _id: usuarioLogado.id }).lean().then((usuario) => {
 
-        Pagina.findOne({nome: req.body.nome}).lean().then((pagina) => {
+        Pagina.findOne({nome: req.body.instituicao}).lean().then((pagina) => {
 
             const novoCertificado = {
                 dono: usuarioLogado.id,
@@ -1279,7 +1316,7 @@ router.post("/novaEmpresa", (req, res) => {
             erros.push({ texto: "Nome muito Pequeno" })
         }
 
-        if (req.body.nome.length > 30) {
+        if (req.body.nome.length > 35) {
             erros.push({ texto: "Nome muito Grande" })
         }
 
@@ -1445,7 +1482,7 @@ router.post("/novaInstituicao", (req, res) => {
             erros.push({ texto: "Nome muito Pequeno" })
         }
 
-        if (req.body.nome.length > 30) {
+        if (req.body.nome.length > 35) {
             erros.push({ texto: "Nome muito Grande" })
         }
 
@@ -1615,6 +1652,33 @@ router.get("/encontrarPaginas", (req, res) => {
         })
 
     }
+
+})
+
+router.get("/paginasSeguidas", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+    var paginas = []
+
+    var paginas_seguidas = usuarioLogado.paginas.split(" ")
+    paginas_seguidas.forEach(pagina => {
+        if (pagina == 0 || pagina == null || pagina == undefined || pagina == "") {
+            console.log("Amigo Invalido")
+        } else {
+            paginas.push(pagina)
+        }
+    })
+
+    Usuario.find({ _id: paginas }).lean().then((paginas) => {
+
+        res.render("usuario/meusAmigos", { usuario: usuarioLogado, paginas: paginas })
+
+    }).catch((erro) => {
+
+        req.flash('error_msg', 'ERRO! Não foi possível encontrar seus paginas')
+        res.redirect("/")
+
+    })
 
 })
 

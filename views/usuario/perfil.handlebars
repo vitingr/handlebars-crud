@@ -158,14 +158,27 @@
                 {{/each}}
             </div>
 
-                        <!-- Licenses & certifications -->
+            <!-- Licenses & certifications -->
 
             <div class="profile_certifications">
                 <h1 class="title_profile_edit">
                     Licenças e Certificações
                 </h1>
 
-                {{#each experiencias}}
+
+                {{#each certificacoes}}
+
+                <div class="certificacao">
+                    <img src="{{foto}}" alt="Logo">
+                    <div class="certificacao_text">
+                        <h2>
+                            {{nome}}
+                        </h2>
+                        <p>
+                            {{unidade}}
+                        </p>
+                    </div>
+                </div>
 
                 {{else}}
 

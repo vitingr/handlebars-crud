@@ -940,9 +940,16 @@ text_feed input:focus {
 }
 
 .left_profile img {
+    cursor: pointer;
     width: 150px;
     height: 150px;
     border-radius: 50%;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+.left_profile img:hover {
+    transform: scale(1.05);
 }
 
 .desc_main_profile {
@@ -1440,7 +1447,7 @@ text_feed input:focus {
     background: white;
     display: flex;
     margin: auto;
-    margin-top: 15px;
+    margin-top: 25px;
     justify-content: center;
     border: 1px solid var(--color1);
     color: var(--color1);
@@ -1602,6 +1609,33 @@ text_feed input:focus {
     flex-direction: column;
 }
 
+.certificacao {
+    display: flex;
+    align-items: center;
+    height: 75px;
+    margin-left: 25px;
+    gap: 15px;
+    border-bottom: 1px solid #33333323;
+    margin-bottom: 10px;
+}
+
+.certificacao img {
+    width: 37.5px;
+    height: 37.5px;
+}
+
+.certificacao_text {
+    display: flex;
+    flex-direction: column;
+}
+
+.certificacao_text h2 {
+    font-size: 16.5px;
+}
+
+.certificacao_text p {
+    font-size: 14px;
+}
 
 /* -=-=-=- AMIGOS -=-=-=- */
 
@@ -1688,12 +1722,14 @@ text_feed input:focus {
 #amigos .opcao_amigo_bottom h2 {
     text-align: center;
     font-size: 18.5px;
+    height: 30px;
 }
 
 #amigos .opcao_amigo_resumo {
-    min-height: 25px;
+    height: 40px;
     font-size: 15px;
-    text-align: justify;
+    text-align: center;
+    overflow: hidden;
 }
 
 #amigos .opcao_amigo_formacao {
@@ -2031,10 +2067,8 @@ text_feed input:focus {
 }
 
 .opcao_pagina_bottom img {
-    width: 100px;
-    height: 100px;
-    margin-top: -65px;
-    margin-bottom: 10px;
+    max-width: 100px;
+    max-height: 100px;
 }
 
 .opcao_pagina_bottom h2 {
@@ -2071,11 +2105,22 @@ text_feed input:focus {
     background: var(--color5);
 }
 
+.logo_pagina_container {
+    display: flex;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    margin-top: -65px;
+    margin-bottom: 10px;
+    background: white;
+    border-radius: 5px;
+}
+
 /* -=-=-=- ANIMAÇÕES -=-=-=- */
 
 @keyframes shake {
     25% {
-        translate: 6px 0;
+        translate: 6px 0; 
     }
 
     50% {

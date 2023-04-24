@@ -25,7 +25,6 @@
     "nodemon": "^2.0.20",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-    "react-router-dom": "^6.8.1",
     "scrollreveal": "^4.0.9"
   }
 }

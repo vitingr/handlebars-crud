@@ -13,8 +13,7 @@ const Certificado = new Schema({
         required: true
     },
     unidade: {
-        type: Schema.Types.ObjectId,
-        ref: "paginas",
+        type: String,
         required: true
     },
     foto: {
