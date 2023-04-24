@@ -16,13 +16,13 @@
                     {{#if usuarioPerfil.resumo}}
                     <h2><ion-icon name="newspaper-outline"></ion-icon> {{usuarioPerfil.resumo}}</h2>
                     {{else}}
-                        
+
                     {{/if}}
 
                     {{#if formacao}}
                     <h2><ion-icon name="school-outline"></ion-icon> {{formacao.area}} - {{formacao.nome}}</h2>
                     {{else}}
-                        
+
                     {{/if}}
 
                     <h2><ion-icon name="mail-outline"></ion-icon> {{usuarioPerfil.email}}</h2>
@@ -30,7 +30,7 @@
                     {{#if usuarioPerfil.telefone}}
                     <h2><ion-icon name="call-outline"></ion-icon> {{usuarioPerfil.telefone}}</h2>
                     {{else}}
-                        
+
                     {{/if}}
 
                     {{#if usuarioPerfil.website}}
@@ -111,18 +111,42 @@
 
                 <div class="edit_profile_message">
                     <h2>
-                        Você não postou nada recentemente...
+                        Essa pessoa não postou nada recentemente...
                     </h2>
                     <p>
-                        Suas publicações recentes irão aparecer aqui!
+                        As publicações recentes irão aparecer aqui!
                     </p>
                 </div>
 
                 {{/each}}
             </div>
 
+            <!-- Licenses & certifications -->
+
+            <div class="profile_certifications">
+                <h1 class="title_profile_edit">
+                    Licenças e Certificações
+                </h1>
+
+                {{#each certificacoes}}
+
+                <img src="{{foto}}" alt="Foto">
+                <p>{{nome}} -- {{instituicao}}</p>
+
+                {{else}}
+
+                <div class="edit_profile_message">
+                    <h2>
+                        Sem Dados...
+                    </h2>
+                </div>
+
+                {{/each}}
+
+            </div>
+
             <!-- INFORMAÇÕES PESSOAIS (ESCOLA, FACULDADE, EMPREGOS) -->
-            <div class="profile_exprience">
+            <div class="profile_experience">
                 <h1 class="title_profile_edit">
                     Experiência Profissional
                 </h1>

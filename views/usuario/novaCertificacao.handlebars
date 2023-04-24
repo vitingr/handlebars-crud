@@ -1,0 +1,36 @@
+<div class="container_principal" id="cadastro">
+    <h1 class="title_cadastro">Adicionar Certificações</h1>
+    <h2 class="subtitle_cadastro">
+        Adicione a suas certificações em seu perfil para atrair a atenção de recrutadores!
+    </h2>
+
+    <form action="/usuario/addCertificacao" method="POST">
+
+        <div class="inputs_container">
+
+            <!-- INFORMAÇÕES FORMACAO -->
+
+            <label for="nome" class="label_cadastro">Nome</label>
+            <input type="text" name="nome" id="nome" placeholder="ex: Curso de Administração" class="input_cadastro" autocomplete="off" minlength="2" maxlength="70">
+
+            <label for="instituicao" class="label_cadastro">Instituição</label>
+            <select name="instituicao" id="instituicao" class="input_cadastro" required>
+                <option value=""></option>
+                {{#each Instituicoes}}
+                <option value="{{nome}}">{{nome}}</option>
+                {{else}}
+
+                {{/each}}
+            </select>
+
+            <button type="submit" class="submit_cadastro">
+                Adicionar
+            </button>
+        </div>
+
+    </form>
+
+
+    <a href="/usuario/editarPerfil">Fechar Edição</a>
+
+</div>

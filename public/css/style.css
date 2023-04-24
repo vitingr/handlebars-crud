@@ -1373,8 +1373,11 @@ text_feed input:focus {
 }
 
 .profile_info {
-    margin-top: 55px;
+    padding: 15px;
+    background: white;
+    padding-top: 55px;
     width: 100%;
+    margin-bottom: 1.2em;
 }
 
 .profile_info_text {
@@ -1411,9 +1414,14 @@ text_feed input:focus {
 .profile_analytics,
 .profile_activity,
 .profile_experience,
-.profile_resources {
-    padding-bottom: 25px;
-    border-bottom: 1px solid #44444434;
+.profile_resources,
+.profile_experience,
+.profile_certifications {
+    border-radius: 7.5px;
+    margin-bottom: 1em;
+    background: white;
+    padding: 25px 15px 25px 15px;
+    border: 1px solid #44444425;
 }
 
 .profile_analytics {
@@ -1426,10 +1434,30 @@ text_feed input:focus {
     text-align: center;
 }
 
+.profile_certifications button {
+    text-align: center;
+    cursor: pointer;
+    background: white;
+    display: flex;
+    margin: auto;
+    margin-top: 15px;
+    justify-content: center;
+    border: 1px solid var(--color1);
+    color: var(--color1);
+    padding: 6.5px;
+    border-radius: 10px;
+    width: 100px;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+.profile_certifications button:hover {
+    transform: scale(1.025);
+}
+
 .profile {
     width: 700px;
     padding: 25px;
-    background: white;
     margin-bottom: 4em;
 }
 
@@ -1573,6 +1601,7 @@ text_feed input:focus {
     display: flex;
     flex-direction: column;
 }
+
 
 /* -=-=-=- AMIGOS -=-=-=- */
 
@@ -2002,8 +2031,8 @@ text_feed input:focus {
 }
 
 .opcao_pagina_bottom img {
-    max-width: 100px;
-    max-height: 100px;
+    width: 100px;
+    height: 100px;
     margin-top: -65px;
     margin-bottom: 10px;
 }

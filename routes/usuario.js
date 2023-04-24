@@ -14,6 +14,7 @@ require("../models/Vaga")
 require("../models/Endereco")
 require("../models/Notificacao")
 require("../models/Formacao")
+require("../models/Certificado")
 
 // Import Models
 const Postagem = mongoose.model("postagens")
@@ -23,6 +24,7 @@ const Vaga = mongoose.model("vagas")
 const Endereco = mongoose.model("enderecos")
 const Notificacao = mongoose.model("notificacoes")
 const Formacao = mongoose.model("formacoes")
+const Certificado = mongoose.model("certificados")
 
 // Helpers
 
@@ -352,33 +354,31 @@ router.get("/editarPerfil", (req, res) => {
 
                         Usuario.find({ "_id": { $ne: usuarioLogado.id } }).lean().then((usuarios) => {
 
-                            if (usuarios.length >= 5) {
+                            Certificado.find({dono: usuarioLogado.id}).lean().then((certificacoes) => {
+                              
+                                if (usuarios.length >= 5) {
 
-                                console.log("tem gente")
-
-                                let users = []
-
-                                for (contador = 0; contador < 5; contador++) {
-                                    let user = Math.floor(Math.random() * usuarios.length)
-
-                                    if (!users.includes(usuarios[user])) {
-                                        users.push(usuarios[user]);
-                                    } else {
-                                        contador--;
+                                    let users = []
+    
+                                    for (contador = 0; contador < 5; contador++) {
+                                        let user = Math.floor(Math.random() * usuarios.length)
+    
+                                        if (!users.includes(usuarios[user])) {
+                                            users.push(usuarios[user]);
+                                        } else {
+                                            contador--;
+                                        }
                                     }
+    
+                                    res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, usuarios: users })
+    
+                                } else {
+    
+                                    res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco })
+    
                                 }
 
-                                console.log(users)
-
-                                res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, endereco: endereco, usuarios: users })
-
-                            } else {
-
-                                console.log("não tem gente")
-
-                                res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, endereco: endereco })
-
-                            }
+                            })
 
                         }).catch((erro) => {
 
@@ -770,7 +770,7 @@ router.get("/novaFormacao", (req, res) => {
 
         Formacao.find({ dono: usuarioLogado.id }).lean().then((formacao) => {
 
-            Instituicao.find().lean().then((Instituicoes) => {
+            Pagina.find({ modelo: "institucional" }).lean().then((Instituicoes) => {
 
                 res.render("usuario/novaFormacao", { usuario: usuarioLogado, formacao: formacao, Instituicoes: Instituicoes })
 
@@ -831,6 +831,76 @@ router.post("/addFormacao", (req, res) => {
 
 })
 
+router.get("/novaCertificacao", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    Usuario.findOne({ _id: usuarioLogado.id }).lean().then((usuario) => {
+
+        Pagina.find({ modelo: "institucional" }).lean().then((Instituicoes) => {
+
+            res.render("usuario/novaCertificacao", { usuario: usuarioLogado, Instituicoes: Instituicoes })
+
+        }).catch((erro) => {
+
+            req.flash('error_msg', 'ERRO! Não foi possível as instituições de ensino.')
+            res.redirect("/usuario/editarPerfil")
+
+        })
+
+    }).catch((erro) => {
+
+        req.flash('error_msg', 'ERRO! Não foi possível localizar sua conta!')
+        res.redirect("/usuario/editarPerfil")
+
+    })
+
+})
+
+router.post("/addCertificacao", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    Usuario.findOne({ _id: usuarioLogado.id }).lean().then((usuario) => {
+
+        Pagina.findOne({nome: req.body.nome}).lean().then((pagina) => {
+
+            const novoCertificado = {
+                dono: usuarioLogado.id,
+                nome: req.body.nome,
+                unidade: req.body.instituicao,
+                foto: pagina.logo
+            }
+    
+            new Certificado(novoCertificado).save().then(() => {
+    
+                req.flash('success_msg', 'Certificação Adicionada com Sucesso!')
+                res.redirect("/usuario/editarPerfil")
+    
+            }).catch((erro) => {
+    
+                console.log(`ERRO ${erro}`)
+                req.flash('error_msg', 'ERRO! Não foi possível adicionar a certificação.')
+                res.redirect("/")
+    
+            })
+
+        }).catch((erro) => {
+            console.log(`ERRO ${erro}`)
+            req.flash('error_msg', 'ERRO! Não foi possível localizar a instituição.')
+            res.redirect("/")
+
+        })
+
+    }).catch((erro) => {
+        console.log(`ERRO ${erro}`)
+        req.flash('error_msg', 'ERRO! Não foi possível localizar sua conta.')
+        res.redirect("/")
+
+    })
+
+})
+
 router.get("/encontrarAmigos", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
@@ -863,67 +933,65 @@ router.get("/verPerfil/:id", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    Usuario.findOne({_id: req.params.id}).lean().then((usuarioPerfil) => {
+    Usuario.findOne({ _id: req.params.id }).lean().then((usuarioPerfil) => {
 
         Postagem.find({ dono: req.params.id }).lean().sort({ data: 'asc' }).then((postagens) => {
 
             Endereco.findOne({ _id: usuarioPerfil.endereco }).lean().then((endereco) => {
-    
+
                 Formacao.findOne({ _id: usuarioPerfil.formacao }).lean().then((formacao) => {
-    
+
                     Usuario.find({ "_id": { $ne: usuarioPerfil.id } }).lean().then((usuarios) => {
+
+                        Certificado.find({dono: usuarioLogado.id}).lean().then((certificacoes) => {
+
+                            if (usuarios.length >= 5) {
     
-                        if (usuarios.length >= 5) {
+                                let users = []
     
-                            console.log("tem gente")
+                                for (contador = 0; contador < 5; contador++) {
+                                    let user = Math.floor(Math.random() * usuarios.length)
     
-                            let users = []
-    
-                            for (contador = 0; contador < 5; contador++) {
-                                let user = Math.floor(Math.random() * usuarios.length)
-    
-                                if (!users.includes(usuarios[user])) {
-                                    users.push(usuarios[user]);
-                                } else {
-                                    contador--;
+                                    if (!users.includes(usuarios[user])) {
+                                        users.push(usuarios[user]);
+                                    } else {
+                                        contador--;
+                                    }
                                 }
+    
+                                res.render("usuario/verPerfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, usuarios: users, usuarioPerfil: usuarioPerfil })
+    
+                            } else {
+    
+                                res.render("usuario/verPerfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, usuarioPerfil: usuarioPerfil })
+    
                             }
-    
-                            console.log(users)
-    
-                            res.render("usuario/verPerfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, endereco: endereco, usuarios: users, usuarioPerfil: usuarioPerfil })
-    
-                        } else {
-    
-                            console.log("não tem gente")
-    
-                            res.render("usuario/verPerfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, endereco: endereco, usuarioPerfil: usuarioPerfil  })
-    
-                        }
-    
+
+                        })
+
                     }).catch((erro) => {
-    
+
                         req.flash('error_msg', 'ERRO! Não foi possível encontrar outras contas...')
                         res.redirect("/")
-    
+
                     })
-    
+
                 }).catch((erro) => {
-    
+
                     req.flash('error_msg', 'ERRO! Não foi possível encontrar suas formações.')
                     res.redirect("/")
-    
+
                 })
-    
+
             })
-    
+
         }).catch((erro) => {
-    
+
             req.flash('error_msg', 'ERRO! Não foi possível encontrar suas postagens.')
             res.redirect("/")
-    
+
         })
-    
+
     }).catch((erro) => {
 
         console.log(`erro ${erro}`)
