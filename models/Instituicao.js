@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
-const Instituicao = new Schema({
+const Empresa = new Schema({
 
     dono: {
         type: Schema.Types.ObjectId,
@@ -23,6 +23,10 @@ const Instituicao = new Schema({
         type: String,
         required: true
     },
+    tipo: {
+        type: String,
+        required: true
+    },
     descricao: {
         type: String
     },
@@ -36,4 +40,7 @@ const Instituicao = new Schema({
 
 })
 
-mongoose.model("instituicoes", Instituicao)
+mongoose.model("empresas", Empresa)
+
+
+})

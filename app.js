@@ -31,7 +31,6 @@ require("./models/Vaga")
 // Import Models
 
 const Postagem = mongoose.model("postagens")
-const Empresa = mongoose.model("empresas")
 const Usuario = mongoose.model("usuarios")
 const Vaga = mongoose.model("vagas")
 
@@ -145,9 +144,9 @@ app.get("/", Logado, (req, res) => {
     // Encontrar Postagens
     Postagem.find().lean().sort({ data: 'asc' }).then((postagens) => {
 
-        Usuario.find({_id: {$ne: usuarioLogado.id}}).lean().then((usuarios) => {
+        Usuario.find({"_id": {$ne: usuarioLogado.id}}).lean().then((usuarios) => {
             
-            if (usuarios.length > 5) {
+            if (usuarios.length >= 5) {
                 let users = []
 
                 for (contador = 0; contador < 5; contador++) {
@@ -156,7 +155,7 @@ app.get("/", Logado, (req, res) => {
                     if (!users.includes(usuarios[user])) {
                         users.push(usuarios[user]);
                       } else {
-                        i--;
+                        contador--;
                       }
                 }
                 
@@ -166,7 +165,6 @@ app.get("/", Logado, (req, res) => {
 
             } else {
 
-                console.log("Não tem pessoal")
                 res.render("usuario/inicio", { usuario: usuarioLogado, postagens: postagens })
 
             }
@@ -180,6 +178,7 @@ app.get("/", Logado, (req, res) => {
 
     }).catch((erro) => {   
 
+        console.log(`ERRO ${erro}`)
         req.flash('error_msg', 'ERRO! Não foi possível encontrar as postagens...')
         res.redirect("/")
 

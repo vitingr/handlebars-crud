@@ -8,8 +8,7 @@ const fs = require("fs")
 
 // Require Models 
 require("../models/Postagem")
-require("../models/Empresa")
-require("../models/Instituicao")
+require("../models/Pagina")
 require("../models/Usuario")
 require("../models/Vaga")
 require("../models/Endereco")
@@ -18,8 +17,7 @@ require("../models/Formacao")
 
 // Import Models
 const Postagem = mongoose.model("postagens")
-const Empresa = mongoose.model("empresas")
-const Instituicao = mongoose.model("instituicoes")
+const Pagina = mongoose.model("paginas")
 const Usuario = mongoose.model("usuarios")
 const Vaga = mongoose.model("vagas")
 const Endereco = mongoose.model("enderecos")
@@ -344,7 +342,7 @@ router.get("/editarPerfil", (req, res) => {
 
     if (perfil_completo == "não") {
 
-        Postagem.find({ dono: usuarioLogado.id }).lean().sort({ data: 'desc' }).then((postagens) => {
+        Postagem.find({ dono: usuarioLogado.id }).lean().sort({ data: 'asc' }).then((postagens) => {
 
             if (!usuarioLogado.endereco || usuarioLogado.endereco == null || usuarioLogado.endereco == undefined || usuarioLogado.endereco == "") {
 
@@ -352,7 +350,42 @@ router.get("/editarPerfil", (req, res) => {
 
                     Formacao.findOne({ _id: usuarioLogado.formacao }).lean().then((formacao) => {
 
-                        res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, endereco: endereco })
+                        Usuario.find({ "_id": { $ne: usuarioLogado.id } }).lean().then((usuarios) => {
+
+                            if (usuarios.length >= 5) {
+
+                                console.log("tem gente")
+
+                                let users = []
+
+                                for (contador = 0; contador < 5; contador++) {
+                                    let user = Math.floor(Math.random() * usuarios.length)
+
+                                    if (!users.includes(usuarios[user])) {
+                                        users.push(usuarios[user]);
+                                    } else {
+                                        contador--;
+                                    }
+                                }
+
+                                console.log(users)
+
+                                res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, endereco: endereco, usuarios: users })
+
+                            } else {
+
+                                console.log("não tem gente")
+
+                                res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, endereco: endereco })
+
+                            }
+
+                        }).catch((erro) => {
+
+                            req.flash('error_msg', 'ERRO! Não foi possível encontrar outras contas...')
+                            res.redirect("/")
+
+                        })
 
                     }).catch((erro) => {
 
@@ -826,6 +859,79 @@ router.get("/encontrarAmigos", (req, res) => {
 
 })
 
+router.get("/verPerfil/:id", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    Usuario.findOne({_id: req.params.id}).lean().then((usuarioPerfil) => {
+
+        Postagem.find({ dono: req.params.id }).lean().sort({ data: 'asc' }).then((postagens) => {
+
+            Endereco.findOne({ _id: usuarioPerfil.endereco }).lean().then((endereco) => {
+    
+                Formacao.findOne({ _id: usuarioPerfil.formacao }).lean().then((formacao) => {
+    
+                    Usuario.find({ "_id": { $ne: usuarioPerfil.id } }).lean().then((usuarios) => {
+    
+                        if (usuarios.length >= 5) {
+    
+                            console.log("tem gente")
+    
+                            let users = []
+    
+                            for (contador = 0; contador < 5; contador++) {
+                                let user = Math.floor(Math.random() * usuarios.length)
+    
+                                if (!users.includes(usuarios[user])) {
+                                    users.push(usuarios[user]);
+                                } else {
+                                    contador--;
+                                }
+                            }
+    
+                            console.log(users)
+    
+                            res.render("usuario/verPerfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, endereco: endereco, usuarios: users, usuarioPerfil: usuarioPerfil })
+    
+                        } else {
+    
+                            console.log("não tem gente")
+    
+                            res.render("usuario/verPerfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, endereco: endereco, usuarioPerfil: usuarioPerfil  })
+    
+                        }
+    
+                    }).catch((erro) => {
+    
+                        req.flash('error_msg', 'ERRO! Não foi possível encontrar outras contas...')
+                        res.redirect("/")
+    
+                    })
+    
+                }).catch((erro) => {
+    
+                    req.flash('error_msg', 'ERRO! Não foi possível encontrar suas formações.')
+                    res.redirect("/")
+    
+                })
+    
+            })
+    
+        }).catch((erro) => {
+    
+            req.flash('error_msg', 'ERRO! Não foi possível encontrar suas postagens.')
+            res.redirect("/")
+    
+        })
+    
+    }).catch((erro) => {
+
+        console.log(`erro ${erro}`)
+
+    })
+
+})
+
 router.post("/amigos/addAmigo", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
@@ -1131,7 +1237,7 @@ router.post("/novaEmpresa", (req, res) => {
 
         } else {
 
-            Empresa.findOne({ nome: req.body.nome }).lean().then((empresa) => {
+            Pagina.findOne({ nome: req.body.nome }).lean().then((empresa) => {
 
                 if (empresa) {
                     req.flash('error_msg', 'ERRO! Já existe uma empresa com esse nome cadastrada em nosso Sistema...')
@@ -1140,7 +1246,7 @@ router.post("/novaEmpresa", (req, res) => {
 
                     if (req.body.website) {
 
-                        const novaEmpresa = new Empresa({
+                        const novaPagina = new Pagina({
 
                             dono: usuarioLogado.id,
                             nome: req.body.nome,
@@ -1148,11 +1254,11 @@ router.post("/novaEmpresa", (req, res) => {
                             qtdFuncionarios: req.body.tamanho_empresa,
                             industria: req.body.industria,
                             tipo: req.body.tipo_empresa,
-                            descricao: req.body.descricao
-
+                            descricao: req.body.descricao,
+                            modelo: "empresa"
                         })
 
-                        novaEmpresa.save().then(() => {
+                        novaPagina.save().then(() => {
 
                             Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
 
@@ -1185,7 +1291,7 @@ router.post("/novaEmpresa", (req, res) => {
 
                     } else {
 
-                        const novaEmpresa = new Empresa({
+                        const novaPagina = new Pagina({
 
                             dono: usuarioLogado.id,
                             nome: req.body.nome,
@@ -1193,11 +1299,12 @@ router.post("/novaEmpresa", (req, res) => {
                             qtdFuncionarios: req.body.tamanho_empresa,
                             industria: req.body.industria,
                             tipo: req.body.tipo_empresa,
-                            descricao: req.body.descricao
+                            descricao: req.body.descricao,
+                            modelo: "empresa"
 
                         })
 
-                        novaEmpresa.save().then(() => {
+                        novaPagina.save().then(() => {
 
                             Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
 
@@ -1292,7 +1399,7 @@ router.post("/novaInstituicao", (req, res) => {
 
         } else {
 
-            Instituicao.findOne({ nome: req.body.nome }).lean().then((instituicao) => {
+            Pagina.findOne({ nome: req.body.nome }).lean().then((instituicao) => {
 
                 if (instituicao) {
                     req.flash('error_msg', 'ERRO! Já existe uma instituição com esse nome cadastrada em nosso Sistema...')
@@ -1301,18 +1408,18 @@ router.post("/novaInstituicao", (req, res) => {
 
                     if (req.body.website) {
 
-                        const novaInstituicao = new Instituicao({
+                        const novaPagina = new Pagina({
 
                             dono: usuarioLogado.id,
                             nome: req.body.nome,
                             website: req.body.website,
                             qtdFuncionarios: req.body.tamanho_instituicao,
                             industria: req.body.industria,
-                            descricao: req.body.descricao
-
+                            descricao: req.body.descricao,
+                            modelo: "institucional"
                         })
 
-                        novaInstituicao.save().then(() => {
+                        novaPagina.save().then(() => {
 
                             Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
 
@@ -1345,18 +1452,19 @@ router.post("/novaInstituicao", (req, res) => {
 
                     } else {
 
-                        const novaInstituicao = new Instituicao({
+                        const novaPagina = new Pagina({
 
                             dono: usuarioLogado.id,
                             nome: req.body.nome,
                             website: "",
                             qtdFuncionarios: req.body.tamanho_instituicao,
                             industria: req.body.industria,
-                            descricao: req.body.descricao
+                            descricao: req.body.descricao,
+                            modelo: "institucional"
 
                         })
 
-                        novaInstituicao.save().then(() => {
+                        novaPagina.save().then(() => {
 
                             Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
 
@@ -1413,18 +1521,9 @@ router.get("/encontrarPaginas", (req, res) => {
         const empresas = usuarioLogado.paginas
         const empresas_seguidas = empresas.split(" ")
 
-        Empresa.find({ "dono": { $ne: usuarioLogado.id }, "_id": { $nin: [empresas_seguidas] } }).lean().then((empresas) => {
+        Pagina.find({ "dono": { $ne: usuarioLogado.id }, "_id": { $nin: empresas_seguidas } }).lean().then((empresas) => {
 
-            Instituicao.find({ "dono": { $ne: usuarioLogado.id }, "_id": { $nin: [empresas_seguidas] } }).lean().then((instituicoes) => {
-
-                res.render("usuario/encontrarPaginas", { usuario: usuarioLogado, empresas: empresas, instituicoes: instituicoes })
-
-            }).catch((erro) => {
-
-                req.flash('error_msg', 'ERRO! Não foi possível encontrar instituições')
-                res.redirect('/')
-
-            })
+            res.render("usuario/encontrarPaginas", { usuario: usuarioLogado, empresas: empresas })
 
         }).catch((erro) => {
 
@@ -1435,18 +1534,10 @@ router.get("/encontrarPaginas", (req, res) => {
 
     } else {
 
-        Empresa.find({ "dono": { $ne: usuarioLogado.id } }).lean().then((empresas) => {
+        Pagina.find({ "dono": { $ne: usuarioLogado.id } }).lean().then((empresas) => {
 
-            Instituicao.find({ "dono": { $ne: usuarioLogado.id } }).lean().then((instituicoes) => {
+            res.render("usuario/encontrarPaginas", { usuario: usuarioLogado, empresas: empresas })
 
-                res.render("usuario/encontrarPaginas", { usuario: usuarioLogado, empresas: empresas, instituicoes: instituicoes })
-
-            }).catch((erro) => {
-
-                req.flash('error_msg', 'ERRO! Não foi possível encontrar instituições')
-                res.redirect('/')
-
-            })
 
         }).catch((erro) => {
 
@@ -1465,29 +1556,28 @@ router.post("/encontrarPaginas/seguirPagina", (req, res) => {
 
     Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
 
-        if (req.body.tipo === 'empresa') {
+        Pagina.findOne({ _id: req.body.id }).then((pagina) => {
 
-            Empresa.findOne({ _id: req.body.id }).then((pagina) => {
+            const paginas_seguidas = usuario.paginas
 
-                pagina.seguidores += 1
-                usuario.paginas += `${req.body.id} `
+            pagina.seguidores += 1
 
-                pagina.save().then(() => {
+            if (paginas_seguidas == null || paginas_seguidas == undefined || paginas_seguidas == "" || !paginas_seguidas) {
+                usuario.paginas += `${req.body.id}`
+            } else {
+                usuario.paginas += ` ${req.body.id}`
+            }
 
-                    usuario.save().then(() => {
+            pagina.save().then(() => {
 
-                        req.flash('success_msg', 'Você começou a seguir a página!')
-                        res.redirect("/usuario/encontrarPaginas")
+                usuario.save().then(() => {
 
-                    }).catch((erro) => {
-
-                        req.flash('error_msg', 'ERRO! Não foi possível seguir a página')
-                        res.redirect('/usuario/encontrarPaginas')
-
-                    })
+                    req.flash('success_msg', 'Você começou a seguir a página!')
+                    res.redirect("/usuario/encontrarPaginas")
 
                 }).catch((erro) => {
 
+                    console.log(erro)
                     req.flash('error_msg', 'ERRO! Não foi possível seguir a página')
                     res.redirect('/usuario/encontrarPaginas')
 
@@ -1495,53 +1585,24 @@ router.post("/encontrarPaginas/seguirPagina", (req, res) => {
 
             }).catch((erro) => {
 
-                req.flash('error_msg', 'ERRO! Não foi possível encontrar a empresa')
+                console.log(erro)
+                req.flash('error_msg', 'ERRO! Não foi possível seguir a página')
                 res.redirect('/usuario/encontrarPaginas')
 
             })
 
-        }
+        }).catch((erro) => {
 
-        if (req.body.tipo === 'instituicao') {
+            console.log(erro)
+            req.flash('error_msg', 'ERRO! Não foi possível encontrar a empresa')
+            res.redirect('/usuario/encontrarPaginas')
 
-            Instituicao.findOne({ _id: req.body.id }).then((pagina) => {
-
-                pagina.seguidores += 1
-                usuario.paginas += `${req.body.id} `
-
-                pagina.save().then(() => {
-
-                    usuario.save().then(() => {
-
-                        req.flash('success_msg', 'Você começou a seguir a página!')
-                        res.redirect("/usuario/encontrarPaginas")
-
-                    }).catch((erro) => {
-
-                        req.flash('error_msg', 'ERRO! Não foi possível seguir a página')
-                        res.redirect('/usuario/encontrarPaginas')
-
-                    })
-
-                }).catch((erro) => {
-
-                    req.flash('error_msg', 'ERRO! Não foi possível seguir a página')
-                    res.redirect('/usuario/encontrarPaginas')
-
-                })
-
-            }).catch((erro) => {
-
-                req.flash('error_msg', 'ERRO! Não foi possível encontrar a instituição')
-                res.redirect('/usuario/encontrarPaginas')
-
-            })
-        }
+        })
 
     }).catch((erro) => {
 
-        req.flash('error_msg', 'ERRO! Não foi possível sincronizar sua conta!')
-        res.redirect("/usuario/encontrarPaginas")
+        req.flash('error_msg', 'ERRO! Não foi possível encontrar a sua conta')
+        res.redirect('/usuario/encontrarPaginas')
 
     })
 
@@ -1554,7 +1615,7 @@ router.get("/paginas", (req, res) => {
     const empresas = usuarioLogado.paginas
     const empresas_seguidas = empresas.split(" ")
 
-    Empresa.find({ "_id": empresas_seguidas }).lean().then((paginas) => {
+    Pagina.find({ "_id": empresas_seguidas }).lean().then((paginas) => {
 
         res.render("usuario/paginas", { usuario: usuarioLogado, paginas: paginas })
 

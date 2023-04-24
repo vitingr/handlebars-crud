@@ -44,40 +44,39 @@
 
                 {{#each convites}}
 
-                <div class="opcao_amigo">
-                    <div class="opcao_amigo_top"
-                        style="background: url(https://img.freepik.com/free-vector/gradient-spheres-background_52683-76367.jpg)">
-
-                    </div>
-                    <div class="opcao_amigo_bottom">
-                        <img src="{{foto}}">
-                        <h2>
-                            {{nomeCompleto}}
-                        </h2>
-                        <p class="opcao_amigo_resumo">
-                            {{resumo}}
-                        </p>
-                        <p class="opcao_amigo_formacao">
-                            ETEC. Prof. Dr. José Dagnoni
-                        </p>
-
-                        <div class="acoes_amigo_pendentes">
-                            <form action="/usuario/amigos/aceitar" method="POST">
-                                <input type="hidden" name="id" id="id" value="{{_id}}">
-                                <button type="submit" class="aceitar_convite">
-                                    Aceitar Convite
-                                </button>
-                            </form>
-
-                            <form action="/usuario/amigos/rejeitar" method="POST">
-                                <input type="hidden" name="id" id="id" value="{{_id}}">
-                                <button type="submit" class="rejeitar_convite">
-                                    Rejeitar Convite
-                                </button>
-                            </form>
+                <a href="/usuario/verPerfil/{{_id}}">
+                    <div class="opcao_amigo">
+                        <div class="opcao_amigo_top"
+                            style="background: url(https://img.freepik.com/free-vector/gradient-spheres-background_52683-76367.jpg)">
+                        </div>
+                        <div class="opcao_amigo_bottom">
+                            <img src="{{foto}}">
+                            <h2>
+                                {{nomeCompleto}}
+                            </h2>
+                            <p class="opcao_amigo_resumo">
+                                {{resumo}}
+                            </p>
+                            <p class="opcao_amigo_formacao">
+                                ETEC. Prof. Dr. José Dagnoni
+                            </p>
+                            <div class="acoes_amigo_pendentes">
+                                <form action="/usuario/amigos/aceitar" method="POST">
+                                    <input type="hidden" name="id" id="id" value="{{_id}}">
+                                    <button type="submit" class="aceitar_convite">
+                                        Aceitar Convite
+                                    </button>
+                                </form>
+                                <form action="/usuario/amigos/rejeitar" method="POST">
+                                    <input type="hidden" name="id" id="id" value="{{_id}}">
+                                    <button type="submit" class="rejeitar_convite">
+                                        Rejeitar Convite
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
 
                 {{else}}
 

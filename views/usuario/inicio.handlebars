@@ -370,30 +370,31 @@
 
         {{#each usuarios}}
 
-        <div class="friends_option_index">
-            <div class="photo_friends_index">
-                <img src={{foto}}>
+        <a href="/usuario/verPerfil/{{_id}}">
+            <div class="friends_option_index">
+                <div class="photo_friends_index">
+                    <img src={{foto}}>
+                </div>
+                <div class="text_friends_index">
+                    <p class="name_friends_index">
+                        {{nomeCompleto}}
+                    </p>
+                    <p class="desc_friends_index">
+                        {{#if cargo_atual}}
+                        {{cargo_atual}}
+                        {{else}}
+                        Profissional Qualificado
+                        {{/if}}
+                    </p>
+                    <p class="desc_friends_index">
+                        {{area}}
+                    </p>
+                </div>
+                <div class="add_friends_index">
+                    <ion-icon name="add-circle-outline"></ion-icon>
+                </div>
             </div>
-
-            <div class="text_friends_index">
-                <p class="name_friends_index">
-                    {{nomeCompleto}}
-                </p>
-                <p class="desc_friends_index">
-                    {{#if cargo_atual}}
-                    {{cargo_atual}}
-                    {{else}}
-                    Profissional Qualificado
-                    {{/if}}
-                </p>
-                <p class="desc_friends_index">
-                    {{area}}
-                </p>
-            </div>
-            <div class="add_friends_index">
-                <ion-icon name="add-circle-outline"></ion-icon>
-            </div>
-        </div>
+        </a>
 
         {{else}}
 

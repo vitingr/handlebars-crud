@@ -42,32 +42,31 @@
 
             <div class="opcoes_amigos">
                 {{#each usuarios}}
-                <div class="opcao_amigo">
-                    <div class="opcao_amigo_top"
-                        style="background: url(https://img.freepik.com/free-vector/gradient-spheres-background_52683-76367.jpg)">
-
+                <a href="/usuario/verPerfil/{{_id}}">
+                    <div class="opcao_amigo">
+                        <div class="opcao_amigo_top"
+                            style="background: url(https://img.freepik.com/free-vector/gradient-spheres-background_52683-76367.jpg)">
+                        </div>
+                        <div class="opcao_amigo_bottom">
+                            <form action="/usuario/amigos/addAmigo" method="POST">
+                                <img src="{{foto}}">
+                                <h2>
+                                    {{nomeCompleto}}
+                                </h2>
+                                <p class="opcao_amigo_resumo">
+                                    {{resumo}}
+                                </p>
+                                <p class="opcao_amigo_formacao">
+                                    ETEC. Prof. Dr. José Dagnoni
+                                </p>
+                                <input type="hidden" name="id" id="id" value="{{_id}}">
+                                <button type="submit" class="adicionar_amigo">
+                                    Adicionar
+                                </button>
+                            </form>
+                        </div>
                     </div>
-                    <div class="opcao_amigo_bottom">
-                        <form action="/usuario/amigos/addAmigo" method="POST">
-                            <img src="{{foto}}">
-                            <h2>
-                                {{nomeCompleto}}
-                            </h2>
-                            <p class="opcao_amigo_resumo">
-                                {{resumo}}
-                            </p>
-                            <p class="opcao_amigo_formacao">
-                                ETEC. Prof. Dr. José Dagnoni
-                            </p>
-
-                            <input type="hidden" name="id" id="id" value="{{_id}}">
-
-                            <button type="submit" class="adicionar_amigo">
-                                Adicionar
-                            </button>
-                        </form>
-                    </div>
-                </div>
+                </a>
 
                 {{else}}
 

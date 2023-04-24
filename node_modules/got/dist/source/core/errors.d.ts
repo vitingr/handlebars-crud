@@ -4,7 +4,7 @@ import type Options from './options.js';
 import type { TimeoutError as TimedOutTimeoutError } from './timed-out.js';
 import type { PlainResponse, Response } from './response.js';
 import type Request from './index.js';
-declare type Error = NodeJS.ErrnoException;
+type Error = NodeJS.ErrnoException;
 /**
 An error to be thrown when a request fails.
 Contains a `code` property with error class code, like `ECONNREFUSED`.

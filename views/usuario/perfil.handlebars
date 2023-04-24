@@ -185,6 +185,62 @@
         <!-- ADICIONAR AMIGOS -->
 
         <div class="container_right">
+
+            {{#if usuarios}}
+            <div class="index_friends">
+                <h1 class="title_index_events">
+                    <ion-icon name="git-network-outline"></ion-icon>
+                    Talvez você conheça
+                </h1>
+
+                {{#each usuarios}}
+
+                <a href="/usuario/verPerfil/{{_id}}">
+                    <div class="friends_option_index">
+                        <div class="photo_friends_index">
+                            <img src={{foto}}>
+                        </div>
+                        <div class="text_friends_index">
+                            <p class="name_friends_index">
+                                {{nomeCompleto}}
+                            </p>
+                            <p class="desc_friends_index">
+                                {{#if cargo_atual}}
+                                {{cargo_atual}}
+                                {{else}}
+                                Profissional Qualificado
+                                {{/if}}
+                            </p>
+                            <p class="desc_friends_index">
+                                {{area}}
+                            </p>
+                        </div>
+                        <div class="add_friends_index">
+                            <ion-icon name="add-circle-outline"></ion-icon>
+                        </div>
+                    </div>
+                </a>
+
+                {{else}}
+
+                {{/each}}
+
+                <div class="center">
+                    <a href="/usuario/amigos">
+                        <button class="cta">
+                            <span>Ver mais</span>
+                            <svg viewBox="0 0 13 10" height="10px" width="15px">
+                                <path d="M1,5 L11,5"></path>
+                                <polyline points="8 1 12 5 8 9"></polyline>
+                            </svg>
+                        </button>
+                    </a>
+                </div>
+
+            </div>
+
+            {{else}}
+
             <div class="index_friends">
                 <h1 class="title_index_events">
                     <ion-icon name="git-network-outline"></ion-icon>
@@ -298,10 +354,23 @@
                     </div>
                 </div>
 
-                <h2 class="ver_mais_index">
-                    Ver mais
-                </h2>
+                <div class="center">
+                    <a href="/usuario/amigos">
+                        <button class="cta">
+                            <span>Ver mais</span>
+                            <svg viewBox="0 0 13 10" height="10px" width="15px">
+                                <path d="M1,5 L11,5"></path>
+                                <polyline points="8 1 12 5 8 9"></polyline>
+                            </svg>
+                        </button>
+                    </a>
+                </div>
 
             </div>
+
+            {{/if}}
+
         </div>
     </div>
+
+</div>

@@ -20,116 +20,92 @@
     </div>
 
 
-    <form action="/usuario/editInfo" method="POST" id="form_basico" enctype="multipart/form-data">
+    <form action="/usuario/editInfo" method="POST" enctype="multipart/form-data">
 
-        <div class="inputs_container">
-
-            <!-- NOME -->
-
-            <label for="nome" class="label_cadastro">Nome: </label>
-            <input type="text" value="{{usuario.nome}}" name="nome" id="nome"
-                placeholder="Um Pequeno Resumo Sobre Você" class="input_cadastro" autocomplete="off" minlength="2"
-                maxlength="100">
-
-            <!-- SOBRENOME -->
-
-            <label for="sobrenome" class="label_cadastro">Sobrenome: </label>
-            <input type="text" value="{{usuario.sobrenome}}" name="sobrenome" id="sobrenome"
-                class="input_cadastro" autocomplete="off" minlength="2" maxlength="100"
-                placeholder="Seu cargo atual na sua Empresa">
-
-            <!-- FOTOS -->
-
-            <div class="perfil_foto_trocar">
-                <div class="foto_trocar_left">
-                    <img src="{{usuario.foto}}" alt="Foto de Perfil">
+        <div id="form_basico">
+            <div class="inputs_container">
+                <!-- NOME -->
+                <label for="nome" class="label_cadastro">Nome: </label>
+                <input type="text" value="{{usuario.nome}}" name="nome" id="nome"
+                    placeholder="Um Pequeno Resumo Sobre Você" class="input_cadastro" autocomplete="off" minlength="2"
+                    maxlength="100">
+                <!-- SOBRENOME -->
+                <label for="sobrenome" class="label_cadastro">Sobrenome: </label>
+                <input type="text" value="{{usuario.sobrenome}}" name="sobrenome" id="sobrenome"
+                    class="input_cadastro" autocomplete="off" minlength="2" maxlength="100"
+                    placeholder="Seu cargo atual na sua Empresa">
+                <!-- FOTOS -->
+                <div class="perfil_foto_trocar">
+                    <div class="foto_trocar_left">
+                        <img src="{{usuario.foto}}" alt="Foto de Perfil">
+                    </div>
+                    <div class="foto_trocar_right">
+                        <label for="file">Alterar Foto</label>
+                        <input type="file" value="{{usuario.foto}}" name="file" id="file">
+                    </div>
                 </div>
-
-                <div class="foto_trocar_right">
-                    <label for="file">Alterar Foto</label>
-                    <input type="file" value="{{usuario.foto}}" name="file" id="file">
-                </div>
+                <!-- TELEFONE -->
+                <label for="telefone" class="label_cadastro">Número de Telefone</label>
+                <input type="tel" value="{{usuario.telefone}}" name="telefone" id="telefone" autocomplete="off"
+                    maxlength="15" onkeyup="numeroTelefone(event)" class="input_cadastro">
+                <label for="tipo_telefone" class="label_cadastro">Tipo de Telefone</label>
+                <select name="tipo_telefone" id="tipo_telefone" class="input_cadastro">
+                    <option value=""></option>
+                    <option value="Celular">Celular</option>
+                    <option value="Casa">Casa</option>
+                    <option value="Trabalho">Trabalho</option>
+                </select>
+                <label for="website">Site Pessoal</label>
+                <input type="text" value="{{usuario.website}}" name="website" id="wesbiste" class="input_cadastro"
+                    minlength="3" maxlength="100" placeholder="Exemplo seu Portfólio Online">
+                <button type="submit" class="submit_cadastro">
+                    Confirmar Alterações
+                </button>
             </div>
+        </div>
 
-            <!-- TELEFONE -->
-
-            <label for="telefone" class="label_cadastro">Número de Telefone</label>
-            <input type="tel" value="{{usuario.telefone}}" name="telefone" id="telefone" autocomplete="off"
-                maxlength="15" onkeyup="numeroTelefone(event)" class="input_cadastro">
-
-            <label for="tipo_telefone" class="label_cadastro">Tipo de Telefone</label>
-            <select name="tipo_telefone" id="tipo_telefone" class="input_cadastro">
-                <option value=""></option>
-                <option value="Celular">Celular</option>
-                <option value="Casa">Casa</option>
-                <option value="Trabalho">Trabalho</option>
-            </select>
-
-            <label for="website">Site Pessoal</label>
-            <input type="text" value="{{usuario.website}}" name="website" id="wesbiste" class="input_cadastro"
-                minlength="3" maxlength="100" placeholder="Exemplo seu Portfólio Online">
-
-            <button type="submit" class="submit_cadastro">
-                Confirmar Alterações
-            </button>
+        <div id="form_profissional">
+            <div class="inputs_container">
+                <!-- HEADLINE -->
+                <label for="headline" class="label_cadastro">Resumo: </label>
+                <input type="text" value="{{usuario.resumo}}" name="headline" id="headline"
+                    placeholder="Um Pequeno Resumo Sobre Você" class="input_cadastro" autocomplete="off" minlength="2"
+                    maxlength="100">
+                <!-- CARGO ATUAL -->
+                <label for="cargo_atual" class="label_cadastro">Cargo Atual: </label>
+                <input type="text" value="{{usuario.cargo_atual}}" name="cargo_atual" id="cargo_atual"
+                    class="input_cadastro" autocomplete="off" minlength="2" maxlength="100"
+                    placeholder="Seu cargo atual na sua Empresa">
+                <!-- FORMACAO -->
+                <label for="formacao" class="label_cadastro">Formação: </label>
+                <select name="formacao" id="formacao" class="input_cadastro">
+                    {{#each formacao}}
+                    <option value="{{_id}}">{{nome}} - {{tipo}}</option>
+                    {{else}}
+                    <option value=""></option>
+                    {{/each}}
+                </select>
+                <a href="/usuario/novaFormacao" class="adicionar_formacao">
+                    <div>
+                        <ion-icon name="add-outline"></ion-icon>
+                        Adicionar Formação
+                    </div>
+                </a>
+                <!-- AREA E EMPRESAS -->
+                <label for="area" class="label_cadastro">Área: </label>
+                <input type="tel" value="{{usuario.area}}" name="area" id="area" autocomplete="off"
+                    maxlength="15" class="input_cadastro" placeholder="Área em que você é especializado">
+                <label for="ultima_empresa">Ultima Empresa: </label>
+                <input type="text" value="{{usuario.ultima_empresa}}" name="ultima_empresa" id="ultima_empresa" class="input_cadastro"
+                    minlength="3" maxlength="100" placeholder="Ultima empresa que você trabalhou">
+                <button type="submit" class="submit_cadastro">
+                    Confirmar Alterações
+                </button>
+            </div>
         </div>
 
     </form>
 
-    <form action="/usuario/editInfo" method="POST" id="form_profissional">
-
-        <div class="inputs_container">
-
-            <!-- HEADLINE -->
-
-            <label for="headline" class="label_cadastro">Resumo: </label>
-            <input type="text" value="{{usuario.resumo}}" name="headline" id="headline"
-                placeholder="Um Pequeno Resumo Sobre Você" class="input_cadastro" autocomplete="off" minlength="2"
-                maxlength="100">
-
-            <!-- CARGO ATUAL -->
-
-            <label for="cargo_atual" class="label_cadastro">Cargo Atual: </label>
-            <input type="text" value="{{usuario.cargo_atual}}" name="cargo_atual" id="cargo_atual"
-                class="input_cadastro" autocomplete="off" minlength="2" maxlength="100"
-                placeholder="Seu cargo atual na sua Empresa">
-
-            <!-- FORMACAO -->
-
-            <label for="formacao" class="label_cadastro">Formação: </label>
-            <select name="formacao" id="formacao" class="input_cadastro">
-                {{#each formacao}}
-                <option value="{{_id}}">{{nome}} - {{tipo}}</option>
-                {{else}}
-                <option value=""></option>
-                {{/each}}
-            </select>
-
-            <a href="/usuario/novaFormacao" class="adicionar_formacao">
-                <div>
-                    <ion-icon name="add-outline"></ion-icon>
-                    Adicionar Formação
-                </div>
-            </a>
-
-            <!-- AREA E EMPRESAS -->
-
-            <label for="area" class="label_cadastro">Área: </label>
-            <input type="tel" value="{{usuario.area}}" name="area" id="area" autocomplete="off"
-                maxlength="15" class="input_cadastro" placeholder="Área em que você é especializado">
-
-
-            <label for="ultima_empresa">Ultima Empresa: </label>
-            <input type="text" value="{{usuario.ultima_empresa}}" name="ultima_empresa" id="ultima_empresa" class="input_cadastro"
-                minlength="3" maxlength="100" placeholder="Ultima empresa que você trabalhou">
-
-            <button type="submit" class="submit_cadastro">
-                Confirmar Alterações
-            </button>
-        </div>
-
-    </form>
-
-    <a href="/">Fechar Edição</a>
+    <a href="/usuario/editarPerfil">Fechar Edição</a>
 
 </div>
