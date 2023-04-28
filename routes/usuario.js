@@ -6,6 +6,8 @@ const multer = require("multer")
 const upload = require("../config/multer")
 const fs = require("fs")
 
+const maxFotos = 2
+
 // Require Models 
 require("../models/Postagem")
 require("../models/Pagina")
@@ -15,6 +17,7 @@ require("../models/Endereco")
 require("../models/Notificacao")
 require("../models/Formacao")
 require("../models/Certificado")
+require("../models/Experiencia")
 
 // Import Models
 const Postagem = mongoose.model("postagens")
@@ -25,6 +28,7 @@ const Endereco = mongoose.model("enderecos")
 const Notificacao = mongoose.model("notificacoes")
 const Formacao = mongoose.model("formacoes")
 const Certificado = mongoose.model("certificados")
+const Experiencia = mongoose.model("experiencias")
 
 // Helpers
 
@@ -354,31 +358,43 @@ router.get("/editarPerfil", (req, res) => {
 
                         Usuario.find({ "_id": { $ne: usuarioLogado.id } }).lean().then((usuarios) => {
 
-                            Certificado.find({dono: usuarioLogado.id}).lean().then((certificacoes) => {
+                            Certificado.find({ dono: usuarioLogado.id }).lean().then((certificacoes) => {
 
-                                console.log("TEM CERTIFICADO A")
-                              
-                                if (usuarios.length >= 5) {
+                                Experiencia.find({ dono: usuarioLogado.id }).lean().then((experiencias) => {
 
-                                    let users = []
-    
-                                    for (contador = 0; contador < 5; contador++) {
-                                        let user = Math.floor(Math.random() * usuarios.length)
-    
-                                        if (!users.includes(usuarios[user])) {
-                                            users.push(usuarios[user]);
-                                        } else {
-                                            contador--;
+                                    if (usuarios.length >= 5) {
+
+                                        let users = []
+
+                                        for (contador = 0; contador < 5; contador++) {
+                                            let user = Math.floor(Math.random() * usuarios.length)
+
+                                            if (!users.includes(usuarios[user])) {
+                                                users.push(usuarios[user]);
+                                            } else {
+                                                contador--;
+                                            }
                                         }
+
+                                        res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, usuarios: users, experiencias: experiencias })
+
+                                    } else {
+
+                                        res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, experiencias: experiencias })
+
                                     }
-    
-                                    res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, usuarios: users })
-    
-                                } else {
-    
-                                    res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco })
-    
-                                }
+
+                                }).catch((erro) => {
+
+                                    req.flash('error_msg', 'ERRO! Não foi possível encontrar suas experiências...')
+                                    res.redirect("/")
+
+                                })
+
+                            }).catch((erro) => {
+
+                                req.flash('error_msg', 'ERRO! Não foi possível encontrar seus certificados...')
+                                res.redirect("/")
 
                             })
 
@@ -424,31 +440,43 @@ router.get("/editarPerfil", (req, res) => {
 
                         Usuario.find({ "_id": { $ne: usuarioLogado.id } }).lean().then((usuarios) => {
 
-                            Certificado.find({dono: usuarioLogado.id}).lean().then((certificacoes) => {
+                            Certificado.find({ dono: usuarioLogado.id }).lean().then((certificacoes) => {
 
-                                console.log("TEM CERTIFICADO B")
-                              
-                                if (usuarios.length >= 5) {
+                                Experiencia.find({ dono: usuarioLogado.id }).lean().then((experiencias) => {
 
-                                    let users = []
-    
-                                    for (contador = 0; contador < 5; contador++) {
-                                        let user = Math.floor(Math.random() * usuarios.length)
-    
-                                        if (!users.includes(usuarios[user])) {
-                                            users.push(usuarios[user]);
-                                        } else {
-                                            contador--;
+                                    if (usuarios.length >= 5) {
+
+                                        let users = []
+
+                                        for (contador = 0; contador < 5; contador++) {
+                                            let user = Math.floor(Math.random() * usuarios.length)
+
+                                            if (!users.includes(usuarios[user])) {
+                                                users.push(usuarios[user]);
+                                            } else {
+                                                contador--;
+                                            }
                                         }
+
+                                        res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, usuarios: users, perfil_completo: perfil_completo, experiencias: experiencias })
+
+                                    } else {
+
+                                        res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, perfil_completo: perfil_completo, experiencias: experiencias })
+
                                     }
-    
-                                    res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, usuarios: users, perfil_completo: perfil_completo })
-    
-                                } else {
-    
-                                    res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, perfil_completo: perfil_completo })
-    
-                                }
+
+                                }).catch((erro) => {
+
+                                    req.flash('error_msg', 'ERRO! Não foi possível encontrar suas experiências...')
+                                    res.redirect("/")
+
+                                })
+
+                            }).catch((erro) => {
+
+                                req.flash('error_msg', 'ERRO! Não foi possível encontrar seus certificados...')
+                                res.redirect("/")
 
                             })
 
@@ -543,16 +571,19 @@ router.get("/infoPerfil", (req, res) => {
 
 })
 
-router.post("/editInfo", upload.single('file'), (req, res) => {
+router.post("/editInfo", upload.fields([
+    {name: 'foto_perfil', maxCount: 1},
+    {name: 'foto_background', maxCount: 1}
+]), (req, res) => {
 
-    const { nome, sobrenome, telefone, tipo_telefone, website, headline, cargo_atual, formacaoUsuario, area, ultima_empresa } = req.body
+    const { nome, sobrenome, telefone, tipo_telefone, website, headline, cargo_atual, formacaoUsuario, area, ultima_empresa } = req.body  
 
-    console.log(req.file)
+    const {foto_background, foto_perfil} = req.files
 
     const usuarioLogado = infoUsuario(req.user)
 
     // COM FOTO
-    if (req.file === null || req.file === undefined || req.file === "") {
+    if (foto_perfil === null || foto_perfil === undefined || foto_perfil === "") {
 
         if (formacaoUsuario) {
 
@@ -589,6 +620,16 @@ router.post("/editInfo", upload.single('file'), (req, res) => {
                     }
 
                     usuario.nomeCompleto = `${nome} ${sobrenome}`
+
+                    if (req.files.foto_background[0].path != null || req.files.foto_background[0].path != undefined || req.files.foto_background[0].path != "") {
+                        const background = req.files.foto_background[0].path
+                        const editBackground = background.replace('public', '')
+                        var newBackground = "";
+                        for (var i = 0; i < editBackground.length; i++) if (editBackground[i] !== "\"" && editBackground[i] !== "\\") newBackground += editBackground[i];
+                        newBackground = newBackground.replace('uploads', '')
+                        newBackground = `/uploads/${newBackground}`
+                        usuario.background = newBackground
+                    }
 
                     usuario.save().then(() => {
 
@@ -645,6 +686,20 @@ router.post("/editInfo", upload.single('file'), (req, res) => {
                 }
 
                 usuario.nomeCompleto = `${nome} ${sobrenome}`
+
+                
+                console.log("B")
+
+                if (req.files.foto_background[0].path != null || req.files.foto_background[0].path != undefined || req.files.foto_background[0].path != "") {
+
+                    const background = req.files.foto_background[0].path
+                    const editBackground = background.replace('public', '')
+                    var newBackground = "";
+                    for (var i = 0; i < editBackground.length; i++) if (editBackground[i] !== "\"" && editBackground[i] !== "\\") newBackground += editBackground[i];
+                    newBackground = newBackground.replace('uploads', '')
+                    newBackground = `/uploads/${newBackground}`
+                    usuario.background = newBackground
+                }
 
                 usuario.save().then(() => {
 
@@ -708,7 +763,19 @@ router.post("/editInfo", upload.single('file'), (req, res) => {
 
                     usuario.nomeCompleto = `${nome} ${sobrenome}`
 
-                    const foto = req.file.path
+                    console.log("C")
+
+                    if (req.files.foto_background[0].path != null || req.files.foto_background[0].path != undefined || req.files.foto_background[0].path != "") {
+                        const background = req.files.foto_background[0].path
+                        const editBackground = background.replace('public', '')
+                        var newBackground = "";
+                        for (var i = 0; i < editBackground.length; i++) if (editBackground[i] !== "\"" && editBackground[i] !== "\\") newBackground += editBackground[i];
+                        newBackground = newBackground.replace('uploads', '')
+                        newBackground = `/uploads/${newBackground}`
+                        usuario.background = newBackground
+                    }
+
+                    const foto = req.files.foto_perfil[0].path
                     const newFoto = foto.replace('public', '')
                     usuario.foto = newFoto
 
@@ -768,7 +835,19 @@ router.post("/editInfo", upload.single('file'), (req, res) => {
 
                 usuario.nomeCompleto = `${nome} ${sobrenome}`
 
-                const foto = req.file.path
+                console.log("d")
+
+                if (req.files.foto_background[0].path != null || req.files.foto_background[0].path != undefined || req.files.foto_background[0].path != "") {
+                    const background = req.files.foto_background[0].path
+                    const editBackground = background.replace('public', '')
+                    var newBackground = "";
+                    for (var i = 0; i < editBackground.length; i++) if (editBackground[i] !== "\"" && editBackground[i] !== "\\") newBackground += editBackground[i];
+                    newBackground = newBackground.replace('uploads', '')
+                    newBackground = `/uploads/${newBackground}`
+                    usuario.background = newBackground
+                }
+
+                const foto = req.files.foto_perfil[0].path
                 const newFoto = foto.replace('public', '')
                 usuario.foto = newFoto
 
@@ -900,7 +979,7 @@ router.post("/addCertificacao", (req, res) => {
 
     Usuario.findOne({ _id: usuarioLogado.id }).lean().then((usuario) => {
 
-        Pagina.findOne({nome: req.body.instituicao}).lean().then((pagina) => {
+        Pagina.findOne({ nome: req.body.instituicao }).lean().then((pagina) => {
 
             const novoCertificado = {
                 dono: usuarioLogado.id,
@@ -908,23 +987,74 @@ router.post("/addCertificacao", (req, res) => {
                 unidade: req.body.instituicao,
                 foto: pagina.logo
             }
-    
+
             new Certificado(novoCertificado).save().then(() => {
-    
+
                 req.flash('success_msg', 'Certificação Adicionada com Sucesso!')
                 res.redirect("/usuario/editarPerfil")
-    
+
             }).catch((erro) => {
-    
+
                 console.log(`ERRO ${erro}`)
                 req.flash('error_msg', 'ERRO! Não foi possível adicionar a certificação.')
                 res.redirect("/")
-    
+
             })
 
         }).catch((erro) => {
             console.log(`ERRO ${erro}`)
             req.flash('error_msg', 'ERRO! Não foi possível localizar a instituição.')
+            res.redirect("/")
+
+        })
+
+    }).catch((erro) => {
+        console.log(`ERRO ${erro}`)
+        req.flash('error_msg', 'ERRO! Não foi possível localizar sua conta.')
+        res.redirect("/")
+
+    })
+
+})
+
+router.get("/novaExperiencia", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    Usuario.findOne({ _id: usuarioLogado.id }).lean().then((usuario) => {
+
+        res.render("usuario/novaExperiencia", { usuario: usuarioLogado })
+
+    }).catch((erro) => {
+
+        req.flash('error_msg', 'ERRO! Não foi possível localizar sua conta!')
+        res.redirect("/usuario/editarPerfil")
+
+    })
+
+})
+
+router.post("/addExperiencia", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    Usuario.findOne({ _id: usuarioLogado.id }).lean().then((usuario) => {
+
+        const novaExperiencia = {
+            dono: usuarioLogado.id,
+            empresa: req.body.empresa,
+            cargo: req.body.cargo
+        }
+
+        new Experiencia(novaExperiencia).save().then(() => {
+
+            req.flash('success_msg', 'Experiência Adicionada com Sucesso!')
+            res.redirect("/usuario/editarPerfil")
+
+        }).catch((erro) => {
+
+            console.log(`ERRO ${erro}`)
+            req.flash('error_msg', 'ERRO! Não foi possível adicionar a Experiência.')
             res.redirect("/")
 
         })
@@ -953,12 +1083,15 @@ router.get("/encontrarAmigos", (req, res) => {
         }
     })
 
+    console.log(`AMIGO:${amigos}`)
+
     Usuario.find({ "_id": { $nin: [usuarioLogado.id, amigos] } }).lean().then((usuarios) => {
 
         res.render("usuario/amigos", { usuario: usuarioLogado, usuarios: usuarios })
 
     }).catch((erro) => {
 
+        console.log(`erro ${erro}`)
         req.flash('error_msg', 'ERRO! Não foi possível encontrar pessoas!')
         res.redirect("/")
 
@@ -980,28 +1113,28 @@ router.get("/verPerfil/:id", (req, res) => {
 
                     Usuario.find({ "_id": { $ne: usuarioPerfil.id } }).lean().then((usuarios) => {
 
-                        Certificado.find({dono: usuarioLogado.id}).lean().then((certificacoes) => {
+                        Certificado.find({ dono: usuarioPerfil._id }).lean().then((certificacoes) => {
 
                             if (usuarios.length >= 5) {
-    
+
                                 let users = []
-    
+
                                 for (contador = 0; contador < 5; contador++) {
                                     let user = Math.floor(Math.random() * usuarios.length)
-    
+
                                     if (!users.includes(usuarios[user])) {
                                         users.push(usuarios[user]);
                                     } else {
                                         contador--;
                                     }
                                 }
-    
+
                                 res.render("usuario/verPerfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, usuarios: users, usuarioPerfil: usuarioPerfil })
-    
+
                             } else {
-    
+
                                 res.render("usuario/verPerfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, usuarioPerfil: usuarioPerfil })
-    
+
                             }
 
                         })
@@ -1192,7 +1325,7 @@ router.post("/amigos/aceitar", (req, res) => {
 
         Usuario.findOne({ _id: req.body.id }).then((amigo) => {
 
-            amigo.amigos += `${usuarioLogado.id}`
+            amigo.amigos += `${usuarioLogado.id} `
             amigo.seguidores += 1
             amigo.save().then(() => {
 
@@ -1743,13 +1876,26 @@ router.post("/encontrarPaginas/seguirPagina", (req, res) => {
 router.get("/paginas", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
+    var paginas = []
 
-    const empresas = usuarioLogado.paginas
-    const empresas_seguidas = empresas.split(" ")
+    var paginas_seguidas = usuarioLogado.paginas.split(" ")
 
-    Pagina.find({ "_id": empresas_seguidas }).lean().then((paginas) => {
+    paginas_seguidas.forEach(pagina => {
+        if (pagina == 0 || pagina == null || pagina == undefined || pagina == "") {
+            console.log("Amigo Invalido")
+        } else {
+            paginas.push(pagina)
+        }
+    })
+
+    Pagina.find({ _id: paginas }).lean().then((paginas) => {
 
         res.render("usuario/paginas", { usuario: usuarioLogado, paginas: paginas })
+
+    }).catch((erro) => {
+
+        req.flash('error_msg', 'ERRO! Não foi possível encontrar suas páginas')
+        res.redirect("/")
 
     })
 

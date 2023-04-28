@@ -323,6 +323,7 @@ app.post("/cadastrar", (req, res) => {
                     amigos: "",
                     amigos_pendentes: "",
                     foto: "https://cdn-icons-png.flaticon.com/512/3135/3135789.png",
+                    background: "https://img.freepik.com/free-vector/gradient-spheres-background_52683-76367.jpg",
                     seguidores: 0,
                     paginas: "",
                     resumo: "",

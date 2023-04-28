@@ -1,0 +1,28 @@
+<div class="container_principal" id="cadastro">
+    <h1 class="title_cadastro">Adicionar Experiências</h1>
+    <h2 class="subtitle_cadastro">
+        Adicione a suas experiências em seu perfil para atrair a atenção de recrutadores!
+    </h2>
+
+    <form action="/usuario/addExperiencia" method="POST">
+
+        <div class="inputs_container">
+
+            <!-- INFORMAÇÕES FORMACAO -->
+
+            <label for="empresa" class="label_cadastro">Empresa: </label>
+            <input type="text" name="empresa" id="empresa" placeholder="ex: Natura LTDA." class="input_cadastro"autocomplete="off" minlength="2" maxlength="70">
+
+            <label for="cargo" class="label_cadastro">Cargo: </label>
+            <input type="text" name="cargo" id="cargo" placeholder="ex: Auxiliar de Administração" class="input_cadastro"autocomplete="off" minlength="2" maxlength="70">
+
+            <button type="submit" class="submit_cadastro">
+                Adicionar
+            </button>
+        </div>
+
+    </form>
+
+    <a href="/usuario/editarPerfil">Fechar Edição</a>
+
+</div>

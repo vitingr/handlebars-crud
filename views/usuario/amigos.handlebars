@@ -45,7 +45,7 @@
                 <a href="/usuario/verPerfil/{{_id}}">
                     <div class="opcao_amigo">
                         <div class="opcao_amigo_top"
-                            style="background: url(https://img.freepik.com/free-vector/gradient-spheres-background_52683-76367.jpg)">
+                            style="background: url({{background}})">
                         </div>
                         <div class="opcao_amigo_bottom">
                             <form action="/usuario/amigos/addAmigo" method="POST">
@@ -70,7 +70,17 @@
 
                 {{else}}
 
-                <p>Nenhuma Pessoa Encontrada</p>
+                <div class="center">
+                    <a href="/usuario/amigos">
+                        <button class="cta">
+                            <span>Você ainda não possui Amigos :C</span>
+                            <svg viewBox="0 0 13 10" height="10px" width="15px">
+                                <path d="M1,5 L11,5"></path>
+                                <polyline points="8 1 12 5 8 9"></polyline>
+                            </svg>
+                        </button>
+                    </a>
+                </div>
 
                 {{/each}}
 

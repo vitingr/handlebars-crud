@@ -42,30 +42,42 @@
 
             <div class="opcoes_amigos">
                 {{#each paginas}}
-                <div class="opcao_amigo">
-                    <div class="opcao_amigo_top"
-                        style="background: url(https://img.freepik.com/free-vector/gradient-spheres-background_52683-76367.jpg)">
 
+                <div class="opcao_pagina">
+                    <div class="opcao_pagina_top"
+                        style="background: url(https://img.freepik.com/free-vector/gradient-spheres-background_52683-76367.jpg)">
                     </div>
-                    <div class="opcao_amigo_bottom">
-                        <form action="/usuario/amigos/addAmigo" method="POST">
-                            <img src="{{logo}}">
+                    <div class="opcao_pagina_bottom">
+                        <form action="/usuario/encontrarPaginas/seguirPagina" method="POST">
+                            <div class="logo_pagina_container">
+                                <img src="{{logo}}">
+                            </div>
                             <h2>
                                 {{nome}}
                             </h2>
-                            <p class="opcao_amigo_resumo">
-                                {{seguidores}} seguidores
-                            </p> 
-
-                            <input type="hidden" name="id" id="id" value="{{_id}}">
-
+                            <p class="opcao_pagina_resumo">
+                                {{seguidores}} Seguidores
+                            </p>
+                            <div class="opcao_pagina_formacao">
+                                <input type="hidden" name="id" id="id" value="{{_id}}">
+                            </div>
                         </form>
                     </div>
                 </div>
 
                 {{else}}
 
-                <p>Nenhuma Página Encontrada</p>
+                <div class="center">
+                    <a href="/usuario/paginas">
+                        <button class="cta">
+                            <span>Você ainda não segue nenhuma Página</span>
+                            <svg viewBox="0 0 13 10" height="10px" width="15px">
+                                <path d="M1,5 L11,5"></path>
+                                <polyline points="8 1 12 5 8 9"></polyline>
+                            </svg>
+                        </button>
+                    </a>
+                </div>
 
                 {{/each}}
 

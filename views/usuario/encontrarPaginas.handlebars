@@ -59,12 +59,13 @@
                             <p class="opcao_pagina_resumo">
                                 {{seguidores}} Seguidores
                             </p>
-                            <p class="opcao_pagina_formacao">
+                            <div class="opcao_pagina_formacao">
                                 <input type="hidden" name="id" id="id" value="{{_id}}">
                                 <input type="hidden" name="tipo" id="tipo" value="empresa">
                                 <button type="submit" class="adicionar_pagina">
                                     Seguir
                                 </button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -81,7 +82,7 @@
                     </div>
                     <div class="opcao_pagina_bottom">
                         <form action="/usuario/encontrarPaginas/seguirPagina" method="POST">
-                            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png">
+                            <img src="{{logo}}">
                             <h2>
                                 {{nome}}
                             </h2>

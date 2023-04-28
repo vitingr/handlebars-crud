@@ -40,10 +40,21 @@
                         <img src="{{usuario.foto}}" alt="Foto de Perfil">
                     </div>
                     <div class="foto_trocar_right">
-                        <label for="file">Alterar Foto</label>
-                        <input type="file" value="{{usuario.foto}}" name="file" id="file">
+                        <label for="foto_perfil">Alterar Foto de Perfil</label>
+                        <input type="file" value="{{usuario.foto}}" name="foto_perfil" id="foto_perfil">
                     </div>
                 </div>
+                <!-- BACKGROUND -->
+                <div class="perfil_foto_trocar">
+                    <div class="foto_trocar_left">
+                        <img src="{{usuario.background}}" alt="Foto de Perfil">
+                    </div>
+                    <div class="foto_trocar_right">
+                        <label for="foto_background">Alterar Foto de Fundo</label>
+                        <input type="file" value="{{usuario.background}}" name="foto_background" id="foto_background">
+                    </div>
+                </div>
+
                 <!-- TELEFONE -->
                 <label for="telefone" class="label_cadastro">Número de Telefone</label>
                 <input type="tel" value="{{usuario.telefone}}" name="telefone" id="telefone" autocomplete="off"

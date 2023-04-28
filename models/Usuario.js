@@ -68,6 +68,9 @@ const Usuario = new Schema({
     foto: {
         type: String
     },
+    background: {
+        type: String
+    },
     seguidores: {
         type: Number
     },

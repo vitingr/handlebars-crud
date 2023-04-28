@@ -43,4 +43,3 @@ const Empresa = new Schema({
 mongoose.model("empresas", Empresa)
 
 
-})

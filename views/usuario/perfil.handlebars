@@ -5,7 +5,7 @@
 
         <div class="profile">
             <div class="profile_background"
-                style="background: url(https://img.freepik.com/free-vector/gradient-spheres-background_52683-76367.jpg); background-size: cover; background-repeat: no-repeat">
+                style="background: url({{usuario.background}}); background-size: cover; background-repeat: no-repeat">
                 <img src={{usuario.foto}}>
             </div>
             <div class="profile_info">
@@ -191,7 +191,7 @@
                 {{/each}}
 
                 <a href="/usuario/novaCertificacao">
-                    <button>
+                    <button class="button_profile">
                         Adicionar
                     </button>
                 </a>
@@ -206,6 +206,11 @@
 
                 {{#each experiencias}}
 
+                <div class="experiencia">
+                    <ion-icon name="business-outline"></ion-icon>
+                    {{cargo}} - {{empresa}}
+                </div>
+
                 {{else}}
 
                 <div class="edit_profile_message">
@@ -218,6 +223,12 @@
                 </div>
 
                 {{/each}}
+
+                <a href="/usuario/novaExperiencia">
+                    <button class="button_profile">
+                        Adicionar
+                    </button>
+                </a>
             </div>
 
         </div>
@@ -225,6 +236,87 @@
         <!-- ADICIONAR AMIGOS -->
 
         <div class="container_right">
+
+            <div class="index_events">
+                <h1 class="title_index_events">
+                    <ion-icon name="newspaper-outline"></ion-icon>
+                    Talvez você se Interesse
+                </h1>
+
+                <div class="vaga_emprego">
+                    <div class="photo_vaga_emprego">
+                        <img src="https://logodownload.org/wp-content/uploads/2014/05/natura-logo-16.png">
+                    </div>
+
+                    <div class="text_vaga_emprego">
+                        <p class="name_vaga_emprego">
+                            Natura Co.
+                        </p>
+                        <p class="desc_vaga_emprego">
+                            R$ 2.600/mês - R$ 5.200/mês
+                        </p>
+                    </div>
+                </div>
+
+                <div class="vaga_emprego">
+                    <div class="photo_vaga_emprego">
+                        <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Logo_Takeda.svg/1280px-Logo_Takeda.svg.png">
+                    </div>
+
+                    <div class="text_vaga_emprego">
+                        <p class="name_vaga_emprego">
+                            Takeda Brasil
+                        </p>
+                        <p class="desc_vaga_emprego">
+                            R$ 3.150/mês - R$ 3.620/mês
+                        </p>
+                    </div>
+                </div>
+
+                <div class="vaga_emprego">
+                    <div class="photo_vaga_emprego">
+                        <img src="https://logodownload.org/wp-content/uploads/2017/03/dell-logo-1-1.png">
+                    </div>
+
+                    <div class="text_vaga_emprego">
+                        <p class="name_vaga_emprego">
+                            Dell
+                        </p>
+                        <p class="desc_vaga_emprego">
+                            R$ 1.890/mês - R$ 2.300/mês
+                        </p>
+                    </div>
+                </div>
+
+                <div class="vaga_emprego">
+                    <div class="photo_vaga_emprego">
+                        <img src="https://logodownload.org/wp-content/uploads/2017/05/banco-santander-logo-41.png">
+                    </div>
+
+                    <div class="text_vaga_emprego">
+                        <p class="name_vaga_emprego">
+                            Banco Santander SA.
+                        </p>
+                        <p class="desc_vaga_emprego">
+                            R$ 3.900/mês - R$ 8.300/mês
+                        </p>
+                    </div>
+                </div>
+
+                <div class="center">
+                    <a href="/usuario/buscarVagas">
+                        <button class="cta">
+                            <span>Ver mais</span>
+                            <svg viewBox="0 0 13 10" height="10px" width="15px">
+                                <path d="M1,5 L11,5"></path>
+                                <polyline points="8 1 12 5 8 9"></polyline>
+                            </svg>
+                        </button>
+                    </a>
+                </div>
+
+            </div>
 
             {{#if usuarios}}
             <div class="index_friends">
@@ -411,6 +503,8 @@
             {{/if}}
 
         </div>
+
+
     </div>
 
 </div>

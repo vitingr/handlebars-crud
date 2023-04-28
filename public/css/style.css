@@ -1441,7 +1441,7 @@ text_feed input:focus {
     text-align: center;
 }
 
-.profile_certifications button {
+.button_profile {
     text-align: center;
     cursor: pointer;
     background: white;
@@ -1458,16 +1458,15 @@ text_feed input:focus {
     transition-duration: 0.3s;
 }
 
-.profile_certifications button:hover {
+.button_profile:hover {
     transform: scale(1.025);
 }
 
 .profile {
     width: 700px;
-    padding: 25px;
     margin-bottom: 4em;
 }
-
+ 
 .profile_info_right {
     display: flex;
     flex-direction: column;
@@ -1615,7 +1614,7 @@ text_feed input:focus {
     height: 75px;
     margin-left: 25px;
     gap: 15px;
-    border-bottom: 1px solid #33333323;
+    border-bottom: 1px dashed #33333323;
     margin-bottom: 10px;
 }
 
@@ -1635,6 +1634,14 @@ text_feed input:focus {
 
 .certificacao_text p {
     font-size: 14px;
+}
+
+.experiencia {
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px dashed #33333323;
 }
 
 /* -=-=-=- AMIGOS -=-=-=- */
@@ -1680,6 +1687,7 @@ text_feed input:focus {
 #amigos .opcoes_amigos,
 #amigos .amigos_pendentes {
     max-width: 900px;
+    width: 100%;
     margin-top: 5em;
     padding-left: 50px;
     display: flex;
