@@ -47,7 +47,7 @@
                 <a href="/usuario/verPerfil/{{_id}}">
                     <div class="opcao_amigo">
                         <div class="opcao_amigo_top"
-                            style="background: url({{background}})">
+                            style="background-image: url({{background}})">
                         </div>
                         <div class="opcao_amigo_bottom">
                             <img src="{{foto}}">
@@ -58,7 +58,7 @@
                                 {{resumo}}
                             </p>
                             <p class="opcao_amigo_formacao">
-                                ETEC. Prof. Dr. José Dagnoni
+                                {{cargo_atual}}
                             </p>
                             <div class="acoes_amigo_pendentes">
                                 <form action="/usuario/amigos/aceitar" method="POST">

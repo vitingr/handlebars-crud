@@ -28,11 +28,11 @@
                 <label for="nome" class="label_cadastro">Nome: </label>
                 <input type="text" value="{{usuario.nome}}" name="nome" id="nome"
                     placeholder="Um Pequeno Resumo Sobre Você" class="input_cadastro" autocomplete="off" minlength="2"
-                    maxlength="100">
+                    maxlength="100" required>
                 <!-- SOBRENOME -->
                 <label for="sobrenome" class="label_cadastro">Sobrenome: </label>
                 <input type="text" value="{{usuario.sobrenome}}" name="sobrenome" id="sobrenome"
-                    class="input_cadastro" autocomplete="off" minlength="2" maxlength="100"
+                    class="input_cadastro" autocomplete="off" minlength="0" maxlength="100"
                     placeholder="Seu cargo atual na sua Empresa">
                 <!-- FOTOS -->
                 <div class="perfil_foto_trocar">
@@ -41,7 +41,7 @@
                     </div>
                     <div class="foto_trocar_right">
                         <label for="foto_perfil">Alterar Foto de Perfil</label>
-                        <input type="file" value="{{usuario.foto}}" name="foto_perfil" id="foto_perfil">
+                        <input type="file" name="foto_perfil" id="foto_perfil">
                     </div>
                 </div>
                 <!-- BACKGROUND -->
@@ -51,7 +51,7 @@
                     </div>
                     <div class="foto_trocar_right">
                         <label for="foto_background">Alterar Foto de Fundo</label>
-                        <input type="file" value="{{usuario.background}}" name="foto_background" id="foto_background">
+                        <input type="file" name="foto_background" id="foto_background">
                     </div>
                 </div>
 

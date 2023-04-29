@@ -5,7 +5,7 @@
 
         <div class="profile">
             <div class="profile_background"
-                style="background: url(https://img.freepik.com/free-vector/gradient-spheres-background_52683-76367.jpg); background-size: cover; background-repeat: no-repeat">
+                style="background-image: url({{usuarioPerfil.background}}); background-size: cover; background-repeat: no-repeat">
                 <img src={{usuarioPerfil.foto}}>
             </div>
             <div class="profile_info">
@@ -163,6 +163,11 @@
 
                 {{#each experiencias}}
 
+                <div class="experiencia">
+                    <ion-icon name="business-outline"></ion-icon>
+                    {{cargo}} - {{empresa}}
+                </div>
+
                 {{else}}
 
                 <div class="edit_profile_message">
@@ -175,6 +180,7 @@
                 </div>
 
                 {{/each}}
+
             </div>
 
         </div>

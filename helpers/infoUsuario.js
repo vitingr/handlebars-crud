@@ -20,6 +20,7 @@ module.exports = {
             escola: usuario.escola,
             amigos: usuario.amigos,
             amigos_pendentes: usuario.amigos_pendentes,
+            notificacoes: usuario.notificacoes,
             foto: usuario.foto,
             background: usuario.background,
             seguidores: usuario.seguidores,

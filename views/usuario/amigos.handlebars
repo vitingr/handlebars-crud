@@ -44,8 +44,7 @@
                 {{#each usuarios}}
                 <a href="/usuario/verPerfil/{{_id}}">
                     <div class="opcao_amigo">
-                        <div class="opcao_amigo_top"
-                            style="background: url({{background}})">
+                        <div class="opcao_amigo_top" style="background-image: url({{background}})">
                         </div>
                         <div class="opcao_amigo_bottom">
                             <form action="/usuario/amigos/addAmigo" method="POST">
@@ -57,7 +56,7 @@
                                     {{resumo}}
                                 </p>
                                 <p class="opcao_amigo_formacao">
-                                    ETEC. Prof. Dr. José Dagnoni
+                                    {{cargo_atual}}
                                 </p>
                                 <input type="hidden" name="id" id="id" value="{{_id}}">
                                 <button type="submit" class="adicionar_amigo">
