@@ -1461,7 +1461,36 @@ router.get("/criarEmpresa", (req, res) => {
 
 })
 
-router.post("/novaEmpresa", (req, res) => {
+router.post("/novaEmpresa", upload.fields([
+    { name: 'foto_logo', maxCount: 1 },
+    { name: 'foto_background', maxCount: 1 }
+]), (req, res) => {
+
+    const { foto_logo, foto_background } = req.files
+
+    var setLogo = ""
+    var setBackground = ""
+
+    if (foto_logo) {
+        const logo = req.files.foto_logo[0].path
+        setLogo = logo.replace('public', '')
+    } else {
+        setLogo = "https://images.squarespace-cdn.com/content/v1/543fa8a4e4b07a3fedf53cf8/1509402629365-7RTSVCL7IYMGHRFZF8G8/fullsizeoutput_5147.jpeg"
+    }
+
+    if (foto_background) {
+        const background = req.files.foto_background[0].path
+        const editBackground = background.replace('public', '')
+        var newBackground = "";
+        for (var i = 0; i < editBackground.length; i++) if (editBackground[i] !== "\"" && editBackground[i] !== "\\") newBackground += editBackground[i];
+        newBackground = newBackground.replace('uploads', '')
+        setBackground = `/uploads/${newBackground}`
+
+    } else {
+
+        setBackground = "https://img.freepik.com/free-vector/gradient-spheres-background_52683-76367.jpg"
+
+    }
 
     const usuarioLogado = infoUsuario(req.user)
     const checkbox = req.body.permissao
@@ -1515,6 +1544,8 @@ router.post("/novaEmpresa", (req, res) => {
 
                         const novaPagina = new Pagina({
 
+                            logo: setLogo,
+                            background: setBackground,
                             dono: usuarioLogado.id,
                             nome: req.body.nome,
                             website: req.body.website,
@@ -1560,6 +1591,8 @@ router.post("/novaEmpresa", (req, res) => {
 
                         const novaPagina = new Pagina({
 
+                            logo: setLogo,
+                            background: setBackground,
                             dono: usuarioLogado.id,
                             nome: req.body.nome,
                             website: "",
@@ -1627,7 +1660,36 @@ router.get("/criarInstituicao", (req, res) => {
 
 })
 
-router.post("/novaInstituicao", (req, res) => {
+router.post("/novaInstituicao", upload.fields([
+    { name: 'foto_logo', maxCount: 1 },
+    { name: 'foto_background', maxCount: 1 }
+]), (req, res) => {
+
+    const { foto_logo, foto_background } = req.files
+
+    var setLogo = ""
+    var setBackground = ""
+
+    if (foto_logo) {
+        const logo = req.files.foto_logo[0].path
+        setLogo = logo.replace('public', '')
+    } else {
+        setLogo = "https://images.squarespace-cdn.com/content/v1/543fa8a4e4b07a3fedf53cf8/1509402629365-7RTSVCL7IYMGHRFZF8G8/fullsizeoutput_5147.jpeg"
+    }
+
+    if (foto_background) {
+        const background = req.files.foto_background[0].path
+        const editBackground = background.replace('public', '')
+        var newBackground = "";
+        for (var i = 0; i < editBackground.length; i++) if (editBackground[i] !== "\"" && editBackground[i] !== "\\") newBackground += editBackground[i];
+        newBackground = newBackground.replace('uploads', '')
+        setBackground = `/uploads/${newBackground}`
+
+    } else {
+
+        setBackground = "https://img.freepik.com/free-vector/gradient-spheres-background_52683-76367.jpg"
+
+    }
 
     const usuarioLogado = infoUsuario(req.user)
     const checkbox = req.body.permissao
@@ -1677,6 +1739,8 @@ router.post("/novaInstituicao", (req, res) => {
 
                         const novaPagina = new Pagina({
 
+                            logo: setLogo,
+                            background: setBackground,
                             dono: usuarioLogado.id,
                             nome: req.body.nome,
                             website: req.body.website,
@@ -1721,6 +1785,8 @@ router.post("/novaInstituicao", (req, res) => {
 
                         const novaPagina = new Pagina({
 
+                            logo: setLogo,
+                            background: setBackground,
                             dono: usuarioLogado.id,
                             nome: req.body.nome,
                             website: "",

@@ -1698,7 +1698,6 @@ text_feed input:focus {
 
 #amigos .opcoes_amigos,
 #amigos .amigos_pendentes {
-    max-width: 900px;
     width: 100%;
     margin-top: 5em;
     padding-left: 50px;
@@ -2063,6 +2062,16 @@ text_feed input:focus {
     align-items: center;
 }
 
+#empresa .enviar_logo_empresa,
+#instituicao .enviar_logo_empresa {
+    padding: 25px;
+}
+
+#empresa h4,
+#instituicao h4 {
+    font-weight: normal;
+}
+
 /* -=-=-=- ENCONTRAR PÁGINAS -=-=-=- */
 
 .opcao_pagina {
@@ -2089,6 +2098,7 @@ text_feed input:focus {
 }
 
 .opcao_pagina_bottom img {
+    border-radius: 5px;
     max-width: 100px;
     max-height: 100px;
 }

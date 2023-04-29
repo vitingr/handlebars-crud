@@ -37,6 +37,9 @@ const Pagina = new Schema({
         type: String,
         default: "https://cdn-icons-png.flaticon.com/512/5809/5809858.png"
     },
+    background: {
+        type: String
+    },
     seguidores: {
         type: Number,
         default: 0

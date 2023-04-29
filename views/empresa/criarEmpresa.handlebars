@@ -4,28 +4,52 @@
         Para começarmos, adicione algumas informações básicas da sua empresa.
     </h2>
 
-    <form action="/usuario/novaEmpresa" method="POST">
+    <form action="/usuario/novaEmpresa" method="POST" enctype="multipart/form-data">
 
         <div class="inputs_container">
 
             <!-- NOME -->
 
             <label for="nome" class="label_cadastro">Nome: <span class="pink_font">*</span></label>
-            <input type="text" name="nome" id="nome" placeholder="O nome da sua Empresa" class="input_cadastro" autocomplete="off" minlength="2" maxlength="35" aria-placeholder="Nome da sua empresa" required>
+            <input type="text" name="nome" id="nome" placeholder="O nome da sua Empresa" class="input_cadastro"
+                autocomplete="off" minlength="2" maxlength="35" aria-placeholder="Nome da sua empresa" required>
 
             <!-- WEBSITE -->
 
             <label for="website" class="label_cadastro">Website: <span class="pink_font"></span></label>
-            <input type="text" name="website" id="website" class="input_cadastro" autocomplete="off" minlength="2" maxlength="100" placeholder="O site da sua empresa">
+            <input type="text" name="website" id="website" class="input_cadastro" autocomplete="off" minlength="2"
+                maxlength="100" placeholder="O site da sua empresa">
+
+            <!-- LOGO DA EMPRESA -->
+
+            <div class="enviar_logo_empresa">
+                <h4 class="title_cadastro">Envie sua Logo</h4>
+                <div class="perfil_foto_trocar">
+                    <div class="foto_trocar_right">
+                        <input type="file" name="foto_logo" id="foto_logo">
+                    </div>
+                </div>
+            </div>
+
+            <div class="enviar_logo_empresa">
+                <h4 class="title_cadastro">Envie seu Plano de Fundo</h4>
+                <div class="perfil_foto_trocar">
+                    <div class="foto_trocar_right">
+                        <input type="file" name="foto_background" id="foto_background">
+                    </div>
+                </div>
+            </div>
 
             <!-- INDUSTRIA -->
 
             <label for="industria" class="label_cadastro">Industria: <span class="pink_font">*</span></label>
-            <input type="text" name="industria" id="industria" placeholder="ex: Farmacêutica" class="input_cadastro" autocomplete="off" minlength="2" maxlength="60" required>
+            <input type="text" name="industria" id="industria" placeholder="ex: Farmacêutica" class="input_cadastro"
+                autocomplete="off" minlength="2" maxlength="60" required>
 
             <!-- TAMANHO DA EMPRESA -->
 
-            <label for="tamanho_empresa" class="label_cadastro">Tamanho da Empresa: <span class="pink_font">*</span></label>
+            <label for="tamanho_empresa" class="label_cadastro">Tamanho da Empresa: <span
+                    class="pink_font">*</span></label>
             <select name="tamanho_empresa" id="tamanho_empresa" class="input_cadastro" required>
                 <option value=""></option>
                 <option value="0 - 1 Colaboradores">0 - 1 Colaboradores</option>
@@ -54,12 +78,15 @@
             </select>
 
             <label for="descricao" class="label_cadastro">Descrição: <span class="pink_font">*</span></label>
-            <input type="text" name="descricao" id="descricao" placeholder="uma Descrição da sua empresa" class="input_cadastro" autocomplete="off" minlength="2" maxlength="200" required>
+            <input type="text" name="descricao" id="descricao" placeholder="uma Descrição da sua empresa"
+                class="input_cadastro" autocomplete="off" minlength="2" maxlength="200" required>
 
             <div class="flex">
                 <input type="checkbox" name="permissao" id="permissao" value="Assinado" class="checkbox">
-                <label for="permissao" class="label_cadastro" id="permissao">Confirmo que sou um representante autorizado desta organização e tenho o direito de agir em seu nome na criação e gestão desta página. A organização e eu concordamos com os termos adicionais das Páginas.
-                <span class="span_cadastro"></span></label>
+                <label for="permissao" class="label_cadastro" id="permissao">Confirmo que sou um representante
+                    autorizado desta organização e tenho o direito de agir em seu nome na criação e gestão desta página.
+                    A organização e eu concordamos com os termos adicionais das Páginas.
+                    <span class="span_cadastro"></span></label>
             </div>
 
             <button type="submit" class="submit_cadastro">
