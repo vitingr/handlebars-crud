@@ -5883,16 +5883,69 @@
     let form_profissional = document.querySelector("#form_profissional")
 
     info_basica.onclick = function () {
-        console.log(`A`)
         form_basico.style.display = 'block'
         form_profissional.style.display = 'none'
     }
 
     info_profissional.onclick = function () {
-        console.log(`B`)
         form_basico.style.display = 'none'
         form_profissional.style.display = 'block'
     }
+</script>
+<script>
+
+    let edit_home = document.querySelector("#edit_home_pagina")
+    let edit_info = document.querySelector("#edit_info_pagina")
+    let edit_seguidores = document.querySelector("#edit_seguidores_pagina")
+    let edit_insights = document.querySelector("#edit_insights_pagina")
+    let edit_vagas = document.querySelector("#edit_vagas_pagina")
+
+    let home_pagina = document.querySelector(".home_editar_pagina")
+    let info_pagina = document.querySelector(".info_editar_pagina")
+    let seguidores_pagina = document.querySelector(".seguidores_editar_pagina")
+    let insights_pagina = document.querySelector(".insights_editar_pagina")
+    let vagas_pagina = document.querySelector(".vagas_editar_pagina")
+
+    edit_home.onclick = function () {
+        home_pagina.style.display = 'block'
+        info_pagina.style.display = 'none'
+        vagas_pagina.style.display = 'none'
+        seguidores_pagina.style.display = 'none'
+        insights_pagina.style.display = 'none'
+    }
+
+    edit_info.onclick = function () {
+        home_pagina.style.display = 'none'
+        info_pagina.style.display = 'block'
+        vagas_pagina.style.display = 'none'
+        seguidores_pagina.style.display = 'none'
+        insights_pagina.style.display = 'none'
+    }
+
+    edit_vagas.onclick = function () {
+        home_pagina.style.display = 'none'
+        info_pagina.style.display = 'none'
+        vagas_pagina.style.display = 'block'
+        seguidores_pagina.style.display = 'none'
+        insights_pagina.style.display = 'none'
+    }
+
+    edit_seguidores.onclick = function () {
+        home_pagina.style.display = 'none'
+        info_pagina.style.display = 'none'
+        vagas_pagina.style.display = 'none'
+        seguidores_pagina.style.display = 'block'
+        insights_pagina.style.display = 'none'
+    }
+
+    edit_insights.onclick = function () {
+        home_pagina.style.display = 'none'
+        info_pagina.style.display = 'none'
+        vagas_pagina.style.display = 'none'
+        seguidores_pagina.style.display = 'none'
+        insights_pagina.style.display = 'block'
+    }
+
 </script>
 
 </html>

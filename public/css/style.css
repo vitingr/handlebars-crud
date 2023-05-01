@@ -454,7 +454,6 @@ form.sign-up-form {
     text-align: center;
 }
 
-
 .subtitle_cadastro {
     font-weight: normal;
     color: var(--font-color-low-emphasis);
@@ -503,11 +502,11 @@ form.sign-up-form {
 
 .input_cadastro {
     background: white;
-    font-size: 16.5px;
+    font-size: 15px;
     margin-bottom: 25px;
     outline: none;
     border-radius: 7.5px;
-    padding: 10px;
+    padding: 7.5px;
     width: 425px;
     border: 1px solid #44444428;
 }
@@ -2146,6 +2145,136 @@ text_feed input:focus {
     margin-bottom: 10px;
     background: white;
     border-radius: 5px;
+}
+
+/* -=-=-=- EDITAR PAGINA -=-=-=- */
+
+#editarPagina .container_editar_pagina {
+    display: flex;
+    gap: 50px;
+}
+
+#editarPagina .container_editar_pagina_left {
+    padding: 20px;
+    border-radius: 20px;
+    background: white;
+    border: 1px solid #e7e7e7;
+    width: 250px;
+    max-height: 275px;
+}
+
+#editarPagina .editar_pagina_option {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #e7e7e7;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.1s;
+    border-left: 1px solid transparent;
+}
+
+#editarPagina .editar_pagina_option:hover {
+    border-left: 1px solid var(--color1);
+}
+
+#editarPagina  .container_editar_pagina_right {
+    padding: 20px;
+    border-radius: 20px;
+    background: white;
+    border: 1px solid #e7e7e7;
+    display: flex;
+    flex-direction: column;
+    width: 750px;
+    min-height: 1000px;
+}
+
+#editarPagina .background_pagina {
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 165px;
+    border-radius: 15px;
+}
+
+#editarPagina .logo_pagina {
+    width: 115px;
+    height: 115px;
+    border-radius: 10px;
+    background: white;
+    margin-left: 35px;
+    margin-top: -75px;
+}
+
+#editarPagina .logo_pagina img {
+    max-width: 125px;
+    max-height: 125px;
+    border-radius: 10px;
+}
+
+#editarPagina .home_pagina_info {
+    padding: 20px;
+    margin-top: 1.25em;
+    width: 100%;
+}
+
+#editarPagina .home_pagina_info h2 {
+    text-align: center;
+}
+
+#editarPagina .home_pagina_info .edit_pagina {
+    text-align: center;
+    cursor: pointer;
+}
+
+#editarPagina .home_pagina_info .home_resumo {
+    margin-top: 2em;
+}
+
+#editarPagina .home_pagina_info .home_resumo h3 {
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0.5em;
+}
+
+#editarPagina .home_pagina_info .home_resumo p {
+    text-align: justify;
+    font-size: 14px;
+    color: var(--font-color-low-emphasis);
+}
+
+#editarPagina .home_editar_pagina,
+#editarPagina .info_editar_pagina,
+#editarPagina .seguidores_editar_pagina,
+#editarPagina .insights_editar_pagina
+#editarPagina .vagas_editar_pagina {
+    width: 100%;
+}
+
+#editarPagina .home_editar_pagina {
+    display: block;
+}
+
+#editarPagina .info_editar_pagina {
+    margin-top: 3em;
+    display: none;
+}
+
+#editarPagina .vagas_editar_pagina {
+    display: none;
+}
+
+#editarPagina .seguidores_editar_pagina {
+    margin-top: 3em;
+    display: none;
+}
+
+#editarPagina .insights_editar_pagina {
+    margin-top: 3em;
+    display: none;
 }
 
 /* -=-=-=- ANIMAÇÕES -=-=-=- */

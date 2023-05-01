@@ -1,0 +1,167 @@
+<div class="container_principal" id="editarPagina">
+
+    <div class="container_editar_pagina">
+
+        <div class="container_editar_pagina_left">
+            <div class="editar_pagina_option" id="edit_home_pagina">
+                <ion-icon name="home-outline"></ion-icon> Home Page
+            </div>
+            <div class="editar_pagina_option" id="edit_info_pagina">
+                <ion-icon name="settings-outline"></ion-icon> Informações Gerais
+            </div>
+            <div class="editar_pagina_option" id="edit_vagas_pagina">
+                <ion-icon name="briefcase-outline"></ion-icon> Vagas de Emprego
+            </div>
+            <div class="editar_pagina_option" id="edit_seguidores_pagina">
+                <ion-icon name="people-outline"></ion-icon> Seguidores
+            </div>
+            <div class="editar_pagina_option" id="edit_insights_pagina">
+                <ion-icon name="trending-up-outline"></ion-icon> Insights
+            </div>
+        </div>
+
+        <div class="container_editar_pagina_right">
+
+            <!-- HOME -->
+            <div class="home_editar_pagina">
+
+                {{>_msg}}
+
+                <div class="background_pagina" style="background-image: url({{pagina.background}})">
+
+                </div>
+                <div class="logo_pagina">
+                    <img src="{{pagina.logo}}" alt="">
+                </div>
+                <div class="home_pagina_info">
+                    <h2>{{pagina.nome}}</h2>
+                    <p class="edit_pagina">Editar</p>
+
+                    <div class="home_resumo">
+                        <h3>
+                            <ion-icon name="newspaper-outline"></ion-icon> Resumo
+                        </h3>
+
+                        <p>
+                            {{pagina.descricao}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EDITAR INFO -->
+            <div class="info_editar_pagina">
+
+                <form action="/empresa/editPagina" method="POST" enctype="multipart/form-data">
+
+                    <div class="inputs_container">
+
+                        <!-- NOME -->
+
+                        <label for="nome" class="label_cadastro">Nome: <span class="pink_font">*</span></label>
+                        <input type="text" value="{{pagina.nome}}" name="nome" id="nome"
+                            placeholder="O nome da sua Empresa" class="input_cadastro" autocomplete="off" minlength="2"
+                            maxlength="35" placeholder="Nome da sua empresa" required>
+
+                        <!-- WEBSITE -->
+
+                        <label for="website" class="label_cadastro">Website: <span class="pink_font"></span></label>
+                        <input type="text" value="{{pagina.website}}" name="website" id="website" class="input_cadastro"
+                            autocomplete="off" minlength="2" maxlength="100" placeholder="O site da sua empresa">
+
+                        <!-- LOGO DA EMPRESA -->
+
+                        <div class="enviar_logo_empresa">
+                            <h4 class="title_cadastro">Trocar Logo</h4>
+                            <div class="perfil_foto_trocar">
+                                <div class="foto_trocar_right">
+                                    <input type="file" name="foto_logo" id="foto_logo">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="enviar_logo_empresa">
+                            <h4 class="title_cadastro">Trocar Plano de Fundo</h4>
+                            <div class="perfil_foto_trocar">
+                                <div class="foto_trocar_right">
+                                    <input type="file" name="foto_background" id="foto_background">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- INDUSTRIA -->
+
+                        <label for="industria" class="label_cadastro">Industria: <span
+                                class="pink_font">*</span></label>
+                        <input type="text" value="{{pagina.industria}}" name="industria" id="industria"
+                            placeholder="ex: Farmacêutica" class="input_cadastro" autocomplete="off" minlength="2"
+                            maxlength="60" required>
+
+                        <!-- TAMANHO DA EMPRESA -->
+
+                        <label for="tamanho_empresa" class="label_cadastro">Tamanho da Empresa: <span
+                                class="pink_font">*</span></label>
+                        <select name="tamanho_empresa" id="tamanho_empresa" class="input_cadastro" required>
+                            <option value=""></option>
+                            <option value="0 - 1 Colaboradores">0 - 1 Colaboradores</option>
+                            <option value="2 - 10 Colaboradores">2 - 10 Colaboradores</option>
+                            <option value="11 - 50 Colaboradores">11 - 50 Colaboradores</option>
+                            <option value="51 - 200 Colaboradores">51 - 200 Colaboradores</option>
+                            <option value="201 - 500 Colaboradores">201 - 500 Colaboradores</option>
+                            <option value="501 - 1.000 Colaboradores">501 - 1.000 Colaboradores</option>
+                            <option value="1.001 - 5.000 Colaboradores">1.001 - 5.000 Colaboradores</option>
+                            <option value="5.001 - 10.000 Colaboradores">5.001 - 10.000 Colaboradores</option>
+                            <option value="+ 10.000 Colaboradores">+ 10.000 Colaboradores</option>
+                        </select>
+
+                        <!-- TIPO DA ORGANIZAÇÃO -->
+
+                        <label for="tipo_empresa" class="label_cadastro">Tipo da Empresa: <span
+                                class="pink_font">*</span></label>
+                        <select name="tipo_empresa" id="tipo_empresa" class="input_cadastro" required>
+                            <option value=""></option>
+                            <option value="Empresa Pública">Empresa Pública</option>
+                            <option value="Empresa Privada">Empresa Privada</option>
+                            <option value="Empresa Governamental">Empresa Governamental</option>
+                            <option value="Sem Fins Lucrativos">Sem Fins Lucrativos</option>
+                            <option value="Empresa Pessoal">Empresa Pessoal</option>
+                            <option value="Parceria">Parceria</option>
+                            <option value="Autonomo">Autonomo</option>
+                        </select>
+
+                        <label for="descricao" class="label_cadastro">Descrição: <span
+                                class="pink_font">*</span></label>
+
+                        <textarea name="descricao" id="descricao" placeholder="uma Descrição da sua empresa"
+                            class="input_cadastro" autocomplete="off" cols="30" rows="10"
+                            required>{{pagina.descricao}}</textarea>
+
+                        <button type="submit" class="submit_cadastro">
+                            Editar Informções
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+
+            <!-- VAGAS DE EMPREGO -->
+            <div class="vagas_editar_pagina">
+                <p>Nada por enquanto</p>
+            </div>
+
+            <!-- SEGUIDORES -->
+            <div class="seguidores_editar_pagina">
+                <p>Nada por enquanto</p>
+            </div>
+
+            <!-- INSIGHTS -->
+            <div class="insights_editar_pagina">
+                <p>Nada por enquanto</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
