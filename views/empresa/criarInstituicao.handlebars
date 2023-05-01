@@ -11,12 +11,14 @@
             <!-- NOME -->
 
             <label for="nome" class="label_cadastro">Nome: <span class="pink_font">*</span></label>
-            <input type="text" name="nome" id="nome" placeholder="Nome da sua Instituição" class="input_cadastro" autocomplete="off" minlength="2" maxlength="35" aria-placeholder="Nome da sua empresa" required>
+            <input type="text" name="nome" id="nome" placeholder="Nome da sua Instituição" class="input_cadastro"
+                autocomplete="off" minlength="2" maxlength="35" aria-placeholder="Nome da sua empresa" required>
 
             <!-- WEBSITE -->
 
             <label for="website" class="label_cadastro">Website: <span class="pink_font"></span></label>
-            <input type="text" name="website" id="website" class="input_cadastro" autocomplete="off" minlength="2" maxlength="100" placeholder="O site da sua empresa">
+            <input type="text" name="website" id="website" class="input_cadastro" autocomplete="off" minlength="2"
+                maxlength="100" placeholder="O site da sua empresa">
 
             <!-- LOGO DA INSTITUICAO -->
 
@@ -32,11 +34,13 @@
             <!-- INDUSTRIA -->
 
             <label for="industria" class="label_cadastro">Industria: <span class="pink_font">*</span></label>
-            <input type="text" name="industria" id="industria" placeholder="ex: Cursos Tecnicos" class="input_cadastro" autocomplete="off" minlength="2" maxlength="60" required>
+            <input type="text" name="industria" id="industria" placeholder="ex: Cursos Tecnicos" class="input_cadastro"
+                autocomplete="off" minlength="2" maxlength="60" required>
 
             <!-- TAMANHO DA EMPRESA -->
 
-            <label for="tamanho_instituicao" class="label_cadastro">Tamanho da Instuição: <span class="pink_font">*</span></label>
+            <label for="tamanho_instituicao" class="label_cadastro">Tamanho da Instuição: <span
+                    class="pink_font">*</span></label>
             <select name="tamanho_instituicao" id="tamanho_instituicao" class="input_cadastro" required>
                 <option value=""></option>
                 <option value="0 - 1 Colaboradores">0 - 1 Colaboradores</option>
@@ -51,12 +55,15 @@
             </select>
 
             <label for="descricao" class="label_cadastro">Descrição: <span class="pink_font">*</span></label>
-            <input type="text" name="descricao" id="descricao" placeholder="uma Descrição da sua empresa" class="input_cadastro" autocomplete="off" minlength="2" maxlength="200" required>
+
+            <textarea name="descricao" id="descricao" placeholder="uma Descrição da sua empresa" class="input_cadastro" autocomplete="off" cols="30" rows="10" required></textarea>
 
             <div class="flex">
                 <input type="checkbox" name="permissao" id="permissao" value="Assinado" class="checkbox">
-                <label for="permissao" class="label_cadastro" id="permissao">Confirmo que sou um representante autorizado desta organização e tenho o direito de agir em seu nome na criação e gestão desta página. A organização e eu concordamos com os termos adicionais das Páginas.
-                <span class="span_cadastro"></span></label>
+                <label for="permissao" class="label_cadastro" id="permissao">Confirmo que sou um representante
+                    autorizado desta organização e tenho o direito de agir em seu nome na criação e gestão desta página.
+                    A organização e eu concordamos com os termos adicionais das Páginas.
+                    <span class="span_cadastro"></span></label>
             </div>
 
             <button type="submit" class="submit_cadastro">
