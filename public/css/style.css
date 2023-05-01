@@ -44,9 +44,12 @@
     background-size: cover;
 }
 
+main {
+    min-height: 72vh;
+}
+
 body {
     background: #f5f5f5c9;
-    min-height: 72vh;
 }
 
 /* ===== REUTILIZÁVEL ======= */
@@ -1363,9 +1366,38 @@ text_feed input:focus {
 
 .footer {
     min-height: 200px;
+    padding-bottom: 75px;
     width: 100%;
     background: var(--color3);
     margin-top: -1px;
+}
+
+.footer_content {
+    padding-top: 75px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer_list {
+    width: 350px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.footer_list h2 {
+    text-underline-offset: 5px;
+    text-decoration: underline;
+    font-weight: normal;
+    color: white;
+    padding-bottom: 15px;
+}
+
+.footer_list a {
+    text-align: center;
+    font-size: 14.5px;
+    color: white;
 }
 
 /* ====== EDIT PROFILE ======= */
@@ -2579,6 +2611,14 @@ text_feed input:focus {
     .index_companies,
     .index_events {
         width: 350px;
+    }
+
+    .footer_list {
+        margin-bottom: 50px;
+    }
+
+    .footer_list h2 {
+        font-size: 20px;
     }
 
 }
