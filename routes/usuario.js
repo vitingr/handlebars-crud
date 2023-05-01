@@ -1728,10 +1728,10 @@ router.post("/novaInstituicao", upload.fields([
 
         } else {
 
-            Pagina.findOne({ nome: req.body.nome }).lean().then((empresa) => {
+            Pagina.findOne({ nome: req.body.nome }).lean().then((instituicao) => {
 
-                if (empresa) {
-                    req.flash('error_msg', 'ERRO! Já existe uma empresa com esse nome cadastrada em nosso Sistema...')
+                if (instituicao) {
+                    req.flash('error_msg', 'ERRO! Já existe uma instituição com esse nome cadastrada em nosso Sistema...')
                     res.redirect("/usuario/criarPagina")
                 } else {
 
@@ -1747,7 +1747,7 @@ router.post("/novaInstituicao", upload.fields([
                             qtdFuncionarios: req.body.tamanho_instituicao,
                             industria: req.body.industria,
                             descricao: req.body.descricao,
-                            modelo: "empresa"
+                            modelo: "institucional"
                         })
 
                         novaPagina.save().then(() => {
@@ -1775,7 +1775,7 @@ router.post("/novaInstituicao", upload.fields([
                             })
 
                         }).catch((erro) => {
-  
+
                             req.flash('error_msg', 'ERRO! Não foi possível criar a página.')
                             res.redirect("/usuario/criarPagina")
 
@@ -1793,7 +1793,7 @@ router.post("/novaInstituicao", upload.fields([
                             qtdFuncionarios: req.body.tamanho_instituicao,
                             industria: req.body.industria,
                             descricao: req.body.descricao,
-                            modelo: "empresa"
+                            modelo: "institucional"
 
                         })
 
@@ -1838,8 +1838,46 @@ router.post("/novaInstituicao", upload.fields([
 
     } else {
 
-        erros.push("Para criar sua Instituição, marque o Checkbox de Permissão.")
+        erros.push("Para criar sua Empresa, marque o Checkbox de Permissão.")
         res.render("usuario/criarPagina", { erros: erros })
+
+    }
+
+})
+
+router.get("/encontrarPaginas", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    if (usuarioLogado.paginas) {
+
+        const empresas = usuarioLogado.paginas
+        const empresas_seguidas = empresas.split(" ")
+
+        Pagina.find({ "dono": { $ne: usuarioLogado.id }, "_id": { $nin: empresas_seguidas } }).lean().then((empresas) => {
+
+            res.render("usuario/encontrarPaginas", { usuario: usuarioLogado, empresas: empresas })
+
+        }).catch((erro) => {
+
+            req.flash('error_msg', 'ERRO! Não foi possível encontrar empresas')
+            res.redirect('/')
+
+        })
+
+    } else {
+
+        Pagina.find({ "dono": { $ne: usuarioLogado.id } }).lean().then((empresas) => {
+
+            res.render("usuario/encontrarPaginas", { usuario: usuarioLogado, empresas: empresas })
+
+
+        }).catch((erro) => {
+
+            req.flash('error_msg', 'ERRO! Não foi possível encontrar empresas')
+            res.redirect('/')
+
+        })
 
     }
 
@@ -1930,7 +1968,7 @@ router.post("/encontrarPaginas/seguirPagina", (req, res) => {
 
 })
 
-router.get("/encontrarPaginas", (req, res) => {
+router.get("/paginas", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
     var paginas = []
