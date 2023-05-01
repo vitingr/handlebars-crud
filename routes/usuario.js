@@ -1930,7 +1930,7 @@ router.post("/encontrarPaginas/seguirPagina", (req, res) => {
 
 })
 
-router.get("/paginas", (req, res) => {
+router.get("/encontrarPaginas", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
     var paginas = []
