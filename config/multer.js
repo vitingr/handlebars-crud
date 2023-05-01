@@ -1,22 +1,24 @@
 const multer = require("multer")
 const path = require("path")
 
-function numerosMulter() {
-    let numeros = [];
+function gerarLetras() {
+    const letras = "abcdefghijklmnopqrstuvwxyz";
+    let string = "";
     for (let i = 0; i < 3; i++) {
-      numeros.push(Math.floor(Math.random() * 10));
+      const randomIndex = Math.floor(Math.random() * alfabeto.length);
+      string += alfabeto[randomIndex];
     }
-    return numeros;
-}
+    return string;
+  }
 
-let numeros = numerosMulter()
+let string = gerarLetras()
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, "public/uploads/")
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + numeros + path.extname(file.originalname))
+        cb(null, Date.now() + string + path.extname(file.originalname))
     }
 })
 
