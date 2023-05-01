@@ -5,7 +5,7 @@ function gerarLetras() {
     const letras = "abcdefghijklmnopqrstuvwxyz";
     let string = "";
     for (let i = 0; i < 3; i++) {
-      const randomIndex = Math.floor(Math.random() * alfabeto.length);
+      const randomIndex = Math.floor(Math.random() * letras.length);
       string += alfabeto[randomIndex];
     }
     return string;
