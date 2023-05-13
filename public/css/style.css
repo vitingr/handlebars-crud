@@ -1461,6 +1461,21 @@ text_feed input:focus {
     color: var(--color1);
 }
 
+.qtd_seguidores_perfil {
+    font-size: 13px !important;
+    cursor: pointer;
+    font-weight: normal;
+    color: var(--color1) !important;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+.qtd_seguidores_perfil:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    color: var(--color2) !important;
+}
+
 .profile_analytics,
 .profile_activity,
 .profile_experience,
@@ -1518,6 +1533,7 @@ text_feed input:focus {
 
 .profile_info_config {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: 25px;
     margin-bottom: 25px;
@@ -1685,6 +1701,33 @@ text_feed input:focus {
     align-items: center;
     gap: 10px;
     border-bottom: 1px dashed #33333323;
+}
+
+.seguidores_container {
+    display: flex;
+    align-items: center;
+    padding-top: 15px;
+    gap: 10px;
+}
+
+.seguidores_container a {
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--font-color);
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+.seguidores_container a:hover {
+    color: var(--color1);
+}
+
+.seguidor img {
+    border-radius: 50%;
+    max-width: 35px;
+    max-height: 35px;
+    width: 100%;
+    height: 100%;
 }
 
 /* -=-=-=- AMIGOS -=-=-=- */
@@ -2191,7 +2234,7 @@ text_feed input:focus {
     border-radius: 20px;
     background: white;
     border: 1px solid #e7e7e7;
-    width: 250px;
+    width: 275px;
     max-height: 275px;
 }
 
@@ -2307,6 +2350,97 @@ text_feed input:focus {
 #editarPagina .insights_editar_pagina {
     margin-top: 3em;
     display: none;
+}
+
+#editarPagina .title_editPagina {
+    text-align: center;
+    font-size: 22.5px;
+    padding-top: 25px;
+}
+
+#editarPagina .subtitle_editPagina {
+    font-size: 15.5px;
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--font-color-low-emphasis);
+}
+
+#editarPagina .vaga_config_1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#editarPagina .vaga_config_2 {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* -=-=-=- SEGUIDORES -=-=-=- */
+
+#seguidores .seguidores_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    gap: 25px;
+}
+
+#seguidores .seguidor_perfil {
+    display: flex;
+    gap: 10px;
+    padding: 25px;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #33333310;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+#seguidores .seguidor_foto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#seguidores .seguidor_foto img {
+    object-fit: contain;
+    width: 65px;
+    height: 65px;
+    border-radius: 7.5px;
+}
+
+#seguidores .seguidor_info {
+    width: 100%;
+}
+
+#seguidores .seguidor_info p {
+    color: var(--font-color-low-emphasis);
+}
+
+#seguidores .seguidor_more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#seguidores .seguidor_more ion-icon {
+    padding: 7.5px;
+    border-radius: 50%;
+    font-size: 25px;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+#seguidores .seguidor_more ion-icon:hover {
+    background: #3333331f;
+}
+
+#seguidores h1 {
+    text-align: center;
+    padding: 25px;
 }
 
 /* -=-=-=- ANIMAÇÕES -=-=-=- */

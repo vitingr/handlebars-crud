@@ -1,0 +1,42 @@
+<div class="container_principal" id="seguidores">
+
+    <div class="container_unico">
+
+        <h1>Seguidores de {{usuario.nome}}</h1>
+
+        <div class="seguidores_container">
+
+            {{#each seguidores}}
+
+            <a href="/usuario/verPerfil/{{_id}}">
+                <div class="seguidor_perfil">
+                    <div class="seguidor_foto">
+                        <img src="{{foto}}">
+                    </div>
+
+                    <div class="seguidor_info">
+                        <h2>
+                            {{nomeCompleto}}
+                        </h2>
+                        <p>
+                            {{seguidores}} seguidores
+                        </p>
+                    </div>
+
+                    <div class="seguidor_more">
+                        <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+                    </div>
+                </div>
+            </a>
+
+            {{else}}
+
+            <p>Essa Pessoa não segue ninguém</p>
+
+            {{/each}}
+
+        </div>
+
+    </div>
+
+</div>

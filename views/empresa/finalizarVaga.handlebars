@@ -1,0 +1,31 @@
+<div class="container_principal" id="cadastro">
+    <h1 class="title_cadastro">Detalhes da Vaga </h1>
+    <h2 class="subtitle_cadastro">
+        Informe mais alguns detalhes sobre a vaga que você está anunciando.
+    </h2>
+
+    <form action="/" method="POST">
+
+        <div class="inputs_container">
+
+            <!-- ULTIMO CARGO ATUADO -->
+
+            <label for="descricao" class="label_cadastro">Descrição <span class="pink_font">*</span></label>
+            <textarea name="descricao" id="descricao" placeholder="uma Descrição da sua empresa" class="input_cadastro" autocomplete="off" cols="30" rows="10" required></textarea>
+
+            <!-- SALARIO -->
+
+            <label for="minSalario" class="label_cadastro">Salário Base Oferecido <span class="pink_font">*</span></label>
+            <input type="text" name="minSalario" id="minSalario" class="input_cadastro" autocomplete="off" minlength="3" maxlength="11" required>
+
+            <label for="minSalario" class="label_cadastro">Salário Máximo Oferecido <span class="pink_font">*</span></label>
+            <input type="text" name="minSalario" id="minSalario" class="input_cadastro" autocomplete="off" minlength="3" maxlength="11" required>
+
+            <button type="submit" class="submit_cadastro">
+                Publicar Vaga
+            </button>
+        </div>
+
+    </form>
+
+</div>

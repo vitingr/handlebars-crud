@@ -63,7 +63,8 @@ const Usuario = new Schema({
         type: String
     },
     notificacoes: {
-        type: Number
+        type: Number,
+        default: 0
     },
     paginas: {
         type: String

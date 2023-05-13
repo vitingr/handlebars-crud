@@ -46,6 +46,18 @@
                             {{pagina.descricao}}
                         </p>
                     </div>
+
+                    {{#if vagas}}
+                    <div class="home_vagas">
+                        <h3>
+                            <ion-icon name="newspaper-outline"></ion-icon> Vagas de Emprego
+                        </h3>
+
+                    </div>
+                    {{else}}
+
+                    {{/if}}
+
                 </div>
             </div>
 
@@ -137,7 +149,7 @@
                             required>{{pagina.descricao}}</textarea>
 
                         <button type="submit" class="submit_cadastro">
-                            Editar Informções
+                            Editar Informações
                         </button>
                     </div>
 
@@ -147,21 +159,93 @@
 
             <!-- VAGAS DE EMPREGO -->
             <div class="vagas_editar_pagina">
-                <p>Nada por enquanto</p>
-            </div>
 
-            <!-- SEGUIDORES -->
-            <div class="seguidores_editar_pagina">
-                <p>Nada por enquanto</p>
-            </div>
+                <form action="/empresa/novaVaga" method="POST">
+                    <div class="vaga_config_1">
+                        <h1 class="title_editPagina">Anuncie uma Vaga! </h1>
+                        <h2 class="subtitle_editPagina">
+                            Vamos começar informando algumas informações básicas da vaga disponibilizada por sua
+                            empresa.
+                        </h2>
 
-            <!-- INSIGHTS -->
-            <div class="insights_editar_pagina">
-                <p>Nada por enquanto</p>
+                        <label for="cargo" class="label_cadastro">Cargo <span class="pink_font">*</span></label>
+                        <input type="text" name="cargo" id="cargo" class="input_cadastro" minlength="2" maxlength="60"
+                            placeholder="Ex: Auxiliar de Administração" required>
+                        <label for="tipo" class="label_cadastro">Tipo de Emprego <span
+                                class="pink_font">*</span></label>
+                        <select name="tipo" id="tipo" class="input_cadastro" required>
+                            <option value=""></option>
+                            <option value="Presencial">Presencial</option>
+                            <option value="Híbrido">Híbrido</option>
+                            <option value="Remoto">Remoto</option>
+                        </select>
+                        <label for="local" class="label_cadastro">Local da Vaga <span class="pink_font">*</span></label>
+                        <input type="text" name="local" id="local" class="input_cadastro" minlength="2" maxlength="200"
+                            placeholder="Ex: São Paulo, Brasil" required>
+                        <label for="modelo" class="label_cadastro">Tipo de Emprego <span
+                                class="pink_font">*</span></label>
+                        <select name="modelo" id="modelo" class="input_cadastro" required>
+                            <option value=""></option>
+                            <option value="Determinado">Tempo determinado</option>
+                            <option value="Indeterminado">Tempo Indeterminado</option>
+                            <option value="Eventual">Eventual</option>
+                            <option value="Estagio">Estágio</option>
+                            <option value="Experiencia">Experiência</option>
+                            <option value="Intermitente">Intermitente</option>
+                            <option value="Home_office">Home Office</option>
+                            <option value="Jovem_aprendiz">Jovem Aprendiz</option>
+                            <option value="Parcial">Parcial</option>
+                        </select>
+                        <button class="submit_cadastro" id="avancar_vaga">
+                            Avançar
+                        </button>
+                    </div>
+
+                    <div class="vaga_config_2">
+
+                        <h1 class="title_editPagina">Anuncie uma Vaga! </h1>
+                        <h2 class="subtitle_editPagina">
+                            Vamos começar informando algumas informações básicas da vaga disponibilizada por sua
+                            empresa.
+                        </h2>
+
+                        <!-- DESCRICAO CARGO -->
+
+                        <label for="descricao" class="label_cadastro">Descrição <span class="pink_font">*</span></label>
+                        <textarea name="descricao" id="descricao" placeholder="uma Descrição da sua empresa"
+                            class="input_cadastro" autocomplete="off" cols="30" rows="10" required></textarea>
+
+                        <!-- SALARIO -->
+
+                        <label for="minSalario" class="label_cadastro">Salário Base Oferecido <span
+                                class="pink_font">*</span></label>
+                        <input type="text" name="minSalario" id="minSalario" class="input_cadastro" autocomplete="off"
+                            minlength="3" maxlength="11" required>
+
+                        <label for="maxSalario" class="label_cadastro">Salário Máximo Oferecido </label>
+                        <input type="text" name="maxSalario" id="maxSalario" class="input_cadastro" autocomplete="off"
+                            minlength="3" maxlength="11">
+
+                        <button type="submit" class="submit_cadastro">
+                            Publicar Vaga
+                        </button>
+                    </div>
+
+                </form>
+
+
+                <!-- SEGUIDORES -->
+                <div class="seguidores_editar_pagina">
+                    <p>Nada por enquanto</p>
+                </div>
+
+                <!-- INSIGHTS -->
+                <div class="insights_editar_pagina">
+                    <p>Nada por enquanto</p>
+                </div>
+
             </div>
 
         </div>
 
     </div>
-
-</div>

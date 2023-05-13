@@ -5948,5 +5948,21 @@
     }
 
 </script>
+<script>
+    let vaga_config_1 = document.querySelector(".vaga_config_1")
+    let vaga_config_2 = document.querySelector(".vaga_config_2")
+    let botao_vaga_config_1 = document.querySelector("#avancar_vaga")
+
+    botao_vaga_config_1.onclick = function(e) {
+        e.preventDefault()
+
+        console.log("A")
+        vaga_config_1.style.display = 'none'
+        vaga_config_2.style.display = 'flex'
+
+    }
+
+
+</script>
 
 </html>

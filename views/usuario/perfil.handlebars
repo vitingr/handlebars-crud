@@ -11,7 +11,13 @@
             <div class="profile_info">
                 <div class="profile_info_text">
                     <div class="profile_info_config">
-                        <h1>{{usuario.nomeCompleto}}</h1>
+                        <h1>
+                            {{usuario.nomeCompleto}}
+                            <p class="qtd_seguidores_perfil">
+                                {{usuario.seguidores}} Seguidores
+                            </p>
+
+                        </h1>
                         <a href="/usuario/infoPerfil">
                             <button type="submit" class="link_edit_profile">
                                 <p>Editar Perfil</p>
@@ -49,6 +55,21 @@
                             Info</span></p>
                     {{else}}
                     <p>Adicione um Endereço. ● <span class="span_link">Contact Info</span></p>
+                    {{/if}}
+
+                    {{#if seguidores}}
+                    <div class="seguidores_container">
+                        {{#each seguidores}}
+                        <div class="seguidor">
+                            <img src="{{foto}}" alt="">
+                        </div>
+                        {{else}}
+
+                        {{/each}}
+                        <a href="/usuario/seguidores">Ver mais seguidores</a>
+                    </div>
+                    {{else}}
+                    <p>Esas pessoa não possui seguidores</p>
                     {{/if}}
 
                 </div>

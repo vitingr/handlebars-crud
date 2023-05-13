@@ -42,6 +42,24 @@ function validarEmail(email) {
     return regex.test(email)
 }
 
+function amigosAleatorios(amigos, quantidade) {
+
+    const array = []
+    while (array.length < quantidade) {
+        const numero = Math.floor(Math.random() * amigos.length);
+
+        let valor = amigos[numero]
+        if (array.includes(valor)) {
+            console.log("Valor Inválido")
+        } else {
+            array.push(valor)
+        }
+    }
+
+    return array
+
+}
+
 // Páginas
 
 router.get("/endereco", (req, res) => {
@@ -362,6 +380,55 @@ router.get("/editarPerfil", (req, res) => {
 
                                 Experiencia.find({ dono: usuarioLogado.id }).lean().then((experiencias) => {
 
+                                    console.log("DEU A")
+
+                                    if (usuarioLogado.seguidores) {
+
+                                        console.log("Tem seguidores")
+
+                                        let amigos = []
+                                        let amigos_separar = usuarioLogado.amigos.split(" ")
+                                        const amigos_separados = []
+
+                                        amigos_separar.forEach(amigo => {
+                                            if (amigo == 0 || amigo == null || amigo == undefined || amigo == "") {
+                                                console.log("Amigo Invalido")
+                                            } else {
+                                                amigos_separados.push(amigo)
+                                            }
+                                        })
+
+                                        if (usuarioLogado.seguidores == 1) {
+                                            amigos = amigosAleatorios(amigos_separados, 1)
+                                        }
+
+                                        if (usuarioLogado.seguidores == 2) {
+                                            amigos = amigosAleatorios(amigos_separados, 2)
+                                        }
+
+                                        if (usuarioLogado.seguidores == 3) {
+                                            amigos = amigosAleatorios(amigos_separados, 3)
+                                        }
+
+                                        if (usuarioLogado.seguidores == 4) {
+                                            amigos = amigosAleatorios(amigos_separados, 4)
+                                        }
+
+                                        if (usuarioLogado.seguidores >= 5) {
+                                            amigos = amigosAleatorios(amigos_separados, 5)
+                                        }
+
+                                        Usuario.find({ "_id": { $in: amigos } }).lean().then((amigos) => {
+
+
+                                        })
+
+                                    } else {
+
+                                        console.log("Não tem seguidores")
+
+                                    }
+
                                     if (usuarios.length >= 5) {
 
                                         let users = []
@@ -376,11 +443,11 @@ router.get("/editarPerfil", (req, res) => {
                                             }
                                         }
 
-                                        res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, usuarios: users, experiencias: experiencias })
+                                        res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, usuarios: users, experiencias: experiencias, seguidores: amigos })
 
                                     } else {
 
-                                        res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, experiencias: experiencias })
+                                        res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, experiencias: experiencias, seguidores: amigos })
 
                                     }
 
@@ -444,30 +511,111 @@ router.get("/editarPerfil", (req, res) => {
 
                                 Experiencia.find({ dono: usuarioLogado.id }).lean().then((experiencias) => {
 
-                                    if (usuarios.length >= 5) {
+                                    console.log("DEU B")
 
-                                        let users = []
+                                    if (usuarioLogado.seguidores) {
 
-                                        for (contador = 0; contador < 5; contador++) {
-                                            let user = Math.floor(Math.random() * usuarios.length)
+                                        console.log("Tem seguidores")
 
-                                            if (!users.includes(usuarios[user])) {
-                                                users.push(usuarios[user]);
+                                        let amigos = []
+                                        let amigos_separar = usuarioLogado.amigos.split(" ")
+                                        const amigos_separados = []
+
+                                        console.log(amigos_separar)
+
+                                        amigos_separar.forEach(amigo => {
+                                            if (amigo == 0 || amigo == null || amigo == undefined || amigo == "") {
+                                                console.log("Amigo Invalido")
                                             } else {
-                                                contador--;
+                                                amigos_separados.push(amigo)
                                             }
+                                        })
+
+                                        console.log(amigos_separados)
+
+                                        if (usuarioLogado.seguidores == 1) {
+                                            amigos = amigosAleatorios(amigos_separados, 1)
                                         }
 
-                                        res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, usuarios: users, perfil_completo: perfil_completo, experiencias: experiencias })
+                                        if (usuarioLogado.seguidores == 2) {
+                                            amigos = amigosAleatorios(amigos_separados, 2)
+                                        }
+
+                                        if (usuarioLogado.seguidores == 3) {
+                                            amigos = amigosAleatorios(amigos_separados, 3)
+                                        }
+
+                                        if (usuarioLogado.seguidores == 4) {
+                                            amigos = amigosAleatorios(amigos_separados, 4)
+                                        }
+
+                                        if (usuarioLogado.seguidores >= 5) {
+                                            amigos = amigosAleatorios(amigos_separados, 5)
+                                        }
+
+                                        console.log("C")
+
+                                        Usuario.find({ "_id": { $in: amigos } }).lean().then((amigos) => {
+
+                                            if (usuarios.length >= 5) {
+
+                                                let users = []
+
+                                                for (contador = 0; contador < 5; contador++) {
+                                                    let user = Math.floor(Math.random() * usuarios.length)
+
+                                                    if (!users.includes(usuarios[user])) {
+                                                        users.push(usuarios[user]);
+                                                    } else {
+                                                        contador--;
+                                                    }
+                                                }
+
+                                                console.log("F")
+
+                                                res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, usuarios: users, perfil_completo: perfil_completo, experiencias: experiencias, seguidores: amigos })
+
+                                            } else {
+
+                                                res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, perfil_completo: perfil_completo, experiencias: experiencias, seguidores: amigos })
+
+                                            }
+
+                                        }).catch((erro) => {
+
+                                            console.log(erro)
+
+                                        })
 
                                     } else {
 
-                                        res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, perfil_completo: perfil_completo, experiencias: experiencias })
+                                        if (usuarios.length >= 5) {
+
+                                            let users = []
+
+                                            for (contador = 0; contador < 5; contador++) {
+                                                let user = Math.floor(Math.random() * usuarios.length)
+
+                                                if (!users.includes(usuarios[user])) {
+                                                    users.push(usuarios[user]);
+                                                } else {
+                                                    contador--;
+                                                }
+                                            }
+
+                                            res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, usuarios: users, perfil_completo: perfil_completo, experiencias: experiencias })
+
+                                        } else {
+
+                                            res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, perfil_completo: perfil_completo, experiencias: experiencias })
+
+                                        }
 
                                     }
 
                                 }).catch((erro) => {
 
+                                    console.log(erro)
                                     req.flash('error_msg', 'ERRO! Não foi possível encontrar suas experiências...')
                                     res.redirect("/")
 
@@ -475,6 +623,7 @@ router.get("/editarPerfil", (req, res) => {
 
                             }).catch((erro) => {
 
+                                console.log(erro)
                                 req.flash('error_msg', 'ERRO! Não foi possível encontrar seus certificados...')
                                 res.redirect("/")
 
@@ -482,6 +631,7 @@ router.get("/editarPerfil", (req, res) => {
 
                         }).catch((erro) => {
 
+                            console.log(erro)
                             req.flash('error_msg', 'ERRO! Não foi possível encontrar outras contas...')
                             res.redirect("/")
 
@@ -489,6 +639,7 @@ router.get("/editarPerfil", (req, res) => {
 
                     }).catch((erro) => {
 
+                        console.log(erro)
                         req.flash('error_msg', 'ERRO! Não foi possível encontrar suas formações.')
                         res.redirect("/")
 
@@ -496,6 +647,7 @@ router.get("/editarPerfil", (req, res) => {
 
                 }).catch((erro) => {
 
+                    console.log(erro)
                     req.flash('error_msg', 'ERRO! Não foi possível encontrar seu endereço...')
                     res.redirect("/")
 
@@ -503,6 +655,7 @@ router.get("/editarPerfil", (req, res) => {
 
             }).catch((erro) => {
 
+                console.log(erro)
                 req.flash('error_msg', 'ERRO! Não foi possível encontrar seu perfil...')
                 res.redirect("/")
 
@@ -524,7 +677,7 @@ router.get("/notificacoes", (req, res) => {
 
     Notificacao.find({ dono: usuarioLogado.id }).lean().then((notificacoes) => {
 
-        Usuario.findOne({_id: usuarioLogado.id}).then((usuario) => {
+        Usuario.findOne({ _id: usuarioLogado.id }).then((usuario) => {
 
             usuario.notificacoes = 0
             usuario.save().then(() => {
@@ -537,7 +690,7 @@ router.get("/notificacoes", (req, res) => {
 
             req.flash('error_msg', 'ERRO! Não foi possível carregar sua conta!')
             res.redirect("/")
-    
+
         })
 
     }).catch((erro) => {
@@ -1099,7 +1252,7 @@ router.get("/encontrarAmigos", (req, res) => {
 
     console.log(`AMIGO:${amigos}`)
 
-    Usuario.find({ "_id": { $nin: [usuarioLogado.id, amigos] } }).lean().then((usuarios) => {
+    Usuario.find({ "_id": { $not: { $in: [usuarioLogado.id, ...amigos] } } }).lean().then((usuarios) => {
 
         res.render("usuario/amigos", { usuario: usuarioLogado, usuarios: usuarios })
 
@@ -1157,14 +1310,14 @@ router.get("/verPerfil/:id", (req, res) => {
 
                                 req.flash('error_msg', 'ERRO! Não foi possível encontrar as experiências...')
                                 res.redirect("/")
-        
+
                             })
 
                         }).catch((erro) => {
 
                             req.flash('error_msg', 'ERRO! Não foi possível encontrar os certificados...')
                             res.redirect("/")
-    
+
                         })
 
                     }).catch((erro) => {
@@ -1991,6 +2144,47 @@ router.get("/paginas", (req, res) => {
 
         req.flash('error_msg', 'ERRO! Não foi possível encontrar suas páginas')
         res.redirect("/")
+
+    })
+
+})
+
+router.get("/seguidores", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    Usuario.findOne({ _id: usuarioLogado.id }).lean().then((usuario) => {
+
+        if (usuario.seguidores && usuario.amigos) {
+
+            let amigos_separar = usuario.amigos.split(" ")
+            const amigos_separados = []
+
+            amigos_separar.forEach(amigo => {
+                if (amigo == 0 || amigo == null || amigo == undefined || amigo == "") {
+                    console.log("Amigo Invalido")
+                } else {
+                    amigos_separados.push(amigo)
+                }
+            })
+
+            Usuario.find({ "_id": { $in: amigos_separados } }).lean().then((seguidores) => {
+
+                res.render("usuario/seguidores", { usuario: usuarioLogado, seguidores: seguidores })
+
+            }).catch((erro) => {
+
+                req.flash('error_msg', 'ERRO! Não foi possível encontrar seus seguidores.')
+                req.redirect("/usuario/editarPerfil")
+
+            })
+
+        }
+
+    }).catch((erro) => {
+
+        req.flash('error_msg', 'ERRO! Não foi possível encontrar sua conta.')
+        req.redirect("/usuario/editarPerfil")
 
     })
 

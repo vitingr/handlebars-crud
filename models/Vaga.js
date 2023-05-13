@@ -12,22 +12,36 @@ const Vaga = new Schema({
         type: String,
         required: true
     },
+    modelo: {
+        type: String,
+        required: true
+    },
+    tipo: {
+        type: String,
+        required: true
+    },
+    local: {
+        type: String,
+        required: true
+    },
     salarioMinimo: {
-        type: Number
+        type: Number,
+        required: true
     },
     salarioMaximo: {
-        type: Number,
-        required: true
+        type: Number
     },
     vagasDisponiveis: {
-        type: Number,
-        required: true
+        type: Number
     },
     descricao: {
         type: String,
         required: true
     },
     linkEmpresa: {
+        type: String
+    },
+    foto: {
         type: String
     }
 

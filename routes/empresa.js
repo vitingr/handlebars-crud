@@ -67,7 +67,7 @@ router.post("/editPagina", upload.fields([
     { name: 'foto_background', maxCount: 1 }
 ]), (req, res) => {
 
-    const { nome, website, industria, tamanho_empresa, tipo_empresa, descricao} = req.body
+    const { nome, website, industria, tamanho_empresa, tipo_empresa, descricao } = req.body
 
     const { foto_logo, foto_background } = req.files
 
@@ -83,44 +83,44 @@ router.post("/editPagina", upload.fields([
         if (!nome || typeof nome == undefined || nome == null) {
             erros.push({ texto: "Adicione um Nome" })
         }
-    
+
         if (nome.length < 2) {
             erros.push({ texto: "Nome muito Pequeno" })
         }
-    
+
         if (nome.length > 35) {
             erros.push({ texto: "Nome muito Grande" })
         }
-    
+
         if (!industria || typeof industria == undefined || industria == null) {
             erros.push({ texto: "Adicione o ramo da sua Empresa" })
         }
-    
+
         if (!tamanho_empresa || typeof tamanho_empresa == undefined || tamanho_empresa == null) {
             erros.push({ texto: "Adicione o tamanho da sua Empresa" })
         }
-    
+
         if (!descricao || typeof descricao == undefined || descricao == null) {
             erros.push({ texto: "Adicione uma descrição da sua Empresa" })
         }
-    
+
         if (erros.length > 0) {
-    
+
             res.render("empresa/editarPagina", { usuario: usuarioLogado, pagina: pagina, erros: erros })
-    
+
         } else {
 
             if (foto_logo) {
 
                 const logo = req.files.foto_logo[0].path
                 setLogo = logo.replace('public', '')
-                
+
             } else {
-        
+
                 setLogo = pagina.logo
-        
+
             }
-        
+
             if (foto_background) {
                 const background = req.files.foto_background[0].path
                 const editBackground = background.replace('public', '')
@@ -128,13 +128,13 @@ router.post("/editPagina", upload.fields([
                 for (var i = 0; i < editBackground.length; i++) if (editBackground[i] !== "\"" && editBackground[i] !== "\\") newBackground += editBackground[i];
                 newBackground = newBackground.replace('uploads', '')
                 setBackground = `/uploads/${newBackground}`
-        
+
             } else {
-        
+
                 setBackground = pagina.background
-        
+
             }
-      
+
             pagina.logo = setLogo
             pagina.background = setBackground
             pagina.nome = nome
@@ -142,20 +142,20 @@ router.post("/editPagina", upload.fields([
             pagina.qtdFuncionarios = tamanho_empresa
             pagina.industria = industria
             pagina.descricao = descricao
-    
+
             pagina.save().then(() => {
-    
+
                 req.flash('success_msg', 'SUCESSO! A sua página foi editada.')
                 res.redirect("/empresa/minhaPagina")
-    
+
             }).catch((erro) => {
-    
+
                 console.log(`erro ${erro}`)
                 req.flash('error_msg', 'ERRO! Não foi possível salvar as alterações.')
                 res.redirect("/empresa/minhaPagina")
-    
+
             })
-    
+
         }
 
     }).catch((erro) => {
@@ -165,6 +165,113 @@ router.post("/editPagina", upload.fields([
         res.redirect("/empresa/minhaPagina")
 
     })
+
+})
+
+router.post("/novaVaga", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    console.log("A")
+
+    const erros = []
+
+    if (!req.body.cargo || req.body.cargo == null || req.body.cargo == undefined || req.body.cargo == "") {
+        erros.push({ texto: "Informe o nome do cargo." })
+    }
+
+    if (req.body.cargo.length > 60) {
+        erros.push({ texto: "Adicione um nome menor para o cargo." })
+    }
+
+    if (req.body.cargo.length < 2) {
+        erros.push({ texto: "Adicione um nome maior para o cargo." })
+    }
+
+    if (!req.body.tipo || req.body.tipo == null || req.body.tipo == undefined || req.body.tipo == "") {
+        erros.push({ texto: "Informe o tipo da vaga." })
+    }
+
+    if (!req.body.modelo || req.body.modelo == null || req.body.modelo == undefined || req.body.modelo == "") {
+        erros.push({ texto: "Informe o modelo da vaga." })
+    }
+
+    if (!req.body.local || req.body.local == null || req.body.local == undefined || req.body.local == "") {
+        erros.push({ texto: "Informe o local da vaga de emprego." })
+    }
+
+    if (req.body.local.length > 200) {
+        erros.push({ texto: "Adicione um nome menor para o local." })
+    }
+
+    if (!req.body.descricao || req.body.descricao == null || req.body.descricao == undefined || req.body.descricao == "") {
+        erros.push({ texto: "Adicione uma descrição na vaga." })
+    }
+
+    if (req.body.minSalario < 721) {
+        erros.push({ texto: "Adicione um salário base superior ao salário mínimo da categoria." })
+    }
+
+    if (!req.body.minSalario || req.body.minSalario == null || req.body.minSalario == undefined || req.body.minSalario == "") {
+        erros.push({ texto: "Adicione um salário base à vaga." })
+    }
+
+    if (req.body.minSalario < 721) {
+        erros.push({ texto: "Adicione um salário base superior ao salário mínimo da categoria." })
+    }
+
+    if (req.body.minSalario > 99999999) {
+        erros.push({ texto: "Adicione um salário máximo inferior ao informado.." })
+    }
+
+    if (erros.length > 0) {
+
+        console.log("B")
+
+        res.render("empresa/editarPagina", { usuario: usuarioLogado, erros: erros })
+
+    } else {
+
+        console.log("A")
+
+        Pagina.findOne({ dono: usuarioLogado.id }).lean().then((empresa) => {
+
+            const novaVaga = new Vaga({
+                empresa: empresa._id,
+                cargo: req.body.cargo,
+                tipo: req.body.tipo,
+                modelo: req.body.modelo,
+                local: req.body.local,
+                vagasDisponiveis: 0,
+                descricao: req.body.descricao,
+                salarioMinimo: req.body.minSalario,
+                salarioMaximo: req.body.maxSalario,
+                foto: empresa.foto
+            })
+
+            console.log("A")
+
+            novaVaga.save().then(() => {
+
+                console.log("Vaga Criada com Sucesso!")
+                res.redirect("/empresa/editPagina")
+
+
+            }).catch((erro) => {
+
+                req.flash('error_msg', 'ERRO! Não foi possível criar a vaga')
+                res.redirect("/empresa/editPagina")
+
+            })
+
+        }).catch((erro) => {
+
+            req.flash('error_msg', 'ERRO! Não foi possível sincronizar sua conta')
+            res.redirect("/empresa/editPagina")
+
+        })
+
+    }
 
 })
 
