@@ -5883,12 +5883,14 @@
     let form_basico = document.querySelector("#form_basico")
     let form_profissional = document.querySelector("#form_profissional")
 
-    info_basica.onclick = function () {
+    info_basica.onclick = function (e) {
+        e.preventDefault()
         form_basico.style.display = 'block'
         form_profissional.style.display = 'none'
     }
 
-    info_profissional.onclick = function () {
+    info_profissional.onclick = function (e) {
+        e.preventDefault()
         form_basico.style.display = 'none'
         form_profissional.style.display = 'block'
     }

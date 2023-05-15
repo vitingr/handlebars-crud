@@ -19,7 +19,7 @@
 :root {
     --bg-color: #f5f5f5;
     --font-color: #404040;
-    --font-color-low-emphasis: #444444b2;
+    --font-color-low-emphasis: rgba(0,0,0,0.6);
     --color1: #F2508B;
     /*--color2: #b96378;*/
     --color2: #bb5a72;
@@ -2046,12 +2046,18 @@ text_feed input:focus {
     color: var(--font-color-low-emphasis);
 }
 
+#vagas .opcao_vaga_flex {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
 #vagas .aplicar_vaga button {
     cursor: pointer;
     background: var(--color2);
     color: white;
     padding: 10px;
-    margin-left: 100px;
     border-radius: 10px;
     transition-timing-function: ease-in-out;
     transition-duration: 0.3s;
@@ -2231,11 +2237,11 @@ text_feed input:focus {
 
 #editarPagina .container_editar_pagina_left {
     padding: 20px;
-    border-radius: 20px;
+    border-radius: 10px;
     background: white;
     border: 1px solid #e7e7e7;
     width: 275px;
-    max-height: 275px;
+    max-height: 250px;
 }
 
 #editarPagina .editar_pagina_option {
@@ -2244,7 +2250,6 @@ text_feed input:focus {
     align-items: center;
     gap: 10px;
     padding: 10px;
-    border-bottom: 1px solid #e7e7e7;
     transition-timing-function: ease-in-out;
     transition-duration: 0.1s;
     border-left: 1px solid transparent;
@@ -2257,11 +2262,9 @@ text_feed input:focus {
 #editarPagina  .container_editar_pagina_right {
     padding: 20px;
     border-radius: 20px;
-    background: white;
-    border: 1px solid #e7e7e7;
     display: flex;
     flex-direction: column;
-    width: 750px;
+    width: 950px;
     min-height: 1000px;
 }
 
@@ -2299,6 +2302,8 @@ text_feed input:focus {
 }
 
 #editarPagina .home_pagina_info .edit_pagina {
+    font-size: 14px;
+    color: var(--color1);
     text-align: center;
     cursor: pointer;
 }
@@ -2307,18 +2312,22 @@ text_feed input:focus {
     margin-top: 2em;
 }
 
-#editarPagina .home_pagina_info .home_resumo h3 {
-    font-weight: normal;
-    display: flex;
+#editarPagina .home_title {
+    font-size: 17.5px;
     align-items: center;
+    display: flex;
     gap: 10px;
     margin-bottom: 0.5em;
 }
 
-#editarPagina .home_pagina_info .home_resumo p {
+#editarPagina .home_text {
     text-align: justify;
     font-size: 14px;
     color: var(--font-color-low-emphasis);
+}
+
+#editarPagina .home_vagas {
+    margin-top: 3em;
 }
 
 #editarPagina .home_editar_pagina,
@@ -2327,6 +2336,8 @@ text_feed input:focus {
 #editarPagina .insights_editar_pagina
 #editarPagina .vagas_editar_pagina {
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 #editarPagina .home_editar_pagina {
@@ -2379,6 +2390,72 @@ text_feed input:focus {
     align-items: center;
     justify-content: center;
 }
+
+#editarPagina .resume_pagina,
+#editarPagina .home_vagas {
+    background: white;
+    padding: 15px;
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+}
+
+#editarPagina .home_vagas {
+    padding: 30px !important;
+}
+
+#editarPagina .home_vagas_container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+#editarPagina .vaga_emprego_pagina {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    padding: 10px;
+    border-radius: 7.5px;
+    transition-timing-function: ease-in-out;
+    border: 1px solid transparent;
+}
+
+#editarPagina .vaga_emprego_pagina:hover {
+    cursor: pointer;
+    border: 1px solid #33333310;
+}
+
+#editarPagina .top_vaga_emprego_pagina img {
+    padding: 15px;
+    width: 85px;
+    height: 85px;
+}
+
+#editarPagina .bottom_vaga_emprego_pagina h2 {
+    font-size: 15px;
+    text-align: left !important;
+    margin: 5px 0px 5px 0px;
+}
+
+
+#editarPagina .vaga_emprego_local {
+    font-size: 14px;
+    color: var(--font-color-low-emphasis);
+    margin: 5px 0px 5px 0px;
+}
+
+#editarPagina .vaga_emprego_status, 
+#editarPagina .vaga_emprego_status ion-icon {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #41b664be;
+}
+
+#editarPagina .vaga_emprego_status {
+    color: #41b664;
+}
+
 
 /* -=-=-=- SEGUIDORES -=-=-=- */
 
@@ -2478,6 +2555,12 @@ text_feed input:focus {
 
 /* RESPONSIVIDADES */
 
+@media (max-width: 1500px) {
+    .container_login {
+        min-height: 140vh;
+    }
+}
+
 @media (max-width: 1475px) {
     .container_principal {
         padding: 50px 0px 0px 50px;
@@ -2519,7 +2602,6 @@ text_feed input:focus {
 
     .container_login,
     .container_cadastro {
-        min-height: 800px;
         height: 100vh;
     }
 
@@ -2654,9 +2736,27 @@ text_feed input:focus {
     .text_something_top {
         width: 100%;
     }
+
+    #editarPagina .container_editar_pagina {
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%
+    }
+
+    #editarPagina .container_editar_pagina_right {
+        width: 100%;
+    }
+
+    #editarPagina .home_text {
+        font-size: 13px;
+    }
 }
 
 @media (max-width: 750px) {
+
+    .container_login {
+        min-height: 0;
+    }
 
     .container_principal {
         margin-top: 5em;
@@ -2754,6 +2854,11 @@ text_feed input:focus {
     .footer_list h2 {
         font-size: 20px;
     }
+
+    #vagas .opcao_vaga {
+        max-width: 100%;
+    }
+    
 
 }
 

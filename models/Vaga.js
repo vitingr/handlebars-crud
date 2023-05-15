@@ -8,6 +8,10 @@ const Vaga = new Schema({
         ref: "empresas",
         required: true
     },
+    nomeEmpresa: {
+        type: String,
+        required: true
+    },
     cargo: {
         type: String,
         required: true

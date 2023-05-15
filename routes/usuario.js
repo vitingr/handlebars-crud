@@ -1586,7 +1586,11 @@ router.get("/buscarVagas", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    res.render("usuario/vagasEmprego", { usuario: usuarioLogado })
+    Vaga.find().lean().then((vagas) => {
+
+        res.render("usuario/vagasEmprego", { usuario: usuarioLogado, vagas: vagas })
+
+    })
 
 })
 

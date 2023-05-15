@@ -56,7 +56,35 @@ router.get("/minhaPagina", (req, res) => {
 
     Pagina.findOne({ dono: usuarioLogado.id }).lean().then((pagina) => {
 
-        res.render("empresa/editarPagina", { usuario: usuarioLogado, pagina: pagina })
+        Usuario.find().lean().then((usuarios => {
+
+            var seguidores = []
+            const paginaId = pagina._id.toString()
+
+            usuarios.forEach(usuario => {
+
+                if (usuario.paginas.includes(paginaId)) {
+                    seguidores.push(usuario)
+                } else {
+                    console.log('Esse usuário não segue você')
+                }
+            })
+
+            Vaga.find({empresa: pagina._id}).lean().then((vagas) => {
+
+                if (vagas) {
+    
+                    res.render("empresa/editarPagina", { usuario: usuarioLogado, pagina: pagina, vagas: vagas, seguidores: seguidores })
+    
+                } else {
+    
+                    res.render("empresa/editarPagina", { usuario: usuarioLogado, pagina: pagina, seguidores: seguidores })
+    
+                }
+    
+            })
+
+        }))
 
     })
 
@@ -246,32 +274,56 @@ router.post("/novaVaga", (req, res) => {
                 descricao: req.body.descricao,
                 salarioMinimo: req.body.minSalario,
                 salarioMaximo: req.body.maxSalario,
-                foto: empresa.foto
+                foto: empresa.logo,
+                nomeEmpresa: empresa.nome
             })
 
             console.log("A")
 
             novaVaga.save().then(() => {
 
-                console.log("Vaga Criada com Sucesso!")
-                res.redirect("/empresa/editPagina")
+                req.flash('success_msg', 'A Vaga foi Criada com Sucesso!')
+                res.redirect("/empresa/minhaPagina")
 
 
             }).catch((erro) => {
 
                 req.flash('error_msg', 'ERRO! Não foi possível criar a vaga')
-                res.redirect("/empresa/editPagina")
+                res.redirect("/empresa/minhaPagina")
 
             })
 
         }).catch((erro) => {
 
             req.flash('error_msg', 'ERRO! Não foi possível sincronizar sua conta')
-            res.redirect("/empresa/editPagina")
+            res.redirect("/empresa/minhaPagina")
 
         })
 
     }
+
+})
+
+router.get("/seguidores", (req, res) => {
+
+    const usuarioLogado = infoUsuario(req.user)
+
+    Pagina.findOne({ dono: usuarioLogado.id }).lean().then((empresa) => {
+
+        Usuario.find().lean().then((usuarios => {
+
+            var seguidores = []
+            usuarios.forEach(usuario => {
+                if (usuario.paginas.includes(empresa._id)) {
+                    seguidores.push(usuario)
+                } else {
+                    console.log('Esse usuário não segue você')
+                }
+            })
+
+        }))
+
+    })
 
 })
 
