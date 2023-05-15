@@ -86,6 +86,11 @@ router.get("/minhaPagina", (req, res) => {
 
         }))
 
+    }).catch((erro) => {
+
+        req.flash('error_msg', 'É necessário possuir uma página para acessar aqui.')
+        res.redirect("/usuario/")
+
     })
 
 })
