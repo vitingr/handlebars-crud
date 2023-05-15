@@ -2625,6 +2625,7 @@ text_feed input:focus {
 
     .container_login,
     .container_cadastro {
+        min-height: 800px;
         height: 100vh;
     }
 
