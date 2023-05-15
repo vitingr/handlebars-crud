@@ -1957,15 +1957,30 @@ text_feed input:focus {
 
 /* -=-=-=- VAGAS -=-=-=- */
 
+#vaga .container_unico {
+    align-items: center;
+    background: transparent !important;
+}
+
+#vaga .vaga_container {
+    background: white;
+    padding: 25px;
+    max-width: 1050px;
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+    min-height: 850px;
+
+}
+
 #vaga h1 {
     margin-top: 1.5em;
     text-align: center;
-    font-size: 27.5px;
+    font-size: 22.5px;
 }
 
 #vaga h2 {
     text-align: center;
-    font-size: 20px;
+    font-size: 16.5px;
     font-weight: normal;
     margin-bottom: 2.5em;
 }
@@ -1976,6 +1991,7 @@ text_feed input:focus {
 }
 
 #vaga .info_vaga_top div {
+    font-size: 14px;
     padding: 5px;
     display: flex;
     align-items: center;
@@ -1983,7 +1999,7 @@ text_feed input:focus {
 }
 
 #vaga .info_vaga_top div ion-icon {
-    font-size: 20px;
+    font-size: 18px;
     cursor: pointer;
     transition-timing-function: ease-in-out;
     transition-duration: 0.3s;
@@ -1994,15 +2010,21 @@ text_feed input:focus {
 }
 
 #vaga .info_vaga_bottom h1 {
+    font-size: 18px;
     margin: 10px;
 }
 
 #vaga .info_vaga_bottom p {
+    font-size: 14px;
     text-align: justify;
     margin-bottom: 3em;
 }
 
 /* -=-=-=- BUSCAR VAGAS -=-=-=- */
+
+#vagas {
+    max-width: 1525px;
+}
 
 #vagas .container_vagas {
     display: flex;
@@ -2260,7 +2282,6 @@ text_feed input:focus {
 }
 
 #editarPagina  .container_editar_pagina_right {
-    padding: 20px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -2333,19 +2354,27 @@ text_feed input:focus {
 #editarPagina .home_editar_pagina,
 #editarPagina .info_editar_pagina,
 #editarPagina .seguidores_editar_pagina,
-#editarPagina .insights_editar_pagina
+#editarPagina .insights_editar_pagina,
 #editarPagina .vagas_editar_pagina {
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    background: white;
+    padding: 25px;
+    border-radius: 5px;
+    border: 1px solid #e7e7e7;
+}
+
+#editarPagina #botao_margin_bottom {
+    margin-bottom: 75px;
 }
 
 #editarPagina .home_editar_pagina {
+    background: none;
+    border: none;
+    padding: 0;
     display: block;
 }
 
 #editarPagina .info_editar_pagina {
-    margin-top: 3em;
     display: none;
 }
 

@@ -380,11 +380,7 @@ router.get("/editarPerfil", (req, res) => {
 
                                 Experiencia.find({ dono: usuarioLogado.id }).lean().then((experiencias) => {
 
-                                    console.log("DEU A")
-
                                     if (usuarioLogado.seguidores) {
-
-                                        console.log("Tem seguidores")
 
                                         let amigos = []
                                         let amigos_separar = usuarioLogado.amigos.split(" ")
@@ -424,9 +420,7 @@ router.get("/editarPerfil", (req, res) => {
                                         })
 
                                     } else {
-
                                         console.log("Não tem seguidores")
-
                                     }
 
                                     if (usuarios.length >= 5) {
@@ -511,17 +505,11 @@ router.get("/editarPerfil", (req, res) => {
 
                                 Experiencia.find({ dono: usuarioLogado.id }).lean().then((experiencias) => {
 
-                                    console.log("DEU B")
-
                                     if (usuarioLogado.seguidores) {
-
-                                        console.log("Tem seguidores")
 
                                         let amigos = []
                                         let amigos_separar = usuarioLogado.amigos.split(" ")
                                         const amigos_separados = []
-
-                                        console.log(amigos_separar)
 
                                         amigos_separar.forEach(amigo => {
                                             if (amigo == 0 || amigo == null || amigo == undefined || amigo == "") {
@@ -530,8 +518,6 @@ router.get("/editarPerfil", (req, res) => {
                                                 amigos_separados.push(amigo)
                                             }
                                         })
-
-                                        console.log(amigos_separados)
 
                                         if (usuarioLogado.seguidores == 1) {
                                             amigos = amigosAleatorios(amigos_separados, 1)
@@ -553,8 +539,6 @@ router.get("/editarPerfil", (req, res) => {
                                             amigos = amigosAleatorios(amigos_separados, 5)
                                         }
 
-                                        console.log("C")
-
                                         Usuario.find({ "_id": { $in: amigos } }).lean().then((amigos) => {
 
                                             if (usuarios.length >= 5) {
@@ -571,8 +555,6 @@ router.get("/editarPerfil", (req, res) => {
                                                     }
                                                 }
 
-                                                console.log("F")
-
                                                 res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, usuarios: users, perfil_completo: perfil_completo, experiencias: experiencias, seguidores: amigos })
 
                                             } else {
@@ -580,10 +562,6 @@ router.get("/editarPerfil", (req, res) => {
                                                 res.render("usuario/perfil", { usuario: usuarioLogado, formacao: formacao, postagens: postagens, certificacoes: certificacoes, endereco: endereco, perfil_completo: perfil_completo, experiencias: experiencias, seguidores: amigos })
 
                                             }
-
-                                        }).catch((erro) => {
-
-                                            console.log(erro)
 
                                         })
 
@@ -615,7 +593,6 @@ router.get("/editarPerfil", (req, res) => {
 
                                 }).catch((erro) => {
 
-                                    console.log(erro)
                                     req.flash('error_msg', 'ERRO! Não foi possível encontrar suas experiências...')
                                     res.redirect("/")
 
@@ -623,7 +600,6 @@ router.get("/editarPerfil", (req, res) => {
 
                             }).catch((erro) => {
 
-                                console.log(erro)
                                 req.flash('error_msg', 'ERRO! Não foi possível encontrar seus certificados...')
                                 res.redirect("/")
 
@@ -631,7 +607,6 @@ router.get("/editarPerfil", (req, res) => {
 
                         }).catch((erro) => {
 
-                            console.log(erro)
                             req.flash('error_msg', 'ERRO! Não foi possível encontrar outras contas...')
                             res.redirect("/")
 
@@ -639,7 +614,6 @@ router.get("/editarPerfil", (req, res) => {
 
                     }).catch((erro) => {
 
-                        console.log(erro)
                         req.flash('error_msg', 'ERRO! Não foi possível encontrar suas formações.')
                         res.redirect("/")
 
@@ -647,7 +621,6 @@ router.get("/editarPerfil", (req, res) => {
 
                 }).catch((erro) => {
 
-                    console.log(erro)
                     req.flash('error_msg', 'ERRO! Não foi possível encontrar seu endereço...')
                     res.redirect("/")
 
@@ -655,7 +628,6 @@ router.get("/editarPerfil", (req, res) => {
 
             }).catch((erro) => {
 
-                console.log(erro)
                 req.flash('error_msg', 'ERRO! Não foi possível encontrar seu perfil...')
                 res.redirect("/")
 
@@ -854,9 +826,6 @@ router.post("/editInfo", upload.fields([
 
                 usuario.nomeCompleto = `${nome} ${sobrenome}`
 
-
-                console.log("B")
-
                 if (req.files.foto_background) {
 
                     const background = req.files.foto_background[0].path
@@ -930,8 +899,6 @@ router.post("/editInfo", upload.fields([
 
                     usuario.nomeCompleto = `${nome} ${sobrenome}`
 
-                    console.log("C")
-
                     if (req.files.foto_background) {
                         const background = req.files.foto_background[0].path
                         const editBackground = background.replace('public', '')
@@ -1001,8 +968,6 @@ router.post("/editInfo", upload.fields([
                 }
 
                 usuario.nomeCompleto = `${nome} ${sobrenome}`
-
-                console.log("d")
 
                 if (req.files.foto_background) {
                     const background = req.files.foto_background[0].path
@@ -1160,25 +1125,9 @@ router.post("/addCertificacao", (req, res) => {
                 req.flash('success_msg', 'Certificação Adicionada com Sucesso!')
                 res.redirect("/usuario/editarPerfil")
 
-            }).catch((erro) => {
-
-                console.log(`ERRO ${erro}`)
-                req.flash('error_msg', 'ERRO! Não foi possível adicionar a certificação.')
-                res.redirect("/")
-
             })
 
-        }).catch((erro) => {
-            console.log(`ERRO ${erro}`)
-            req.flash('error_msg', 'ERRO! Não foi possível localizar a instituição.')
-            res.redirect("/")
-
         })
-
-    }).catch((erro) => {
-        console.log(`ERRO ${erro}`)
-        req.flash('error_msg', 'ERRO! Não foi possível localizar sua conta.')
-        res.redirect("/")
 
     })
 
@@ -1218,18 +1167,7 @@ router.post("/addExperiencia", (req, res) => {
             req.flash('success_msg', 'Experiência Adicionada com Sucesso!')
             res.redirect("/usuario/editarPerfil")
 
-        }).catch((erro) => {
-
-            console.log(`ERRO ${erro}`)
-            req.flash('error_msg', 'ERRO! Não foi possível adicionar a Experiência.')
-            res.redirect("/")
-
         })
-
-    }).catch((erro) => {
-        console.log(`ERRO ${erro}`)
-        req.flash('error_msg', 'ERRO! Não foi possível localizar sua conta.')
-        res.redirect("/")
 
     })
 
@@ -1250,15 +1188,12 @@ router.get("/encontrarAmigos", (req, res) => {
         }
     })
 
-    console.log(`AMIGO:${amigos}`)
-
     Usuario.find({ "_id": { $not: { $in: [usuarioLogado.id, ...amigos] } } }).lean().then((usuarios) => {
 
         res.render("usuario/amigos", { usuario: usuarioLogado, usuarios: usuarios })
 
     }).catch((erro) => {
 
-        console.log(`erro ${erro}`)
         req.flash('error_msg', 'ERRO! Não foi possível encontrar pessoas!')
         res.redirect("/")
 
@@ -1342,10 +1277,6 @@ router.get("/verPerfil/:id", (req, res) => {
             res.redirect("/")
 
         })
-
-    }).catch((erro) => {
-
-        console.log(`erro ${erro}`)
 
     })
 
@@ -1594,11 +1525,23 @@ router.get("/buscarVagas", (req, res) => {
 
 })
 
-router.get("/vaga", (req, res) => {
+router.get("/vaga/:id", (req, res) => {
 
     const usuarioLogado = infoUsuario(req.user)
 
-    res.render("usuario/vaga", { usuario: usuarioLogado })
+    Vaga.findOne({_id: req.params.id}).lean().then((vaga) => {
+
+        console.log(`vaga: ${vaga}`)
+
+        Pagina.findOne({_id: vaga.empresa}).lean().then((empresa) => {
+
+            console.log(`empresa: ${empresa}`)
+
+            res.render("usuario/vaga", { usuario: usuarioLogado, vaga: vaga, empresa: empresa })
+
+        })
+
+    })
 
 })
 
@@ -2094,7 +2037,6 @@ router.post("/encontrarPaginas/seguirPagina", (req, res) => {
 
                 }).catch((erro) => {
 
-                    console.log(erro)
                     req.flash('error_msg', 'ERRO! Não foi possível seguir a página')
                     res.redirect('/usuario/encontrarPaginas')
 
@@ -2102,7 +2044,6 @@ router.post("/encontrarPaginas/seguirPagina", (req, res) => {
 
             }).catch((erro) => {
 
-                console.log(erro)
                 req.flash('error_msg', 'ERRO! Não foi possível seguir a página')
                 res.redirect('/usuario/encontrarPaginas')
 
@@ -2110,7 +2051,6 @@ router.post("/encontrarPaginas/seguirPagina", (req, res) => {
 
         }).catch((erro) => {
 
-            console.log(erro)
             req.flash('error_msg', 'ERRO! Não foi possível encontrar a empresa')
             res.redirect('/usuario/encontrarPaginas')
 

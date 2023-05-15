@@ -2,41 +2,41 @@
 
     <div class="container_unico">
 
-        <h1>Design de Interiores</h1>
-        <h2>Loja do Patrício - Santa Bárbara d'Oeste, São Paulo, Brasil</h2>
-
-        <div class="info_vaga_top">
-            <div>
-                <ion-icon name="briefcase-outline"></ion-icon>
-                Tempo Integral - Estágio
+        <div class="vaga_container">
+            <h1>{{vaga.cargo}}</h1>
+            <h2>{{vaga.nomeEmpresa}} - {{vaga.local}}</h2>
+            <div class="info_vaga_top">
+                <div>
+                    <ion-icon name="briefcase-outline"></ion-icon>
+                    {{vaga.tipo}} - {{vaga.modelo}}
+                </div>
+                <div>
+                    <ion-icon name="business-outline"></ion-icon>
+                    {{empresa.qtdFuncionarios}}
+                </div>
+                <div>
+                    <ion-icon name="cash-outline"></ion-icon>
+                    {{#if vaga.salarioMaximo}}
+                        R${{vaga.salarioMinimo}} - R${{vaga.salarioMaximo}}
+                    {{else}}
+                        R${{vaga.salarioMinimo}}
+                    {{/if}}
+                </div>
+                <div>
+                    <ion-icon name="bulb-outline"></ion-icon>
+                    Compare com outras vagas <span class="span_link">Aqui</span>
+                </div>
             </div>
-            <div>
-                <ion-icon name="business-outline"></ion-icon>
-                12 Colaboradoras
+            <div class="info_vaga_bottom">
+                <h1>
+                    Sobre a vaga
+                </h1>
+                <p>{{vaga.descricao}}</p>
+                <h1>
+                    Competências
+                </h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum placeat praesentium dolorum culpa! Reiciendis deleniti minus minima nam, itaque corporis voluptatibus, eos repellendus dolorem nesciunt ipsum fugiat cumque natus! Labore. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia vero voluptatum nostrum! Nobis ad rerum facilis cupiditate vitae, illum alias distinctio inventore, reprehenderit mollitia reiciendis! Dolorum facilis soluta voluptate libero.</p>
             </div>
-            <div>
-                <ion-icon name="cash-outline"></ion-icon>
-                R$3.000,00
-            </div>
-            <div>
-                <ion-icon name="bulb-outline"></ion-icon>
-                Compare com outras vagas <span class="span_link">Aqui</span>
-            </div>
-        </div>
-
-        <div class="info_vaga_bottom">
-            <h1>
-                Sobre a vaga
-            </h1>
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus sint quos iste ratione maiores tempora rerum. Modi minus minima deleniti asperiores sapiente illo fugit maiores esse, quia praesentium veritatis nihil. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus nobis, dolorum exercitationem, dolore impedit, soluta laudantium nulla earum a eveniet sint voluptatem eligendi explicabo modi officia! Sunt dolor dignissimos vel. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus, ipsum doloremque consequuntur exercitationem consectetur aperiam quas iusto possimus quasi fugit veritatis distinctio quia incidunt unde aliquam labore commodi iste officiis?</p>
-
-            <h1>
-                Competências
-            </h1>
-
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum placeat praesentium dolorum culpa! Reiciendis deleniti minus minima nam, itaque corporis voluptatibus, eos repellendus dolorem nesciunt ipsum fugiat cumque natus! Labore. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia vero voluptatum nostrum! Nobis ad rerum facilis cupiditate vitae, illum alias distinctio inventore, reprehenderit mollitia reiciendis! Dolorum facilis soluta voluptate libero.</p>
-
         </div>
 
     </div>

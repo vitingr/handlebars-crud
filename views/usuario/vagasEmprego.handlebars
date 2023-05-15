@@ -14,35 +14,36 @@
 
             {{#each vagas}}
 
-            <div class="opcao_vaga">
-                <div class="foto_empresa_vaga">
-                    <img src="{{foto}}">
-                </div>
-
-                <div class="opcao_vaga_flex">
-                    <div class="info_vaga">
-                        <p class="nome_vaga">
-                            {{cargo}}
-                        </p>
-                        <p class="desc_vaga">
-                            {{nomeEmpresa}}
-                        </p>
-                        <p class="desc_vaga">
-                            {{local}}
-                        </p>
-                        <p class="desc_vaga">
-                            R${{salarioMinimo}} - R${{salarioMaximo}}
-                        </p>
+            <a href="/usuario/vaga/{{_id}}">
+                <div class="opcao_vaga">
+                    <div class="foto_empresa_vaga">
+                        <img src="{{foto}}">
                     </div>
-                    <a href="/usuario/vaga">
-                        <div class="aplicar_vaga">
-                            <button>
-                                Ver Mais
-                            </button>
+                    <div class="opcao_vaga_flex">
+                        <div class="info_vaga">
+                            <p class="nome_vaga">
+                                {{cargo}}
+                            </p>
+                            <p class="desc_vaga">
+                                {{nomeEmpresa}}
+                            </p>
+                            <p class="desc_vaga">
+                                {{local}}
+                            </p>
+                            <p class="desc_vaga">
+                                R${{salarioMinimo}} - R${{salarioMaximo}}
+                            </p>
                         </div>
-                    </a>
+                        <a href="/usuario/vaga/{{_id}}">
+                            <div class="aplicar_vaga">
+                                <button>
+                                    Ver Mais
+                                </button>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
+            </a>
 
             {{else}}
 

@@ -83,197 +83,204 @@
                 {{/if}}
 
             </div>
-        </div>
 
-        <!-- EDITAR INFO -->
-        <div class="info_editar_pagina">
+            <!-- EDITAR INFO -->
+            <div class="info_editar_pagina">
 
-            <form action="/empresa/editPagina" method="POST" enctype="multipart/form-data">
+                <form action="/empresa/editPagina" method="POST" enctype="multipart/form-data">
 
-                <div class="inputs_container">
+                    <div class="inputs_container">
 
-                    <!-- NOME -->
+                        <h1 class="title_editPagina">Informações da Empresa! </h1>
+                        <h2 class="subtitle_editPagina">
+                            Aqui é possível alterar as informações gerais de sua empresa.
+                        </h2>
 
-                    <label for="nome" class="label_cadastro">Nome: <span class="pink_font">*</span></label>
-                    <input type="text" value="{{pagina.nome}}" name="nome" id="nome" placeholder="O nome da sua Empresa"
-                        class="input_cadastro" autocomplete="off" minlength="2" maxlength="35"
-                        placeholder="Nome da sua empresa" required>
+                        <!-- NOME -->
 
-                    <!-- WEBSITE -->
+                        <label for="nome" class="label_cadastro">Nome: <span class="pink_font">*</span></label>
+                        <input type="text" value="{{pagina.nome}}" name="nome" id="nome"
+                            placeholder="O nome da sua Empresa" class="input_cadastro" autocomplete="off" minlength="2"
+                            maxlength="35" placeholder="Nome da sua empresa" required>
 
-                    <label for="website" class="label_cadastro">Website: <span class="pink_font"></span></label>
-                    <input type="text" value="{{pagina.website}}" name="website" id="website" class="input_cadastro"
-                        autocomplete="off" minlength="2" maxlength="100" placeholder="O site da sua empresa">
+                        <!-- WEBSITE -->
 
-                    <!-- LOGO DA EMPRESA -->
+                        <label for="website" class="label_cadastro">Website: <span class="pink_font"></span></label>
+                        <input type="text" value="{{pagina.website}}" name="website" id="website" class="input_cadastro"
+                            autocomplete="off" minlength="2" maxlength="100" placeholder="O site da sua empresa">
 
-                    <div class="enviar_logo_empresa">
-                        <h4 class="title_cadastro">Trocar Logo</h4>
-                        <div class="perfil_foto_trocar">
-                            <div class="foto_trocar_right">
-                                <input type="file" name="foto_logo" id="foto_logo">
+                        <!-- LOGO DA EMPRESA -->
+
+                        <div class="enviar_logo_empresa">
+                            <h4 class="title_cadastro">Trocar Logo</h4>
+                            <div class="perfil_foto_trocar">
+                                <div class="foto_trocar_right">
+                                    <input type="file" name="foto_logo" id="foto_logo">
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="enviar_logo_empresa">
-                        <h4 class="title_cadastro">Trocar Plano de Fundo</h4>
-                        <div class="perfil_foto_trocar">
-                            <div class="foto_trocar_right">
-                                <input type="file" name="foto_background" id="foto_background">
+                        <div class="enviar_logo_empresa">
+                            <h4 class="title_cadastro">Trocar Plano de Fundo</h4>
+                            <div class="perfil_foto_trocar">
+                                <div class="foto_trocar_right">
+                                    <input type="file" name="foto_background" id="foto_background">
+                                </div>
                             </div>
                         </div>
+
+                        <!-- INDUSTRIA -->
+
+                        <label for="industria" class="label_cadastro">Industria: <span
+                                class="pink_font">*</span></label>
+                        <input type="text" value="{{pagina.industria}}" name="industria" id="industria"
+                            placeholder="ex: Farmacêutica" class="input_cadastro" autocomplete="off" minlength="2"
+                            maxlength="60" required>
+
+                        <!-- TAMANHO DA EMPRESA -->
+
+                        <label for="tamanho_empresa" class="label_cadastro">Tamanho da Empresa: <span
+                                class="pink_font">*</span></label>
+                        <select name="tamanho_empresa" id="tamanho_empresa" class="input_cadastro" required>
+                            <option value=""></option>
+                            <option value="0 - 1 Colaboradores">0 - 1 Colaboradores</option>
+                            <option value="2 - 10 Colaboradores">2 - 10 Colaboradores</option>
+                            <option value="11 - 50 Colaboradores">11 - 50 Colaboradores</option>
+                            <option value="51 - 200 Colaboradores">51 - 200 Colaboradores</option>
+                            <option value="201 - 500 Colaboradores">201 - 500 Colaboradores</option>
+                            <option value="501 - 1.000 Colaboradores">501 - 1.000 Colaboradores</option>
+                            <option value="1.001 - 5.000 Colaboradores">1.001 - 5.000 Colaboradores</option>
+                            <option value="5.001 - 10.000 Colaboradores">5.001 - 10.000 Colaboradores</option>
+                            <option value="+ 10.000 Colaboradores">+ 10.000 Colaboradores</option>
+                        </select>
+
+                        <!-- TIPO DA ORGANIZAÇÃO -->
+
+                        <label for="tipo_empresa" class="label_cadastro">Tipo da Empresa: <span
+                                class="pink_font">*</span></label>
+                        <select name="tipo_empresa" id="tipo_empresa" class="input_cadastro" required>
+                            <option value=""></option>
+                            <option value="Empresa Pública">Empresa Pública</option>
+                            <option value="Empresa Privada">Empresa Privada</option>
+                            <option value="Empresa Governamental">Empresa Governamental</option>
+                            <option value="Sem Fins Lucrativos">Sem Fins Lucrativos</option>
+                            <option value="Empresa Pessoal">Empresa Pessoal</option>
+                            <option value="Parceria">Parceria</option>
+                            <option value="Autonomo">Autonomo</option>
+                        </select>
+
+                        <label for="descricao" class="label_cadastro">Descrição: <span
+                                class="pink_font">*</span></label>
+
+                        <textarea name="descricao" id="descricao" placeholder="uma Descrição da sua empresa"
+                            class="input_cadastro" autocomplete="off" cols="30" rows="10"
+                            required>{{pagina.descricao}}</textarea>
+
+                        <button type="submit" id="botao_margin_bottom" class="submit_cadastro">
+                            Editar Informações
+                        </button>
                     </div>
 
-                    <!-- INDUSTRIA -->
+                </form>
 
-                    <label for="industria" class="label_cadastro">Industria: <span class="pink_font">*</span></label>
-                    <input type="text" value="{{pagina.industria}}" name="industria" id="industria"
-                        placeholder="ex: Farmacêutica" class="input_cadastro" autocomplete="off" minlength="2"
-                        maxlength="60" required>
+            </div>
 
-                    <!-- TAMANHO DA EMPRESA -->
+            <!-- VAGAS DE EMPREGO -->
+            <div class="vagas_editar_pagina">
 
-                    <label for="tamanho_empresa" class="label_cadastro">Tamanho da Empresa: <span
-                            class="pink_font">*</span></label>
-                    <select name="tamanho_empresa" id="tamanho_empresa" class="input_cadastro" required>
-                        <option value=""></option>
-                        <option value="0 - 1 Colaboradores">0 - 1 Colaboradores</option>
-                        <option value="2 - 10 Colaboradores">2 - 10 Colaboradores</option>
-                        <option value="11 - 50 Colaboradores">11 - 50 Colaboradores</option>
-                        <option value="51 - 200 Colaboradores">51 - 200 Colaboradores</option>
-                        <option value="201 - 500 Colaboradores">201 - 500 Colaboradores</option>
-                        <option value="501 - 1.000 Colaboradores">501 - 1.000 Colaboradores</option>
-                        <option value="1.001 - 5.000 Colaboradores">1.001 - 5.000 Colaboradores</option>
-                        <option value="5.001 - 10.000 Colaboradores">5.001 - 10.000 Colaboradores</option>
-                        <option value="+ 10.000 Colaboradores">+ 10.000 Colaboradores</option>
-                    </select>
+                <form action="/empresa/novaVaga" method="POST">
+                    <div class="vaga_config_1">
+                        <h1 class="title_editPagina">Anuncie uma Vaga! </h1>
+                        <h2 class="subtitle_editPagina">
+                            Vamos começar informando algumas informações básicas da vaga disponibilizada por sua
+                            empresa.
+                        </h2>
 
-                    <!-- TIPO DA ORGANIZAÇÃO -->
-
-                    <label for="tipo_empresa" class="label_cadastro">Tipo da Empresa: <span
-                            class="pink_font">*</span></label>
-                    <select name="tipo_empresa" id="tipo_empresa" class="input_cadastro" required>
-                        <option value=""></option>
-                        <option value="Empresa Pública">Empresa Pública</option>
-                        <option value="Empresa Privada">Empresa Privada</option>
-                        <option value="Empresa Governamental">Empresa Governamental</option>
-                        <option value="Sem Fins Lucrativos">Sem Fins Lucrativos</option>
-                        <option value="Empresa Pessoal">Empresa Pessoal</option>
-                        <option value="Parceria">Parceria</option>
-                        <option value="Autonomo">Autonomo</option>
-                    </select>
-
-                    <label for="descricao" class="label_cadastro">Descrição: <span class="pink_font">*</span></label>
-
-                    <textarea name="descricao" id="descricao" placeholder="uma Descrição da sua empresa"
-                        class="input_cadastro" autocomplete="off" cols="30" rows="10"
-                        required>{{pagina.descricao}}</textarea>
-
-                    <button type="submit" class="submit_cadastro">
-                        Editar Informações
-                    </button>
-                </div>
-
-            </form>
-
-        </div>
-
-        <!-- VAGAS DE EMPREGO -->
-        <div class="vagas_editar_pagina">
-
-            <form action="/empresa/novaVaga" method="POST">
-                <div class="vaga_config_1">
-                    <h1 class="title_editPagina">Anuncie uma Vaga! </h1>
-                    <h2 class="subtitle_editPagina">
-                        Vamos começar informando algumas informações básicas da vaga disponibilizada por sua
-                        empresa.
-                    </h2>
-
-                    <label for="cargo" class="label_cadastro">Cargo <span class="pink_font">*</span></label>
-                    <input type="text" name="cargo" id="cargo" class="input_cadastro" minlength="2" maxlength="60"
-                        placeholder="Ex: Auxiliar de Administração" required>
-                    <label for="tipo" class="label_cadastro">Tipo de Emprego <span class="pink_font">*</span></label>
-                    <select name="tipo" id="tipo" class="input_cadastro" required>
-                        <option value=""></option>
-                        <option value="Presencial">Presencial</option>
-                        <option value="Híbrido">Híbrido</option>
-                        <option value="Remoto">Remoto</option>
-                    </select>
-                    <label for="local" class="label_cadastro">Local da Vaga <span class="pink_font">*</span></label>
-                    <input type="text" name="local" id="local" class="input_cadastro" minlength="2" maxlength="200"
-                        placeholder="Ex: São Paulo, Brasil" required>
-                    <label for="modelo" class="label_cadastro">Tipo de Emprego <span class="pink_font">*</span></label>
-                    <select name="modelo" id="modelo" class="input_cadastro" required>
-                        <option value=""></option>
-                        <option value="Determinado">Tempo determinado</option>
-                        <option value="Indeterminado">Tempo Indeterminado</option>
-                        <option value="Eventual">Eventual</option>
-                        <option value="Estagio">Estágio</option>
-                        <option value="Experiencia">Experiência</option>
-                        <option value="Intermitente">Intermitente</option>
-                        <option value="Home_office">Home Office</option>
-                        <option value="Jovem_aprendiz">Jovem Aprendiz</option>
-                        <option value="Parcial">Parcial</option>
-                    </select>
-                    <button class="submit_cadastro" id="avancar_vaga">
-                        Avançar
-                    </button>
-                </div>
-
-                <div class="vaga_config_2">
-
-                    <h1 class="title_editPagina">Anuncie uma Vaga! </h1>
-                    <h2 class="subtitle_editPagina">
-                        Vamos começar informando algumas informações básicas da vaga disponibilizada por sua
-                        empresa.
-                    </h2>
-
-                    <!-- DESCRICAO CARGO -->
-
-                    <label for="descricao" class="label_cadastro">Descrição <span class="pink_font">*</span></label>
-                    <textarea name="descricao" id="descricao" placeholder="uma Descrição da sua empresa"
-                        class="input_cadastro" autocomplete="off" cols="30" rows="10" required></textarea>
-
-                    <!-- SALARIO -->
-
-                    <label for="minSalario" class="label_cadastro">Salário Base Oferecido <span
-                            class="pink_font">*</span></label>
-                    <input type="text" name="minSalario" id="minSalario" class="input_cadastro" autocomplete="off"
-                        minlength="3" maxlength="11" required>
-
-                    <label for="maxSalario" class="label_cadastro">Salário Máximo Oferecido </label>
-                    <input type="text" name="maxSalario" id="maxSalario" class="input_cadastro" autocomplete="off"
-                        minlength="3" maxlength="11">
-
-                    <button type="submit" class="submit_cadastro">
-                        Publicar Vaga
-                    </button>
-                </div>
-
-            </form>
-
-
-            <!-- SEGUIDORES -->
-            <div class="seguidores_editar_pagina">
-                <div class="container_seguidores_pagina">
-                    {{#each seguidores}}
-                    <div>
-                        <img src="{{foto}}">
+                        <label for="cargo" class="label_cadastro">Cargo <span class="pink_font">*</span></label>
+                        <input type="text" name="cargo" id="cargo" class="input_cadastro" minlength="2" maxlength="60"
+                            placeholder="Ex: Auxiliar de Administração" required>
+                        <label for="tipo" class="label_cadastro">Tipo de Emprego <span
+                                class="pink_font">*</span></label>
+                        <select name="tipo" id="tipo" class="input_cadastro" required>
+                            <option value=""></option>
+                            <option value="Presencial">Presencial</option>
+                            <option value="Híbrido">Híbrido</option>
+                            <option value="Remoto">Remoto</option>
+                        </select>
+                        <label for="local" class="label_cadastro">Local da Vaga <span class="pink_font">*</span></label>
+                        <input type="text" name="local" id="local" class="input_cadastro" minlength="2" maxlength="200"
+                            placeholder="Ex: São Paulo, Brasil" required>
+                        <label for="modelo" class="label_cadastro">Tipo de Emprego <span
+                                class="pink_font">*</span></label>
+                        <select name="modelo" id="modelo" class="input_cadastro" required>
+                            <option value=""></option>
+                            <option value="Determinado">Tempo determinado</option>
+                            <option value="Indeterminado">Tempo Indeterminado</option>
+                            <option value="Eventual">Eventual</option>
+                            <option value="Estagio">Estágio</option>
+                            <option value="Experiencia">Experiência</option>
+                            <option value="Intermitente">Intermitente</option>
+                            <option value="Home_office">Home Office</option>
+                            <option value="Jovem_aprendiz">Jovem Aprendiz</option>
+                            <option value="Parcial">Parcial</option>
+                        </select>
+                        <button class="submit_cadastro" id="avancar_vaga">
+                            Avançar
+                        </button>
                     </div>
-                    {{else}}
 
-                    {{/each}}
+                    <div class="vaga_config_2">
+
+                        <h1 class="title_editPagina">Anuncie uma Vaga! </h1>
+                        <h2 class="subtitle_editPagina">
+                            Vamos começar informando algumas informações básicas da vaga disponibilizada por sua
+                            empresa.
+                        </h2>
+
+                        <!-- DESCRICAO CARGO -->
+
+                        <label for="descricao" class="label_cadastro">Descrição <span class="pink_font">*</span></label>
+                        <textarea name="descricao" id="descricao" placeholder="uma Descrição da vaga"
+                            class="input_cadastro" autocomplete="off" cols="30" rows="10" required></textarea>
+
+                        <!-- SALARIO -->
+
+                        <label for="minSalario" class="label_cadastro">Salário Base Oferecido <span
+                                class="pink_font">*</span></label>
+                        <input type="text" name="minSalario" id="minSalario" class="input_cadastro" autocomplete="off"
+                            minlength="3" maxlength="11" required>
+
+                        <label for="maxSalario" class="label_cadastro">Salário Máximo Oferecido </label>
+                        <input type="text" name="maxSalario" id="maxSalario" class="input_cadastro" autocomplete="off"
+                            minlength="3" maxlength="11">
+
+                        <button type="submit" id="botao_margin_bottom" class="submit_cadastro">
+                            Publicar Vaga
+                        </button>
+                    </div>
+
+                </form>
+
+
+                <!-- SEGUIDORES -->
+                <div class="seguidores_editar_pagina">
+                    <div class="container_seguidores_pagina">
+                        {{#each seguidores}}
+                        <div>
+                            <img src="{{foto}}">
+                        </div>
+                        {{else}}
+
+                        {{/each}}
+                    </div>
                 </div>
-            </div>
 
-            <!-- INSIGHTS -->
-            <div class="insights_editar_pagina">
-                <p>Nada por enquanto</p>
-            </div>
+                <!-- INSIGHTS -->
+                <div class="insights_editar_pagina">
+                    <p>Nada por enquanto</p>
+                </div>
 
+            </div>
         </div>
 
     </div>
-
-</div>
