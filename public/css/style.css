@@ -2783,10 +2783,6 @@ text_feed input:focus {
 
 @media (max-width: 750px) {
 
-    .container_login {
-        min-height: 0;
-    }
-
     .container_principal {
         margin-top: 5em;
         padding: 10px;
