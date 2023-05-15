@@ -2584,12 +2584,6 @@ text_feed input:focus {
 
 /* RESPONSIVIDADES */
 
-@media (max-width: 1500px) {
-    .container_login {
-        min-height: 140vh;
-    }
-}
-
 @media (max-width: 1475px) {
     .container_principal {
         padding: 50px 0px 0px 50px;
