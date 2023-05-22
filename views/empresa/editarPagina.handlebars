@@ -1,6 +1,10 @@
 <div class="container_principal" id="editarPagina">
 
+    {{>_msg}}
+
     <div class="container_editar_pagina">
+
+        <!-- MENU DE NAVEGAÇÃO DE EDITAR EMPRESA -->
 
         <div class="container_editar_pagina_left">
             <div class="editar_pagina_option" id="edit_home_pagina">
@@ -25,8 +29,7 @@
             <!-- HOME -->
             <div class="home_editar_pagina">
 
-                {{>_msg}}
-
+                <!-- MENU DE RESUMO DA EMPRESA -->
                 <div class="resume_pagina">
                     <div class="background_pagina" style="background-image: url({{pagina.background}})">
                     </div>
@@ -43,9 +46,30 @@
                             <p class="home_text">
                                 {{pagina.descricao}}
                             </p>
+
                         </div>
                     </div>
                 </div>
+
+                <!-- MENU DE NOTÍCIAS DA EMPRESA -->
+
+                <div class="home_newslatter">
+                    <h3 class="home_title">Notificações da Empresa</h3>
+                    <div class="newslatter">
+                        <img src="https://cdn-icons-png.flaticon.com/128/811/811478.png">
+                        <div class="newslatter_content">
+                            <h3>Atualizações</h3>
+                            <p class="qtd_pubs">13 eventos realizados ● 20 seguidores</p>
+                            <p class="newslatter_info">Esteja sempre por dentro das novidades da empresa
+                                {{pagina.nome}}, inscreva-se no canal de notificações</p>
+                            <button class="submit_cadastro">
+                                Inscrever-se
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MENU DE VAGAS DA EMPRESA -->
 
                 {{#if vagas}}
                 <div class="home_vagas">
@@ -142,7 +166,7 @@
                         <label for="tamanho_empresa" class="label_cadastro">Tamanho da Empresa: <span
                                 class="pink_font">*</span></label>
                         <select name="tamanho_empresa" id="tamanho_empresa" class="input_cadastro" required>
-                            <option value=""></option>
+                            <option value="{{pagina.qtdFuncionarios}}">{{pagina.qtdFuncionarios}}</option>
                             <option value="0 - 1 Colaboradores">0 - 1 Colaboradores</option>
                             <option value="2 - 10 Colaboradores">2 - 10 Colaboradores</option>
                             <option value="11 - 50 Colaboradores">11 - 50 Colaboradores</option>
@@ -159,7 +183,7 @@
                         <label for="tipo_empresa" class="label_cadastro">Tipo da Empresa: <span
                                 class="pink_font">*</span></label>
                         <select name="tipo_empresa" id="tipo_empresa" class="input_cadastro" required>
-                            <option value=""></option>
+                            <option value="{{pagina.tipo}}">{{pagina.tipo}}</option>
                             <option value="Empresa Pública">Empresa Pública</option>
                             <option value="Empresa Privada">Empresa Privada</option>
                             <option value="Empresa Governamental">Empresa Governamental</option>
@@ -229,7 +253,7 @@
                         </button>
                     </div>
 
-                    <div class="vaga_config_2">
+                    <div class="vaga_config_2 inputs_container">
 
                         <h1 class="title_editPagina">Anuncie uma Vaga! </h1>
                         <h2 class="subtitle_editPagina">
@@ -241,8 +265,9 @@
 
                         <label for="descricao" class="label_cadastro">Descrição <span class="pink_font">*</span></label>
                         <textarea name="descricao" id="descricao" placeholder="uma Descrição da vaga"
-                            class="input_cadastro" autocomplete="off" cols="30" rows="10" required></textarea>
+                            class="input_cadastro" autocomplete="off" cols="30" rows="10"></textarea>
 
+                        <br>
                         <!-- SALARIO -->
 
                         <label for="minSalario" class="label_cadastro">Salário Base Oferecido <span
@@ -283,4 +308,195 @@
             </div>
         </div>
 
-    </div>
+        <!-- ADICIONAR AMIGOS -->
+
+        <div class="container_right">
+
+            {{#if usuarios}}
+            <div class="index_friends">
+                <h1 class="title_index_events">
+                    <ion-icon name="git-network-outline"></ion-icon>
+                    Talvez você conheça
+                </h1>
+
+                {{#each usuarios}}
+
+                <a href="/usuario/verPerfil/{{_id}}">
+                    <div class="friends_option_index">
+                        <div class="photo_friends_index">
+                            <img src={{foto}}>
+                        </div>
+                        <div class="text_friends_index">
+                            <p class="name_friends_index">
+                                {{nomeCompleto}}
+                            </p>
+                            <p class="desc_friends_index">
+                                {{#if cargo_atual}}
+                                {{cargo_atual}}
+                                {{else}}
+                                Profissional Qualificado
+                                {{/if}}
+                            </p>
+                            <p class="desc_friends_index">
+                                {{area}}
+                            </p>
+                        </div>
+                        <div class="add_friends_index">
+                            <ion-icon name="add-circle-outline"></ion-icon>
+                        </div>
+                    </div>
+                </a>
+
+                {{else}}
+
+                {{/each}}
+
+                <div class="center">
+                    <a href="/usuario/amigos">
+                        <button class="cta">
+                            <span>Ver mais</span>
+                            <svg viewBox="0 0 13 10" height="10px" width="15px">
+                                <path d="M1,5 L11,5"></path>
+                                <polyline points="8 1 12 5 8 9"></polyline>
+                            </svg>
+                        </button>
+                    </a>
+                </div>
+
+            </div>
+
+            {{else}}
+
+            <div class="index_friends">
+                <h1 class="title_index_events">
+                    <ion-icon name="git-network-outline"></ion-icon>
+                    Talvez você conheça
+                </h1>
+
+                <div class="friends_option_index">
+                    <div class="photo_friends_index">
+                        <img
+                            src="https://i.pinimg.com/736x/40/d0/3d/40d03d04ff61fccaf012a5fba3612e61--fluffy-animals-baby-animals.jpg">
+                    </div>
+
+                    <div class="text_friends_index">
+                        <p class="name_friends_index">
+                            Sebastiana Felisberta
+                        </p>
+                        <p class="desc_friends_index">
+                            Profissional de Recursos Humanos.
+                        </p>
+                        <p class="desc_friends_index">
+                            Estuda em USP São Paulo.
+                        </p>
+                    </div>
+                    <div class="add_friends_index">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="friends_option_index">
+                    <div class="photo_friends_index">
+                        <img
+                            src="https://thumbs.dreamstime.com/b/cachorro-franc%C3%AAs-engra%C3%A7ado-usando-um-carnaval-ou-vaqueiro-de-halloween-com-fantasia-corpo-inteiro-bra%C3%A7os-e-cal%C3%A7as-falsos-c%C3%A3o-176071462.jpg">
+                    </div>
+
+                    <div class="text_friends_index">
+                        <p class="name_friends_index">
+                            Maria Joana
+                        </p>
+                        <p class="desc_friends_index">
+                            Desempregada.
+                        </p>
+                        <p class="desc_friends_index">
+                            Estudou em E.E Jorge Covre.
+                        </p>
+                    </div>
+                    <div class="add_friends_index">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="friends_option_index">
+                    <div class="photo_friends_index">
+                        <img src="https://a.thumbs.redditmedia.com/ZEDQ7Di2TjK2Oia7QY97Bl5PRuuAEsYUcRRMGkTObs8.jpg">
+                    </div>
+
+                    <div class="text_friends_index">
+                        <p class="name_friends_index">
+                            Eugenia Cosimo
+                        </p>
+                        <p class="desc_friends_index">
+                            Profissional de Produção.
+                        </p>
+                        <p class="desc_friends_index">
+                            Estudou em ETEC José Dagnoni.
+                        </p>
+                    </div>
+                    <div class="add_friends_index">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="friends_option_index">
+                    <div class="photo_friends_index">
+                        <img src="https://m.media-amazon.com/images/I/51yYfu2H1eL._AC_SX569_.jpg">
+                    </div>
+
+                    <div class="text_friends_index">
+                        <p class="name_friends_index">
+                            Marineusa dos Santos
+                        </p>
+                        <p class="desc_friends_index">
+                            Cursando ADS.
+                        </p>
+                        <p class="desc_friends_index">
+                            Estuda em UNICAMP Campinas.
+                        </p>
+                    </div>
+                    <div class="add_friends_index">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="friends_option_index">
+                    <div class="photo_friends_index">
+                        <img src="https://i.pinimg.com/originals/0e/02/f6/0e02f656b1464a8ef1064b172e85a1c2.jpg">
+                    </div>
+
+                    <div class="text_friends_index">
+                        <p class="name_friends_index">
+                            Julia Pereira
+                        </p>
+                        <p class="desc_friends_index">
+                            Desempregada.
+                        </p>
+                        <p class="desc_friends_index">
+                            Estudou em E.E Alfredo Santos.
+                        </p>
+                    </div>
+                    <div class="add_friends_index">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="center">
+                    <a href="/usuario/amigos">
+                        <button class="cta">
+                            <span>Ver mais</span>
+                            <svg viewBox="0 0 13 10" height="10px" width="15px">
+                                <path d="M1,5 L11,5"></path>
+                                <polyline points="8 1 12 5 8 9"></polyline>
+                            </svg>
+                        </button>
+                    </a>
+                </div>
+
+            </div>
+
+            {{/if}}
+
+        </div>
+
+    </div>    
+</div>

@@ -476,6 +476,7 @@ form.sign-up-form {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    max-width: 600px;
 }
 
 .label_cadastro {
@@ -581,6 +582,7 @@ form.sign-up-form {
 }
 
 .link-nav {
+    font-size: 15px;
     position: relative;
     display: flex;
     align-items: center;
@@ -747,13 +749,13 @@ form.sign-up-form {
 .main_info .main_info_div div ion-icon {
     color: var(--font-color);
     margin-left: 0.25em;
-    font-size: 22.5px;
+    font-size: 18.5px;
 }
 
 .main_info .main_info_div div p {
     color: var(--font-color-low-emphasis);
     margin-left: -0.5em;
-    font-size: 14.5px;
+    font-size: 13.5px;
 }
 
 .feed {
@@ -883,15 +885,15 @@ text_feed input:focus {
 }
 
 .info_publication h2 {
-    font-weight: normal;
     display: flex;
     align-items: center;
-    font-size: 17px;
+    font-size: 15px;
     margin-left: 15px;
     font-weight: bold;
 }
 
 .content_publication {
+    font-size: 14px;
     text-align: justify;
     margin-top: 1.25em;
     width: 100%;
@@ -934,7 +936,7 @@ text_feed input:focus {
 
 .date_publication {
     margin-left: 15px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: normal;
     color: #444444b0;
 }
@@ -1732,19 +1734,31 @@ text_feed input:focus {
 
 /* -=-=-=- AMIGOS -=-=-=- */
 
+#amigos {
+    max-width: 1325px !important;
+}
+
+#amigos .container_unico {
+    background: none;
+}
+
 #amigos .container_unico h1 {
     text-align: center;
 }
 
 #amigos .container_amigos {
+    gap: 50px;
     display: flex;
 }
 
 #amigos .acoes_amigos {
-    width: 300px;
+    background: white;
+    width: 350px;
+    height: 400px;
     margin-top: 5em;
-    padding: 0px 50px 0px 25px;
-    border-right: 1px solid #33333336;
+    border-radius: 10px;
+    border: 1px solid #e7e7e7;
+    padding: 50px 50px 0px 50px;
 }
 
 #amigos .acoes_amigos div {
@@ -1760,6 +1774,10 @@ text_feed input:focus {
     transition-duration: 0.25s;
 }
 
+#amigos .acoes_amigos div p {
+    font-size: 13px;
+}
+
 #amigos .acoes_amigos div ion-icon {
     font-size: 22.5px;
     color: var(--color2);
@@ -1770,15 +1788,21 @@ text_feed input:focus {
     border-bottom: 1px solid var(--color1);
 }
 
+#amigos .opcoes_amigos {
+    border-radius: 10px;
+    border: 1px solid #e7e7e7;
+    padding-top: 50px;
+    background: white;
+}
+
 #amigos .opcoes_amigos,
 #amigos .amigos_pendentes {
     width: 100%;
     margin-top: 5em;
-    padding-left: 50px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 50px;
+    gap: 15px;
 }
 
 #amigos .opcao_amigo {
@@ -1814,14 +1838,14 @@ text_feed input:focus {
 
 #amigos .opcao_amigo_bottom h2 {
     text-align: center;
-    font-size: 17.5px;
+    font-size: 16.5px;
     height: 40px;
     overflow: hidden;
 }
 
 #amigos .opcao_amigo_resumo {
     height: 40px;
-    font-size: 15px;
+    font-size: 12px;
     text-align: center;
     overflow: hidden;
 }
@@ -1829,7 +1853,7 @@ text_feed input:focus {
 #amigos .opcao_amigo_formacao {
     color: var(--font-color-low-emphasis);
     margin-top: 1.2em;
-    font-size: 15px;
+    font-size: 12.5px;
     min-height: 25px;
     text-align: center;
 }
@@ -2252,9 +2276,14 @@ text_feed input:focus {
 
 /* -=-=-=- EDITAR PAGINA -=-=-=- */
 
+#editarPagina {
+    max-width: 1825px;
+}
+
 #editarPagina .container_editar_pagina {
     display: flex;
-    gap: 50px;
+    flex-wrap: wrap;
+    gap: 25px;
 }
 
 #editarPagina .container_editar_pagina_left {
@@ -2263,10 +2292,11 @@ text_feed input:focus {
     background: white;
     border: 1px solid #e7e7e7;
     width: 275px;
-    max-height: 250px;
+    max-height: 245px;
 }
 
 #editarPagina .editar_pagina_option {
+    font-size: 14px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -2293,7 +2323,7 @@ text_feed input:focus {
     background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
-    height: 165px;
+    height: 185px;
     border-radius: 15px;
 }
 
@@ -2343,12 +2373,8 @@ text_feed input:focus {
 
 #editarPagina .home_text {
     text-align: justify;
-    font-size: 14px;
+    font-size: 13px;
     color: var(--font-color-low-emphasis);
-}
-
-#editarPagina .home_vagas {
-    margin-top: 3em;
 }
 
 #editarPagina .home_editar_pagina,
@@ -2370,8 +2396,10 @@ text_feed input:focus {
 #editarPagina .home_editar_pagina {
     background: none;
     border: none;
-    padding: 0;
-    display: block;
+    margin-top: -25px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
 
 #editarPagina .info_editar_pagina {
@@ -2421,15 +2449,17 @@ text_feed input:focus {
 }
 
 #editarPagina .resume_pagina,
-#editarPagina .home_vagas {
+#editarPagina .home_vagas,
+#editarPagina .home_newslatter {
     background: white;
     padding: 15px;
     border: 1px solid #e7e7e7;
     border-radius: 5px;
 }
 
-#editarPagina .home_vagas {
-    padding: 30px !important;
+#editarPagina .home_vagas,
+#editarPagina .home_newslatter {
+    padding: 35px !important;
 }
 
 #editarPagina .home_vagas_container {
@@ -2483,6 +2513,38 @@ text_feed input:focus {
 
 #editarPagina .vaga_emprego_status {
     color: #41b664;
+}
+
+#editarPagina .newslatter {
+    margin-top: 25px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#editarPagina .newslatter img {
+    width: 100px;
+    height: 100px;
+}
+
+#editarPagina .newslatter .newslatter_content {
+    max-width: 500px;
+    margin-left: 1.5em;
+}
+
+.newslatter_content h3 {
+    font-size: 15.75px;
+}
+
+.qtd_pubs {
+    color: var(--font-color-low-emphasis);
+    font-size: 13px;
+}
+
+.newslatter_info {
+    margin-top: 0.75em;
+    font-size: 13.5px;
 }
 
 
@@ -2588,16 +2650,18 @@ text_feed input:focus {
 
     .container_login,
     .container_cadastro {
-        min-height: 800px;
+        min-height: 1200px;
         height: 145vh;
     }
-}
 
-@media (max-width: 1475px) {
+    #editarPagina .container_editar_pagina_right {
+        width: 750px;
+    }
 
     .container_principal {
         padding: 50px 0px 0px 50px;
     }
+
 }
 
 @media (max-width: 1420px) {
@@ -2921,6 +2985,18 @@ text_feed input:focus {
 
     #vagas .opcao_vaga {
         max-width: 100%;
+    }
+
+    .newslatter {
+        justify-content: center;
+    }
+
+    .newslatter_content {
+        margin-top: 1em;
+    }
+
+    #editarPagina .submit_cadastro {
+        width: 200px;
     }
 
 }

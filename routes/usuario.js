@@ -76,7 +76,6 @@ router.get("/endereco", (req, res) => {
 
     }
 
-
 })
 
 router.post("/novoEndereco", (req, res) => {

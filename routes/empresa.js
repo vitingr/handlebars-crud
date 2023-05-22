@@ -139,6 +139,7 @@ router.post("/editPagina", upload.fields([
 
         if (erros.length > 0) {
 
+            console.log(erros)
             res.render("empresa/editarPagina", { usuario: usuarioLogado, pagina: pagina, erros: erros })
 
         } else {
@@ -174,6 +175,7 @@ router.post("/editPagina", upload.fields([
             pagina.website = website
             pagina.qtdFuncionarios = tamanho_empresa
             pagina.industria = industria
+            pagina.tipo = tipo_empresa
             pagina.descricao = descricao
 
             pagina.save().then(() => {

@@ -79,9 +79,7 @@
             <div class="inputs_container">
                 <!-- HEADLINE -->
                 <label for="headline" class="label_cadastro">Resumo: </label>
-                <input type="text" value="{{usuario.resumo}}" name="headline" id="headline"
-                    placeholder="Um Pequeno Resumo Sobre Você" class="input_cadastro" autocomplete="off" minlength="2"
-                    maxlength="100">
+                <textarea name="headline" id="headline" class="input_cadastro" spellcheck="off" minlength="2" maxlength="100" placeholder="Um Pequeno Resumo sobre você">{{usuario.resumo}}</textarea>
                 <!-- CARGO ATUAL -->
                 <label for="cargo_atual" class="label_cadastro">Cargo Atual: </label>
                 <input type="text" value="{{usuario.cargo_atual}}" name="cargo_atual" id="cargo_atual"
