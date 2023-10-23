@@ -218,7 +218,7 @@ app.post("/cadastrar", (req, res) => {
     }
 
     if (req.body.nome.length > 20) {
-        erros.push({ texto: "Nome muito Grande" })
+        erros.push({ texto: "Nome muito grande" })
     }
 
     if (req.body.sobrenome.length > 20) {
